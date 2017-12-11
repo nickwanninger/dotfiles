@@ -1,0 +1,1 @@
+/Users/nick/.config/fisherman/cprintf/cprintf.fish

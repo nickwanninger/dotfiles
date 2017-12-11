@@ -1,0 +1,1 @@
+/Users/nick/.config/fisherman/fzf/functions/__fzf_uninstall.fish

@@ -1,0 +1,1 @@
+/Users/nick/.config/fisherman/z/functions/__z_clean.fish
