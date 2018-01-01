@@ -5,8 +5,13 @@ ln -s ~/dotfiles/fish/ ~/.config
 
 
 rm -rf ~/.vimrc
-ln -s ~/dotfiles/vim/vimrc ~/.vimrc
+rm -rf ~/.vim
 
+ln -s ~/dotfiles/vim/vimrc ~/.vimrc
+ln -s ~/dotfiles/vim/ ~/.vim
+
+rm -rf ~/.gitignore
 ln -s ~/dotfiles/git/.gitignore ~/.gitignore
+
 
 echo "Setup Complete!"

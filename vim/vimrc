@@ -19,12 +19,11 @@ filetype off
 
 " Turn on syntax highlighting
 syntax on
+colorscheme dracula
+set termguicolors
+
 " For plugins to load correctly
 filetype plugin indent on
-
-" TODO: Pick a leader key
-" let mapleader = ","
-
 
 " Show line numbers
 set number
@@ -43,7 +42,6 @@ runtime! macros/matchit.vim
 " Move up/down editor lines
 nnoremap k gj
 nnoremap j gk
-
 
 " Rendering
 set ttyfast
@@ -71,3 +69,4 @@ map <leader>l :set list!<CR> " Toggle tabs and EOL
 
 " use 4 spaces instead of tabs
 set tabstop=2
+
