@@ -1,26 +1,41 @@
 " Don't try to be vi compatible
 set nocompatible
+filetype off
 
+
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'tpope/vim-fugitive'
+Plugin 'git://git.wincent.com/command-t.git'
+Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+call vundle#end()            " required
+filetype plugin indent on    " required
 
 " disable swapfiles (they are a nuisance)
 set noswapfile
 " Helps force plugins to load correctly when it is turned back on below
-filetype off
 
 " TODO: Load plugins here (pathogen or vundle)
-
-" mouse mode
 
 "if has('mouse')
 "  set mouse=a
 "  set selectmode=cmd
 "endif
 
-
 " Turn on syntax highlighting
 syntax on
-colorscheme dracula
 set termguicolors
+colorscheme monokai
+
+let g:monokai_term_italic = 1
+let g:monokai_gui_italic = 1
 
 " For plugins to load correctly
 filetype plugin indent on
