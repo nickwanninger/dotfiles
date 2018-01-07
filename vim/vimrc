@@ -1,9 +1,8 @@
 " Don't try to be vi compatible
-set nocompatible
 filetype off
-
-
-
+set nocompatible   " Disable vi-compatibility
+set laststatus=2   " Always show the statusline
+set encoding=utf-8 " Necessary to show Unicode glyphs
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -14,28 +13,28 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'git://git.wincent.com/command-t.git'
-Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+Plugin 'Lokaltog/vim-powerline'
+Plugin 'scrooloose/nerdtree'
+Plugin 'leafgarland/typescript-vim'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
 " disable swapfiles (they are a nuisance)
 set noswapfile
-" Helps force plugins to load correctly when it is turned back on below
+" helps force plugins to load correctly when it is turned back on below
 
-" TODO: Load plugins here (pathogen or vundle)
+"set mouse=a
 
-"if has('mouse')
-"  set mouse=a
-"  set selectmode=cmd
-"endif
+set clipboard=unnamed
 
 " Turn on syntax highlighting
 syntax on
 set termguicolors
 colorscheme monokai
 
-let g:monokai_term_italic = 1
-let g:monokai_gui_italic = 1
+
+set cursorline
+
 
 " For plugins to load correctly
 filetype plugin indent on
@@ -43,6 +42,9 @@ filetype plugin indent on
 " Show line numbers
 set number
 
+map <C-n> :set number! <cr>
+
+map <C-n> :NERDTreeToggle<CR>
 " Show file stats
 set ruler
 
@@ -59,7 +61,7 @@ nnoremap k gj
 nnoremap j gk
 
 " Rendering
-set ttyfast
+" set ttyfast
 
 " Last line
 set showcmd
@@ -81,6 +83,15 @@ set listchars=tab:▸\ ,eol:¬
 " Or use your leader key + l to toggle on/off
 map <leader>l :set list!<CR> " Toggle tabs and EOL
 
+
+
+
+
+" Split pane navigation mappings
+set winheight=999
+set winminheight=0
+noremap <C-A-left> <C-W>h<C-W>_
+noremap <C-A-right> <C-W>l<C-W>_
 
 " use 4 spaces instead of tabs
 set tabstop=2
