@@ -43,8 +43,12 @@ filetype plugin indent on
 set number
 
 map <C-n> :set number! <cr>
-
 map <C-n> :NERDTreeToggle<CR>
+
+noremap <C-S> :update<CR>
+vnoremap <C-S> <C-C>:update<CR>
+inoremap <C-S> <C-O>:update<CR>
+
 " Show file stats
 set ruler
 
@@ -55,10 +59,6 @@ set encoding=utf-8
 set scrolloff=0
 set matchpairs+=<:> " use % to jump between pairs
 runtime! macros/matchit.vim
-
-" Move up/down editor lines
-nnoremap k gj
-nnoremap j gk
 
 " Rendering
 " set ttyfast
@@ -94,5 +94,8 @@ noremap <C-A-left> <C-W>h<C-W>_
 noremap <C-A-right> <C-W>l<C-W>_
 
 " use 4 spaces instead of tabs
+"set tabstop=2
 set tabstop=2
+set shiftwidth=2
+set expandtab
 
