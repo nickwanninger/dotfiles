@@ -2,12 +2,13 @@
 set fish_greeting ""
 set HOMEBREW_NO_AUTO_UPDATE 1
 
+switch (uname)
+case Darwin
+  export PATH="/usr/local/opt/python/libexec/bin:$PATH"
+end
 
-export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 
 set -x GOPATH $HOME/dev/go/
-
-
 
 alias t "tmux"
 
