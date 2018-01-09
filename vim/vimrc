@@ -21,27 +21,53 @@ filetype plugin indent on    " required
 
 " disable swapfiles (they are a nuisance)
 set noswapfile
-set clipboard=unnamed
 syntax on
 set termguicolors
 colorscheme monokai
 set cursorline
 filetype plugin indent on
 
-" Show line numbers
+
+
+
+""" System Clipboard and COPY and PASTE support
+set pastetoggle=<F2>
+vnoremap <C-c> "*y
+map <silent><Leader>p :set paste<CR>o<esc>"*]p:set nopaste<cr>"
+map <silent><Leader><S-p> :set paste<CR>O<esc>"*]p:set nopaste<cr>"
+
+
+" DISABLE ARROW KEYS
+noremap <Up> <NOP>
+noremap <Down> <NOP>
+noremap <Left> <NOP>
+noremap <Right> <NOP>
+
 set number
+function! ToggleNumbersOn()
+    set nu!
+    set rnu
+endfunction
+function! ToggleRelativeOn()
+    set rnu!
+    set nu
+endfunction
+autocmd FocusLost * call ToggleRelativeOn()
+autocmd FocusGained * call ToggleRelativeOn()
+autocmd InsertEnter * call ToggleRelativeOn()
+autocmd InsertLeave * call ToggleRelativeOn()
+
 
 map <C-n> :set number! <cr>
 map <C-n> :NERDTreeToggle<CR>
 
+
+" Map ctrl + s to save in any mode
 noremap <C-S> :update<CR>
 vnoremap <C-S> <C-C>:update<CR>
 inoremap <C-S> <C-O>:update<CR>
 
-" Show file stats
 set ruler
-
-" Encoding
 set encoding=utf-8
 
 " Cursor motion
@@ -72,9 +98,15 @@ set listchars=tab:▸\ ,eol:¬
 " Or use your leader key + l to toggle on/off
 map <leader>l :set list!<CR> " Toggle tabs and EOL
 
+" Quicker window manangement
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-h> <C-w>h
+nnoremap <C-l> <C-w>l
 
-
-
+" Use tab to navitate blocks
+nnoremap <tab> %
+vnoremap <tab> %
 
 " Split pane navigation mappings
 set winheight=999
