@@ -16,6 +16,7 @@ Plugin 'git://git.wincent.com/command-t.git'
 Plugin 'Lokaltog/vim-powerline'
 Plugin 'scrooloose/nerdtree'
 Plugin 'leafgarland/typescript-vim'
+Plugin 'kien/ctrlp.vim'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
