@@ -4,7 +4,7 @@ set nocompatible   " Disable vi-compatibility
 set laststatus=2   " Always show the statusline
 set encoding=utf-8 " Necessary to show Unicode glyphs
 " set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
+set rtp+=~/.vim/bundle/vundle
 call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
@@ -21,22 +21,11 @@ filetype plugin indent on    " required
 
 " disable swapfiles (they are a nuisance)
 set noswapfile
-" helps force plugins to load correctly when it is turned back on below
-
-"set mouse=a
-
 set clipboard=unnamed
-
-" Turn on syntax highlighting
 syntax on
 set termguicolors
 colorscheme monokai
-
-
 set cursorline
-
-
-" For plugins to load correctly
 filetype plugin indent on
 
 " Show line numbers
