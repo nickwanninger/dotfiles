@@ -14,7 +14,7 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'git://git.wincent.com/command-t.git'
 Plugin 'Lokaltog/vim-powerline'
-Plugin 'scrooloose/nerdtree'
+" Plugin 'scrooloose/nerdtree'
 Plugin 'leafgarland/typescript-vim'
 Plugin 'kien/ctrlp.vim'
 call vundle#end()            " required
@@ -121,3 +121,7 @@ set tabstop=2
 set shiftwidth=2
 set expandtab
 
+
+
+" CTRLP Configuration
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
