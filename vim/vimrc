@@ -2,7 +2,13 @@
 filetype off
 set nocompatible   " Disable vi-compatibility
 set laststatus=2   " Always show the statusline
+let g:airline_powerline_fonts = 0
 set encoding=utf-8 " Necessary to show Unicode glyphs
+"set term=screen-256color
+
+let g:ycm_confirm_extra_conf = 0 
+
+
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/vundle
 call vundle#begin()
@@ -13,10 +19,10 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'git://git.wincent.com/command-t.git'
-Plugin 'Lokaltog/vim-powerline'
-" Plugin 'scrooloose/nerdtree'
+"Plugin 'Valloric/YouCompleteMe'
 Plugin 'leafgarland/typescript-vim'
 Plugin 'kien/ctrlp.vim'
+Plugin 'Lokaltog/vim-powerline'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
@@ -24,19 +30,18 @@ filetype plugin indent on    " required
 set noswapfile
 syntax on
 set termguicolors
-colorscheme monokai
-set cursorline
+" colorscheme monokai
+" colorscheme duoduo
+" colorscheme gruvbox
+" set cursorline
+" colorscheme monokai
 filetype plugin indent on
 
-
+set backspace=indent,eol,start
 
 
 """ System Clipboard and COPY and PASTE support
-set pastetoggle=<F2>
-vnoremap <C-c> "*y
-map <silent><Leader>p :set paste<CR>o<esc>"*]p:set nopaste<cr>"
-map <silent><Leader><S-p> :set paste<CR>O<esc>"*]p:set nopaste<cr>"
-
+set clipboard=unnamed
 
 " DISABLE ARROW KEYS
 noremap <Up> <NOP>
@@ -59,8 +64,18 @@ autocmd InsertEnter * call ToggleRelativeOn()
 autocmd InsertLeave * call ToggleRelativeOn()
 
 
-map <C-n> :set number! <cr>
-map <C-n> :NERDTreeToggle<CR>
+" map <C-m> :set number! <cr>
+
+
+
+""" SYSTEM CLIPBOARD COPY & PASTE SUPPORT
+set pastetoggle=<F2> "F2 before pasting to preserve indentation
+"Copy paste to/from clipboard
+vnoremap <C-c> "*y
+map <silent><Leader>p :set paste<CR>o<esc>"*]p:set nopaste<cr>"
+map <silent><Leader><S-p> :set paste<CR>O<esc>"*]p:set nopaste<cr>"
+
+
 
 
 " Map ctrl + s to save in any mode
@@ -68,16 +83,17 @@ noremap <C-S> :update<CR>
 vnoremap <C-S> <C-C>:update<CR>
 inoremap <C-S> <C-O>:update<CR>
 
+noremap <C-\/> :Ex<CR>
 set ruler
 set encoding=utf-8
 
 " Cursor motion
-set scrolloff=0
+set scrolloff=8
 set matchpairs+=<:> " use % to jump between pairs
 runtime! macros/matchit.vim
 
 " Rendering
-" set ttyfast
+
 
 " Last line
 set showcmd
@@ -92,10 +108,6 @@ set smartcase
 set showmatch
 map <leader><space> :let @/=''<cr> " clear search
 
-" Visualize tabs and newlines
-set listchars=tab:▸\ ,eol:¬
-" Uncomment this to enable by default:
-" set list " To enable by default
 " Or use your leader key + l to toggle on/off
 map <leader>l :set list!<CR> " Toggle tabs and EOL
 
@@ -116,12 +128,17 @@ noremap <C-A-left> <C-W>h<C-W>_
 noremap <C-A-right> <C-W>l<C-W>_
 
 " use 4 spaces instead of tabs
-"set tabstop=2
+set tabstop=2
 set tabstop=2
 set shiftwidth=2
-set expandtab
+" set expandtab
 
 
 
 " CTRLP Configuration
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
+
+
+
+
+

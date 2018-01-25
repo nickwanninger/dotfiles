@@ -1,6 +1,5 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =4
-let g:netrw_dirhist_1='/Users/nick/dotfiles'
-let g:netrw_dirhist_2='/Users/nick/dotfiles/fish'
+let g:netrw_dirhist_cnt =3
+let g:netrw_dirhist_1='/Users/nick/dev/c/stack-vm-in-c'
+let g:netrw_dirhist_2='/Users/nick/dev/c/stack-vm-in-c/src'
 let g:netrw_dirhist_3='/Users/nick/dotfiles'
-let g:netrw_dirhist_4='/Users/nick/dotfiles/fish'
