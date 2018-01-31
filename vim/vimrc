@@ -13,16 +13,19 @@ let g:ycm_confirm_extra_conf = 0
 set rtp+=~/.vim/bundle/vundle
 call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
+" call vundle#begin('~/some/path/here')
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'git://git.wincent.com/command-t.git'
-"Plugin 'Valloric/YouCompleteMe'
 Plugin 'leafgarland/typescript-vim'
+Plugin 'junegunn/limelight.vim'
 Plugin 'kien/ctrlp.vim'
 Plugin 'Lokaltog/vim-powerline'
+Plugin 'scrooloose/nerdtree'
+" Plugin 'airblade/vim-gitgutter'
+Plugin 'tpope/vim-commentary'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
@@ -34,9 +37,10 @@ set termguicolors
 " colorscheme duoduo
 " colorscheme gruvbox
 " set cursorline
-" colorscheme monokai
+" colorscheme jellybeans
+let g:jellybeans_use_term_background_color = 1
 filetype plugin indent on
-
+set lazyredraw
 set backspace=indent,eol,start
 
 
@@ -49,7 +53,7 @@ noremap <Down> <NOP>
 noremap <Left> <NOP>
 noremap <Right> <NOP>
 
-set number
+" set number
 function! ToggleNumbersOn()
     set nu!
     set rnu
@@ -58,14 +62,14 @@ function! ToggleRelativeOn()
     set rnu!
     set nu
 endfunction
-autocmd FocusLost * call ToggleRelativeOn()
-autocmd FocusGained * call ToggleRelativeOn()
-autocmd InsertEnter * call ToggleRelativeOn()
-autocmd InsertLeave * call ToggleRelativeOn()
+" autocmd FocusLost * call ToggleRelativeOn()
+" autocmd FocusGained * call ToggleRelativeOn()
+" autocmd InsertEnter * call ToggleRelativeOn()
+" autocmd InsertLeave * call ToggleRelativeOn()
 
 
 " map <C-m> :set number! <cr>
-
+map <C-n> :NERDTreeToggle<CR>
 
 
 """ SYSTEM CLIPBOARD COPY & PASTE SUPPORT
