@@ -31,13 +31,18 @@ filetype plugin indent on    " required
 
 " disable swapfiles (they are a nuisance)
 set noswapfile
+autocmd filetype crontab setlocal nobackup nowritebackup
 syntax on
 set termguicolors
+set background=dark
 " colorscheme monokai
 " colorscheme duoduo
 " colorscheme gruvbox
 " set cursorline
 " colorscheme jellybeans
+colorscheme draculablack
+" colorscheme leo
+" colorscheme zerg
 let g:jellybeans_use_term_background_color = 1
 filetype plugin indent on
 set lazyredraw
@@ -48,10 +53,10 @@ set backspace=indent,eol,start
 set clipboard=unnamed
 
 " DISABLE ARROW KEYS
-noremap <Up> <NOP>
-noremap <Down> <NOP>
-noremap <Left> <NOP>
-noremap <Right> <NOP>
+" noremap <Up> <NOP>
+" noremap <Down> <NOP>
+" noremap <Left> <NOP>
+" noremap <Right> <NOP>
 
 " set number
 function! ToggleNumbersOn()
@@ -113,7 +118,10 @@ set showmatch
 map <leader><space> :let @/=''<cr> " clear search
 
 " Or use your leader key + l to toggle on/off
-map <leader>l :set list!<CR> " Toggle tabs and EOL
+" map <leader>l :set list!<CR> " Toggle tabs and EOL
+" set list
+" set listchars=tab:→/<space>
+
 
 " Quicker window manangement
 nnoremap <C-j> <C-w>j
@@ -141,8 +149,4 @@ set shiftwidth=2
 
 " CTRLP Configuration
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
-
-
-
-
 

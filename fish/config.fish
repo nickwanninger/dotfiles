@@ -12,5 +12,5 @@ export EDITOR=(which vim)
 set -x GOPATH $HOME/dev/go/
 
 alias t "tmux"
-
+alias v "vim"
 alias :q "exit"
