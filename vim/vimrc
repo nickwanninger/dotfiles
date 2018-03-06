@@ -4,7 +4,6 @@ set nocompatible   " Disable vi-compatibility
 set laststatus=2   " Always show the statusline
 let g:airline_powerline_fonts = 0
 set encoding=utf-8 " Necessary to show Unicode glyphs
-"set term=screen-256color
 
 let g:ycm_confirm_extra_conf = 0 
 
@@ -24,8 +23,12 @@ Plugin 'junegunn/limelight.vim'
 Plugin 'kien/ctrlp.vim'
 Plugin 'Lokaltog/vim-powerline'
 Plugin 'scrooloose/nerdtree'
-" Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-commentary'
+
+Plugin 'ervandew/supertab'
+
+
+Bundle 'dag/vim-fish'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
@@ -35,19 +38,11 @@ autocmd filetype crontab setlocal nobackup nowritebackup
 syntax on
 set termguicolors
 set background=dark
-" colorscheme monokai
-" colorscheme duoduo
-" colorscheme gruvbox
-" set cursorline
-" colorscheme jellybeans
 colorscheme draculablack
-" colorscheme leo
-" colorscheme zerg
 let g:jellybeans_use_term_background_color = 1
 filetype plugin indent on
 set lazyredraw
 set backspace=indent,eol,start
-
 
 """ System Clipboard and COPY and PASTE support
 set clipboard=unnamed
@@ -58,7 +53,7 @@ set clipboard=unnamed
 " noremap <Left> <NOP>
 " noremap <Right> <NOP>
 
-" set number
+set number
 function! ToggleNumbersOn()
     set nu!
     set rnu
@@ -67,15 +62,14 @@ function! ToggleRelativeOn()
     set rnu!
     set nu
 endfunction
+
 " autocmd FocusLost * call ToggleRelativeOn()
 " autocmd FocusGained * call ToggleRelativeOn()
 " autocmd InsertEnter * call ToggleRelativeOn()
 " autocmd InsertLeave * call ToggleRelativeOn()
 
-
 " map <C-m> :set number! <cr>
 map <C-n> :NERDTreeToggle<CR>
-
 
 """ SYSTEM CLIPBOARD COPY & PASTE SUPPORT
 set pastetoggle=<F2> "F2 before pasting to preserve indentation
@@ -83,9 +77,6 @@ set pastetoggle=<F2> "F2 before pasting to preserve indentation
 vnoremap <C-c> "*y
 map <silent><Leader>p :set paste<CR>o<esc>"*]p:set nopaste<cr>"
 map <silent><Leader><S-p> :set paste<CR>O<esc>"*]p:set nopaste<cr>"
-
-
-
 
 " Map ctrl + s to save in any mode
 noremap <C-S> :update<CR>
@@ -101,11 +92,8 @@ set scrolloff=8
 set matchpairs+=<:> " use % to jump between pairs
 runtime! macros/matchit.vim
 
-" Rendering
-
-
 " Last line
-set showcmd
+" set showcmd
 
 " Searching
 nnoremap / /\v
@@ -129,6 +117,9 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
 
+" Shortcut to indent the file
+nnoremap <C-F> gg=G
+
 " Use tab to navitate blocks
 nnoremap <tab> %
 vnoremap <tab> %
@@ -145,8 +136,13 @@ set tabstop=2
 set shiftwidth=2
 " set expandtab
 
-
-
 " CTRLP Configuration
-let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
+let g:ctrlp_custom_ignore = 'build\|node_modules\|DS_Store\|git'
 
+
+nnoremap tn :tabnew<Space>
+nnoremap tl :tabnext<CR>
+nnoremap th :tabprev<CR>
+nnoremap tj :tabfirst<CR>
+nnoremap tk :tablast<CR>
+nnoremap tq :tabclose<CR>
