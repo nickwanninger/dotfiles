@@ -163,7 +163,8 @@ hi markdownUrl ctermfg=141 ctermbg=NONE cterm=NONE guifg=#bd93f9 guibg=NONE gui=
 hi markdownUrlTitleDelimiter ctermfg=84 ctermbg=NONE cterm=NONE guifg=#50fa7b guibg=NONE gui=NONE
 " }}}
 
-
+hi IndentGuidesOdd  guibg=#bada55
+hi IndentGuidesEven guibg=#fadbad
 "
 "cygwin has an annoying behavior where it resets background to light
 "regardless of what is set above, so we force it yet again

@@ -1,12 +1,16 @@
 " Don't try to be vi compatible
+scriptencoding utf-8
+set encoding=utf-8
 filetype off
 set nocompatible   " Disable vi-compatibility
 set laststatus=2   " Always show the statusline
 let g:airline_powerline_fonts = 0
 set encoding=utf-8 " Necessary to show Unicode glyphs
+set autoindent
 
-let g:ycm_confirm_extra_conf = 0 
-
+let g:ctrlp_custom_ignore = 'build\|node_modules\|DS_Store\|git'
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_auto_colors = 0
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/vundle
@@ -24,8 +28,11 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'Lokaltog/vim-powerline'
 Plugin 'scrooloose/nerdtree'
 Plugin 'tpope/vim-commentary'
+Plugin 'nathanaelkane/vim-indent-guides'
 
-Plugin 'ervandew/supertab'
+"Plugin 'ervandew/supertab'
+" Plugin 'valloric/youcompleteme'
+
 
 
 Bundle 'dag/vim-fish'
@@ -34,13 +41,14 @@ filetype plugin indent on    " required
 
 " disable swapfiles (they are a nuisance)
 set noswapfile
+
 autocmd filetype crontab setlocal nobackup nowritebackup
 syntax on
-set termguicolors
-set background=dark
+" set background=dark
 colorscheme draculablack
 let g:jellybeans_use_term_background_color = 1
 filetype plugin indent on
+
 set lazyredraw
 set backspace=indent,eol,start
 
@@ -62,6 +70,9 @@ function! ToggleRelativeOn()
     set rnu!
     set nu
 endfunction
+
+
+set visualbell t_vb=
 
 " autocmd FocusLost * call ToggleRelativeOn()
 " autocmd FocusGained * call ToggleRelativeOn()
@@ -107,8 +118,8 @@ map <leader><space> :let @/=''<cr> " clear search
 
 " Or use your leader key + l to toggle on/off
 " map <leader>l :set list!<CR> " Toggle tabs and EOL
+" set listchars=trail:·
 " set list
-" set listchars=tab:→/<space>
 
 
 " Quicker window manangement
@@ -122,7 +133,6 @@ nnoremap <C-F> gg=G
 
 " Use tab to navitate blocks
 nnoremap <tab> %
-vnoremap <tab> %
 
 " Split pane navigation mappings
 set winheight=999
@@ -133,12 +143,6 @@ noremap <C-A-right> <C-W>l<C-W>_
 " use 4 spaces instead of tabs
 set tabstop=2
 set tabstop=2
-set shiftwidth=2
-" set expandtab
-
-" CTRLP Configuration
-let g:ctrlp_custom_ignore = 'build\|node_modules\|DS_Store\|git'
-
 
 nnoremap tn :tabnew<Space>
 nnoremap tl :tabnext<CR>
@@ -146,3 +150,4 @@ nnoremap th :tabprev<CR>
 nnoremap tj :tabfirst<CR>
 nnoremap tk :tablast<CR>
 nnoremap tq :tabclose<CR>
+

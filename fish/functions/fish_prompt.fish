@@ -1,1 +1,1 @@
-/Users/nick/.config/fisherman/boss/fish_prompt.fish
+/Users/nick/.config/fisherman/pure/fish_prompt.fish
