@@ -36,5 +36,5 @@ SET fish_pager_color_completion:75715E
 SET fish_pager_color_description:49483E
 SET fish_pager_color_prefix:F8F8F2
 SET fish_pager_color_progress:F8F8F2
-SET fisher_active_prompt:pure
-SET fisher_dependency_count:pure
+SET fisher_active_prompt:\x1d
+SET fisher_dependency_count:last_job_id\x1elast_job_id

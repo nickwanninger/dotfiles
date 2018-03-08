@@ -5,5 +5,5 @@ fisherman/docker-completion
 fisherman/fzf
 fisherman/get
 fisherman/getopts
-rafaelrinaldi/pure
+fisherman/last_job_id
 fisherman/z

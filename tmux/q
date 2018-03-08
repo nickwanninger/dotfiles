@@ -109,6 +109,11 @@ set smartcase
 set showmatch
 map <leader><space> :let @/=''<cr> " clear search
 
+" Or use your leader key + l to toggle on/off
+" map <leader>l :set list!<CR> " Toggle tabs and EOL
+" set listchars=trail:·
+" set list
+
 
 " Quicker window manangement
 nnoremap <C-j> <C-w>j

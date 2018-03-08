@@ -1,1 +1,0 @@
-/Users/nick/.config/fisherman/pure/fish_title.fish
