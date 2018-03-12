@@ -3,7 +3,7 @@ scriptencoding utf-8
 filetype off
 set nocompatible   " Disable vi-compatibility
 set laststatus=2   " Always show the statusline
-let g:airline_powerline_fonts = 0
+" let g:airline_powerline_fonts = 0
 set encoding=utf-8 " Necessary to show Unicode glyphs
 
 let g:ctrlp_custom_ignore = 'build\|node_modules\|DS_Store\|git'
@@ -14,9 +14,6 @@ let g:indent_guides_auto_colors = 0
 set rtp+=~/.vim/bundle/vundle
 call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
-" call vundle#begin('~/some/path/here')
-
-" let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'git://git.wincent.com/command-t.git'
@@ -27,6 +24,8 @@ Plugin 'Lokaltog/vim-powerline'
 Plugin 'scrooloose/nerdtree'
 Plugin 'tpope/vim-commentary'
 Plugin 'nathanaelkane/vim-indent-guides'
+Plugin 'gcavallanti/vim-noscrollbar'
+Plugin 'wincent/terminus'
 Bundle 'dag/vim-fish'
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -48,6 +47,14 @@ set backspace=indent,eol,start
 """ System Clipboard and COPY and PASTE support
 set clipboard=unnamed
 
+
+set mouse=a
+
+:map <ScrollWheelUp> <Up>
+:map <ScrollWheelDown> <Down>
+" let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+" let &t_SR = "\<Esc>]50;CursorShape=2\x7"
+" let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 " DISABLE ARROW KEYS
 " noremap <Up> <NOP>
 " noremap <Down> <NOP>
@@ -67,12 +74,6 @@ endfunction
 
 set visualbell t_vb=
 
-" autocmd FocusLost * call ToggleRelativeOn()
-" autocmd FocusGained * call ToggleRelativeOn()
-" autocmd InsertEnter * call ToggleRelativeOn()
-" autocmd InsertLeave * call ToggleRelativeOn()
-
-" map <C-m> :set number! <cr>
 map <C-n> :NERDTreeToggle<CR>
 
 """ SYSTEM CLIPBOARD COPY & PASTE SUPPORT
@@ -88,7 +89,7 @@ vnoremap <C-S> <C-C>:update<CR>
 inoremap <C-S> <C-O>:update<CR>
 
 noremap <C-\/> :Ex<CR>
-set ruler
+" set ruler
 set encoding=utf-8
 
 " Cursor motion
@@ -138,3 +139,5 @@ nnoremap tj :tabfirst<CR>
 nnoremap tk :tablast<CR>
 nnoremap tq :tabclose<CR>
 
+
+set statusline+=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %{noscrollbar#statusline(20,'_','=')}

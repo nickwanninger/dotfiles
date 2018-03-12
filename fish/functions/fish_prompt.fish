@@ -15,7 +15,7 @@ function fish_prompt
 			set prompt_symbol '$'
 	end
 
-	set_color B7D443
+	set_color -o 8BCFF7
 	echo -n (basename $PWD)
 	set_color normal
 	printf ' %s ' $prompt_symbol
