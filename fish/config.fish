@@ -10,7 +10,7 @@ case Darwin
 end
 
 
-export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="$HOME/.cargo/bin:/opt/local/bin:$PATH"
 
 export PATH="$HOME/.bin:$PATH"
 export EDITOR=(which vim)

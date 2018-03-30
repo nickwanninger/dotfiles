@@ -9,6 +9,8 @@ set encoding=utf-8 " Necessary to show Unicode glyphs
 let g:ctrlp_custom_ignore = 'build\|node_modules\|DS_Store\|git'
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_auto_colors = 0
+" let g:ctrlp_extensions = ['buffertag', 'tag', 'line', 'dir']
+
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/vundle
@@ -23,6 +25,8 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'Lokaltog/vim-powerline'
 Plugin 'scrooloose/nerdtree'
 Plugin 'tpope/vim-commentary'
+" Plugin 'valloric/youcompleteme'
+
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'gcavallanti/vim-noscrollbar'
 Plugin 'wincent/terminus'
@@ -36,10 +40,14 @@ set noswapfile
 
 autocmd filetype crontab setlocal nobackup nowritebackup
 syntax on
-" set background=dark
+set background=dark
 colorscheme draculablack
 let g:jellybeans_use_term_background_color = 1
 filetype plugin indent on
+
+
+" highlight Visual cterm=italic
+
 
 set lazyredraw
 set backspace=indent,eol,start
