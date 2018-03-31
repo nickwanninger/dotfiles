@@ -5,13 +5,10 @@ set nocompatible   " Disable vi-compatibility
 set laststatus=2   " Always show the statusline
 " let g:airline_powerline_fonts = 0
 set encoding=utf-8 " Necessary to show Unicode glyphs
-
-
 let g:ctrlp_custom_ignore = 'build\|node_modules\|DS_Store\|git'
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_auto_colors = 0
 
-let g:ycm_global_ycm_extra_conf = '~/dotfiles/vim/.ycm_extra_conf.py'
 " let g:ctrlp_extensions = ['buffertag', 'tag', 'line', 'dir']
 
 " set the runtime path to include Vundle and initialize
@@ -60,15 +57,21 @@ set mouse=a
 :map <ScrollWheelUp> <Up>
 :map <ScrollWheelDown> <Down>
 
-
 set number
+function! ToggleNumbersOn()
+    set nu!
+    set rnu
+endfunction
+function! ToggleRelativeOn()
+    set rnu!
+    set nu
+endfunction
 
 
 set visualbell t_vb=
 
 map <C-n> :NERDTreeToggle<CR>
 map <C-q> :q<CR>
-map <C-Q> :q!<CR>
 
 """ SYSTEM CLIPBOARD COPY & PASTE SUPPORT
 set pastetoggle=<F2> "F2 before pasting to preserve indentation

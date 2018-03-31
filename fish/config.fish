@@ -19,6 +19,6 @@ set -x GOPATH $HOME/dev/go/
 alias t "tmux"
 alias v "vim"
 alias :q "exit"
-
+alias aplay "mplayer -cache 1024 -quiet -rawaudio samplesize=1:channels=1:rate=8000 -demuxer rawaudio -"
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/nick/.gcloud/google-cloud-sdk/path.fish.inc' ]; if type source > /dev/null; source '/Users/nick/.gcloud/google-cloud-sdk/path.fish.inc'; else; . '/Users/nick/.gcloud/google-cloud-sdk/path.fish.inc'; end; end
