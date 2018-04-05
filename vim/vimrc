@@ -6,7 +6,6 @@ set laststatus=2   " Always show the statusline
 " let g:airline_powerline_fonts = 0
 set encoding=utf-8 " Necessary to show Unicode glyphs
 
-
 let g:ctrlp_custom_ignore = 'build\|node_modules\|DS_Store\|git'
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_auto_colors = 0
@@ -27,10 +26,8 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'Lokaltog/vim-powerline'
 Plugin 'scrooloose/nerdtree'
 Plugin 'tpope/vim-commentary'
+Plugin 'xuhdev/vim-latex-live-preview'
 Plugin 'valloric/youcompleteme'
-
-Plugin 'nathanaelkane/vim-indent-guides'
-Plugin 'gcavallanti/vim-noscrollbar'
 Plugin 'wincent/terminus'
 Bundle 'dag/vim-fish'
 call vundle#end()            " required
@@ -43,7 +40,7 @@ set noswapfile
 autocmd filetype crontab setlocal nobackup nowritebackup
 syntax on
 set background=dark
-colorscheme draculablack
+colorscheme molokai
 let g:jellybeans_use_term_background_color = 1
 filetype plugin indent on
 
@@ -59,7 +56,6 @@ set mouse=a
 
 :map <ScrollWheelUp> <Up>
 :map <ScrollWheelDown> <Down>
-
 
 set number
 
@@ -135,3 +131,7 @@ nnoremap tq :tabclose<CR>
 
 
 set statusline+=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %{noscrollbar#statusline(20,'_','=')}
+
+
+
+
