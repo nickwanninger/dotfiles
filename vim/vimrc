@@ -40,7 +40,7 @@ set noswapfile
 autocmd filetype crontab setlocal nobackup nowritebackup
 syntax on
 set background=dark
-colorscheme molokai
+colorscheme draculablack
 let g:jellybeans_use_term_background_color = 1
 filetype plugin indent on
 
