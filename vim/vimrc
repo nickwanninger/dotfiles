@@ -2,16 +2,17 @@
 scriptencoding utf-8
 filetype off
 set nocompatible   " Disable vi-compatibility
+" set noshowmode
 set laststatus=2   " Always show the statusline
-" let g:airline_powerline_fonts = 0
+
 set encoding=utf-8 " Necessary to show Unicode glyphs
 
 let g:ctrlp_custom_ignore = 'build\|node_modules\|DS_Store\|git'
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_auto_colors = 0
 
+" let g:Powerline_symbols = 'fancy'
 let g:ycm_global_ycm_extra_conf = '~/dotfiles/vim/.ycm_extra_conf.py'
-" let g:ctrlp_extensions = ['buffertag', 'tag', 'line', 'dir']
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/vundle
@@ -24,23 +25,46 @@ Plugin 'leafgarland/typescript-vim'
 Plugin 'junegunn/limelight.vim'
 Plugin 'kien/ctrlp.vim'
 Plugin 'Lokaltog/vim-powerline'
+" Plugin 'itchyny/lightline.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'tpope/vim-commentary'
 Plugin 'xuhdev/vim-latex-live-preview'
 Plugin 'valloric/youcompleteme'
 Plugin 'wincent/terminus'
 Bundle 'dag/vim-fish'
+Plugin 'sjl/gundo.vim'
 call vundle#end()            " required
 filetype plugin indent on    " required
 set smartindent
-" set equalprg=indent
-" disable swapfiles (they are a nuisance)
 set noswapfile
 
+
+nnoremap <C-g> :GundoToggle<CR>
+
 autocmd filetype crontab setlocal nobackup nowritebackup
+
 syntax on
 set background=dark
-colorscheme draculablack
+
+" Pick a colorscheme
+colorscheme monokai
+
+let g:color_scheme = "dark"
+function! ToggleSyntaxColor()
+   if g:color_scheme == "dark"
+      let g:color_scheme = "light"
+			colorscheme github
+   else
+      let g:color_scheme = "dark"
+			colorscheme monokai
+   endif
+endfunction
+
+
+map <C-C> :call ToggleSyntaxColor()<CR>
+
+
+
 let g:jellybeans_use_term_background_color = 1
 filetype plugin indent on
 
@@ -51,24 +75,35 @@ set backspace=indent,eol,start
 """ System Clipboard and COPY and PASTE support
 set clipboard=unnamed
 
-
+" Enable mouse mode in every mode
 set mouse=a
 
-:map <ScrollWheelUp> <Up>
-:map <ScrollWheelDown> <Down>
+" Change the scroll wheel from an actual scroll
+" to just moving up and down with arrowkeys
+map <ScrollWheelUp> <Up>
+map <ScrollWheelDown> <Down>
 
+" Enables numbers on 
 set number
 
+" Map ctrl+d to toggling the relative numbers
+" on the side of the screen
 
+
+" Disable the bell in vim
 set visualbell t_vb=
 
+" Setup a toggle for nerd tree on ctr+n
 map <C-n> :NERDTreeToggle<CR>
+
+" Map ctrl+q and ctrl+Q to quit and SUPER quit :)
 map <C-q> :q<CR>
 map <C-Q> :q!<CR>
 
-""" SYSTEM CLIPBOARD COPY & PASTE SUPPORT
-set pastetoggle=<F2> "F2 before pasting to preserve indentation
-"Copy paste to/from clipboard
+" System copy and paste
+set pastetoggle=<F2>
+
+" Copy paste to/from clipboard
 vnoremap <C-c> "*y
 map <silent><Leader>p :set paste<CR>o<esc>"*]p:set nopaste<cr>"
 map <silent><Leader><S-p> :set paste<CR>O<esc>"*]p:set nopaste<cr>"
@@ -78,9 +113,7 @@ noremap <C-S> :update<CR>
 vnoremap <C-S> <C-C>:update<CR>
 inoremap <C-S> <C-O>:update<CR>
 
-noremap <C-\/> :Ex<CR>
-" set ruler
-set encoding=utf-8
+
 
 " Cursor motion
 set scrolloff=8
@@ -91,8 +124,6 @@ runtime! macros/matchit.vim
 " set showcmd
 
 " Searching
-nnoremap / /\v
-vnoremap / /\v
 set incsearch
 set ignorecase
 set smartcase
@@ -107,7 +138,7 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
 
 " Shortcut to indent the file
-nnoremap <C-F> gg=G
+" nnoremap <C-F> gg=G
 
 " Use tab to navitate blocks
 nnoremap <tab> %
@@ -128,9 +159,5 @@ nnoremap tj :tabfirst<CR>
 nnoremap tk :tablast<CR>
 nnoremap tq :tabclose<CR>
 
-
-set statusline+=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %{noscrollbar#statusline(20,'_','=')}
-
-
-
+" set statusline+=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %{noscrollbar#statusline(20,'_','=')}
 
