@@ -7,9 +7,10 @@ set laststatus=2   " Always show the statusline
 
 set encoding=utf-8 " Necessary to show Unicode glyphs
 
-let g:ctrlp_custom_ignore = 'build\|node_modules\|DS_Store\|git'
+let g:ctrlp_custom_ignore = 'build\|node_modules\|DS_Store\|git\|\/vim\/bundle'
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_auto_colors = 0
+	
 
 " let g:Powerline_symbols = 'fancy'
 let g:ycm_global_ycm_extra_conf = '~/dotfiles/vim/.ycm_extra_conf.py'
@@ -33,6 +34,10 @@ Plugin 'valloric/youcompleteme'
 Plugin 'wincent/terminus'
 Bundle 'dag/vim-fish'
 Plugin 'sjl/gundo.vim'
+
+Plugin 'lluchs/vim-wren'
+
+Plugin 'joom/latex-unicoder.vim'
 call vundle#end()            " required
 filetype plugin indent on    " required
 set smartindent
@@ -64,6 +69,18 @@ endfunction
 map <C-C> :call ToggleSyntaxColor()<CR>
 
 
+map <C-\> <C-v>F\
+map <space> <ESC>viw
+imap <C-l> λ
+
+
+
+" This keeps the current visual block selection active
+" after changing indent with '<' or '>'. Usually the 
+" visual block selection is lost after you shift it,
+" which is incredibly annoying.
+vmap > >gv
+vmap < <gv
 
 let g:jellybeans_use_term_background_color = 1
 filetype plugin indent on
@@ -88,7 +105,6 @@ set number
 
 " Map ctrl+d to toggling the relative numbers
 " on the side of the screen
-
 
 " Disable the bell in vim
 set visualbell t_vb=
@@ -132,10 +148,10 @@ map <leader><space> :let @/=''<cr> " clear search
 
 
 " Quicker window manangement
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-h> <C-w>h
-nnoremap <C-l> <C-w>l
+"nnoremap <C-j> <C-w>j
+"nnoremap <C-k> <C-w>k
+"nnoremap <C-h> <C-w>h
+"nnoremap <C-l> <C-w>l
 
 " Shortcut to indent the file
 " nnoremap <C-F> gg=G
