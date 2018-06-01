@@ -1,53 +1,67 @@
-function fish_prompt --description 'Write out the prompt, prepending the Debian chroot environment if present'
-	if not set -q __fish_prompt_normal
-        set -g __fish_prompt_normal (set_color normal)
-    end
+function fish_prompt --description 'Write out the prompt'
+	set -l last_status $status
+    set -l normal (set_color normal)
 
-    if not set -q __fish_prompt_chroot_env
-        set -g __fish_prompt_chroot_env (set_color yellow)
-    end
+    # Hack; fish_config only copies the fish_prompt function (see #736)
+    if not set -q -g __fish_classic_git_functions_defined
+        set -g __fish_classic_git_functions_defined
 
-    # Set variable identifying the chroot you work in (used in the prompt below)
-    if begin
-            not set -q debian_chroot
-            and test -r /etc/debian_chroot
+        function __fish_repaint_user --on-variable fish_color_user --description "Event handler, repaint when fish_color_user changes"
+            if status --is-interactive
+                commandline -f repaint ^/dev/null
+            end
         end
-        set debian_chroot (cat /etc/debian_chroot)
-    end
-    if begin
-            not set -q __fish_debian_chroot_prompt
-            and set -q debian_chroot
-            and test -n $debian_chroot
+
+        function __fish_repaint_host --on-variable fish_color_host --description "Event handler, repaint when fish_color_host changes"
+            if status --is-interactive
+                commandline -f repaint ^/dev/null
+            end
         end
-        set -g __fish_debian_chroot_prompt "($debian_chroot)"
+
+        function __fish_repaint_status --on-variable fish_color_status --description "Event handler; repaint when fish_color_status changes"
+            if status --is-interactive
+                commandline -f repaint ^/dev/null
+            end
+        end
+
+        function __fish_repaint_bind_mode --on-variable fish_key_bindings --description "Event handler; repaint when fish_key_bindings changes"
+            if status --is-interactive
+                commandline -f repaint ^/dev/null
+            end
+        end
+
+        # initialize our new variables
+        if not set -q __fish_classic_git_prompt_initialized
+            set -qU fish_color_user
+            or set -U fish_color_user -o green
+            set -qU fish_color_host
+            or set -U fish_color_host -o cyan
+            set -qU fish_color_status
+            or set -U fish_color_status red
+            set -U __fish_classic_git_prompt_initialized
+        end
     end
 
-    # Prepend the chroot environment if present
-    if set -q __fish_debian_chroot_prompt
-        echo -n -s "$__fish_prompt_chroot_env" "$__fish_debian_chroot_prompt" "$__fish_prompt_normal" ' '
-    end
-
+    set -l color_cwd
+    set -l prefix
+    set -l suffix
     switch "$USER"
-
         case root toor
-
-            if not set -q __fish_prompt_cwd
-                if set -q fish_color_cwd_root
-                    set -g __fish_prompt_cwd (set_color $fish_color_cwd_root)
-                else
-                    set -g __fish_prompt_cwd (set_color $fish_color_cwd)
-                end
+            if set -q fish_color_cwd_root
+                set color_cwd $fish_color_cwd_root
+            else
+                set color_cwd $fish_color_cwd
             end
-
-            echo -n -s "$USER" @ (prompt_hostname) ' ' "$__fish_prompt_cwd" (prompt_pwd) "$__fish_prompt_normal" '# '
-
+            set suffix '#'
         case '*'
-
-            if not set -q __fish_prompt_cwd
-                set -g __fish_prompt_cwd (set_color $fish_color_cwd)
-            end
-
-            echo -n -s "$USER" @ (prompt_hostname) ' ' "$__fish_prompt_cwd" (prompt_pwd) "$__fish_prompt_normal" '> '
-
+            set color_cwd $fish_color_cwd
+            set suffix '>'
     end
+
+    set -l prompt_status
+    if test $last_status -ne 0
+        set prompt_status ' ' (set_color $fish_color_status) "[$last_status]" "$normal"
+    end
+
+    echo -n -s (set_color $fish_color_user) "$USER" $normal @ (set_color $fish_color_host) (prompt_hostname) $normal ' ' (set_color $color_cwd) (prompt_pwd) $normal (__fish_vcs_prompt) $normal $prompt_status $suffix " "
 end

@@ -17,7 +17,7 @@ function plc
 			eval $EDITOR /tmp/playground.c
 
 		case ir
-			clang -S -emit-llvm -O3 -o /tmp/playground.ll /tmp/playground.c
+			clang -S -emit-llvm -o /tmp/playground.ll /tmp/playground.c
 			eval $EDITOR /tmp/playground.ll
 
 		case run

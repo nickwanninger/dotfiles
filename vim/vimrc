@@ -7,7 +7,9 @@ set laststatus=2   " Always show the statusline
 
 set encoding=utf-8 " Necessary to show Unicode glyphs
 
-let g:ctrlp_custom_ignore = 'build\|node_modules\|DS_Store\|git\|\/vim\/bundle'
+let g:ctrlp_custom_ignore = 'build\|node_modules\|DS_Store\|git\/'
+let g:ctrlp_max_depth=40
+let g:ctrlp_working_path_mode=''
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_auto_colors = 0
 	
@@ -34,9 +36,7 @@ Plugin 'valloric/youcompleteme'
 Plugin 'wincent/terminus'
 Bundle 'dag/vim-fish'
 Plugin 'sjl/gundo.vim'
-
 Plugin 'lluchs/vim-wren'
-
 Plugin 'joom/latex-unicoder.vim'
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -50,9 +50,8 @@ autocmd filetype crontab setlocal nobackup nowritebackup
 
 syntax on
 set background=dark
-
 " Pick a colorscheme
-colorscheme monokai
+colorscheme draculablack
 
 let g:color_scheme = "dark"
 function! ToggleSyntaxColor()
@@ -61,17 +60,21 @@ function! ToggleSyntaxColor()
 			colorscheme github
    else
       let g:color_scheme = "dark"
-			colorscheme monokai
+			colorscheme draculablack
    endif
 endfunction
 
 
-map <C-C> :call ToggleSyntaxColor()<CR>
+" map <C-C> :call ToggleSyntaxColor()<CR>
 
 
 map <C-\> <C-v>F\
 map <space> <ESC>viw
-imap <C-l> λ
+
+
+
+" Insert a lambda: mostly for scheme and haskell
+imap <C-Bslash> λ
 
 
 
@@ -85,7 +88,7 @@ vmap < <gv
 let g:jellybeans_use_term_background_color = 1
 filetype plugin indent on
 
-
+set ttyfast  " we have a fast terminal
 set lazyredraw
 set backspace=indent,eol,start
 
@@ -99,6 +102,8 @@ set mouse=a
 " to just moving up and down with arrowkeys
 map <ScrollWheelUp> <Up>
 map <ScrollWheelDown> <Down>
+map <ScrollWheelRight> <Right>
+map <ScrollWheelLeft> <Left>
 
 " Enables numbers on 
 set number
@@ -118,6 +123,12 @@ map <C-Q> :q!<CR>
 
 " System copy and paste
 set pastetoggle=<F2>
+
+
+
+" tell me when i'm running on too long
+" highlight OverLength ctermbg=red 
+" match OverLength /\%80v.\+/
 
 " Copy paste to/from clipboard
 vnoremap <C-c> "*y
@@ -168,6 +179,9 @@ noremap <C-A-right> <C-W>l<C-W>_
 set tabstop=2
 set shiftwidth=2
 
+
+autocmd Filetype haskell setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
+
 nnoremap tn :tabnew<Space>
 nnoremap tl :tabnext<CR>
 nnoremap th :tabprev<CR>
@@ -175,5 +189,19 @@ nnoremap tj :tabfirst<CR>
 nnoremap tk :tablast<CR>
 nnoremap tq :tabclose<CR>
 
-" set statusline+=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %{noscrollbar#statusline(20,'_','=')}
 
+
+command WQ wq
+command Wq wq
+command W w
+command Q q
+nnoremap ; :
+
+"set up code folding
+set nofoldenable     "don't fold by default
+set foldmethod=indent   " fold on indentations
+set foldnestmax=10   "only fold up to 10 levels
+set foldlevel=1     " only show me first fold level
+
+
+" set statusline+=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %{noscrollbar#statusline(20,'_','=')}
