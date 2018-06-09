@@ -25,4 +25,7 @@ alias aplay "mplayer -cache 1024 -quiet -rawaudio samplesize=1:channels=1:rate=8
 alias remake "make clean; make"
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/nick/.gcloud/google-cloud-sdk/path.fish.inc' ]; if type source > /dev/null; source '/Users/nick/.gcloud/google-cloud-sdk/path.fish.inc'; else; . '/Users/nick/.gcloud/google-cloud-sdk/path.fish.inc'; end; end
+
+
+
 set -g fish_user_paths "/usr/local/opt/llvm/bin" $fish_user_paths

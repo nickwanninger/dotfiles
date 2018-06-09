@@ -1,0 +1,3 @@
+function linux
+	docker run -v (pwd):/mount/ -w /mount/ --name debian-(openssl rand -hex 4) --rm -i -t debian bash
+end
