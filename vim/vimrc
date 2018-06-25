@@ -7,7 +7,7 @@ set laststatus=2   " Always show the statusline
 
 set encoding=utf-8 " Necessary to show Unicode glyphs
 
-let g:ctrlp_custom_ignore = 'build\|node_modules\|DS_Store\|git\/'
+let g:ctrlp_custom_ignore = 'vendor\|build\|node_modules\|DS_Store\|git\/'
 let g:ctrlp_max_depth=40
 let g:ctrlp_working_path_mode=''
 let g:indent_guides_enable_on_vim_startup = 1
@@ -64,6 +64,9 @@ function! ToggleSyntaxColor()
    endif
 endfunction
 
+
+
+au BufRead,BufNewFile *.g set filetype=geode
 
 " map <C-C> :call ToggleSyntaxColor()<CR>
 
