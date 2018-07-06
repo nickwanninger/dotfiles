@@ -38,6 +38,7 @@ Bundle 'dag/vim-fish'
 Plugin 'sjl/gundo.vim'
 Plugin 'lluchs/vim-wren'
 Plugin 'joom/latex-unicoder.vim'
+Plugin 'fatih/vim-go' 
 call vundle#end()            " required
 filetype plugin indent on    " required
 set smartindent
@@ -124,6 +125,12 @@ map <C-n> :NERDTreeToggle<CR>
 map <C-q> :q<CR>
 map <C-Q> :q!<CR>
 
+
+" Map esc to exit terminal mode
+tnoremap <Esc> <C-\><C-n>
+
+
+
 " System copy and paste
 set pastetoggle=<F2>
 
@@ -178,6 +185,9 @@ set winheight=999
 set winminheight=0
 noremap <C-A-left> <C-W>h<C-W>_
 noremap <C-A-right> <C-W>l<C-W>_
+
+set splitbelow
+set splitright
 
 set tabstop=2
 set shiftwidth=2

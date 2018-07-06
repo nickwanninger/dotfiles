@@ -10,8 +10,10 @@ switch (uname)
 case Darwin
   # export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 	export PATH="$HOME/.cargo/bin:/opt/local/bin:$PATH"
-	export PATH="$GOPATH/bin:$PATH"
 end
+
+
+export PATH="$GOPATH/bin:$PATH"
 
 
 export PATH="$HOME/.bin:$PATH"
