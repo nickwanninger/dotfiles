@@ -1,4 +1,5 @@
 fisherman/await
+oh-my-fish/plugin-fasd
 fisherman/fzf
 fisherman/get
 fisherman/getopts

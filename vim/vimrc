@@ -31,13 +31,10 @@ Plugin 'Lokaltog/vim-powerline'
 " Plugin 'itchyny/lightline.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'tpope/vim-commentary'
-Plugin 'xuhdev/vim-latex-live-preview'
-Plugin 'valloric/youcompleteme'
+" Plugin 'valloric/youcompleteme'
 Plugin 'wincent/terminus'
 Bundle 'dag/vim-fish'
 Plugin 'sjl/gundo.vim'
-Plugin 'lluchs/vim-wren'
-Plugin 'joom/latex-unicoder.vim'
 Plugin 'fatih/vim-go' 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -52,19 +49,7 @@ autocmd filetype crontab setlocal nobackup nowritebackup
 syntax on
 set background=dark
 " Pick a colorscheme
-colorscheme draculablack
-
-let g:color_scheme = "dark"
-function! ToggleSyntaxColor()
-   if g:color_scheme == "dark"
-      let g:color_scheme = "light"
-			colorscheme github
-   else
-      let g:color_scheme = "dark"
-			colorscheme draculablack
-   endif
-endfunction
-
+colorscheme Heahtraht
 
 
 au BufRead,BufNewFile *.g set filetype=geode

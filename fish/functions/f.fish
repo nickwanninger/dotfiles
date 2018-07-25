@@ -1,0 +1,1 @@
+/Users/nick/.config/fisherman/fasd/functions/f.fish
