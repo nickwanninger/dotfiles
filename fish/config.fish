@@ -27,5 +27,7 @@ alias remake "make clean; make"
 if [ -f '/Users/nick/.gcloud/google-cloud-sdk/path.fish.inc' ]; if type source > /dev/null; source '/Users/nick/.gcloud/google-cloud-sdk/path.fish.inc'; else; . '/Users/nick/.gcloud/google-cloud-sdk/path.fish.inc'; end; end
 
 
+set -x HOMEBREW_NO_AUTO_UPDATE 1
+
 
 set -g fish_user_paths "/usr/local/opt/llvm/bin" $fish_user_paths

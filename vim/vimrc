@@ -28,9 +28,15 @@ Plugin 'leafgarland/typescript-vim'
 Plugin 'junegunn/limelight.vim'
 Plugin 'kien/ctrlp.vim'
 Plugin 'Lokaltog/vim-powerline'
+
+Plugin 'pangloss/vim-javascript'
+Plugin 'mxw/vim-jsx'
+
 " Plugin 'itchyny/lightline.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'tpope/vim-commentary'
+Plugin 'ianks/vim-tsx'
+
 " Plugin 'valloric/youcompleteme'
 Plugin 'wincent/terminus'
 Bundle 'dag/vim-fish'
@@ -42,6 +48,11 @@ set smartindent
 set noswapfile
 
 
+
+set shortmess+=I
+
+set colorcolumn=100
+
 nnoremap <C-g> :GundoToggle<CR>
 
 autocmd filetype crontab setlocal nobackup nowritebackup
@@ -50,6 +61,7 @@ syntax on
 set background=dark
 " Pick a colorscheme
 colorscheme Heahtraht
+" colorscheme draculablack
 
 
 au BufRead,BufNewFile *.g set filetype=geode
@@ -176,6 +188,7 @@ set splitright
 
 set tabstop=2
 set shiftwidth=2
+
 
 
 autocmd Filetype haskell setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
