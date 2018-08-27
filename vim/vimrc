@@ -13,6 +13,14 @@ let g:ctrlp_working_path_mode=''
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_auto_colors = 0
 	
+let g:go_disable_autoinstall = 0
+
+" Highlight
+let g:go_highlight_functions = 1  
+let g:go_highlight_methods = 1  
+let g:go_highlight_structs = 1  
+let g:go_highlight_operators = 1  
+let g:go_highlight_build_constraints = 1  
 
 " let g:Powerline_symbols = 'fancy'
 let g:ycm_global_ycm_extra_conf = '~/dotfiles/vim/.ycm_extra_conf.py'
@@ -36,6 +44,8 @@ Plugin 'mxw/vim-jsx'
 Plugin 'scrooloose/nerdtree'
 Plugin 'tpope/vim-commentary'
 Plugin 'ianks/vim-tsx'
+
+Plugin 'majutsushi/tagbar'
 
 " Plugin 'valloric/youcompleteme'
 Plugin 'wincent/terminus'
@@ -61,7 +71,6 @@ syntax on
 set background=dark
 " Pick a colorscheme
 colorscheme Heahtraht
-" colorscheme draculablack
 
 
 au BufRead,BufNewFile *.g set filetype=geode
@@ -216,3 +225,34 @@ set foldlevel=1     " only show me first fold level
 
 
 " set statusline+=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %{noscrollbar#statusline(20,'_','=')}
+
+
+
+
+let g:tagbar_type_go = {  
+    \ 'ctagstype' : 'go',
+    \ 'kinds'     : [
+        \ 'p:package',
+        \ 'i:imports:1',
+        \ 'c:constants',
+        \ 'v:variables',
+        \ 't:types',
+        \ 'n:interfaces',
+        \ 'w:fields',
+        \ 'e:embedded',
+        \ 'm:methods',
+        \ 'r:constructor',
+        \ 'f:functions'
+    \ ],
+    \ 'sro' : '.',
+    \ 'kind2scope' : {
+        \ 't' : 'ctype',
+        \ 'n' : 'ntype'
+    \ },
+    \ 'scope2kind' : {
+        \ 'ctype' : 't',
+        \ 'ntype' : 'n'
+    \ },
+    \ 'ctagsbin'  : 'gotags',
+    \ 'ctagsargs' : '-sort -silent'
+		\ }

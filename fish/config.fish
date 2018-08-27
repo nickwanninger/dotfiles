@@ -21,6 +21,7 @@ export EDITOR=(which vim)
 
 
 alias :q "exit"
+alias kb "keybase"
 alias aplay "mplayer -cache 1024 -quiet -rawaudio samplesize=1:channels=1:rate=8000 -demuxer rawaudio -"
 alias remake "make clean; make"
 # The next line updates PATH for the Google Cloud SDK.
