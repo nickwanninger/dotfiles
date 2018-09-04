@@ -12,15 +12,14 @@ let g:ctrlp_max_depth=40
 let g:ctrlp_working_path_mode=''
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_auto_colors = 0
-	
-let g:go_disable_autoinstall = 0
+
 
 " Highlight
-let g:go_highlight_functions = 1  
-let g:go_highlight_methods = 1  
-let g:go_highlight_structs = 1  
-let g:go_highlight_operators = 1  
-let g:go_highlight_build_constraints = 1  
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
 
 " let g:Powerline_symbols = 'fancy'
 let g:ycm_global_ycm_extra_conf = '~/dotfiles/vim/.ycm_extra_conf.py'
@@ -35,7 +34,8 @@ Plugin 'git://git.wincent.com/command-t.git'
 Plugin 'leafgarland/typescript-vim'
 Plugin 'junegunn/limelight.vim'
 Plugin 'kien/ctrlp.vim'
-Plugin 'Lokaltog/vim-powerline'
+" Plugin 'Lokaltog/vim-powerline'
+Plugin 'vim-airline/vim-airline'
 
 Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
@@ -46,18 +46,23 @@ Plugin 'tpope/vim-commentary'
 Plugin 'ianks/vim-tsx'
 
 Plugin 'majutsushi/tagbar'
+Plugin 'airblade/vim-gitgutter'
 
 " Plugin 'valloric/youcompleteme'
 Plugin 'wincent/terminus'
 Bundle 'dag/vim-fish'
 Plugin 'sjl/gundo.vim'
-Plugin 'fatih/vim-go' 
+Plugin 'fatih/vim-go'
+
+
 call vundle#end()            " required
 filetype plugin indent on    " required
 set smartindent
 set noswapfile
 
 
+
+let g:go_fmt_command = 'goimports'
 
 set shortmess+=I
 
@@ -71,6 +76,8 @@ syntax on
 set background=dark
 " Pick a colorscheme
 colorscheme Heahtraht
+highlight ExtraWhitespace ctermbg=darkred guibg=lightgreen
+match ExtraWhitespace /\s\+\%#\@<!$/
 
 
 au BufRead,BufNewFile *.g set filetype=geode
@@ -89,7 +96,7 @@ imap <C-Bslash> λ
 
 
 " This keeps the current visual block selection active
-" after changing indent with '<' or '>'. Usually the 
+" after changing indent with '<' or '>'. Usually the
 " visual block selection is lost after you shift it,
 " which is incredibly annoying.
 vmap > >gv
@@ -115,8 +122,8 @@ map <ScrollWheelDown> <Down>
 map <ScrollWheelRight> <Right>
 map <ScrollWheelLeft> <Left>
 
-" Enables numbers on 
-set number
+" Enables numbers on
+map <C-c> :set nu!<CR>
 
 " Map ctrl+d to toggling the relative numbers
 " on the side of the screen
@@ -132,6 +139,9 @@ map <C-q> :q<CR>
 map <C-Q> :q!<CR>
 
 
+
+
+
 " Map esc to exit terminal mode
 tnoremap <Esc> <C-\><C-n>
 
@@ -143,7 +153,7 @@ set pastetoggle=<F2>
 
 
 " tell me when i'm running on too long
-" highlight OverLength ctermbg=red 
+" highlight OverLength ctermbg=red
 " match OverLength /\%80v.\+/
 
 " Copy paste to/from clipboard
@@ -229,7 +239,9 @@ set foldlevel=1     " only show me first fold level
 
 
 
-let g:tagbar_type_go = {  
+
+
+let g:tagbar_type_go = {
     \ 'ctagstype' : 'go',
     \ 'kinds'     : [
         \ 'p:package',

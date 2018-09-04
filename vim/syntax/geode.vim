@@ -6,9 +6,9 @@ if exists("b:current_syntax")
 endif
 
 
-syn keyword geodeKeywords if else for match while
+syn keyword geodeKeywords is include if else for match while
 syn keyword geodeKeywords return func
-syn keyword geodeKeywords int float char string bool
+syn keyword geodeKeywords int float byte string bool
 syn keyword geodeKeywords let
 
 syn match geodeNum "\<\d\+\>[df]?"
@@ -16,12 +16,11 @@ syn match geodeNum "\v<[0-9_]+>"
 syn match geodeNum "\v<.?[0-9_]+[df]?>"
 syn match geodeNum "\<0[bB][01]\+\>"
 syn match geodeNum "\<0[xX]\x\+\>"
-syn match geodeNum "\<0[oO]\o\+\>" 
+syn match geodeNum "\<0[oO]\o\+\>"
 
 syn match geodeComment /#.*/
-syn region geodeComment start=#---# end=#---#
 
-syn region geodeString start=/"/ skip=/\\"/ end=/"/ 
+syn region geodeString start=/"/ skip=/\\"/ end=/"/
 
 syn match geodeCharacter /'.'/
 

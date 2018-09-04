@@ -11,7 +11,9 @@ endif
 let g:colors_name = "Heahtraht"
 
 
-hi Normal ctermfg=15 ctermbg=233 cterm=NONE
+hi Normal ctermfg=15 ctermbg=0 cterm=NONE
+hi NonText ctermbg=black
+
 
 hi Cursor ctermfg=0 ctermbg=15 cterm=NONE
 hi Visual ctermfg=NONE ctermbg=234 cterm=NONE
