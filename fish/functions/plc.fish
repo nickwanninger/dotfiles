@@ -24,14 +24,14 @@ function plc
 			# compile and run
 			gcc -o /tmp/playground /tmp/playground.c
 			/tmp/playground
-		
+
 
 		case asm
 			# build the asm and show it to the user
 			gcc -S -o /tmp/playground.s -masm=intel /tmp/playground.c
 			eval $EDITOR /tmp/playground.s
 	end
-		
+
 end
 
 

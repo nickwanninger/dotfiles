@@ -6,29 +6,36 @@ export TERM="xterm-256color"
 # cal
 #
 set -x GOPATH $HOME/dev/go
+
+
 switch (uname)
+# Specific things to my mac
 case Darwin
   # export PATH="/usr/local/opt/python/libexec/bin:$PATH"
+	export PATH="$HOME/.bin:$PATH"
 	export PATH="$HOME/.cargo/bin:/opt/local/bin:$PATH"
+	export PATH="$GOPATH/bin:$PATH"
 end
 
 
-export PATH="$GOPATH/bin:$PATH"
-
-
-export PATH="$HOME/.bin:$PATH"
 export EDITOR=(which vim)
 
 
+alias cft "vim ~/dotfiles/tmux/tmux.conf"
+alias cff "vim ~/dotfiles/fish/config.fish"
+
+
+
+alias tm "tmux new-session -A -s main"
 alias :q "exit"
 alias kb "keybase"
 alias aplay "mplayer -cache 1024 -quiet -rawaudio samplesize=1:channels=1:rate=8000 -demuxer rawaudio -"
 alias remake "make clean; make"
+
+alias glog "git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/nick/.gcloud/google-cloud-sdk/path.fish.inc' ]; if type source > /dev/null; source '/Users/nick/.gcloud/google-cloud-sdk/path.fish.inc'; else; . '/Users/nick/.gcloud/google-cloud-sdk/path.fish.inc'; end; end
 
-
+# disable homebrew auto update. Not sure if this works
 set -x HOMEBREW_NO_AUTO_UPDATE 1
-
-
 set -g fish_user_paths "/usr/local/opt/llvm/bin" $fish_user_paths

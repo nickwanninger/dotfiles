@@ -34,6 +34,7 @@ Plugin 'git://git.wincent.com/command-t.git'
 Plugin 'leafgarland/typescript-vim'
 Plugin 'junegunn/limelight.vim'
 Plugin 'kien/ctrlp.vim'
+Plugin 'liuchengxu/vim-which-key'
 " Plugin 'Lokaltog/vim-powerline'
 Plugin 'vim-airline/vim-airline'
 
@@ -54,6 +55,8 @@ Bundle 'dag/vim-fish'
 Plugin 'sjl/gundo.vim'
 Plugin 'fatih/vim-go'
 
+Plugin 'anned20/vimsence'
+
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -71,11 +74,14 @@ set colorcolumn=100
 nnoremap <C-g> :GundoToggle<CR>
 
 autocmd filetype crontab setlocal nobackup nowritebackup
+au BufRead,BufNewFile *.md setlocal textwidth=80
+
 
 syntax on
 set background=dark
 " Pick a colorscheme
 colorscheme Heahtraht
+" colorscheme rupza
 highlight ExtraWhitespace ctermbg=darkred guibg=lightgreen
 match ExtraWhitespace /\s\+\%#\@<!$/
 
@@ -84,16 +90,11 @@ au BufRead,BufNewFile *.g set filetype=geode
 
 " map <C-C> :call ToggleSyntaxColor()<CR>
 
-
 map <C-\> <C-v>F\
 map <space> <ESC>viw
 
-
-
 " Insert a lambda: mostly for scheme and haskell
 imap <C-Bslash> λ
-
-
 
 " This keeps the current visual block selection active
 " after changing indent with '<' or '>'. Usually the
@@ -117,10 +118,10 @@ set mouse=a
 
 " Change the scroll wheel from an actual scroll
 " to just moving up and down with arrowkeys
-map <ScrollWheelUp> <Up>
-map <ScrollWheelDown> <Down>
-map <ScrollWheelRight> <Right>
-map <ScrollWheelLeft> <Left>
+" map <ScrollWheelUp> <Up>
+" map <ScrollWheelDown> <Down>
+" map <ScrollWheelRight> <Right>
+" map <ScrollWheelLeft> <Left>
 
 " Enables numbers on
 map <C-c> :set nu!<CR>
@@ -268,3 +269,5 @@ let g:tagbar_type_go = {
     \ 'ctagsbin'  : 'gotags',
     \ 'ctagsargs' : '-sort -silent'
 		\ }
+
+
