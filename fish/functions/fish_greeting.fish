@@ -1,7 +1,7 @@
 function fish_greeting
 	clear
 	printf "\n\n"
-	fortune -s funny
+	fortune
 	printf "\n\n"
 end
 

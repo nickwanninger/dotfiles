@@ -18,13 +18,17 @@ case Darwin
 end
 
 
-export EDITOR=(which vim)
+export EDITOR=(which nvim)
 
 
 alias cft "vim ~/dotfiles/tmux/tmux.conf"
 alias cff "vim ~/dotfiles/fish/config.fish"
 
 
+
+alias vim="nvim"
+alias vi="nvim"
+alias oldvim="vim"
 
 alias tm "tmux new-session -A -s main"
 alias :q "exit"

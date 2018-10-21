@@ -6,6 +6,9 @@ rm -rf ~/.vim
 ln -sf ~/dotfiles/vim/vimrc ~/.vimrc
 ln -sF ~/dotfiles/vim/ ~/.vim
 
+ln -s ../.vim ~/.config/nvim
+ln -s ../.vimrc ~/.vim/init.vim
+
 ln -sf ~/dotfiles/git/.gitignore ~/.gitignore
 
 ln -sf ~/dotfiles/tmux/tmux.conf ~/.tmux.conf

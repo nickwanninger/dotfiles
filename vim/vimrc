@@ -2,8 +2,8 @@
 scriptencoding utf-8
 filetype off
 set nocompatible   " Disable vi-compatibility
-" set noshowmode
-set laststatus=2   " Always show the statusline
+set noshowmode
+" set laststatus=2   " Always show the statusline
 
 set encoding=utf-8 " Necessary to show Unicode glyphs
 
@@ -21,77 +21,64 @@ let g:go_highlight_structs = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 
-" let g:Powerline_symbols = 'fancy'
 let g:ycm_global_ycm_extra_conf = '~/dotfiles/vim/.ycm_extra_conf.py'
+let g:ycm_autoclose_preview_window_after_insertion = 1
+let g:ycm_autoclose_preview_window_after_completion = 1
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/vundle
 call vundle#begin()
+
 " alternatively, pass a path where Vundle should install plugins
 Plugin 'VundleVim/Vundle.vim'
+" Plugin 'snoe/nvim-parinfer.js'
 Plugin 'tpope/vim-fugitive'
 Plugin 'git://git.wincent.com/command-t.git'
 Plugin 'leafgarland/typescript-vim'
 Plugin 'junegunn/limelight.vim'
 Plugin 'kien/ctrlp.vim'
-Plugin 'liuchengxu/vim-which-key'
-" Plugin 'Lokaltog/vim-powerline'
+Plugin 'junegunn/rainbow_parentheses.vim'
 Plugin 'vim-airline/vim-airline'
-
 Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
-
-" Plugin 'itchyny/lightline.vim'
 Plugin 'scrooloose/nerdtree'
-Plugin 'tpope/vim-commentary'
-Plugin 'ianks/vim-tsx'
-
-Plugin 'majutsushi/tagbar'
-Plugin 'airblade/vim-gitgutter'
-
-" Plugin 'valloric/youcompleteme'
-Plugin 'wincent/terminus'
+Plugin 'valloric/youcompleteme'
 Bundle 'dag/vim-fish'
-Plugin 'sjl/gundo.vim'
-Plugin 'fatih/vim-go'
-
-Plugin 'anned20/vimsence'
-
 
 call vundle#end()            " required
+
 filetype plugin indent on    " required
-set smartindent
-set noswapfile
 
 
-
-let g:go_fmt_command = 'goimports'
-
-set shortmess+=I
-
-set colorcolumn=100
-
-nnoremap <C-g> :GundoToggle<CR>
+" set colorcolumn=100
 
 autocmd filetype crontab setlocal nobackup nowritebackup
 au BufRead,BufNewFile *.md setlocal textwidth=80
 
-
 syntax on
+
+
+if (has("termguicolors"))
+  set termguicolors
+endif
 set background=dark
-" Pick a colorscheme
-colorscheme Heahtraht
-" colorscheme rupza
+
+
+colorscheme gruvbox
+hi Normal guibg=NONE ctermbg=NONE
+
 highlight ExtraWhitespace ctermbg=darkred guibg=lightgreen
 match ExtraWhitespace /\s\+\%#\@<!$/
 
 
 au BufRead,BufNewFile *.g set filetype=geode
-
-" map <C-C> :call ToggleSyntaxColor()<CR>
+au BufRead,BufNewFile *.w set filetype=lisp
 
 map <C-\> <C-v>F\
 map <space> <ESC>viw
+
+nnoremap Q q
+nnoremap q <Nop>
 
 " Insert a lambda: mostly for scheme and haskell
 imap <C-Bslash> λ
@@ -103,99 +90,72 @@ imap <C-Bslash> λ
 vmap > >gv
 vmap < <gv
 
-let g:jellybeans_use_term_background_color = 1
+
 filetype plugin indent on
 
-set ttyfast  " we have a fast terminal
-set lazyredraw
-set backspace=indent,eol,start
-
-""" System Clipboard and COPY and PASTE support
-set clipboard=unnamed
-
-" Enable mouse mode in every mode
-set mouse=a
 
 " Change the scroll wheel from an actual scroll
 " to just moving up and down with arrowkeys
-" map <ScrollWheelUp> <Up>
-" map <ScrollWheelDown> <Down>
-" map <ScrollWheelRight> <Right>
-" map <ScrollWheelLeft> <Left>
-
+map <ScrollWheelUp> <Up>
+map <ScrollWheelDown> <Down>
+map <ScrollWheelRight> <Right>
+map <ScrollWheelLeft> <Left>
 " Enables numbers on
-map <C-c> :set nu!<CR>
-
-" Map ctrl+d to toggling the relative numbers
-" on the side of the screen
-
-" Disable the bell in vim
-set visualbell t_vb=
-
+map <C-c> :set relativenumber! <bar> set nu!<CR>
 " Setup a toggle for nerd tree on ctr+n
 map <C-n> :NERDTreeToggle<CR>
-
 " Map ctrl+q and ctrl+Q to quit and SUPER quit :)
 map <C-q> :q<CR>
 map <C-Q> :q!<CR>
-
-
-
-
-
 " Map esc to exit terminal mode
 tnoremap <Esc> <C-\><C-n>
-
-
-
-" System copy and paste
-set pastetoggle=<F2>
-
-
-
-" tell me when i'm running on too long
-" highlight OverLength ctermbg=red
-" match OverLength /\%80v.\+/
-
-" Copy paste to/from clipboard
-vnoremap <C-c> "*y
-map <silent><Leader>p :set paste<CR>o<esc>"*]p:set nopaste<cr>"
-map <silent><Leader><S-p> :set paste<CR>O<esc>"*]p:set nopaste<cr>"
-
 " Map ctrl + s to save in any mode
 noremap <C-S> :update<CR>
 vnoremap <C-S> <C-C>:update<CR>
 inoremap <C-S> <C-O>:update<CR>
 
-
-
 " Cursor motion
-set scrolloff=8
-set matchpairs+=<:> " use % to jump between pairs
 runtime! macros/matchit.vim
 
-" Last line
-" set showcmd
 
+
+
+inoremap {<CR> {<CR>}<C-o>O
+
+
+
+set smartindent
+set noswapfile
+let g:indentLine_fileTypeExclude=['help']
+let g:indentLine_bufNameExclude=['NERD_tree.*']
+let g:rainbow#max_level = 16
+let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
+au VimEnter * RainbowParentheses
+let g:go_fmt_command = 'goimports'
+
+let g:indentLine_enabled = 1
+set shortmess+=I
+set visualbell t_vb= " disable visual bell
+set ttyfast  " we have a fast terminal
+set lazyredraw
+set backspace=indent,eol,start
+""" System Clipboard and COPY and PASTE support
+set clipboard=unnamed
+" Enable mouse mode in every mode
+set mouse=a
+set cursorline
+" System copy and paste
+set pastetoggle=<F2>
+set scrolloff=8
+set matchpairs+=<:> " use % to jump between pairs
 " Searching
 set incsearch
 set ignorecase
 set smartcase
 set showmatch
 map <leader><space> :let @/=''<cr> " clear search
-
-
-" Quicker window manangement
-"nnoremap <C-j> <C-w>j
-"nnoremap <C-k> <C-w>k
-"nnoremap <C-h> <C-w>h
-"nnoremap <C-l> <C-w>l
-
-" Shortcut to indent the file
-" nnoremap <C-F> gg=G
-
 " Use tab to navitate blocks
-nnoremap <tab> %
+" nnoremap <tab> %
 
 " Split pane navigation mappings
 set winheight=999
@@ -209,9 +169,16 @@ set splitright
 set tabstop=2
 set shiftwidth=2
 
+set nofoldenable     "don't fold by default
+set foldmethod=indent   " fold on indentations
+set foldnestmax=10   "only fold up to 10 levels
+set foldlevel=1     " only show me first fold level
 
 
+" Make haskell use spaces for tabs instead of tabs
 autocmd Filetype haskell setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
+autocmd Filetype Lisp setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
+
 
 nnoremap tn :tabnew<Space>
 nnoremap tl :tabnext<CR>
@@ -219,9 +186,6 @@ nnoremap th :tabprev<CR>
 nnoremap tj :tabfirst<CR>
 nnoremap tk :tablast<CR>
 nnoremap tq :tabclose<CR>
-
-
-
 command WQ wq
 command Wq wq
 command W w
@@ -229,45 +193,4 @@ command Q q
 nnoremap ; :
 
 "set up code folding
-set nofoldenable     "don't fold by default
-set foldmethod=indent   " fold on indentations
-set foldnestmax=10   "only fold up to 10 levels
-set foldlevel=1     " only show me first fold level
-
-
-" set statusline+=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %{noscrollbar#statusline(20,'_','=')}
-
-
-
-
-
-
-let g:tagbar_type_go = {
-    \ 'ctagstype' : 'go',
-    \ 'kinds'     : [
-        \ 'p:package',
-        \ 'i:imports:1',
-        \ 'c:constants',
-        \ 'v:variables',
-        \ 't:types',
-        \ 'n:interfaces',
-        \ 'w:fields',
-        \ 'e:embedded',
-        \ 'm:methods',
-        \ 'r:constructor',
-        \ 'f:functions'
-    \ ],
-    \ 'sro' : '.',
-    \ 'kind2scope' : {
-        \ 't' : 'ctype',
-        \ 'n' : 'ntype'
-    \ },
-    \ 'scope2kind' : {
-        \ 'ctype' : 't',
-        \ 'ntype' : 'n'
-    \ },
-    \ 'ctagsbin'  : 'gotags',
-    \ 'ctagsargs' : '-sort -silent'
-		\ }
-
 

@@ -1,4 +1,4 @@
 def FlagsForFile( filename, **kwargs ):
   return {
-    'flags': [ '-std=c99', '-x', 'c++', '-Wall', '-Wextra', '-Werror', '-Wno-unused-parameter', '-Wno-unused-variable', '-I./include' ],
+    'flags': [ '-x', 'c++', '-Wall', '-I./include', '-Wno-unused-variable' ],
   }

@@ -340,8 +340,9 @@ if exists('g:gruvbox_invert_signs')
   endif
 endif
 
-let s:invert_selection = s:inverse
+let s:invert_selection = ''
 if exists('g:gruvbox_invert_selection')
+
   if g:gruvbox_invert_selection == 0
     let s:invert_selection = ''
   endif
