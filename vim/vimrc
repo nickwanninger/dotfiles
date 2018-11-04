@@ -13,7 +13,6 @@ let g:ctrlp_working_path_mode=''
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_auto_colors = 0
 
-
 " Highlight
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
@@ -24,12 +23,13 @@ let g:go_highlight_build_constraints = 1
 let g:ycm_global_ycm_extra_conf = '~/dotfiles/vim/.ycm_extra_conf.py'
 let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_error_symbol = '!!'
+let g:ycm_warning_symbol = '??'
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/vundle
 call vundle#begin()
 
-" alternatively, pass a path where Vundle should install plugins
 Plugin 'VundleVim/Vundle.vim'
 " Plugin 'snoe/nvim-parinfer.js'
 Plugin 'tpope/vim-fugitive'
@@ -43,18 +43,20 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
 Plugin 'scrooloose/nerdtree'
 Plugin 'valloric/youcompleteme'
-Bundle 'dag/vim-fish'
+Plugin 'dag/vim-fish'
 
 call vundle#end()            " required
-
 filetype plugin indent on    " required
-
 
 " set colorcolumn=100
 
 autocmd filetype crontab setlocal nobackup nowritebackup
 au BufRead,BufNewFile *.md setlocal textwidth=80
+au BufRead,BufNewFile *.tex setlocal textwidth=80
 
+set wrap linebreak nolist
+set wrap
+set textwidth=0 wrapmargin=0
 syntax on
 
 
@@ -63,16 +65,16 @@ if (has("termguicolors"))
 endif
 set background=dark
 
-
 colorscheme gruvbox
+
 hi Normal guibg=NONE ctermbg=NONE
 
-highlight ExtraWhitespace ctermbg=darkred guibg=lightgreen
+highlight ExtraWhitespace ctermbg=red guibg=#fabd2f
 match ExtraWhitespace /\s\+\%#\@<!$/
 
 
 au BufRead,BufNewFile *.g set filetype=geode
-au BufRead,BufNewFile *.w set filetype=lisp
+au BufRead,BufNewFile *.wl set filetype=clojure
 
 map <C-\> <C-v>F\
 map <space> <ESC>viw
@@ -82,6 +84,7 @@ nnoremap q <Nop>
 
 " Insert a lambda: mostly for scheme and haskell
 imap <C-Bslash> λ
+imap <C-w> <esc>dbi
 
 " This keeps the current visual block selection active
 " after changing indent with '<' or '>'. Usually the
@@ -101,7 +104,7 @@ map <ScrollWheelDown> <Down>
 map <ScrollWheelRight> <Right>
 map <ScrollWheelLeft> <Left>
 " Enables numbers on
-map <C-c> :set relativenumber! <bar> set nu!<CR>
+map <C-c> :set nu!<CR>
 " Setup a toggle for nerd tree on ctr+n
 map <C-n> :NERDTreeToggle<CR>
 " Map ctrl+q and ctrl+Q to quit and SUPER quit :)
@@ -118,8 +121,8 @@ inoremap <C-S> <C-O>:update<CR>
 runtime! macros/matchit.vim
 
 
-
-
+set list
+set listchars=tab:\·\ ,trail:·,eol:\ ,nbsp:_
 inoremap {<CR> {<CR>}<C-o>O
 
 
@@ -154,6 +157,9 @@ set ignorecase
 set smartcase
 set showmatch
 map <leader><space> :let @/=''<cr> " clear search
+
+map <C-d> :YcmForceCompileAndDiagnostics<CR>
+map <S-Tab> :YcmCompleter GoTo<CR>
 " Use tab to navitate blocks
 " nnoremap <tab> %
 
@@ -177,7 +183,7 @@ set foldlevel=1     " only show me first fold level
 
 " Make haskell use spaces for tabs instead of tabs
 autocmd Filetype haskell setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
-autocmd Filetype Lisp setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
+autocmd Filetype lisp setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
 
 
 nnoremap tn :tabnew<Space>
@@ -191,6 +197,3 @@ command Wq wq
 command W w
 command Q q
 nnoremap ; :
-
-"set up code folding
-
