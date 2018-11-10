@@ -60,9 +60,10 @@ set wrap
 set textwidth=0 wrapmargin=0
 syntax on
 
-
-if (has("termguicolors"))
-  set termguicolors
+if (has("mac"))
+	if (has("termguicolors"))
+		set termguicolors
+	endif
 endif
 set background=dark
 
