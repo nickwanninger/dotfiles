@@ -187,13 +187,6 @@ set foldlevel=1     " only show me first fold level
 autocmd Filetype haskell setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
 autocmd Filetype lisp setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
 
-
-nnoremap tn :tabnew<Space>
-nnoremap tl :tabnext<CR>
-nnoremap th :tabprev<CR>
-nnoremap tj :tabfirst<CR>
-nnoremap tk :tablast<CR>
-nnoremap tq :tabclose<CR>
 command WQ wq
 command Wq wq
 command W w
