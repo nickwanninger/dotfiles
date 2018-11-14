@@ -32,7 +32,6 @@ set rtp+=~/.vim/bundle/vundle
 call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
-" Plugin 'snoe/nvim-parinfer.js'
 Plugin 'tpope/vim-fugitive'
 Plugin 'git://git.wincent.com/command-t.git'
 Plugin 'leafgarland/typescript-vim'
