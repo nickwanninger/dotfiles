@@ -45,7 +45,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'valloric/youcompleteme'
 Plugin 'dag/vim-fish'
 Plugin 'rhysd/vim-clang-format'
-
+Plugin 'bhurlow/vim-parinfer'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
