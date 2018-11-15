@@ -46,12 +46,19 @@ Plugin 'valloric/youcompleteme'
 Plugin 'dag/vim-fish'
 Plugin 'rhysd/vim-clang-format'
 Plugin 'bhurlow/vim-parinfer'
+Plugin 'dracula/vim'
+
 call vundle#end()            " required
 filetype plugin indent on    " required
 
 " set colorcolumn=100
 
 autocmd filetype crontab setlocal nobackup nowritebackup
+
+
+
+let g:dracula_italic = 0
+
 
 set wrap linebreak nolist
 set wrap
@@ -63,9 +70,11 @@ if (has("mac"))
 		set termguicolors
 	endif
 endif
+
+
 set background=dark
 
-colorscheme gruvbox
+color dracula
 
 hi Normal guibg=NONE ctermbg=NONE
 
@@ -92,7 +101,6 @@ imap <C-w> <esc>dbi
 " which is incredibly annoying.
 vmap > >gv
 vmap < <gv
-
 
 filetype plugin indent on
 
@@ -146,7 +154,7 @@ set backspace=indent,eol,start
 set clipboard=unnamed
 " Enable mouse mode in every mode
 set mouse=a
-set cursorline
+" set cursorline
 " System copy and paste
 set pastetoggle=<F2>
 set scrolloff=8
