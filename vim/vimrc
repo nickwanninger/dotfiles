@@ -198,3 +198,9 @@ command Wq wq
 command W w
 command Q q
 nnoremap ; :
+
+
+
+nnoremap <leader>d "_d
+xnoremap <leader>d "_d
+xnoremap <leader>p "_dP
