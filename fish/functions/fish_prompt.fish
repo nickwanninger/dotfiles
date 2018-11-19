@@ -1,8 +1,6 @@
 function fish_prompt
 
 	set -l exit_status $status
-
-
 	set_color green
 	printf (whoami)
 	set_color white
