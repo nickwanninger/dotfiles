@@ -47,7 +47,7 @@ Plugin 'dag/vim-fish'
 Plugin 'rhysd/vim-clang-format'
 Plugin 'bhurlow/vim-parinfer'
 Plugin 'dracula/vim'
-Plugin 'liuchengxu/space-vim-dark'
+Plugin 'nickaroot/vim-xcode-dark-theme'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -75,7 +75,7 @@ endif
 
 set background=dark
 
-colorscheme space-vim-dark
+colorscheme dracula
 
 " hi Comment cterm=italic
 hi Comment guifg=#5C6370 ctermfg=59
