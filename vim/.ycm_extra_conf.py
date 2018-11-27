@@ -8,5 +8,5 @@ def FlagsForFile( filename, **kwargs ):
         lang = "c"
         lib = "-std=c99"
     return {
-           'flags': [ '-x', lang, lib, '-Wall', '-Wpedantic', '-I./include', '-Wno-unused-variable', '-fms-extensions' ]
+           'flags': [ '-x', lang, lib, '-Wall', '-I./include', '-Wno-unused-variable', '-fms-extensions', '-Wno-gnu-anonymous-struct' ]
             }
