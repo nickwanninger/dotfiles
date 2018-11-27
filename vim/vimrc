@@ -56,7 +56,8 @@ filetype plugin indent on    " required
 
 autocmd filetype crontab setlocal nobackup nowritebackup
 
-
+:autocmd BufWritePre [:;]*
+\   try | echoerr 'Forbidden file name: ' . expand('<afile>') | endtry
 
 let g:dracula_italic = 0
 
