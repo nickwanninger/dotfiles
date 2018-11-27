@@ -138,6 +138,7 @@ runtime! macros/matchit.vim
 
 set list
 set listchars=tab:\·\ ,trail:·,eol:\ ,nbsp:_
+"" set listchars=tab:\|\ ,trail:·,eol:\ ,nbsp:_
 inoremap {<CR> {<CR>}<C-o>O
 
 
