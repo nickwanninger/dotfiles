@@ -1,11 +1,2 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =9
-let g:netrw_dirhist_1='/Users/nick/dev/c/stack-vm-in-c'
-let g:netrw_dirhist_2='/Users/nick/dev/c/stack-vm-in-c/src'
-let g:netrw_dirhist_3='/Users/nick/dotfiles'
-let g:netrw_dirhist_4='/Users/nick/dotfiles/vim'
-let g:netrw_dirhist_5='/Users/nick/.emacs.d'
-let g:netrw_dirhist_6='/Users/nick/.emacs.d/core'
-let g:netrw_dirhist_7='/Users/nick/.emacs.d'
-let g:netrw_dirhist_8='/Users/nick/.emacs.d/core'
-let g:netrw_dirhist_9='/Users/nick/.emacs.d/core/aprilfool'
+let g:netrw_dirhist_cnt =0
