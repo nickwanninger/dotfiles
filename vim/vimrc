@@ -165,7 +165,7 @@ set mouse=a
 set cursorline
 " System copy and paste
 set pastetoggle=<F2>
-set scrolloff=8
+set scrolloff=0
 set matchpairs+=<:> " use % to jump between pairs
 " Searching
 set incsearch
