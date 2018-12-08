@@ -91,6 +91,7 @@ match ExtraWhitespace /\s\+\%#\@<!$/
 
 au BufRead,BufNewFile *.g set filetype=geode
 au BufRead,BufNewFile *.wl set filetype=clojure
+au BufRead,BufNewFile *.ox set filetype=clojure
 
 map <C-\> <C-v>F\
 map <space> <ESC>viw
