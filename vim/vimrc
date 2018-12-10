@@ -163,7 +163,7 @@ set backspace=indent,eol,start
 set clipboard=unnamed
 " Enable mouse mode in every mode
 set mouse=a
-set cursorline
+" set cursorline
 " System copy and paste
 set pastetoggle=<F2>
 set scrolloff=4
