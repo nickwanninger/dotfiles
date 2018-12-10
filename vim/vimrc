@@ -48,6 +48,8 @@ Plugin 'rhysd/vim-clang-format'
 Plugin 'eraserhd/parinfer-rust'
 Plugin 'dracula/vim'
 Plugin 'nickaroot/vim-xcode-dark-theme'
+Plugin 'l04m33/vlime', {'rtp': 'vim/'}
+
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -180,8 +182,6 @@ map <S-Tab> :YcmCompleter GoTo<CR>
 " Use tab to navitate blocks
 " nnoremap <tab> %
 
-" Split pane navigation mappings
-set winheight=999
 set winminheight=0
 noremap <C-A-left> <C-W>h<C-W>_
 noremap <C-A-right> <C-W>l<C-W>_
