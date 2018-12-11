@@ -19,5 +19,19 @@ ln -sf ~/dotfiles/tmux/tmux.conf ~/.tmux.conf
 # killall Dock
 
 
+echo "Setting up vundle"
+BUNDLE_DIR=~/.vim/bundle
+
+rm -rf "$BUNDLE_DIR/*"
+# Install/update Vundle
+mkdir -p "$BUNDLE_DIR" && (git clone https://github.com/gmarik/vundle.git "$BUNDLE_DIR/vundle" || (cd "$BUNDLE_DIR/vundle" && git pull origin master))
+
+# Install bundles
+vim +PluginInstall +qall
+
+
+cd vim/bundle/youcompleteme
+./install.py --clang-completer
+
 
 echo "Setup Complete!"

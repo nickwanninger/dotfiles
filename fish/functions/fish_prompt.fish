@@ -1,22 +1,34 @@
 function fish_prompt
 
 	set -l exit_status $status
+
+	set_color white
+	printf "("
+
 	set_color green
 	printf (whoami)
-	set_color white
-	printf ":"
+
+
+	printf " "
+
 	set_color blue
-	# print the prompt
-	pwd | sed "s|$HOME|~|g" | tr -d '\n'
-	set_color -d 777777
-	# printf " ("
-	# cat ~/.weather | cut -c 16- | head -2 | xargs echo -n
-	# printf ")"
+	printf (prompt_hostname)
+
+
+	set_color yellow
+	printf " \""
+	prompt_pwd | sed "s|$HOME|~|g" | tr -d '\n'
+	printf "\""
+
+	set_color white
+	printf ")"
+
+
 	# add a new line at the end
 	printf "\n"
 
 
-	set prompt_symbol ">"
+	set prompt_symbol "*"
 	if [ $exit_status -ne 0 ]
 		set_color --bold red
 		printf "$exit_status "
