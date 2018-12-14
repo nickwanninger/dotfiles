@@ -31,8 +31,11 @@ let g:ycm_warning_symbol = '??'
 set rtp+=~/.vim/bundle/vundle
 call vundle#begin()
 
+
+
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-vinegar'
 Plugin 'git://git.wincent.com/command-t.git'
 Plugin 'leafgarland/typescript-vim'
 Plugin 'junegunn/limelight.vim'
