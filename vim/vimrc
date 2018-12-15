@@ -5,6 +5,8 @@ set nocompatible   " Disable vi-compatibility
 set noshowmode
 " set laststatus=2   " Always show the statusline
 
+let &t_ZH="\e[3m"
+let &t_ZR="\e[23m"
 set encoding=utf-8 " Necessary to show Unicode glyphs
 
 let g:ctrlp_custom_ignore = 'vendor\|build\|node_modules\|DS_Store\|git\/'
@@ -84,7 +86,7 @@ set background=dark
 
 colorscheme dracula
 
-" hi Comment cterm=italic
+hi Comment cterm=italic,bold
 hi Comment guifg=#5C6370 ctermfg=59
 hi Normal     ctermbg=NONE guibg=NONE
 "hi LineNr     ctermbg=NONE guibg=NONE
