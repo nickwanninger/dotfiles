@@ -34,4 +34,8 @@ cd vim/bundle/youcompleteme
 ./install.py --clang-completer
 
 
+echo "installing terminfos"
+tic -x xterm-256color-italic.terminfo
+tic -x tmux-256color.terminfo
+
 echo "Setup Complete!"
