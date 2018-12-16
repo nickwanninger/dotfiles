@@ -2,26 +2,22 @@ function fish_prompt
 
 	set -l exit_status $status
 
-	set_color white
-	printf "("
-
 	set_color green
 	printf (whoami)
 
-
-	printf " "
+	set_color black
+	printf " on "
 
 	set_color blue
 	printf (prompt_hostname)
 
+	set_color black
+	printf " in "
 
 	set_color yellow
-	printf " \""
 	prompt_pwd | sed "s|$HOME|~|g" | tr -d '\n'
-	printf "\""
 
 	set_color white
-	printf ")"
 
 
 	# add a new line at the end
