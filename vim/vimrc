@@ -4,7 +4,7 @@ filetype off
 set nocompatible   " Disable vi-compatibility
 set noshowmode
 " set laststatus=2   " Always show the statusline
-
+set nofoldenable " folding sucks
 let &t_ZH="\e[3m"
 let &t_ZR="\e[23m"
 set encoding=utf-8 " Necessary to show Unicode glyphs
