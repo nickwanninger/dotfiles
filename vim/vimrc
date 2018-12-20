@@ -84,13 +84,16 @@ endif
 
 set background=dark
 
-colorscheme dracula
+colorscheme monokai
 
 hi Comment cterm=italic,bold
 hi Comment guifg=#5C6370 ctermfg=59
-hi Normal     ctermbg=NONE guibg=NONE
+" hi Normal     ctermbg=NONE guibg=NONE
 "hi LineNr     ctermbg=NONE guibg=NONE
 hi SignColumn ctermbg=NONE guibg=NONE
+hi SpecialKey ctermbg=NONE guibg=NONE
+hi Special ctermbg=NONE guibg=NONE
+hi NonText ctermbg=NONE guibg=NONE
 
 highlight ExtraWhitespace ctermbg=red guibg=#fabd2f
 match ExtraWhitespace /\s\+\%#\@<!$/
@@ -146,7 +149,6 @@ runtime! macros/matchit.vim
 
 set list
 set listchars=tab:\·\ ,trail:·,eol:\ ,nbsp:_
-"" set listchars=tab:\|\ ,trail:·,eol:\ ,nbsp:_
 inoremap {<CR> {<CR>}<C-o>O
 
 
