@@ -15,12 +15,6 @@ let g:ctrlp_working_path_mode=''
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_auto_colors = 0
 
-" Highlight
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_structs = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_build_constraints = 1
 
 let g:ycm_global_ycm_extra_conf = '~/dotfiles/vim/.ycm_extra_conf.py'
 let g:ycm_autoclose_preview_window_after_insertion = 1
@@ -32,7 +26,6 @@ let g:ycm_warning_symbol = '??'
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/vundle
 call vundle#begin()
-
 
 
 Plugin 'VundleVim/Vundle.vim'
@@ -51,7 +44,8 @@ Plugin 'valloric/youcompleteme'
 Plugin 'dag/vim-fish'
 Plugin 'rhysd/vim-clang-format'
 Plugin 'eraserhd/parinfer-rust'
-Plugin 'dracula/vim'
+Plugin 'fatih/vim-go'
+" Plugin 'dracula/vim'
 Plugin 'nickaroot/vim-xcode-dark-theme'
 Plugin 'l04m33/vlime', {'rtp': 'vim/'}
 
@@ -59,7 +53,17 @@ Plugin 'l04m33/vlime', {'rtp': 'vim/'}
 call vundle#end()            " required
 filetype plugin indent on    " required
 
-" set colorcolumn=100
+
+
+" Highlight
+let g:go_fmt_command = "goimports"
+let g:go_term_mode = "split"
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_interfaces = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
 
 autocmd filetype crontab setlocal nobackup nowritebackup
 
@@ -84,14 +88,14 @@ endif
 
 set background=dark
 
-colorscheme monokai
+colorscheme dracula
 
-hi Comment cterm=italic,bold
-hi Comment guifg=#5C6370 ctermfg=59
-" hi Normal     ctermbg=NONE guibg=NONE
-"hi LineNr     ctermbg=NONE guibg=NONE
-hi SignColumn ctermbg=NONE guibg=NONE
-hi SpecialKey ctermbg=NONE guibg=NONE
+" hi Comment cterm=italic,bold
+" hi Commentguifg=#5f5faf ctermfg=NONE
+hi Normal     ctermbg=NONE guibg=NONE
+" hi LineNr     ctermbg=NONE guibg=NONE
+" hi SignColumn ctermbg=NONE guibg=NONE
+" hi SpecialKey ctermbg=NONE guibg=NONE
 hi Special ctermbg=NONE guibg=NONE
 hi NonText ctermbg=NONE guibg=NONE
 
@@ -147,8 +151,8 @@ inoremap <C-S> <C-O>:update<CR>
 runtime! macros/matchit.vim
 
 
-set list
-set listchars=tab:\·\ ,trail:·,eol:\ ,nbsp:_
+" set list
+" set listchars=tab:\·\ ,trail:·,eol:\ ,nbsp:_
 inoremap {<CR> {<CR>}<C-o>O
 
 
@@ -160,7 +164,6 @@ let g:indentLine_bufNameExclude=['NERD_tree.*']
 let g:rainbow#max_level = 16
 let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
 au VimEnter * RainbowParentheses
-let g:go_fmt_command = 'goimports'
 
 let g:indentLine_enabled = 1
 set shortmess+=I
@@ -172,7 +175,7 @@ set backspace=indent,eol,start
 set clipboard=unnamed
 " Enable mouse mode in every mode
 set mouse=a
-" set cursorline
+set cursorline
 " System copy and paste
 set pastetoggle=<F2>
 set scrolloff=4
