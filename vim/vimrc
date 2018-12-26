@@ -3,6 +3,7 @@ scriptencoding utf-8
 filetype off
 set nocompatible   " Disable vi-compatibility
 set noshowmode
+set laststatus=0
 " set laststatus=2   " Always show the statusline
 set nofoldenable " folding sucks
 let &t_ZH="\e[3m"
