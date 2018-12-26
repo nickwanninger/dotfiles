@@ -35,7 +35,7 @@ Plugin 'git://git.wincent.com/command-t.git'
 Plugin 'leafgarland/typescript-vim'
 Plugin 'junegunn/limelight.vim'
 Plugin 'kien/ctrlp.vim'
-Plugin 'junegunn/rainbow_parentheses.vim'
+" Plugin 'junegunn/rainbow_parentheses.vim'
 Plugin 'vim-airline/vim-airline'
 Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
@@ -136,6 +136,7 @@ map <ScrollWheelRight> <Right>
 map <ScrollWheelLeft> <Left>
 " Enables numbers on
 map <C-c> :set nu!<CR>
+set number
 " Setup a toggle for nerd tree on ctr+n
 map <C-n> :NERDTreeToggle<CR>
 " Map ctrl+q and ctrl+Q to quit and SUPER quit :)
@@ -164,7 +165,7 @@ let g:indentLine_fileTypeExclude=['help']
 let g:indentLine_bufNameExclude=['NERD_tree.*']
 let g:rainbow#max_level = 16
 let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
-au VimEnter * RainbowParentheses
+" au VimEnter * RainbowParentheses
 
 let g:indentLine_enabled = 1
 set shortmess+=I
