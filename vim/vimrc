@@ -29,6 +29,8 @@ call vundle#begin()
 
 
 Plugin 'VundleVim/Vundle.vim'
+
+Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-vinegar'
 Plugin 'git://git.wincent.com/command-t.git'
