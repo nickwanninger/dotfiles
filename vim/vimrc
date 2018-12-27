@@ -48,7 +48,6 @@ Plugin 'dag/vim-fish'
 Plugin 'rhysd/vim-clang-format'
 Plugin 'eraserhd/parinfer-rust'
 Plugin 'fatih/vim-go'
-" Plugin 'dracula/vim'
 Plugin 'nickaroot/vim-xcode-dark-theme'
 Plugin 'l04m33/vlime', {'rtp': 'vim/'}
 
@@ -91,11 +90,11 @@ endif
 
 set background=dark
 
-colorscheme dracula
+colorscheme onedark
 
 " hi Comment cterm=italic,bold
 " hi Commentguifg=#5f5faf ctermfg=NONE
-hi Normal     ctermbg=NONE guibg=NONE
+" hi Normal     ctermbg=NONE guibg=NONE
 " hi CursorLine ctermbg=NONE guibg=NONE
 " hi LineNr     ctermbg=NONE guibg=NONE
 " hi SignColumn ctermbg=NONE guibg=NONE
@@ -137,6 +136,9 @@ map <ScrollWheelUp> <Up>
 map <ScrollWheelDown> <Down>
 map <ScrollWheelRight> <Right>
 map <ScrollWheelLeft> <Left>
+
+
+
 " Enables numbers on
 map <C-c> :set nu!<CR>
 set number
