@@ -10,6 +10,21 @@ let &t_ZH="\e[3m"
 let &t_ZR="\e[23m"
 set encoding=utf-8 " Necessary to show Unicode glyphs
 
+
+
+" playing around with vimscript
+function! ASMCompile()
+	echo expand("%:p")
+	silent !clear
+	silent !execute "rm /tmp/out.s"
+	execute "!clang -Iinclude -O3 -S -o /tmp/out.s -masm=intel " . expand("%:p")
+	vsp /tmp/out.s
+endfunction
+
+:command ASMCompile :call ASMCompile()
+
+map <leader>asm :ASMCompile<CR>
+
 let g:ctrlp_custom_ignore = 'vendor\|build\|node_modules\|DS_Store\|git\/'
 let g:ctrlp_max_depth=40
 let g:ctrlp_working_path_mode=''
@@ -54,6 +69,23 @@ Plugin 'l04m33/vlime', {'rtp': 'vim/'}
 
 call vundle#end()            " required
 filetype plugin indent on    " required
+
+
+
+
+
+"////////////////////////////////////////////////////////
+
+let g:tmux_navigator_no_mappings = 1
+
+nnoremap <silent> <M-Left> :TmuxNavigateLeft<cr>
+nnoremap <silent> <M-Down> :TmuxNavigateDown<cr>
+nnoremap <silent> <M-Up> :TmuxNavigateUp<cr>
+nnoremap <silent> <M-Right> :TmuxNavigateRight<cr>
+" nnoremap <silent> {Previous-Mapping} :TmuxNavigatePrevious<cr>
+
+"////////////////////////////////////////////////////////
+
 
 
 " Highlight
