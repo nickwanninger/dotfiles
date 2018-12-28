@@ -12,7 +12,6 @@ set encoding=utf-8 " Necessary to show Unicode glyphs
 
 
 
-" playing around with vimscript
 function! ASMCompile()
 	echo expand("%:p")
 	silent !clear
