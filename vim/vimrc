@@ -76,8 +76,6 @@ autocmd filetype crontab setlocal nobackup nowritebackup
 let g:dracula_italic = 0
 
 
-
-
 set wrap linebreak nolist
 set wrap
 set textwidth=0 wrapmargin=0
@@ -96,7 +94,7 @@ colorscheme onedark
 
 " hi Comment cterm=italic,bold
 " hi Commentguifg=#5f5faf ctermfg=NONE
-" hi Normal     ctermbg=NONE guibg=NONE
+hi Normal     ctermbg=NONE guibg=NONE
 " hi CursorLine ctermbg=NONE guibg=NONE
 " hi LineNr     ctermbg=NONE guibg=NONE
 " hi SignColumn ctermbg=NONE guibg=NONE
