@@ -43,3 +43,10 @@ if [ -f '/Users/nick/.gcloud/google-cloud-sdk/path.fish.inc' ]; if type source >
 # disable homebrew auto update. Not sure if this works
 set -x HOMEBREW_NO_AUTO_UPDATE 1
 set -g fish_user_paths "/usr/local/opt/llvm/bin" $fish_user_paths
+
+
+switch (uname)
+case Darwin
+	export CC=/usr/local/opt/llvm/bin/clang
+	export CXX=/usr/local/opt/llvm/bin/clang++
+end
