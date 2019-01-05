@@ -182,10 +182,10 @@ endif
 
 
 set background=dark
-colorscheme onedark
+colorscheme brogrammer
 
 
-hi Normal     ctermbg=NONE guibg=NONE
+" hi Normal     ctermbg=NONE guibg=NONE
 hi Special ctermbg=NONE guibg=NONE
 hi NonText ctermbg=NONE guibg=NONE
 
