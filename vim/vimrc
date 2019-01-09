@@ -261,7 +261,7 @@ map <C-c> :set nu!<CR>
 map <C-n> :NERDTreeToggle<CR>
 map <C-q> :q<CR>
 map <C-Q> :q!<CR>
-map <leader><space> :let @/=''<cr> "
+map <leader>/ :let @/=''<cr>"
 map <C-d> :YcmForceCompileAndDiagnostics<CR>
 map <S-Tab> :YcmCompleter GoTo<CR>
 
