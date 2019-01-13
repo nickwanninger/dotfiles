@@ -213,7 +213,7 @@ set encoding=utf-8 " Necessary to show Unicode glyphs
 " setup some filetype mappings
 au BufRead,BufNewFile *.g set filetype=geode
 au BufRead,BufNewFile *.wl set filetype=clojure
-au BufRead,BufNewFile *.cdr set filetype=lisp
+au BufRead,BufNewFile *.cdr set filetype=clojure
 autocmd Filetype haskell setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
 autocmd Filetype lisp setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
 
