@@ -216,6 +216,8 @@ au BufRead,BufNewFile *.wl set filetype=clojure
 au BufRead,BufNewFile *.cdr set filetype=clojure
 autocmd Filetype haskell setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
 autocmd Filetype lisp setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
+autocmd Filetype c setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
+autocmd Filetype cpp setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
 
 
 command WQ wq
