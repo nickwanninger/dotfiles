@@ -271,6 +271,8 @@ map <C-d> :YcmForceCompileAndDiagnostics<CR>
 map <S-Tab> :YcmCompleter GoTo<CR>
 
 
+map <leader>f :ClangFormat<CR>
+
 noremap <C-S> :update<CR>
 vnoremap <C-S> <C-C>:update<CR>
 inoremap <C-S> <C-O>:update<CR>
