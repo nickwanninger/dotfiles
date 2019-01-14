@@ -236,6 +236,9 @@ nnoremap q <Nop>
 imap <C-Bslash> λ
 imap <C-w> <esc>dbi
 
+
+imap <C-/> hello
+
 " This keeps the current visual block selection active
 " after changing indent with '<' or '>'. Usually the
 " visual block selection is lost after you shift it,
