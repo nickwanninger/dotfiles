@@ -98,7 +98,6 @@ Plugin 'dag/vim-fish'
 Plugin 'rhysd/vim-clang-format'
 Plugin 'eraserhd/parinfer-rust'
 Plugin 'fatih/vim-go'
-Plugin 'nickaroot/vim-xcode-dark-theme'
 Plugin 'l04m33/vlime', {'rtp': 'vim/'}
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -181,9 +180,8 @@ if (has("mac"))
 endif
 
 
-set background=dark
+" set background=dark
 colorscheme brogrammer
-
 
 " hi Normal     ctermbg=NONE guibg=NONE
 hi Special ctermbg=NONE guibg=NONE
