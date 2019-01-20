@@ -12,6 +12,7 @@ function fish_prompt
 
 	if [ $exit_status -ne 0 ]
 		set_color red
+		printf "%d " $exit_status
 	else
 		set_color green
 	end
