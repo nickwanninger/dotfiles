@@ -4,7 +4,7 @@ function fish_prompt
 
 
 
-	set_color "#444444"
+	set_color "#44475A"
 	printf (prompt_hostname)
 	printf " "
 	printf (prompt_pwd)
@@ -18,7 +18,7 @@ function fish_prompt
 	end
 
 	printf "λ"
-	set_color "#555555"
+	set_color "#44475A"
 	printf " :: "
 
 end
