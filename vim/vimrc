@@ -218,6 +218,9 @@ autocmd Filetype c setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
 autocmd Filetype cpp setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
 
 
+
+
+
 command WQ wq
 command Wq wq
 command W w
