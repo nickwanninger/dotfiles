@@ -80,6 +80,7 @@ set rtp+=~/.vim/bundle/vundle
 call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
+Plugin 'lluchs/vim-wren'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-vinegar'
