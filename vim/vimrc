@@ -97,7 +97,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'valloric/youcompleteme'
 Plugin 'dag/vim-fish'
 Plugin 'rhysd/vim-clang-format'
-Plugin 'eraserhd/parinfer-rust'
+Plugin 'eraserhd/parinfer-rust', {'do': 'cargo build --release'}
 Plugin 'fatih/vim-go'
 Plugin 'l04m33/vlime', {'rtp': 'vim/'}
 call vundle#end()            " required
@@ -217,6 +217,7 @@ au BufRead,BufNewFile *.wl set filetype=clojure
 au BufRead,BufNewFile *.cdr set filetype=clojure
 autocmd Filetype haskell setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
 autocmd Filetype lisp setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
+autocmd Filetype clojure setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
 autocmd Filetype c setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
 autocmd Filetype cpp setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
 
