@@ -184,6 +184,7 @@ endif
 set background=dark
 " colorscheme brogrammer
 colorscheme dracula
+" colorscheme gruvbox
 " colorscheme github
 
 hi Normal  ctermbg=NONE guibg=NONE
