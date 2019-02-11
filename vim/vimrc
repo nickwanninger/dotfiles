@@ -105,7 +105,6 @@ filetype plugin indent on    " required
 "////////////////////////////////////////////////////////
 
 
-
 "////////////////////////////////////////////////////////
 let g:ctrlp_custom_ignore = 'vendor\|build\|node_modules\|bin\/|DS_Store\|git\/'
 let g:ctrlp_max_depth=40
@@ -183,8 +182,8 @@ endif
 
 set background=dark
 " colorscheme brogrammer
-colorscheme dracula
-" colorscheme gruvbox
+" colorscheme dracula
+colorscheme gruvbox
 " colorscheme github
 
 hi Normal  ctermbg=NONE guibg=NONE
