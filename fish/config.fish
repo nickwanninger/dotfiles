@@ -50,3 +50,4 @@ case Darwin
 	# export CC=/usr/local/opt/llvm/bin/clang
 	# export CXX=/usr/local/opt/llvm/bin/clang++
 end
+set -g fish_user_paths "/usr/local/opt/binutils/bin" $fish_user_paths
