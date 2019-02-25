@@ -183,13 +183,19 @@ endif
 set background=dark
 " colorscheme brogrammer
 " colorscheme dracula
-colorscheme gruvbox
+" colorscheme gruvbox
+colorscheme monokai
 " colorscheme github
 
 hi Normal  ctermbg=NONE guibg=NONE
 " hi Special ctermbg=NONE guibg=NONE
 " hi NonText ctermbg=NONE guibg=NONE
 " hi LineNr  ctermbg=NONE guibg=NONE
+
+set textwidth=80
+set colorcolumn=+1
+hi ColorColumn guibg=#2d2d2d ctermbg=246
+
 
 highlight ExtraWhitespace ctermbg=red guibg=#fabd2f
 match ExtraWhitespace /\s\+\%#\@<!$/
@@ -296,7 +302,12 @@ set fillchars=vert:▒
 
 
 
-
+" use the silver searcher... cause it's better
+if executable('ag') 
+    " Note we extract the column as well as the file and line number
+    set grepprg=ag\ --nogroup\ --nocolor\ --column
+    set grepformat=%f:%l:%c%m
+endif
 
 
 
