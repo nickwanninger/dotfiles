@@ -51,3 +51,7 @@ case Darwin
 	# export CXX=/usr/local/opt/llvm/bin/clang++
 end
 set -g fish_user_paths "/usr/local/opt/binutils/bin" $fish_user_paths
+
+# Wasmer
+export WASMER_DIR="$HOME/.wasmer"
+[ -s "$WASMER_DIR/wasmer.sh" ] && source "$WASMER_DIR/wasmer.sh"  # This loads wasmer
