@@ -182,17 +182,18 @@ set background=dark
 " colorscheme brogrammer
 " colorscheme dracula
 " colorscheme gruvbox
-colorscheme monokai
+" colorscheme monokai
+colorscheme onedark
 " colorscheme github
 
-hi Normal  ctermbg=NONE guibg=NONE
+" hi Normal  ctermbg=NONE guibg=NONE
 " hi Special ctermbg=NONE guibg=NONE
 " hi NonText ctermbg=NONE guibg=NONE
 " hi LineNr  ctermbg=NONE guibg=NONE
 
 set textwidth=80
 set colorcolumn=+1
-hi ColorColumn guibg=#2d2d2d ctermbg=246
+" hi ColorColumn guibg=#2d2d2d ctermbg=246
 
 
 highlight ExtraWhitespace ctermbg=red guibg=#fabd2f
