@@ -69,6 +69,7 @@ set showmatch
 set smartindent
 set noswapfile
 set number
+set relativenumber
 
 
 
