@@ -68,8 +68,8 @@ set smartcase
 set showmatch
 set smartindent
 set noswapfile
-set number
-set relativenumber
+" set number
+" set relativenumber
 
 
 
@@ -201,10 +201,6 @@ set colorcolumn=+1
 highlight ExtraWhitespace ctermbg=red guibg=#fabd2f
 match ExtraWhitespace /\s\+\%#\@<!$/
 "////////////////////////////////////////////////////////
-
-
-
-" map <C-minus> :echo "hello"<CR>
 
 
 
