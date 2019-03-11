@@ -34,24 +34,18 @@ filetype off
 set nocompatible " Disable vi-compatibility
 set noshowmode
 set laststatus=0
-
 set winminheight=0
 noremap <C-A-left> <C-W>h<C-W>_
 noremap <C-A-right> <C-W>l<C-W>_
-
 set splitbelow
 set splitright
-
 set tabstop=2
 set shiftwidth=2
-
 set nofoldenable     "don't fold by default
 set foldmethod=indent   " fold on indentations
 set foldnestmax=10   "only fold up to 10 levels
 set foldlevel=1     " only show me first fold level
-
 let g:indentLine_enabled = 1
-"set shortmess+=I
 set visualbell t_vb= " disable visual bell
 set ttyfast  " we have a fast terminal
 set lazyredraw
@@ -60,7 +54,7 @@ set clipboard=unnamed
 set mouse=a
 set cursorline
 set pastetoggle=<F2>
-set scrolloff=4
+set sidescroll=10
 set matchpairs+=<:>
 set incsearch
 set ignorecase
@@ -68,15 +62,13 @@ set smartcase
 set showmatch
 set smartindent
 set noswapfile
-" set number
-" set relativenumber
 
+"//////////////////////////
+"//                      //
+"//        PLUGINS       //
+"//                      //
+"//////////////////////////
 
-
-
-" PLUGINS
-
-"////////////////////////////////////////////////////////
 set rtp+=~/.vim/bundle/vundle
 call vundle#begin()
 
@@ -102,6 +94,9 @@ Plugin 'fatih/vim-go'
 Plugin 'l04m33/vlime', {'rtp': 'vim/'}
 call vundle#end()            " required
 filetype plugin indent on    " required
+
+
+
 "////////////////////////////////////////////////////////
 
 
@@ -168,9 +163,9 @@ let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
 
 "////////////////////////////////////////////////////////
 filetype plugin indent on
-set wrap linebreak nolist
-set wrap
-set textwidth=0 wrapmargin=0
+" set wrap linebreak nolist
+" set wrap
+" set textwidth=0 wrapmargin=0
 syntax on
 
 if (has("mac"))
@@ -181,17 +176,15 @@ endif
 
 
 set background=dark
-" colorscheme brogrammer
-" colorscheme dracula
+" colorscheme monokai_pro
 " colorscheme gruvbox
 " colorscheme monokai
 colorscheme onedark
-" colorscheme github
 
-" hi Normal  ctermbg=NONE guibg=NONE
+hi Normal  ctermbg=NONE guibg=NONE
 " hi Special ctermbg=NONE guibg=NONE
 " hi NonText ctermbg=NONE guibg=NONE
-" hi LineNr  ctermbg=NONE guibg=NONE
+hi LineNr  ctermbg=NONE guibg=NONE
 
 set textwidth=80
 set colorcolumn=+1
@@ -227,16 +220,11 @@ autocmd Filetype clojure setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
 autocmd Filetype c setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
 autocmd Filetype cpp setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
 
-
-
-
-
 command WQ wq
 command Wq wq
 command W w
 command Q q
 nnoremap ; :
-
 
 nnoremap <leader>d "_d
 xnoremap <leader>d "_d
@@ -248,9 +236,6 @@ nnoremap Q q
 nnoremap q <Nop>
 imap <C-Bslash> λ
 imap <C-w> <esc>dbi
-
-
-imap <C-/> hello
 
 " This keeps the current visual block selection active
 " after changing indent with '<' or '>'. Usually the
@@ -273,7 +258,11 @@ map <ScrollWheelUp> <Up>
 map <ScrollWheelDown> <Down>
 map <ScrollWheelRight> <Right>
 map <ScrollWheelLeft> <Left>
-map <C-c> :set nu!<CR>
+
+
+map <C-c> :set nu! rnu!<CR>
+
+
 map <C-n> :NERDTreeToggle<CR>
 map <C-q> :q<CR>
 map <C-Q> :q!<CR>
