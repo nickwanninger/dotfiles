@@ -157,10 +157,6 @@ let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
 "////////////////////////////////////////////////////////
 
 
-
-
-
-
 "////////////////////////////////////////////////////////
 filetype plugin indent on
 " set wrap linebreak nolist
@@ -258,6 +254,8 @@ map <ScrollWheelUp> <Up>
 map <ScrollWheelDown> <Down>
 map <ScrollWheelRight> <Right>
 map <ScrollWheelLeft> <Left>
+
+
 
 
 map <C-c> :set nu! rnu!<CR>
