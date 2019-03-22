@@ -175,12 +175,13 @@ set background=dark
 " colorscheme monokai_pro
 " colorscheme gruvbox
 " colorscheme monokai
-colorscheme onedark
+" colorscheme onedark
+colorscheme dracula
 
 hi Normal  ctermbg=NONE guibg=NONE
 " hi Special ctermbg=NONE guibg=NONE
 " hi NonText ctermbg=NONE guibg=NONE
-hi LineNr  ctermbg=NONE guibg=NONE
+" hi LineNr  ctermbg=NONE guibg=NONE
 
 set textwidth=80
 set colorcolumn=+1
