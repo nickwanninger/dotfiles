@@ -1,30 +1,19 @@
 function fish_prompt
-
 	set -l exit_status $status
 
-
-
-	set_color cyan
-	printf (prompt_pwd)
-
-	return
-
-	set_color "#44475A"
-	printf (prompt_hostname)
-	printf " "
-	printf (prompt_pwd)
-	printf "\n"
-
 	if [ $exit_status -ne 0 ]
-		set_color red
-		printf "%d " $exit_status
-	else
-		set_color green
+		set_color -r red
+		printf "["
+		printf "%d" $exit_status
+		printf "]"
+		set_color reset
+		printf " "
 	end
 
+	set_color (printf "#%.6s" (echo (prompt_hostname) | md5))
+	printf (prompt_pwd)
 
-	set_color "#44475A"
-	printf " ⌘ "
-
+	set_color "#ffffff"
+	printf " # "
 end
 
