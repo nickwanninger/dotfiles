@@ -66,6 +66,13 @@ set showmatch
 set smartindent
 set noswapfile
 
+set hidden
+set cmdheight=2
+set updatetime=300
+set shortmess+=c
+
+set shell=/bin/sh
+
 "//////////////////////////
 "//                      //
 "//        PLUGINS       //
@@ -89,7 +96,6 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
 Plugin 'scrooloose/nerdtree'
-" Plugin 'valloric/youcompleteme'
 Plugin 'dag/vim-fish'
 Plugin 'rhysd/vim-clang-format'
 Plugin 'eraserhd/parinfer-rust', {'do': 'cargo build --release'}
@@ -97,12 +103,14 @@ Plugin 'fatih/vim-go'
 Plugin 'l04m33/vlime', {'rtp': 'vim/'}
 Plugin 'flazz/vim-colorschemes'
 
-Plugin 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+Plugin 'valloric/youcompleteme'
+" Plugin 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+
+
 call vundle#end()            " required
 filetype plugin indent on    " required
 
 "////////////////////////////////////////////////////////
-
 
 
 
