@@ -324,7 +324,7 @@ function! ASMCompile()
 	echo expand("%:p")
 	silent !clear
 	silent !execute "rm /tmp/out.s"
-	execute "!clang -Iinclude -O3 -S -o /tmp/out.s -masm=intel " . expand("%:p")
+	execute "!clang -Iinclude -S -o /tmp/out.s -masm=intel " . expand("%:p")
 	vsp /tmp/out.s
 endfunction
 
