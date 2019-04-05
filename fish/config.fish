@@ -47,6 +47,9 @@ set -g fish_user_paths "/usr/local/opt/llvm/bin" $fish_user_paths
 
 switch (uname)
 case Darwin
+
+  set -gx LDFLAGS "-L/usr/local/opt/llvm/lib"
+  set -gx CPPFLAGS "-I/usr/local/opt/llvm/include"
 	# export CC=/usr/local/opt/llvm/bin/clang
 	# export CXX=/usr/local/opt/llvm/bin/clang++
 end
