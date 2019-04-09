@@ -8,5 +8,6 @@ def FlagsForFile( filename, **kwargs ):
         lang = "c"
         std = "-std=c99"
     return {
-           'flags': [ '-x', lang, std, '-Wall', '-I./include', '-I./Include', '-Wunused-variable', '-fms-extensions', '-Wno-gnu-anonymous-struct' ]
+           'flags': [ '-x', lang, std, '-Wall', '-I./include', '-I./Include',
+               '-I/usr/local/opt/llvm/include', '-Wunused-variable', '-fms-extensions', '-Wno-gnu-anonymous-struct' ]
             }
