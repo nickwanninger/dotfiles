@@ -201,6 +201,8 @@ set background=dark
 colorscheme dracula
 
 hi Normal  ctermbg=NONE guibg=NONE
+"
+"
 " hi Special ctermbg=NONE guibg=NONE
 " hi NonText ctermbg=NONE guibg=NONE
 " hi LineNr  ctermbg=NONE guibg=NONE
