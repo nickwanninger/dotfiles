@@ -6,14 +6,14 @@ function fish_prompt
 		printf "["
 		printf "%d" $exit_status
 		printf "]"
-		set_color reset
+		set_color normal
 		printf " "
 	end
 
-	set_color (printf "#%.6s" (echo (prompt_hostname) | md5))
+	set_color "#F767A3" # (printf "#%.6s" (echo (prompt_hostname) | md5) | tail -c 6)
 	printf (prompt_pwd)
 
-	set_color "#ffffff"
+	set_color normal
 	printf " # "
 end
 
