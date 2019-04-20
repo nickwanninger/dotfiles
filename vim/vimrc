@@ -198,7 +198,7 @@ set background=dark
 " colorscheme gruvbox
 " colorscheme monokai
 " colorscheme onedark
-colorscheme dracula
+colorscheme brogrammer
 
 hi Normal  ctermbg=NONE guibg=NONE
 "
