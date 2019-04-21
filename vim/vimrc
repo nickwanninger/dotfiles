@@ -55,7 +55,7 @@ set lazyredraw
 set backspace=indent,eol,start
 set clipboard=unnamed
 set mouse=a
-" set cursorline
+set cursorline
 set pastetoggle=<F2>
 set sidescroll=10
 set matchpairs+=<:>
@@ -205,7 +205,7 @@ hi Normal  ctermbg=NONE guibg=NONE
 "
 " hi Special ctermbg=NONE guibg=NONE
 " hi NonText ctermbg=NONE guibg=NONE
-" hi LineNr  ctermbg=NONE guibg=NONE
+hi LineNr  ctermbg=NONE guibg=NONE
 
 " set textwidth=80
 " set colorcolumn=+1
@@ -283,7 +283,7 @@ map <ScrollWheelLeft> <Left>
 
 
 
-map <C-c> :set nu! rnu!<CR>
+map <C-c> :set nu!<CR>
 
 
 map <C-n> :NERDTreeToggle<CR>
