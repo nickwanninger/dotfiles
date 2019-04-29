@@ -282,7 +282,7 @@ map <ScrollWheelRight> <Right>
 map <ScrollWheelLeft> <Left>
 
 
-
+set nu
 
 map <C-c> :set nu!<CR>
 
