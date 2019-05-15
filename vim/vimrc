@@ -196,10 +196,10 @@ endif
 
 set background=dark
 " colorscheme monokai_pro
-" colorscheme gruvbox
 " colorscheme monokai
 " colorscheme onedark
-colorscheme brogrammer
+" colorscheme brogrammer
+colorscheme gruvbox
 
 hi Normal  ctermbg=NONE guibg=NONE
 "
