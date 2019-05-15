@@ -42,6 +42,7 @@ noremap <C-A-left> <C-W>h<C-W>_
 noremap <C-A-right> <C-W>l<C-W>_
 set splitbelow
 set splitright
+set noeol
 set tabstop=2
 set shiftwidth=2
 set nofoldenable     "don't fold by default
