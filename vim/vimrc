@@ -238,6 +238,7 @@ au BufRead,BufNewFile *.g set filetype=geode
 au BufRead,BufNewFile *.wl set filetype=clojure
 au BufRead,BufNewFile *.cdr set filetype=clojure
 au BufRead,BufNewFile *.he set filetype=ruby
+au BufRead,BufNewFile *.cr set filetype=ruby
 autocmd Filetype haskell setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
 autocmd Filetype lisp setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
 autocmd Filetype clojure setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
