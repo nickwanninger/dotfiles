@@ -56,7 +56,7 @@ set lazyredraw
 set backspace=indent,eol,start
 set clipboard=unnamed
 set mouse=a
-set cursorline
+" set cursorline
 set pastetoggle=<F2>
 set sidescroll=10
 set matchpairs+=<:>
@@ -84,16 +84,18 @@ set rtp+=~/.vim/bundle/vundle
 call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
-Plugin 'lluchs/vim-wren'
+
+" Plugin 'lluchs/vim-wren'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'tpope/vim-fugitive'
-Plugin 'leafgarland/typescript-vim'
-Plugin 'junegunn/limelight.vim'
+Plugin 'airblade/vim-gitgutter'
+
+" Plugin 'leafgarland/typescript-vim'
 Plugin 'bfrg/vim-cpp-modern'
 Plugin 'kien/ctrlp.vim'
 Plugin 'junegunn/rainbow_parentheses.vim'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
+" Plugin 'vim-airline/vim-airline'
+" Plugin 'vim-airline/vim-airline-themes'
 Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
 Plugin 'scrooloose/nerdtree'
@@ -103,10 +105,7 @@ Plugin 'eraserhd/parinfer-rust', {'do': 'cargo build --release'}
 Plugin 'fatih/vim-go'
 Plugin 'l04m33/vlime', {'rtp': 'vim/'}
 Plugin 'flazz/vim-colorschemes'
-" Plugin 'lervag/vimtex'
-
 Plugin 'valloric/youcompleteme'
-" Plugin 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 
 
 call vundle#end()            " required
