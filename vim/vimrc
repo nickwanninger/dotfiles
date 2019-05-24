@@ -115,7 +115,7 @@ filetype plugin indent on    " required
 "////////////////////////////////////////////////////////
 
 
-let g:airline_powerline_fonts = 1
+" let g:airline_powerline_fonts = 1
 
 if version >= 720
     " set colorcolumn=80
