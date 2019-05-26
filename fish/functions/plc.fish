@@ -17,7 +17,7 @@ function plc
 			eval $EDITOR /tmp/playground.c
 
 		case ir
-			clang -S -emit-llvm -o /tmp/playground.ll /tmp/playground.c
+			clang -O0 -S -emit-llvm -o /tmp/playground.ll /tmp/playground.c
 			eval $EDITOR /tmp/playground.ll
 
 		case run
@@ -28,7 +28,7 @@ function plc
 
 		case asm
 			# build the asm and show it to the user
-			gcc -S -o /tmp/playground.s -masm=intel /tmp/playground.c
+			gcc -O0 -S -o /tmp/playground.s -masm=intel /tmp/playground.c
 			eval $EDITOR /tmp/playground.s
 	end
 
