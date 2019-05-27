@@ -207,6 +207,8 @@ hi Normal  ctermbg=NONE guibg=NONE
 " hi Special ctermbg=NONE guibg=NONE
 hi NonText ctermbg=NONE guibg=NONE
 hi LineNr  ctermbg=NONE guibg=NONE
+hi Comment cterm=none
+
 
 " set textwidth=80
 " set colorcolumn=+1
@@ -221,8 +223,8 @@ match ExtraWhitespace /\s\+\%#\@<!$/
 
 
 " enable italics mode and other things
-let &t_ZH="\e[3m"
-let &t_ZR="\e[23m"
+" let &t_ZH="\e[3m"
+" let &t_ZR="\e[23m"
 
 
 " disable folding, hopefully. Its the worse
