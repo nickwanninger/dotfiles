@@ -326,7 +326,7 @@ syn cluster rubyDeclaration contains=rubyAliasDeclaration,rubyAliasDeclaration2,
 " Keywords {{{1
 " Note: the following keywords have already been defined:
 " begin case class def do end for if module unless until while
-syn match   rubyControl	       "\<\%(and\|break\|in\|next\|not\|or\|redo\|rescue\|retry\|return\|new\)\>[?!]\@!"
+syn match   rubyControl	       "\<\%(and\|break\|in\|next\|not\|or\|redo\|rescue\|retry\|return\)\>[?!]\@!"
 syn match   rubyOperator       "\<defined?" display
 syn match   rubyKeyword	       "\<\%(super\|yield\)\>[?!]\@!"
 syn match   rubyBoolean	       "\<\%(true\|false\)\>[?!]\@!"
