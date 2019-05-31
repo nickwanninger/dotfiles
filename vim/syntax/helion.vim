@@ -49,7 +49,7 @@ endif
 
 " Operators {{{1
 if exists("helion_operators")
-  syn match  helionOperator "[~!^|*/%+-]\|&\.\@!\|\%(class\s*\)\@<!<<\|<=>\|<=\|\%(<\|\<class\s\+\u\w*\s*\)\@<!<[^<]\@=\|===\|==\|=\~\|>>\|>=\|=\@1<!>\|\*\*\|\.\.\.\|\.\.\|::"
+  syn match  helionOperator "[~!^|*/%+-]\|&\.\@!\|\%(type\s*\)\@<!<<\|<=>\|<=\|\%(<\|\<type\s\+\u\w*\s*\)\@<!<[^<]\@=\|===\|==\|=\~\|>>\|>=\|=\@1<!>\|\*\*\|\.\.\.\|\.\.\|::"
   syn match  helionOperator "->\|-=\|/=\|\*\*=\|\*=\|&&=\|&=\|&&\|||=\||=\|||\|%=\|+=\|!\~\|!="
   syn region helionBracketOperator matchgroup=helionOperator start="\%(\w[?!]\=\|[]})]\)\@2<=\[\s*" end="\s*]" contains=ALLBUT,@helionNotTop
 endif
@@ -206,7 +206,7 @@ syn match   helionKeyword	       "\<\%(primitive\|yield\)\>[?!]\@!"
 if !exists("b:helion_no_expensive") && !exists("helion_no_expensive")
   syn match  helionDefine "\<alias\>"  nextgroup=helionAliasDeclaration  skipwhite skipnl
   syn match  helionDefine "\<def\>"    nextgroup=helionMethodDeclaration skipwhite skipnl
-  syn match  helionClass	"\<class\>"  nextgroup=helionClassDeclaration  skipwhite skipnl
+  syn match  helionClass	"\<type\>"  nextgroup=helionClassDeclaration  skipwhite skipnl
   syn match  helionModule "\<module\>" nextgroup=helionModuleDeclaration skipwhite skipnl
 
   if s:foldable('def')
@@ -215,10 +215,10 @@ if !exists("b:helion_no_expensive") && !exists("helion_no_expensive")
     syn region helionMethodBlock start="\<def\>"	matchgroup=helionDefine end="\%(\<def\_s\+\)\@<!\<end\>" contains=ALLBUT,@helionNotTop
   endif
 
-  if s:foldable('class')
-    syn region helionBlock start="\<class\>"	matchgroup=helionClass end="\<end\>" contains=ALLBUT,@helionNotTop fold
+  if s:foldable('type')
+    syn region helionBlock start="\<type\>"	matchgroup=helionClass end="\<end\>" contains=ALLBUT,@helionNotTop fold
   else
-    syn region helionBlock start="\<class\>"	matchgroup=helionClass end="\<end\>" contains=ALLBUT,@helionNotTop
+    syn region helionBlock start="\<type\>"	matchgroup=helionClass end="\<end\>" contains=ALLBUT,@helionNotTop
   endif
 
   if s:foldable('module')
@@ -290,7 +290,7 @@ if !exists("b:helion_no_expensive") && !exists("helion_no_expensive")
 
 else
   syn match helionControl "\<def\>[?!]\@!"    nextgroup=helionMethodDeclaration skipwhite skipnl
-  syn match helionControl "\<class\>[?!]\@!"  nextgroup=helionClassDeclaration  skipwhite skipnl
+  syn match helionControl "\<type\>[?!]\@!"  nextgroup=helionClassDeclaration  skipwhite skipnl
   syn match helionControl "\<module\>[?!]\@!" nextgroup=helionModuleDeclaration skipwhite skipnl
   syn match helionControl "\<\%(case\|begin\|do\|for\|if\|unless\|while\|until\|else\|elif\|ensure\|then\|when\|end\)\>[?!]\@!"
 endif
@@ -308,7 +308,7 @@ if !exists("helion_no_special_methods")
   syn keyword helionKeyword   callcc caller lambda proc
   " false positive with 'include?'
   syn match   helionMacro     "\<include\>[?!]\@!"
-  syn keyword helionMacro     extend prepend refine using
+  syn keyword helionMacro     extends extend prepend refine using
   syn keyword helionMacro     alias_method define_method define_singleton_method remove_method undef_method
 endif
 
