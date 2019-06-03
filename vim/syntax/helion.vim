@@ -194,7 +194,7 @@ syn cluster helionDeclaration contains=helionAliasDeclaration,helionAliasDeclara
 " begin case class def do end for if module unless until while
 syn match   helionControl	       "\<\%(and\|break\|in\|next\|not\|or\|redo\|rescue\|retry\|return\)\>[?!]\@!"
 syn match   helionOperator       "\<defined?" display
-syn match   helionKeyword	       "\<\%(super\|yield\)\>[?!]\@!"
+syn match   helionKeyword	       "\<\%(super\|yield\|new\|let\)\>[?!]\@!"
 syn match   helionBoolean	       "\<\%(true\|false\)\>[?!]\@!"
 syn match   helionPseudoVariable "\<\%(nil\|self\)\>[?!]\@!" " TODO: reorganise
 
