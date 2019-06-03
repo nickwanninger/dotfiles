@@ -198,7 +198,8 @@ set background=dark
 " colorscheme monokai_pro
 " colorscheme monokai
 " colorscheme onedark
-colorscheme brogrammer
+" colorscheme brogrammer
+colorscheme xcode_dark
 " colorscheme gruvbox
 
 hi Normal  ctermbg=NONE guibg=NONE
