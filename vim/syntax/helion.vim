@@ -334,6 +334,11 @@ syn match  helionSymbol		"[]})\"':]\@1<!\<\%(\h\|[^\x00-\x7F]\)\%(\w\|[^\x00-\x7
 syn match  helionSymbol		"\%([{(,]\_s*\)\zs[[:space:],{]\l\w*[!?]\=::\@!"hs=s+1,he=e-1
 syn match  helionSymbol		"[[:space:],{(]\%(\h\|[^\x00-\x7F]\)\%(\w\|[^\x00-\x7F]\)*[!?]\=:[[:space:],]\@="hs=s+1,he=e-1
 
+
+
+syn match   helionSymbol        "\<\%(const\)\>[?!]\@!"
+
+
 " __END__ Directive {{{1
 if s:foldable('__END__')
   syn region helionData matchgroup=helionDataDirective start="^__END__$" end="\%$" fold
