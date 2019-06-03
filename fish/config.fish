@@ -44,20 +44,6 @@ if [ -f '/Users/nick/.gcloud/google-cloud-sdk/path.fish.inc' ]; if type source >
 set -x HOMEBREW_NO_AUTO_UPDATE 1
 set -g fish_user_paths "/usr/local/opt/llvm/bin" $fish_user_paths
 
-
-switch (uname)
-case Darwin
-
-  set -gx LDFLAGS "-L/usr/local/opt/llvm/lib"
-  set -gx CPPFLAGS "-I/usr/local/opt/llvm/include"
-	# export CC=/usr/local/opt/llvm/bin/clang
-	# export CXX=/usr/local/opt/llvm/bin/clang++
-end
 set -g fish_user_paths "/usr/local/opt/binutils/bin" $fish_user_paths
 
-# Wasmer
-export WASMER_DIR="$HOME/.wasmer"
-[ -s "$WASMER_DIR/wasmer.sh" ] && source "$WASMER_DIR/wasmer.sh"  # This loads wasmer
-
 test -e {$HOME}/.iterm2_shell_integration.fish ; and source {$HOME}/.iterm2_shell_integration.fish
-
