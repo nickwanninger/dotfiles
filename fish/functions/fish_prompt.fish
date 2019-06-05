@@ -16,9 +16,6 @@ function fish_prompt
 	set_color "#F767A3" # (printf "#%.6s" (echo (prompt_hostname) | md5) | tail -c 6)
 	printf (prompt_pwd)
 
-
-  printf '%s ' (__fish_git_prompt)
-
 	set_color normal
 	printf " # "
 end
