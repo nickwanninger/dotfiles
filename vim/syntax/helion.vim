@@ -336,7 +336,7 @@ syn match  helionSymbol		"[[:space:],{(]\%(\h\|[^\x00-\x7F]\)\%(\w\|[^\x00-\x7F]
 
 
 
-syn match   helionSymbol        "\<\%(const\)\>[?!]\@!"
+syn match   helionSymbol        "\<\%(const\|some\)\>[?!]\@!"
 
 
 " __END__ Directive {{{1
