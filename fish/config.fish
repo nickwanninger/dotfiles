@@ -37,6 +37,12 @@ alias aplay "mplayer -cache 1024 -quiet -rawaudio samplesize=1:channels=1:rate=8
 alias remake "make clean; make"
 
 alias glog "git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+
+
+alias mk "make"
+alias md "make debug"
+
+
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/nick/.gcloud/google-cloud-sdk/path.fish.inc' ]; if type source > /dev/null; source '/Users/nick/.gcloud/google-cloud-sdk/path.fish.inc'; else; . '/Users/nick/.gcloud/google-cloud-sdk/path.fish.inc'; end; end
 
