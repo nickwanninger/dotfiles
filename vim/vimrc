@@ -80,35 +80,45 @@ set shell=/bin/sh
 "//                      //
 "//////////////////////////
 
-set rtp+=~/.vim/bundle/vundle
-call vundle#begin()
-
-Plugin 'VundleVim/Vundle.vim'
-
-" Plugin 'lluchs/vim-wren'
-Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'tpope/vim-fugitive'
-Plugin 'airblade/vim-gitgutter'
-
-" Plugin 'leafgarland/typescript-vim'
-Plugin 'bfrg/vim-cpp-modern'
-Plugin 'kien/ctrlp.vim'
-Plugin 'junegunn/rainbow_parentheses.vim'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'pangloss/vim-javascript'
-Plugin 'mxw/vim-jsx'
-Plugin 'scrooloose/nerdtree'
-Plugin 'dag/vim-fish'
-Plugin 'rhysd/vim-clang-format'
-Plugin 'eraserhd/parinfer-rust', {'do': 'cargo build --release'}
-Plugin 'fatih/vim-go'
-Plugin 'l04m33/vlime', {'rtp': 'vim/'}
-Plugin 'flazz/vim-colorschemes'
-Plugin 'valloric/youcompleteme'
 
 
-call vundle#end()            " required
+call plug#begin('~/.vim/plugged')
+
+" Plug 'VundleVim/Vundle.vim'
+Plug 'christoomey/vim-tmux-navigator'
+" Plug 'tpope/vim-fugitive'
+" Plug 'airblade/vim-gitgutter'
+Plug 'bfrg/vim-cpp-modern'
+Plug 'kien/ctrlp.vim'
+Plug 'junegunn/rainbow_parentheses.vim'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'scrooloose/nerdtree'
+Plug 'rhysd/vim-clang-format'
+Plug 'flazz/vim-colorschemes'
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
+
+" Plug 'pangloss/vim-javascript'
+" Plug 'mxw/vim-jsx'
+" Plug 'dag/vim-fish'
+" Plug 'eraserhd/parinfer-rust', {'do': 'cargo build --release'}
+" Plug 'fatih/vim-go'
+" Plug 'l04m33/vlime', {'rtp': 'vim/'}
+
+
+Plug 'junegunn/fzf', { 'do': './install --all' }
+
+call plug#end()
+
+
+
+let g:LanguageClient_serverCommands = {
+    \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
+		\ 'cpp': ['clangd'],
+    \ }
+
+
+
 filetype plugin indent on    " required
 
 "////////////////////////////////////////////////////////

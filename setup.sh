@@ -19,20 +19,17 @@ ln -sf ~/dotfiles/tmux/tmux.conf ~/.tmux.conf
 # killall Dock
 
 
-echo "Setting up vundle"
-BUNDLE_DIR=~/.vim/bundle
+echo "Setting up vim-plug"
+
+BUNDLE_DIR=~/.vim/autoload
 
 rm -rf "$BUNDLE_DIR/*"
-# Install/update Vundle
-mkdir -p "$BUNDLE_DIR" && (git clone https://github.com/gmarik/vundle.git "$BUNDLE_DIR/vundle" || (cd "$BUNDLE_DIR/vundle" && git pull origin master))
+mkdir -p $BUNDLE_DIR
+
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 # Install bundles
-vim +PluginInstall +qall
-
-
-cd vim/bundle/youcompleteme
-./install.py --clang-completer
-
+vim +PlugInstall +UpdateRemotePlugins +qa
 
 echo "installing terminfos"
 tic -x xterm-256color-italic.terminfo

@@ -30,5 +30,5 @@ Temporary Items
 .fish_history
 # End of https://www.gitignore.io/api/macos
 
-
+vim/plugged
 vim/bundle
