@@ -97,7 +97,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'rhysd/vim-clang-format'
 Plug 'flazz/vim-colorschemes'
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
-
+Plug 'jremmen/vim-ripgrep'
 " Plug 'pangloss/vim-javascript'
 " Plug 'mxw/vim-jsx'
 " Plug 'dag/vim-fish'
