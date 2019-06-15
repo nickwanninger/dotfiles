@@ -13,10 +13,11 @@ function fish_prompt
 		printf " "
 	end
 
-	set_color "#F767A3" # (printf "#%.6s" (echo (prompt_hostname) | md5) | tail -c 6)
+	set_color (printf "#%.6s" (echo (prompt_hostname) | md5) | tail -c 6)
 	printf (prompt_pwd)
 
 	set_color normal
-	printf " # "
+	printf "\n"
+	printf "❯ "
 end
 

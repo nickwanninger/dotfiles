@@ -100,7 +100,7 @@ Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
 Plug 'jremmen/vim-ripgrep'
 " Plug 'pangloss/vim-javascript'
 " Plug 'mxw/vim-jsx'
-" Plug 'dag/vim-fish'
+Plug 'dag/vim-fish'
 " Plug 'eraserhd/parinfer-rust', {'do': 'cargo build --release'}
 " Plug 'fatih/vim-go'
 " Plug 'l04m33/vlime', {'rtp': 'vim/'}
