@@ -265,8 +265,8 @@ if !exists("b:helion_no_expensive") && !exists("helion_no_expensive")
   if s:foldable('if')
     " syn region helionConditionalExpression matchgroup=helionConditional start="\%(\%(^\|\.\.\.\=\|[{:,;([<>~\*%&^|+=-]\|\%(\<[_[:lower:]][_[:alnum:]]*\)\@<![?!]\)\s*\)\@<=\%(if\|unless\)\>" end="\%(\%(\%(\.\@1<!\.\)\|::\)\s*\)\@<!\<end\>" contains=ALLBUT,@helionNotTop fold
   else
-    " syn region helionConditionalExpression matchgroup=helionConditional start="\%(\%(^\|\.\.\.\=\|[{:,;([<>~\*%&^|+=-]\|\%(\<[_[:lower:]][_[:alnum:]]*\)\@<![?!]\)\s*\)\@<=\%(if\|unless\)\>" end="\%(\%(\%(\.\@1<!\.\)\|::\)\s*\)\@<!\<end\>" contains=ALLBUT,@helionNotTop
   endif
+    syn region helionConditionalExpression matchgroup=helionConditional start="\%(\%(^\|\.\.\.\=\|[{:,;([<>~\*%&^|+=-]\|\%(\<[_[:lower:]][_[:alnum:]]*\)\@<![?!]\)\s*\)\@<=\%(if\|unless\)\>" end="\%(\%(\%(\.\@1<!\.\)\|::\)\s*\)\@<!\<end\>" contains=ALLBUT,@helionNotTop
 
   syn match helionConditional "\<\%(then\|else\|when\)\>[?!]\@!"	contained containedin=helionCaseExpression
   syn match helionConditional "\<\%(then\|else\)\>[?!]\@!" contained containedin=helionConditionalExpression
