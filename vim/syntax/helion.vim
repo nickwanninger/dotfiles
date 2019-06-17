@@ -146,10 +146,10 @@ syn match helionPredefinedVariable "$\%(deferr\|defout\|stderr\|stdin\|stdout\)\
 
 " Normal Regular Expression {{{1
 if s:foldable('/')
-  syn region helionRegexp matchgroup=helionRegexpDelimiter start="\%(\%(^\|\<\%(and\|or\|while\|until\|unless\|if\|elif\|when\|not\|then\|else\)\|[;\~=!|&(,{[<>?:*+-]\)\s*\)\@<=/" end="/[iomxneus]*" skip="\\\\\|\\/" contains=@helionRegexpSpecial fold
+  syn region helionRegexp matchgroup=helionRegexpDelimiter start="\%(\%(^\|\<\%(and\|or\|while\|until\|unless\|if\|when\|not\|then\|else\)\|[;\~=!|&(,{[<>?:*+-]\)\s*\)\@<=/" end="/[iomxneus]*" skip="\\\\\|\\/" contains=@helionRegexpSpecial fold
   syn region helionRegexp matchgroup=helionRegexpDelimiter start="\%(\h\k*\s\+\)\@<=/\%([ \t=]\|$\)\@!" end="/[iomxneus]*" skip="\\\\\|\\/" contains=@helionRegexpSpecial fold
 else
-  syn region helionRegexp matchgroup=helionRegexpDelimiter start="\%(\%(^\|\<\%(and\|or\|while\|until\|unless\|if\|elif\|when\|not\|then\|else\)\|[;\~=!|&(,{[<>?:*+-]\)\s*\)\@<=/" end="/[iomxneus]*" skip="\\\\\|\\/" contains=@helionRegexpSpecial
+  syn region helionRegexp matchgroup=helionRegexpDelimiter start="\%(\%(^\|\<\%(and\|or\|while\|until\|unless\|if\|when\|not\|then\|else\)\|[;\~=!|&(,{[<>?:*+-]\)\s*\)\@<=/" end="/[iomxneus]*" skip="\\\\\|\\/" contains=@helionRegexpSpecial
   syn region helionRegexp matchgroup=helionRegexpDelimiter start="\%(\h\k*\s\+\)\@<=/\%([ \t=]\|$\)\@!" end="/[iomxneus]*" skip="\\\\\|\\/" contains=@helionRegexpSpecial
 endif
 
@@ -263,13 +263,13 @@ if !exists("b:helion_no_expensive") && !exists("helion_no_expensive")
   endif
 
   if s:foldable('if')
-    syn region helionConditionalExpression matchgroup=helionConditional start="\%(\%(^\|\.\.\.\=\|[{:,;([<>~\*%&^|+=-]\|\%(\<[_[:lower:]][_[:alnum:]]*\)\@<![?!]\)\s*\)\@<=\%(if\|unless\)\>" end="\%(\%(\%(\.\@1<!\.\)\|::\)\s*\)\@<!\<end\>" contains=ALLBUT,@helionNotTop fold
+    " syn region helionConditionalExpression matchgroup=helionConditional start="\%(\%(^\|\.\.\.\=\|[{:,;([<>~\*%&^|+=-]\|\%(\<[_[:lower:]][_[:alnum:]]*\)\@<![?!]\)\s*\)\@<=\%(if\|unless\)\>" end="\%(\%(\%(\.\@1<!\.\)\|::\)\s*\)\@<!\<end\>" contains=ALLBUT,@helionNotTop fold
   else
-    syn region helionConditionalExpression matchgroup=helionConditional start="\%(\%(^\|\.\.\.\=\|[{:,;([<>~\*%&^|+=-]\|\%(\<[_[:lower:]][_[:alnum:]]*\)\@<![?!]\)\s*\)\@<=\%(if\|unless\)\>" end="\%(\%(\%(\.\@1<!\.\)\|::\)\s*\)\@<!\<end\>" contains=ALLBUT,@helionNotTop
+    " syn region helionConditionalExpression matchgroup=helionConditional start="\%(\%(^\|\.\.\.\=\|[{:,;([<>~\*%&^|+=-]\|\%(\<[_[:lower:]][_[:alnum:]]*\)\@<![?!]\)\s*\)\@<=\%(if\|unless\)\>" end="\%(\%(\%(\.\@1<!\.\)\|::\)\s*\)\@<!\<end\>" contains=ALLBUT,@helionNotTop
   endif
 
   syn match helionConditional "\<\%(then\|else\|when\)\>[?!]\@!"	contained containedin=helionCaseExpression
-  syn match helionConditional "\<\%(then\|else\|elif\)\>[?!]\@!" contained containedin=helionConditionalExpression
+  syn match helionConditional "\<\%(then\|else\)\>[?!]\@!" contained containedin=helionConditionalExpression
 
   syn match helionExceptional	  "\<\%(\%(\%(;\|^\)\s*\)\@<=rescue\|else\|ensure\)\>[?!]\@!" contained containedin=helionBlockExpression
   syn match helionMethodExceptional "\<\%(\%(\%(;\|^\)\s*\)\@<=rescue\|else\|ensure\)\>[?!]\@!" contained containedin=helionMethodBlock
@@ -292,7 +292,7 @@ else
   syn match helionControl "\<def\>[?!]\@!"    nextgroup=helionMethodDeclaration skipwhite skipnl
   syn match helionControl "\<type\>[?!]\@!"  nextgroup=helionClassDeclaration  skipwhite skipnl
   syn match helionControl "\<module\>[?!]\@!" nextgroup=helionModuleDeclaration skipwhite skipnl
-  syn match helionControl "\<\%(case\|begin\|do\|for\|if\|unless\|while\|until\|else\|elif\|ensure\|then\|when\|end\)\>[?!]\@!"
+  syn match helionControl "\<\%(case\|begin\|do\|for\|if\|unless\|while\|until\|else\|ensure\|then\|when\|end\)\>[?!]\@!"
 endif
 
 " Special Methods {{{1
