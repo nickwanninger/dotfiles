@@ -192,7 +192,7 @@ syn cluster helionDeclaration contains=helionAliasDeclaration,helionAliasDeclara
 " Keywords {{{1
 " Note: the following keywords have already been defined:
 " begin case class def do end for if module unless until while
-syn match   helionControl	       "\<\%(and\|break\|in\|next\|not\|or\|redo\|rescue\|retry\|return\)\>[?!]\@!"
+syn match   helionControl	       "\<\%(and\|break\|in\|next\|not\|or\|redo\|rescue\|retry\|return\|decl\)\>[?!]\@!"
 syn match   helionOperator       "\<defined?" display
 syn match   helionKeyword	       "\<\%(super\|yield\|new\|let\)\>[?!]\@!"
 syn match   helionBoolean	       "\<\%(true\|false\)\>[?!]\@!"
