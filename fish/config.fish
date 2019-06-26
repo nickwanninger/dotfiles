@@ -8,6 +8,10 @@ export TERM="xterm-256color"
 set -x GOPATH $HOME/dev/go
 
 
+mkdir -p ~/.local/bin
+export PATH="$HOME/.local/bin:$PATH"
+
+
 switch (uname)
 # Specific things to my mac
 case Darwin
