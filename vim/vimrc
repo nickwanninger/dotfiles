@@ -249,6 +249,7 @@ set encoding=utf-8 " Necessary to show Unicode glyphs
 au BufRead,BufNewFile *.g set filetype=geode
 au BufRead,BufNewFile *.wl set filetype=clojure
 au BufRead,BufNewFile *.cdr set filetype=clojure
+au BufRead,BufNewFile *.rad set filetype=haskell
 au BufRead,BufNewFile *.he set filetype=helion
 au BufRead,BufNewFile *.cr set filetype=ruby
 autocmd Filetype haskell setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
