@@ -102,6 +102,9 @@ Plug 'jremmen/vim-ripgrep'
 Plug 'dag/vim-fish'
 Plug 'nbouscal/vim-stylish-haskell'
 Plug 'junegunn/fzf', { 'do': './install --all' }
+Plug 'ndmitchell/ghcid'
+Plug 'sbdchd/neoformat'
+
 " Plug 'parsonsmatt/intero-neovim'
 " Plug 'pangloss/vim-javascript'
 " Plug 'mxw/vim-jsx'
