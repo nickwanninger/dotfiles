@@ -98,17 +98,28 @@ Plug 'rhysd/vim-clang-format'
 Plug 'flazz/vim-colorschemes'
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
 Plug 'jremmen/vim-ripgrep'
+" Plug 'w0rp/ale'
+Plug 'dag/vim-fish'
+Plug 'nbouscal/vim-stylish-haskell'
+Plug 'junegunn/fzf', { 'do': './install --all' }
+" Plug 'parsonsmatt/intero-neovim'
 " Plug 'pangloss/vim-javascript'
 " Plug 'mxw/vim-jsx'
-Plug 'dag/vim-fish'
 " Plug 'eraserhd/parinfer-rust', {'do': 'cargo build --release'}
 " Plug 'fatih/vim-go'
 " Plug 'l04m33/vlime', {'rtp': 'vim/'}
 
 
-Plug 'junegunn/fzf', { 'do': './install --all' }
 
 call plug#end()
+
+
+
+
+" let g:ale_linters.haskell = ['stack-ghc-mod', 'hlint']
+
+
+
 
 
 
@@ -168,18 +179,6 @@ nnoremap <silent> <M-Up> :TmuxNavigateUp<cr>
 nnoremap <silent> <M-Right> :TmuxNavigateRight<cr>
 "////////////////////////////////////////////////////////
 
-
-
-"////////////////////////////////////////////////////////
-let g:go_fmt_command = "goimports"
-let g:go_term_mode = "split"
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_structs = 1
-let g:go_highlight_interfaces = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_build_constraints = 1
-"////////////////////////////////////////////////////////
 
 
 "////////////////////////////////////////////////////////
