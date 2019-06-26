@@ -15,8 +15,6 @@ case Darwin
 	export PATH="$HOME/.bin:$PATH"
 	export PATH="$HOME/.cargo/bin:/opt/local/bin:$PATH"
 	export PATH="$GOPATH/bin:$PATH"
-	export PATH="$HOME/.cabal/bin:$HOME/.ghcup/bin:$PATH"
-
 end
 
 
