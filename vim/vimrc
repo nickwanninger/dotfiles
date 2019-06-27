@@ -100,7 +100,7 @@ Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
 Plug 'jremmen/vim-ripgrep'
 " Plug 'w0rp/ale'
 Plug 'dag/vim-fish'
-Plug 'nbouscal/vim-stylish-haskell'
+" Plug 'nbouscal/vim-stylish-haskell'
 Plug 'junegunn/fzf', { 'do': './install --all' }
 Plug 'ndmitchell/ghcid'
 Plug 'sbdchd/neoformat'
@@ -116,6 +116,10 @@ Plug 'sbdchd/neoformat'
 
 call plug#end()
 
+
+
+
+let g:neoformat_enabled_haskell = ['hindent']
 
 
 
@@ -313,7 +317,9 @@ map <C-d> :YcmForceCompileAndDiagnostics<CR>
 map <S-Tab> :YcmCompleter GoTo<CR>
 
 
-map <leader>f :ClangFormat<CR>
+autocmd FileType c map <leader>f :ClangFormat<CR>
+autocmd FileType c++ map <leader>f :ClangFormat<CR>
+autocmd FileType haskell map <leader>f :Neoformat<CR>
 
 noremap <C-S> :update<CR>
 vnoremap <C-S> <C-C>:update<CR>
