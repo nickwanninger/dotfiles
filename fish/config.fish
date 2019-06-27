@@ -12,6 +12,10 @@ mkdir -p ~/.local/bin
 export PATH="$HOME/.local/bin:$PATH"
 
 
+mkdir -p ~/.cabal/bin
+export PATH="$HOME/.cabal/bin:$PATH"
+
+
 switch (uname)
 # Specific things to my mac
 case Darwin
