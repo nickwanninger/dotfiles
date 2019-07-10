@@ -320,7 +320,7 @@ map <S-Tab> :YcmCompleter GoTo<CR>
 
 
 autocmd FileType c map <leader>f :ClangFormat<CR>
-autocmd FileType c++ map <leader>f :ClangFormat<CR>
+autocmd FileType cpp map <leader>f :ClangFormat<CR>
 autocmd FileType haskell map <leader>f :Neoformat<CR>
 
 noremap <C-S> :update<CR>
