@@ -17,7 +17,7 @@ function fish_prompt
 	printf (prompt_pwd)
 
 	set_color normal
-	printf "\n"
-	printf "❯ "
+	printf " "
+	printf "\$ "
 end
 
