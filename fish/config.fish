@@ -19,6 +19,8 @@ export PATH="$HOME/.cabal/bin:$PATH"
 switch (uname)
 # Specific things to my mac
 case Darwin
+	export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
+	export PATH="/usr/local/opt/python@2/libexec/bin:$PATH"
   # export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 	export PATH="$HOME/.bin:$PATH"
 	export PATH="$HOME/.cargo/bin:/opt/local/bin:$PATH"
