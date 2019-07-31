@@ -1,7 +1,7 @@
 
 set __fish_git_prompt_show_informative_status
 
-function fish_prompt
+function __fish_prompt
 	set -l exit_status $status
 
 	if [ $exit_status -ne 0 ]
@@ -21,3 +21,11 @@ function fish_prompt
 	printf "\$ "
 end
 
+function fish_prompt
+	set_color green
+	printf "%s\n" (prompt_pwd)
+	set_color yellow
+	printf "%s" (prompt_hostname)
+	set_color normal
+	printf ": "
+end
