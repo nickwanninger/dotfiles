@@ -35,10 +35,10 @@ function fish_prompt
 		set_color green
 		printf "%s" (prompt_pwd)
 
+		set_color normal
 		# show git file changes
 		set -l file_changes (git diff --name-only 2> /dev/null | wc -l)
 		if [ $file_changes -ne 0 ]
-			set_color normal
 			printf " <%d>" $file_changes
 		end
 
