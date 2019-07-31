@@ -21,6 +21,9 @@ switch (uname)
 case Darwin
 	export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
 	export PATH="/usr/local/opt/python@2/libexec/bin:$PATH"
+
+	# latex crap
+	export PATH="/usr/local/texlive/2019/bin/x86_64-darwin:$PATH"
   # export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 	export PATH="$HOME/.bin:$PATH"
 	export PATH="$HOME/.cargo/bin:/opt/local/bin:$PATH"
