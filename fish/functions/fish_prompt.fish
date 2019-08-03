@@ -15,21 +15,6 @@ function fish_prompt
 		set_color green
 		printf "%s" (prompt_pwd)
 
-		if [ false ]
-			set_color normal
-			# show git file changes
-			set -l file_changes (git diff --name-only 2> /dev/null | wc -l)
-			if [ $file_changes -ne 0 ]
-				printf " <%d>" $file_changes
-			end
-
-			set -l branch (git rev-parse --abbrev-ref HEAD 2> /dev/null)
-			if [ "$branch" != "" ]
-				printf " (%s)" "$branch"
-			end
-		end
-
-
 		printf "\n"
 	end
 
