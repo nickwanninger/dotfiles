@@ -1,0 +1,1 @@
+/home/nick/.config/fisherman/fzf/conf.d/fzf.fish

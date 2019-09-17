@@ -105,6 +105,8 @@ Plug 'junegunn/fzf', { 'do': './install --all' }
 Plug 'ndmitchell/ghcid'
 Plug 'sbdchd/neoformat'
 
+Plug 'rishikanthc/skyfall-vim'
+
 " Plug 'parsonsmatt/intero-neovim'
 " Plug 'pangloss/vim-javascript'
 " Plug 'mxw/vim-jsx'
@@ -201,8 +203,8 @@ filetype plugin indent on
 " set wrap linebreak nolist
 " set wrap
 " set textwidth=0 wrapmargin=0
-syntax on
 
+syntax on
 if (has("mac"))
 	if (has("termguicolors"))
 		set termguicolors
@@ -211,10 +213,15 @@ endif
 
 
 set background=dark
+" colorscheme skyfall
+
 " colorscheme monokai_pro
 " colorscheme monokai
 " colorscheme onedark
 colorscheme brogrammer
+" colorscheme wwdc16
+" colorscheme boring
+" colorscheme simpleblack
 " colorscheme xcode_dark
 " colorscheme gruvbox
 
@@ -304,6 +311,8 @@ map <ScrollWheelUp> <Up>
 map <ScrollWheelDown> <Down>
 map <ScrollWheelRight> <Right>
 map <ScrollWheelLeft> <Left>
+
+
 
 
 set nu
