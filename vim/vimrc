@@ -105,6 +105,7 @@ Plug 'junegunn/fzf', { 'do': './install --all' }
 Plug 'ndmitchell/ghcid'
 Plug 'sbdchd/neoformat'
 
+Plug 'majutsushi/tagbar'
 Plug 'rishikanthc/skyfall-vim'
 
 " Plug 'parsonsmatt/intero-neovim'
@@ -325,7 +326,11 @@ map <C-q> :q<CR>
 map <C-Q> :q!<CR>
 map <leader>/ :let @/=''<cr>"
 map <C-d> :YcmForceCompileAndDiagnostics<CR>
-map <S-Tab> :YcmCompleter GoTo<CR>
+" map <S-Tab> :YcmCompleter GoTo<CR>
+"
+"
+map <S-Tab> <C-]>
+map <C-Tab> :Tagbar<CR>
 
 
 autocmd FileType c map <leader>f :ClangFormat<CR>
