@@ -57,6 +57,9 @@ alias mk "make"
 alias md "make debug"
 
 
+alias fen "ssh fenrir -Y"
+
+
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/nick/.gcloud/google-cloud-sdk/path.fish.inc' ]; if type source > /dev/null; source '/Users/nick/.gcloud/google-cloud-sdk/path.fish.inc'; else; . '/Users/nick/.gcloud/google-cloud-sdk/path.fish.inc'; end; end
 
