@@ -13,6 +13,12 @@ function fish_prompt
     set -l color_error (set_color $fish_color_error)
     set -l color_normal "$color2"
 
+
+		switch (uname)
+			case Darwin
+				printf " "
+		end
+
     if test "$status_copy" -ne 0
         set color "$color_error"
         set color2 "$color_error"
