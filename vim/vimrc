@@ -108,6 +108,10 @@ Plug 'sbdchd/neoformat'
 Plug 'majutsushi/tagbar'
 Plug 'rishikanthc/skyfall-vim'
 
+Plug 'SirVer/ultisnips'
+
+Plug 'vim-latex/vim-latex'
+
 " Plug 'parsonsmatt/intero-neovim'
 " Plug 'pangloss/vim-javascript'
 " Plug 'mxw/vim-jsx'
@@ -119,12 +123,13 @@ Plug 'rishikanthc/skyfall-vim'
 
 call plug#end()
 
-
+let g:UltiSnipsExpandTrigger = '<M-Space>'
+let g:UltiSnipsJumpForwardTrigger = '<tab>'
+let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
+let g:UltiSnipsSnippetDirectories=[$HOME.'/dotfiles/vim/UltiSnips']
 
 
 let g:neoformat_enabled_haskell = ['hindent']
-
-
 
 " let g:ale_linters.haskell = ['stack-ghc-mod', 'hlint']
 

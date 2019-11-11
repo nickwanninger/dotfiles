@@ -30,6 +30,7 @@ case Darwin
 	export PATH="$GOPATH/bin:$PATH"
 end
 
+export PATH="$HOME/.bin:$PATH"
 
 export EDITOR=(which nvim)
 
