@@ -38,7 +38,7 @@ function fish_prompt
             set color "$color_error"
         end
 
-        echo -sn "$color"(host_info "host ")"$color_normal"
+				# echo -sn "$color"(host_info "host ")"$color_normal"
     end
 
     if test "$PWD" = ~
@@ -59,27 +59,27 @@ function fish_prompt
     end
 
 
-		set -l paths
-		if set -l git_dir (git rev-parse --show-toplevel 2> /dev/null)
-			set git_dir (string replace $HOME '~' $git_dir)
-			for x in (string split '/' $git_dir)[1..-2]
-				set -a paths (set_color brblack)$x(set_color normal)
-			end
-			set -a paths (set_color green)(string split '/' $git_dir)[-1](set_color normal)
-			set -l git_loc (git rev-parse --show-prefix 2> /dev/null)
-			for x in (string split '/' $git_loc)
-				set -a paths (set_color brblack)$x(set_color normal)
-		end
-		else
-			set -l dir (string replace $HOME '~' $PWD)
-			for x in (string split '/' $dir)
-				set -a paths (set_color brblack)$x(set_color normal)
-			end
-		end
-		set -l path (string join '/' $paths)
+		# set -l paths
+		# if set -l git_dir (git rev-parse --show-toplevel 2> /dev/null)
+		# 	set git_dir (string replace $HOME '~' $git_dir)
+		# 	for x in (string split '/' $git_dir)[1..-2]
+		# 		set -a paths (set_color brblack)$x(set_color normal)
+		# 	end
+		# 	set -a paths (set_color green)(string split '/' $git_dir)[-1](set_color normal)
+		# 	set -l git_loc (git rev-parse --show-prefix 2> /dev/null)
+		# 	for x in (string split '/' $git_loc)
+		# 		set -a paths (set_color brblack)$x(set_color normal)
+		# end
+		# else
+		# 	set -l dir (string replace $HOME '~' $PWD)
+		# 	for x in (string split '/' $dir)
+		# 		set -a paths (set_color brblack)$x(set_color normal)
+		# 	end
+		# end
+		# set -l path (string join '/' $paths)
+		# echo -sn "$path"
 
-		echo -sn "$path"
+		set_color brblack
+		printf "%s %s|%s " (prompt_pwd) (set_color "#FFA779") $color_normal
 
-		set_color "#FFA779"
-		echo -sn " \$$color_normal "
 end

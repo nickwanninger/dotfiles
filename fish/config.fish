@@ -2,15 +2,13 @@
 set fish_greeting ""
 set HOMEBREW_NO_AUTO_UPDATE 1
 export TERM="xterm-256color"
-# Show a pretty calendar :)
-# cal
-#
-set -x GOPATH $HOME/dev/go
 
+export PROMPT_COMMAND='echo -n -e "\e]2;${PWD/${HOME}/~}\e\\"'
+
+set -x GOPATH $HOME/dev/go
 
 mkdir -p ~/.local/bin
 export PATH="$HOME/.local/bin:$PATH"
-
 
 mkdir -p ~/.cabal/bin
 export PATH="$HOME/.cabal/bin:$PATH"
@@ -30,6 +28,8 @@ case Darwin
 	export PATH="$GOPATH/bin:$PATH"
 end
 
+# Setup ~/.bin as a PATH location.
+mkdir -p ~/.bin
 export PATH="$HOME/.bin:$PATH"
 
 export EDITOR=(which nvim)
@@ -58,6 +58,9 @@ alias md "make debug"
 
 
 alias fen "ssh fenrir -Y"
+alias lg "lazygit"
+
+alias lx "exa -laFBS"
 
 
 # The next line updates PATH for the Google Cloud SDK.

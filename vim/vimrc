@@ -153,7 +153,6 @@ filetype plugin indent on    " required
 " let g:airline_powerline_fonts = 1
 
 if version >= 720
-    " set colorcolumn=80
     set undofile
     set undodir=~/.tmp//,/tmp//
 endif
@@ -212,19 +211,14 @@ filetype plugin indent on
 " set textwidth=0 wrapmargin=0
 
 syntax on
-if (has("mac"))
-	if (has("termguicolors"))
-		set termguicolors
-	endif
-endif
-
+set termguicolors
 
 set background=dark
 " colorscheme skyfall
 
 " colorscheme monokai_pro
 " colorscheme monokai
-" colorscheme onedark
+" colorscheme one
 colorscheme brogrammer
 " colorscheme wwdc16
 " colorscheme boring
@@ -242,9 +236,8 @@ hi Comment cterm=none
 
 
 " set textwidth=80
-" set colorcolumn=+1
-" hi ColorColumn guibg=#2d2d2d ctermbg=246
-
+" set colorcolumn=80
+" hi ColorColumn guibg=#232320
 
 highlight ExtraWhitespace ctermbg=red guibg=#fabd2f
 match ExtraWhitespace /\s\+\%#\@<!$/
@@ -370,36 +363,18 @@ endif
 
 
 
+
+let g:asmsyntax = 'nasm'
+
 function! ASMCompile()
 	echo expand("%:p")
 	silent !clear
 	silent !execute "rm /tmp/out.s"
-	execute "!clang -Iinclude -S -o /tmp/out.s -masm=intel " . expand("%:p")
-	vsp /tmp/out.s
+	silent execute "!~/dotfiles/bin/shellcode.sh " . expand("%:p") . " > /tmp/out.hex"
+	vsp /tmp/out.hex
 endfunction
 
 :command ASMCompile :call ASMCompile()
 
-map <leader>asm :ASMCompile<CR>
+map <leader>a :ASMCompile<CR>
 
-
-fun! s:SelectColorS()
-  50vnew
-  setlocal bufhidden=wipe buftype=nofile nonu fdc=0
-  file ColorSchemeSelector
-  let files = split(glob(expand('~/.vim/colors/').'*'))
-  for file in files
-    let name = matchstr( file , '\w\+\(\.vim\)\@=' )
-    if strlen(name) > 0
-      put=name
-    endif
-  endfor
-  normal ggdd
-  setlocal nomodifiable
-  setlocal cursorline
-  hi CursorLine gui=reverse
-  nmap <buffer>  <Enter>  :cal g:SetColor()<CR>
-  nmap <buffer>  <C-q>    :q<CR>
-  nmap <buffer>  e        :exec 'tabe ~/.vim/colors/' . getline('.') . '.vim'<CR>
-endf
-com! SelectColorS   :cal s:SelectColorS()
