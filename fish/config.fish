@@ -60,7 +60,7 @@ alias md "make debug"
 alias fen "ssh fenrir -Y"
 alias lg "lazygit"
 
-alias lx "exa -laFBS"
+alias lx "exa -lgaFBS"
 
 
 # The next line updates PATH for the Google Cloud SDK.

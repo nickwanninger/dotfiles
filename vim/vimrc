@@ -18,17 +18,6 @@
 
 
 
-"////////////////////////////////////////////////////////
-"   ____ _____ _   _ _____ ____      _    _
-"  / ___| ____| \ | | ____|  _ \    / \  | |
-" | |  _|  _| |  \| |  _| | |_) |  / _ \ | |
-" | |_| | |___| |\  | |___|  _ <  / ___ \| |___
-"  \____|_____|_| \_|_____|_| \_\/_/   \_\_____|
-"////////////////////////////////////////////////////////
-
-
-
-
 " a spot for general configuration and whatnot
 
 " Don't try to be vi compatible
@@ -84,13 +73,9 @@ set shell=/bin/sh
 
 call plug#begin('~/.vim/plugged')
 
-" Plug 'VundleVim/Vundle.vim'
 Plug 'christoomey/vim-tmux-navigator'
-" Plug 'tpope/vim-fugitive'
-" Plug 'airblade/vim-gitgutter'
 Plug 'bfrg/vim-cpp-modern'
 Plug 'kien/ctrlp.vim'
-Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'scrooloose/nerdtree'
@@ -98,28 +83,10 @@ Plug 'rhysd/vim-clang-format'
 Plug 'flazz/vim-colorschemes'
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
 Plug 'jremmen/vim-ripgrep'
-" Plug 'w0rp/ale'
 Plug 'dag/vim-fish'
-" Plug 'nbouscal/vim-stylish-haskell'
+Plug 'wsdjeg/FlyGrep.vim'
 Plug 'junegunn/fzf', { 'do': './install --all' }
-Plug 'ndmitchell/ghcid'
-Plug 'sbdchd/neoformat'
-
-Plug 'majutsushi/tagbar'
-Plug 'rishikanthc/skyfall-vim'
-
-Plug 'SirVer/ultisnips'
-
-Plug 'vim-latex/vim-latex'
-
-" Plug 'parsonsmatt/intero-neovim'
-" Plug 'pangloss/vim-javascript'
-" Plug 'mxw/vim-jsx'
-" Plug 'eraserhd/parinfer-rust', {'do': 'cargo build --release'}
-" Plug 'fatih/vim-go'
-" Plug 'l04m33/vlime', {'rtp': 'vim/'}
-
-
+Plug 'dracula/vim'
 
 call plug#end()
 
@@ -127,30 +94,24 @@ let g:UltiSnipsExpandTrigger = '<M-Space>'
 let g:UltiSnipsJumpForwardTrigger = '<tab>'
 let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
 let g:UltiSnipsSnippetDirectories=[$HOME.'/dotfiles/vim/UltiSnips']
-
-
 let g:neoformat_enabled_haskell = ['hindent']
-
-" let g:ale_linters.haskell = ['stack-ghc-mod', 'hlint']
-
-
-
-
-
 
 let g:LanguageClient_serverCommands = {
     \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
 		\ 'cpp': ['clangd'],
     \ }
 
-
-
 filetype plugin indent on    " required
 
 "////////////////////////////////////////////////////////
 
 
+
+
+
+
 " let g:airline_powerline_fonts = 1
+let g:airline_theme='dracula'
 
 if version >= 720
     set undofile
@@ -170,7 +131,6 @@ let g:ctrlp_working_path_mode=''
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_auto_colors = 0
 "////////////////////////////////////////////////////////
-
 
 
 
@@ -199,52 +159,28 @@ nnoremap <silent> <M-Right> :TmuxNavigateRight<cr>
 "////////////////////////////////////////////////////////
 let g:indentLine_fileTypeExclude=['help']
 let g:indentLine_bufNameExclude=['NERD_tree.*']
-let g:rainbow#max_level = 16
-let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
 "////////////////////////////////////////////////////////
 
 
 "////////////////////////////////////////////////////////
 filetype plugin indent on
-" set wrap linebreak nolist
-" set wrap
-" set textwidth=0 wrapmargin=0
-
 syntax on
 set termguicolors
 
 set background=dark
-" colorscheme skyfall
+" colorscheme brogrammer
+colorscheme dracula
 
-" colorscheme monokai_pro
-" colorscheme monokai
-" colorscheme one
-colorscheme brogrammer
-" colorscheme wwdc16
-" colorscheme boring
-" colorscheme simpleblack
-" colorscheme xcode_dark
-" colorscheme gruvbox
-
+" Overwrite all colorscheme stuff
 hi Normal  ctermbg=NONE guibg=NONE
-"
-"
-" hi Special ctermbg=NONE guibg=NONE
 hi NonText ctermbg=NONE guibg=NONE
 hi LineNr  ctermbg=NONE guibg=NONE
 hi Comment cterm=none
 
 
-" set textwidth=80
-" set colorcolumn=80
-" hi ColorColumn guibg=#232320
-
 highlight ExtraWhitespace ctermbg=red guibg=#fabd2f
 match ExtraWhitespace /\s\+\%#\@<!$/
 "////////////////////////////////////////////////////////
-
-
-
 
 " enable italics mode and other things
 " let &t_ZH="\e[3m"
@@ -259,13 +195,13 @@ set encoding=utf-8 " Necessary to show Unicode glyphs
 
 
 " setup some filetype mappings
-au BufRead,BufNewFile *.g set filetype=geode
-au BufRead,BufNewFile *.wl set filetype=clojure
-au BufRead,BufNewFile *.cdr set filetype=clojure
-au BufRead,BufNewFile *.rad set filetype=radon
-au BufRead,BufNewFile *.x set filetype=alex
-au BufRead,BufNewFile *.he set filetype=helion
-au BufRead,BufNewFile *.cr set filetype=ruby
+" au BufRead,BufNewFile *.g set filetype=geode
+" au BufRead,BufNewFile *.wl set filetype=clojure
+" au BufRead,BufNewFile *.cdr set filetype=clojure
+" au BufRead,BufNewFile *.rad set filetype=radon
+" au BufRead,BufNewFile *.x set filetype=alex
+" au BufRead,BufNewFile *.he set filetype=helion
+" au BufRead,BufNewFile *.cr set filetype=ruby
 autocmd Filetype haskell setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
 autocmd Filetype happy setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
 autocmd Filetype lisp setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
@@ -283,7 +219,6 @@ nnoremap <leader>d "_d
 xnoremap <leader>d "_d
 xnoremap <leader>p "_dP
 
-map <C-\> <C-v>F\
 map <space> <ESC>viw
 nnoremap Q q
 nnoremap q <Nop>
@@ -296,7 +231,6 @@ imap <C-w> <esc>dbi
 " which is incredibly annoying.
 vmap > >gv
 vmap < <gv
-
 
 " disable writing different filename with :w<filename>
 :autocmd BufWritePre [:;]*
@@ -312,47 +246,29 @@ map <ScrollWheelDown> <Down>
 map <ScrollWheelRight> <Right>
 map <ScrollWheelLeft> <Left>
 
-
-
-
 set nu
 
 map <C-c> :set nu!<CR>
-
 
 map <C-n> :NERDTreeToggle<CR>
 map <C-q> :q<CR>
 map <C-Q> :q!<CR>
 map <leader>/ :let @/=''<cr>"
 map <C-d> :YcmForceCompileAndDiagnostics<CR>
-" map <S-Tab> :YcmCompleter GoTo<CR>
-"
-"
-map <S-Tab> <C-]>
-map <C-Tab> :Tagbar<CR>
-
 
 autocmd FileType c map <leader>f :ClangFormat<CR>
 autocmd FileType cpp map <leader>f :ClangFormat<CR>
-autocmd FileType haskell map <leader>f :Neoformat<CR>
 
 noremap <C-S> :update<CR>
 vnoremap <C-S> <C-C>:update<CR>
 inoremap <C-S> <C-O>:update<CR>
 
+nnoremap <Space>/ :FlyGrep<cr>
+
+
 " Cursor motion
 runtime! macros/matchit.vim
-
-"set list
-"set listchars=tab:\·\ ,trail:·,eol:\ ,nbsp:_
 inoremap {<CR> {<CR>}<C-o>O
-
-
-
-" split style
-set fillchars=vert:▒
-
-
 
 " use the silver searcher... cause it's better
 if executable('ag')
@@ -360,21 +276,4 @@ if executable('ag')
     set grepprg=ag\ --nogroup\ --nocolor\ --column
     set grepformat=%f:%l:%c%m
 endif
-
-
-
-
-let g:asmsyntax = 'nasm'
-
-function! ASMCompile()
-	echo expand("%:p")
-	silent !clear
-	silent !execute "rm /tmp/out.s"
-	silent execute "!~/dotfiles/bin/shellcode.sh " . expand("%:p") . " > /tmp/out.hex"
-	vsp /tmp/out.hex
-endfunction
-
-:command ASMCompile :call ASMCompile()
-
-map <leader>a :ASMCompile<CR>
 
