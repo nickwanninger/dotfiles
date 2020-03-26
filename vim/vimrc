@@ -75,7 +75,7 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'bfrg/vim-cpp-modern'
-Plug 'kien/ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'scrooloose/nerdtree'
@@ -111,7 +111,7 @@ filetype plugin indent on    " required
 
 
 " let g:airline_powerline_fonts = 1
-let g:airline_theme='dracula'
+" let g:airline_theme='monokai'
 
 if version >= 720
     set undofile
@@ -169,7 +169,8 @@ set termguicolors
 
 set background=dark
 " colorscheme brogrammer
-colorscheme dracula
+" colorscheme dracula
+colorscheme monokai
 
 " Overwrite all colorscheme stuff
 hi Normal  ctermbg=NONE guibg=NONE
@@ -206,8 +207,8 @@ autocmd Filetype haskell setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
 autocmd Filetype happy setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
 autocmd Filetype lisp setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
 autocmd Filetype clojure setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
-autocmd Filetype c setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
-autocmd Filetype cpp setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
+" autocmd Filetype c setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
+" autocmd Filetype cpp setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
 
 command WQ wq
 command Wq wq
@@ -270,10 +271,9 @@ nnoremap <Space>/ :FlyGrep<cr>
 runtime! macros/matchit.vim
 inoremap {<CR> {<CR>}<C-o>O
 
-" use the silver searcher... cause it's better
-if executable('ag')
-    " Note we extract the column as well as the file and line number
-    set grepprg=ag\ --nogroup\ --nocolor\ --column
+" use ripgrep, as its better.
+if executable('rg')
+    set grepprg=rg\ --nogroup\ --nocolor\ --column
     set grepformat=%f:%l:%c%m
 endif
 
