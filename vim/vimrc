@@ -85,10 +85,14 @@ Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
 Plug 'jremmen/vim-ripgrep'
 Plug 'dag/vim-fish'
 Plug 'wsdjeg/FlyGrep.vim'
-Plug 'junegunn/fzf', { 'do': './install --all' }
 Plug 'dracula/vim'
 
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+
 call plug#end()
+
+let g:fzf_preview_window = 'right:60%'
 
 let g:UltiSnipsExpandTrigger = '<M-Space>'
 let g:UltiSnipsJumpForwardTrigger = '<tab>'
@@ -225,6 +229,11 @@ nnoremap Q q
 nnoremap q <Nop>
 imap <C-Bslash> λ
 imap <C-w> <esc>dbi
+
+
+
+nnoremap <C-g> :Rg<CR>
+nnoremap <C-f> :Files<CR>
 
 " This keeps the current visual block selection active
 " after changing indent with '<' or '>'. Usually the
