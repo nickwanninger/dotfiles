@@ -90,6 +90,10 @@ Plug 'dracula/vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
+Plug 'cespare/vim-toml'
+
+Plug 'rust-lang/rust.vim'
+
 call plug#end()
 
 let g:fzf_preview_window = 'right:60%'
@@ -111,6 +115,8 @@ filetype plugin indent on    " required
 
 
 
+let g:asmsyntax = 'nasm'
+
 
 
 
@@ -124,7 +130,7 @@ endif
 
 
 "////////////////////////////////////////////////////////
-let g:ctrlp_custom_ignore = 'vendor\|build\|node_modules\|bin\/|DS_Store\|git\/'
+let g:ctrlp_custom_ignore = 'vendor\|target\|build\|node_modules\|bin\/|DS_Store\|git\/'
 let g:ctrlp_max_depth=40
 let g:ctrlp_working_path_mode=''
 "////////////////////////////////////////////////////////
@@ -198,6 +204,7 @@ set nofoldenable " folding sucks
 " show unicode glyphs
 set encoding=utf-8 " Necessary to show Unicode glyphs
 
+au BufRead,BufNewFile *.hbs set filetype=html
 
 " setup some filetype mappings
 " au BufRead,BufNewFile *.g set filetype=geode
