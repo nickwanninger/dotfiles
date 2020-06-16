@@ -3,7 +3,7 @@ import os
 def FlagsForFile( filename, **kwargs ):
     name, ext = os.path.splitext(filename)
     lang = "c++"
-    std = "-std=c++17"
+    std = "-std=c++20"
     if ext == ".c":
         lang = "c"
         std = "-std=c99"
