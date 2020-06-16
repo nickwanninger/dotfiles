@@ -11,7 +11,6 @@
 "
 "    author: nick wanninger
 "    email:  nickwanninger@gmail.com
-"    mirror: git.csdisaster.club/
 "
 "////////////////////////////////////////////////////////
 
@@ -58,7 +57,7 @@ set noswapfile
 
 set hidden
 set cmdheight=1
-set updatetime=10
+set updatetime=300
 set shortmess+=c
 
 set shell=/bin/sh
@@ -115,12 +114,6 @@ let g:deoplete#sources#clang#libclang_path = '/usr/lib/libclang.so'
 
 let g:fzf_preview_window = 'right:60%'
 
-let g:UltiSnipsExpandTrigger = '<M-Space>'
-let g:UltiSnipsJumpForwardTrigger = '<tab>'
-let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
-let g:UltiSnipsSnippetDirectories=[$HOME.'/dotfiles/vim/UltiSnips']
-let g:neoformat_enabled_haskell = ['hindent']
-
 
 filetype plugin indent on    " required
 
@@ -130,16 +123,13 @@ filetype plugin indent on    " required
 
 " Language server crap
 
-set hidden
 
 let g:LanguageClient_serverCommands = {
 	\ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
 	\ 'cpp': ['clangd'],
+	\ 'c': ['clangd'],
 	\ }
 
-let g:LanguageClient_devel = 1 " Use rust debug build
-let g:LanguageClient_loggingLevel = 'DEBUG' " Use highest logging level
-let g:LanguageClient_serverStderr = '/tmp/clangd.stderr'
 
 nnoremap <F5> :call LanguageClient_contextMenu()<CR>
 " Or map each action separately
@@ -149,7 +139,7 @@ nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
 
 
 " <TAB>: completion with deoplete.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
 
 " Make nasm the default assembly syntax
@@ -164,7 +154,7 @@ nnoremap <C-g> :GitGutterToggle<CR> :GitGutterLineHighlightsToggle<CR>
 
 
 " let g:airline_powerline_fonts = 1
-" let g:airline_theme='monokai'
+let g:airline_theme='minimalist'
 
 if version >= 720
     set undofile
@@ -219,13 +209,22 @@ let g:indentLine_bufNameExclude=['NERD_tree.*']
 "////////////////////////////////////////////////////////
 filetype plugin indent on
 syntax on
-set termguicolors
+" set termguicolors
 
-set background=dark
+" set background=dark
 " colorscheme brogrammer
 " colorscheme dracula
-colorscheme monokai
+" colorscheme monokai
 " colorscheme xcode_dark
+colorscheme Heahtraht
+" colorscheme gruvbox
+" colorscheme boring
+
+
+" Force vim to use 16 ANSI colors
+" set t_Co=16
+
+" colorscheme blaquemagick
 
 " Overwrite all colorscheme stuff
 hi Normal  ctermbg=NONE guibg=NONE
@@ -233,6 +232,7 @@ hi NonText ctermbg=NONE guibg=NONE
 hi LineNr  ctermbg=NONE guibg=NONE
 hi SignColumn  ctermbg=NONE guibg=NONE
 hi Comment cterm=none
+highlight Comment cterm=italic gui=italic
 
 
 set updatetime=250
@@ -255,7 +255,6 @@ let &t_ZH="\e[3m"
 let &t_ZR="\e[23m"
 
 
-highlight Comment cterm=italic gui=italic
 
 " highlight clear SignColumn
 

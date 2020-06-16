@@ -6,32 +6,32 @@ function fish_prompt
 		#      printf "[mac] "
 		# end
 
-
 		echo -n "["
-		set_color brblack
 
-		set_color red
-		echo -n (whoami)
-		set_color brblack
-		echo -n "@"
+		# set_color 8a8a8a
+		# echo -n (whoami)
 
-		set_color red
+		# set_color white
+		# echo -n "@"
+
+		set_color 5ad7ff
 		echo -n (hostname)
 
-		set_color brblack
-		echo -n "::"
+		set_color 8a8a8a
+		echo -n " "
 
-		set_color cyan
+		set_color 5fd7af
+		# echo -n (basename (prompt_pwd))
 		echo -n (prompt_pwd)
 
 		set_color reset
-		echo -n "] "
+		echo -n "]"
 
     if test "$status_copy" -ne 0
 				set_color red
 				printf "[%d] " $status_copy
 		else
-			set_color green
+			set_color 8a8a8a
 			#printf "| "
     end
 
