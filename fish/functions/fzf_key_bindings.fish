@@ -1,1 +1,0 @@
-/Users/nick/dotfiles/vim/plugged/fzf/shell/key-bindings.fish

@@ -30,8 +30,8 @@ hi StatusLine ctermfg=15 ctermbg=240 cterm=bold
 hi StatusLineNC ctermfg=15 ctermbg=240 cterm=NONE
 hi Pmenu ctermfg=NONE ctermbg=NONE cterm=NONE
 hi PmenuSel ctermfg=NONE ctermbg=236 cterm=NONE
-hi IncSearch ctermfg=NONE ctermbg=NONE cterm=inverse
-hi Search ctermfg=NONE ctermbg=11 cterm=inverse
+hi IncSearch ctermfg=15 ctermbg=239 cterm=NONE
+hi Search ctermfg=15    ctermbg=239 cterm=NONE
 hi Directory ctermfg=240 ctermbg=NONE cterm=NONE
 
 hi Folded ctermfg=239 ctermbg=233 cterm=NONE

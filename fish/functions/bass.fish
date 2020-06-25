@@ -1,1 +1,0 @@
-/Users/nick/.config/fisherman/bass/functions/bass.fish
