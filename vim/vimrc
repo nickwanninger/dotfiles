@@ -236,26 +236,26 @@ filetype plugin indent on
 syntax enable
 " set termguicolors
 
-set background=dark
+set background=light
 " colorscheme Heahtraht
-colorscheme github
-
+" colorscheme one
+colorscheme solarized
 
 " Force vim to use 16 ANSI colors
 " set t_Co=16
 
 
 " Overwrite all colorscheme stuff
-hi Normal  ctermbg=NONE guibg=NONE
+" hi Normal  ctermbg=NONE guibg=NONE
 hi NonText ctermbg=NONE guibg=NONE
 " hi LineNr  ctermbg=NONE guibg=NONE
 hi SignColumn  ctermbg=NONE guibg=NONE
 hi Comment cterm=none
 highlight Comment cterm=italic gui=italic
 
-hi CocFloat ctermbg=238
-hi CocFloating ctermbg=238 guibg=238
-hi Pmenu ctermbg=238 guibg=238
+hi CocFloat ctermbg=238 ctermfg=15
+hi CocFloating ctermbg=238 guibg=238 ctermfg=15
+hi Pmenu ctermbg=238 guibg=238 ctermfg=15
 
 let g:gitgutter_max_signs = 500
 
