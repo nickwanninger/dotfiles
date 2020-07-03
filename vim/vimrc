@@ -237,7 +237,8 @@ syntax enable
 " set termguicolors
 
 set background=dark
-colorscheme Heahtraht
+" colorscheme Heahtraht
+colorscheme github
 
 
 " Force vim to use 16 ANSI colors
