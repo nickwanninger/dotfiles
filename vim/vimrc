@@ -239,14 +239,16 @@ syntax enable
 set background=light
 " colorscheme Heahtraht
 " colorscheme one
-colorscheme solarized
+" colorscheme solarized
+" colorscheme xcodelight
+colorscheme dracula
 
 " Force vim to use 16 ANSI colors
 " set t_Co=16
 
 
 " Overwrite all colorscheme stuff
-" hi Normal  ctermbg=NONE guibg=NONE
+hi Normal  ctermbg=NONE guibg=NONE
 hi NonText ctermbg=NONE guibg=NONE
 " hi LineNr  ctermbg=NONE guibg=NONE
 hi SignColumn  ctermbg=NONE guibg=NONE
