@@ -20,6 +20,9 @@ case Darwin
 	# export PATH="$PATH:$GOPATH/bin"
 end
 
+export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/lib"
+
+
 # Setup ~/.bin as a PATH location.
 mkdir -p ~/.bin
 export PATH="$HOME/.bin:$PATH"

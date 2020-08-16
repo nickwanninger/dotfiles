@@ -236,12 +236,15 @@ filetype plugin indent on
 syntax enable
 " set termguicolors
 
-set background=light
+set background=dark
 " colorscheme Heahtraht
 " colorscheme one
 " colorscheme solarized
 " colorscheme xcodelight
 colorscheme dracula
+" colorscheme sublimemonokai
+" colorscheme twodark
+
 
 " Force vim to use 16 ANSI colors
 " set t_Co=16
