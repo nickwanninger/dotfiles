@@ -6,7 +6,13 @@ function fish_prompt
 		#      printf "[mac] "
 		# end
 
-		set_color green
+
+		if test -e ~/.config/shellcolor;
+			set_color (cat ~/.config/shellcolor)
+		else;
+			set_color green
+		end
+
 		echo -n "["
 		echo -n (hostname)
 		echo -n " "
