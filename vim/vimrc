@@ -40,11 +40,11 @@ set foldlevel=1     " only show me first fold level
 let g:indentLine_enabled = 1
 set visualbell t_vb= " disable visual bell
 set ttyfast  " we have a fast terminal
- "set lazyredraw
+set lazyredraw
 set backspace=indent,eol,start
 set clipboard=unnamed
 set mouse=a
-" set cursorline
+set cursorline
 set pastetoggle=<F2>
 set sidescroll=10
 set matchpairs+=<:>
@@ -57,11 +57,10 @@ set noswapfile
 set nobackup
 set nowritebackup
 
+set undofile
+set undodir=~/.tmp//,/tmp//
 
 set hidden
-set cmdheight=1
-set updatetime=300
-set shortmess+=c
 
 set shell=/bin/sh
 
@@ -75,12 +74,11 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'bfrg/vim-cpp-modern'
-" Plug 'ctrlpvim/ctrlp.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'scrooloose/nerdtree'
 Plug 'rhysd/vim-clang-format'
-Plug 'flazz/vim-colorschemes'
+" Plug 'flazz/vim-colorschemes'
 
 Plug 'lluchs/vim-wren'
 
@@ -89,34 +87,35 @@ Plug 'lluchs/vim-wren'
 Plug 'jremmen/vim-ripgrep'
 Plug 'dag/vim-fish'
 Plug 'wsdjeg/FlyGrep.vim'
-Plug 'dracula/vim'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-Plug 'cespare/vim-toml'
-Plug 'airblade/vim-gitgutter'
 Plug 'rust-lang/rust.vim'
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'stsewd/fzf-checkout.vim'
+
+Plug 'kdheepak/lazygit.nvim'
+
+Plug 'gruvbox-community/gruvbox'
+
 call plug#end()
 
 
-" inoremap <silent><expr> <TAB>
-"       \ pumvisible() ? "\<C-n>" :
-"       \ <SID>check_back_space() ? "\<TAB>" :
-"       \ coc#refresh()
-" inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+" Most important thing first -- Colors
+syntax enable
 
-" Use `[g` and `]g` to navigate diagnostics
-" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
+set background=dark
+colorscheme gruvbox
+" Overwrite all colorscheme stuff
+hi Normal  ctermbg=NONE guibg=NONE
+hi NonText ctermbg=NONE guibg=NONE
+hi SignColumn  ctermbg=NONE guibg=NONE
 
-" GoTo code navigation.
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
+
+nnoremap <C-f> :GFiles<CR>
+nnoremap <C-p> :Files<CR>
+
 
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
@@ -133,83 +132,32 @@ function! s:show_documentation()
 endfunction
 
 
+let g:rustfmt_autosave = 1
+
 " Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
-
-
-" let g:deoplete#enable_at_startup = 1
-" let g:deoplete#sources#clang#libclang_path = '/usr/lib/libclang.so'
-
+let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.5, 'highlight': 'Comment' } }
 let g:fzf_preview_window = 'right:60%'
+let $FZF_DEFAULT_OPTS="--reverse"
+" hit \gc to open the git branch checkout
+nnoremap <leader>gc :GCheckout<CR>
 
 
-filetype plugin indent on    " required
 
 "////////////////////////////////////////////////////////
-
-
-" Language server crap
-" let g:LanguageClient_serverCommands = {
-" 	\ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
-" 	\ 'cpp': ['clangd'],
-" 	\ 'c': ['clangd'],
-" 	\ }
-
-" nnoremap <F5> :call LanguageClient_contextMenu()<CR>
-" " Or map each action separately
-" nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
-" nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
-" nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
-
-
-" <TAB>: completion with deoplete.
-" inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-
-
 " Make nasm the default assembly syntax
 let g:asmsyntax = 'nasm'
 
 
+filetype plugin indent on    " required
 
-
-let g:gitgutter_enabled = 0
-let g:gitgutter_signs = 0
-nnoremap <C-g> :GitGutterToggle<CR> :GitGutterLineHighlightsToggle<CR>
-
-
-" let g:airline_powerline_fonts = 1
-let g:airline_theme='minimalist'
-
-if version >= 720
-    set undofile
-    set undodir=~/.tmp//,/tmp//
-endif
-
-
-"////////////////////////////////////////////////////////
-let g:ctrlp_custom_ignore = 'vendor\|target\|build\|node_modules\|bin\/|DS_Store\|git\/'
-let g:ctrlp_max_depth=40
-let g:ctrlp_working_path_mode=''
-"////////////////////////////////////////////////////////
 
 
 
 "////////////////////////////////////////////////////////
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_auto_colors = 0
-"////////////////////////////////////////////////////////
-
-
-
-"////////////////////////////////////////////////////////
-" let g:ycm_global_ycm_extra_conf = '~/dotfiles/vim/.ycm_extra_conf.py'
-" let g:ycm_confirm_extra_conf = 0
-" let g:ycm_autoclose_preview_window_after_insertion = 1
-" let g:ycm_autoclose_preview_window_after_completion = 1
-" let g:ycm_error_symbol = '!!'
-" let g:ycm_warning_symbol = '??'
-" let g:ycm_max_diagnostics_to_display = 0
 "////////////////////////////////////////////////////////
 
 
@@ -233,30 +181,6 @@ let g:indentLine_bufNameExclude=['NERD_tree.*']
 
 "////////////////////////////////////////////////////////
 filetype plugin indent on
-syntax enable
-" set termguicolors
-
-set background=dark
-" colorscheme Heahtraht
-" colorscheme one
-" colorscheme solarized
-" colorscheme xcodelight
-colorscheme dracula
-" colorscheme sublimemonokai
-" colorscheme twodark
-
-
-" Force vim to use 16 ANSI colors
-" set t_Co=16
-
-
-" Overwrite all colorscheme stuff
-hi Normal  ctermbg=NONE guibg=NONE
-hi NonText ctermbg=NONE guibg=NONE
-" hi LineNr  ctermbg=NONE guibg=NONE
-hi SignColumn  ctermbg=NONE guibg=NONE
-hi Comment cterm=none
-highlight Comment cterm=italic gui=italic
 
 hi CocFloat ctermbg=238 ctermfg=15
 hi CocFloating ctermbg=238 guibg=238 ctermfg=15
@@ -272,14 +196,13 @@ highlight GitGutterDelete ctermfg=1
 highlight GitGutterChangeDelete ctermfg=4
 
 
-highlight ExtraWhitespace ctermbg=red guibg=#fabd2f
+highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+\%#\@<!$/
 "////////////////////////////////////////////////////////
 
 " enable italics mode and other things
 let &t_ZH="\e[3m"
 let &t_ZR="\e[23m"
-
 
 
 " highlight clear SignColumn
@@ -300,18 +223,20 @@ au BufRead,BufNewFile *.hbs set filetype=html
 " au BufRead,BufNewFile *.x set filetype=alex
 " au BufRead,BufNewFile *.he set filetype=helion
 " au BufRead,BufNewFile *.cr set filetype=ruby
+" autocmd Filetype c setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
+" autocmd Filetype cpp setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
 autocmd Filetype haskell setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
 autocmd Filetype happy setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
 autocmd Filetype lisp setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
 autocmd Filetype clojure setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
-" autocmd Filetype c setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
-" autocmd Filetype cpp setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
+
 
 command WQ wq
 command Wq wq
 command W w
 command Q q
 nnoremap ; :
+
 
 nnoremap <leader>d "_d
 xnoremap <leader>d "_d
@@ -327,8 +252,6 @@ imap <C-w> <esc>dbi
 
 nnoremap <leader>m :make<CR>
 
-nnoremap <C-f> :Files<CR>
-nnoremap <C-p> :Files<CR>
 
 " This keeps the current visual block selection active
 " after changing indent with '<' or '>'. Usually the
@@ -351,31 +274,26 @@ map <ScrollWheelDown> <Down>
 map <ScrollWheelRight> <Right>
 map <ScrollWheelLeft> <Left>
 
+
+map <S-Up> <Up>
 set nu
 
 map <C-c> :set nu!<CR>
-
 map <C-n> :NERDTreeToggle<CR>
 map <C-q> :q<CR>
 map <C-Q> :q!<CR>
 map <leader>/ :let @/=''<cr>"
 
-
-" map <C-d> :YcmForceCompileAndDiagnostics<CR>
-
-autocmd FileType c map <leader>f :ClangFormat<CR>
-autocmd FileType cpp map <leader>f :ClangFormat<CR>
-
+" nice control-s meme
 noremap <C-S> :update<CR>
 vnoremap <C-S> <C-C>:update<CR>
 inoremap <C-S> <C-O>:update<CR>
 
-nnoremap <Space>/ :FlyGrep<cr>
+
+autocmd FileType c map <leader>f :ClangFormat<CR>
+autocmd FileType cpp map <leader>f :ClangFormat<CR>
 
 
-" Cursor motion
-runtime! macros/matchit.vim
-inoremap {<CR> {<CR>}<C-o>O
 
 " use ripgrep, as its better.
 if executable('rg')
