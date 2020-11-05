@@ -106,15 +106,18 @@ call plug#end()
 syntax enable
 
 set background=dark
-colorscheme gruvbox
+" colorscheme gruvbox
+colorscheme brogrammer
+
+
 " Overwrite all colorscheme stuff
 hi Normal  ctermbg=NONE guibg=NONE
 hi NonText ctermbg=NONE guibg=NONE
 hi SignColumn  ctermbg=NONE guibg=NONE
 
 
-nnoremap <C-f> :GFiles<CR>
-nnoremap <C-p> :Files<CR>
+nnoremap <C-p> :GFiles<CR>
+nnoremap <C-f> :Files<CR>
 
 
 " Symbol renaming.
@@ -137,8 +140,8 @@ let g:rustfmt_autosave = 1
 " Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
-let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.5, 'highlight': 'Comment' } }
-let g:fzf_preview_window = 'right:60%'
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.9, 'highlight': 'Comment' } }
+" let g:fzf_preview_window = 'bottom:30%'
 let $FZF_DEFAULT_OPTS="--reverse"
 " hit \gc to open the git branch checkout
 nnoremap <leader>gc :GCheckout<CR>
@@ -289,6 +292,8 @@ noremap <C-S> :update<CR>
 vnoremap <C-S> <C-C>:update<CR>
 inoremap <C-S> <C-O>:update<CR>
 
+
+inoremap <C-_> /*  */<Left><Left><Left>
 
 autocmd FileType c map <leader>f :ClangFormat<CR>
 autocmd FileType cpp map <leader>f :ClangFormat<CR>
