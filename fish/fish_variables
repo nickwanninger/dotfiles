@@ -15,7 +15,7 @@ SETUVAR __fish_init_2_39_8:\x1d
 SETUVAR __fish_init_2_3_0:\x1d
 SETUVAR __fish_init_3_x:\x1d
 SETUVAR __fish_initialized:3100
-SETUVAR fish_color_autosuggestion:9C9C9C
+SETUVAR fish_color_autosuggestion:777777
 SETUVAR fish_color_cancel:\x2dr
 SETUVAR fish_color_command:ffffff
 SETUVAR fish_color_comment:bcbcbc
