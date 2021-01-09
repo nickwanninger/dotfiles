@@ -1,5 +1,6 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =8
+let g:netrw_dirhistcnt =9
+let g:netrw_dirhist_9='/home/nick/chariot/arch/x86/asm'
 let g:netrw_dirhist_8='/home/nick/linux/2.6/net'
 let g:netrw_dirhist_7='/home/nick/linux/2.6/net/ipv4'
 let g:netrw_dirhist_6='/home/nick/chariot/kernel/fs/ext2'

@@ -44,7 +44,7 @@ set lazyredraw
 set backspace=indent,eol,start
 set clipboard=unnamed
 set mouse=a
-set cursorline
+" set cursorline
 set pastetoggle=<F2>
 set sidescroll=10
 set matchpairs+=<:>
@@ -99,15 +99,23 @@ Plug 'kdheepak/lazygit.nvim'
 
 Plug 'gruvbox-community/gruvbox'
 
+Plug 'preservim/tagbar'
+Plug 'cespare/vim-toml'
+Plug 'Shirk/vim-gas'
+
+
 call plug#end()
 
 
 " Most important thing first -- Colors
 syntax enable
 
-set background=dark
+" let g:airline_theme='simple'
+" set background=dark
 " colorscheme gruvbox
-colorscheme brogrammer
+" colorscheme brogrammer
+" colorscheme cobalt2
+colorscheme dracula
 
 
 " Overwrite all colorscheme stuff
@@ -135,10 +143,11 @@ function! s:show_documentation()
 endfunction
 
 
+
 let g:rustfmt_autosave = 1
 
 " Highlight the symbol and its references when holding the cursor.
-autocmd CursorHold * silent call CocActionAsync('highlight')
+" autocmd CursorHold * silent call CocActionAsync('highlight')
 
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.9, 'highlight': 'Comment' } }
 " let g:fzf_preview_window = 'bottom:30%'
@@ -150,7 +159,8 @@ nnoremap <leader>gc :GCheckout<CR>
 
 "////////////////////////////////////////////////////////
 " Make nasm the default assembly syntax
-let g:asmsyntax = 'nasm'
+"let g:asmsyntax = 'nasm'
+let g:asmsyntax = 'gas'
 
 
 filetype plugin indent on    " required
@@ -199,13 +209,14 @@ highlight GitGutterDelete ctermfg=1
 highlight GitGutterChangeDelete ctermfg=4
 
 
-highlight ExtraWhitespace ctermbg=red guibg=red
-match ExtraWhitespace /\s\+\%#\@<!$/
+" highlight ExtraWhitespace ctermbg=red guibg=red
+" match ExtraWhitespace /\s\+\%#\@<!$/
 "////////////////////////////////////////////////////////
 
 " enable italics mode and other things
 let &t_ZH="\e[3m"
 let &t_ZR="\e[23m"
+highlight Comment cterm=italic gui=italic
 
 
 " highlight clear SignColumn
@@ -218,20 +229,6 @@ set encoding=utf-8 " Necessary to show Unicode glyphs
 
 au BufRead,BufNewFile *.hbs set filetype=html
 
-" setup some filetype mappings
-" au BufRead,BufNewFile *.g set filetype=geode
-" au BufRead,BufNewFile *.wl set filetype=clojure
-" au BufRead,BufNewFile *.cdr set filetype=clojure
-" au BufRead,BufNewFile *.rad set filetype=radon
-" au BufRead,BufNewFile *.x set filetype=alex
-" au BufRead,BufNewFile *.he set filetype=helion
-" au BufRead,BufNewFile *.cr set filetype=ruby
-" autocmd Filetype c setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
-" autocmd Filetype cpp setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
-autocmd Filetype haskell setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
-autocmd Filetype happy setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
-autocmd Filetype lisp setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
-autocmd Filetype clojure setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
 
 
 command WQ wq
@@ -252,7 +249,6 @@ imap <C-Bslash> λ
 imap <C-w> <esc>dbi
 
 
-
 nnoremap <leader>m :make<CR>
 
 
@@ -268,7 +264,6 @@ vmap < <gv
 \   try | echoerr 'Forbidden file name: ' . expand('<afile>') | endtry
 
 
-autocmd filetype crontab setlocal nobackup nowritebackup
 
 " Change the scroll wheel from an actual scroll
 " to just moving up and down with arrowkeys
@@ -280,6 +275,8 @@ map <ScrollWheelLeft> <Left>
 
 map <S-Up> <Up>
 set nu
+
+nmap <C-a> :TagbarToggle<CR>
 
 map <C-c> :set nu!<CR>
 map <C-n> :NERDTreeToggle<CR>
@@ -298,6 +295,23 @@ inoremap <C-_> /*  */<Left><Left><Left>
 autocmd FileType c map <leader>f :ClangFormat<CR>
 autocmd FileType cpp map <leader>f :ClangFormat<CR>
 
+autocmd filetype crontab setlocal nobackup nowritebackup
+
+
+" setup some filetype mappings
+" au BufRead,BufNewFile *.g set filetype=geode
+" au BufRead,BufNewFile *.wl set filetype=clojure
+" au BufRead,BufNewFile *.cdr set filetype=clojure
+" au BufRead,BufNewFile *.rad set filetype=radon
+" au BufRead,BufNewFile *.x set filetype=alex
+" au BufRead,BufNewFile *.he set filetype=helion
+" au BufRead,BufNewFile *.cr set filetype=ruby
+" autocmd Filetype c setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
+" autocmd Filetype cpp setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
+autocmd Filetype haskell setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
+autocmd Filetype happy setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
+autocmd Filetype lisp setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
+autocmd Filetype clojure setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
 
 
 " use ripgrep, as its better.

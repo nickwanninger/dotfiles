@@ -26,6 +26,7 @@ export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/lib"
 # Setup ~/.bin as a PATH location.
 mkdir -p ~/.bin
 export PATH="$HOME/.bin:$PATH"
+export PATH="$HOME/.cargo/bin:$PATH"
 
 export EDITOR=(which nvim)
 
