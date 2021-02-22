@@ -59,3 +59,7 @@ set -x HOMEBREW_NO_AUTO_UPDATE 1
 set -g fish_user_paths "/usr/local/opt/llvm/bin" $fish_user_paths
 set -g fish_user_paths "/usr/local/opt/binutils/bin" $fish_user_paths
 test -e {$HOME}/.iterm2_shell_integration.fish ; and source {$HOME}/.iterm2_shell_integration.fish
+
+
+# set "__fish_git_prompt_show_informative_status" yes
+set "__fish_git_prompt_showdirtystate" yes

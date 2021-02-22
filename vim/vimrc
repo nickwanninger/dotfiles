@@ -42,7 +42,7 @@ set visualbell t_vb= " disable visual bell
 set ttyfast  " we have a fast terminal
 set lazyredraw
 set backspace=indent,eol,start
-set clipboard=unnamed
+set clipboard=unnamedplus
 set mouse=a
 " set cursorline
 set pastetoggle=<F2>
@@ -83,6 +83,9 @@ Plug 'rhysd/vim-clang-format'
 Plug 'lluchs/vim-wren'
 
 
+Plug 'dracula/vim', { 'as': 'dracula' }
+
+
 " Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
 Plug 'jremmen/vim-ripgrep'
 Plug 'dag/vim-fish'
@@ -103,6 +106,8 @@ Plug 'preservim/tagbar'
 Plug 'cespare/vim-toml'
 Plug 'Shirk/vim-gas'
 
+Plug 'ayu-theme/ayu-vim'
+
 
 call plug#end()
 
@@ -110,18 +115,17 @@ call plug#end()
 " Most important thing first -- Colors
 syntax enable
 
-" let g:airline_theme='simple'
-" set background=dark
-" colorscheme gruvbox
-" colorscheme brogrammer
-" colorscheme cobalt2
+set termguicolors     " enable true colors support
+let ayucolor="light"  " for light version of theme
+let ayucolor="mirage" " for mirage version of theme
+let ayucolor="dark"   " for dark version of theme
 colorscheme dracula
 
 
 " Overwrite all colorscheme stuff
 hi Normal  ctermbg=NONE guibg=NONE
-hi NonText ctermbg=NONE guibg=NONE
-hi SignColumn  ctermbg=NONE guibg=NONE
+" hi NonText ctermbg=NONE guibg=NONE
+" hi SignColumn  ctermbg=NONE guibg=NONE
 
 
 nnoremap <C-p> :GFiles<CR>
@@ -241,6 +245,7 @@ nnoremap ; :
 nnoremap <leader>d "_d
 xnoremap <leader>d "_d
 xnoremap <leader>p "_dP
+
 
 map <space> <ESC>viw
 nnoremap Q q
