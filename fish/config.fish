@@ -47,3 +47,8 @@ set -x HOMEBREW_NO_AUTO_UPDATE 1
 set HOMEBREW_NO_AUTO_UPDATE 1
 test -e {$HOME}/.iterm2_shell_integration.fish ; and source {$HOME}/.iterm2_shell_integration.fish
 
+
+
+set -g hydro_color_pwd yellow
+set -g hydro_color_prompt green
+set -g hydro_color_error red
