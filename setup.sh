@@ -2,6 +2,10 @@
 rm -rf ~/.config/fish
 ln -sF ~/dotfiles/fish/ ~/.config
 
+
+rm -rf ~/.config/alacritty
+ln -sF ~/dotfiles/alacritty/ ~/.config
+
 rm -rf ~/.vim
 ln -sf ~/dotfiles/vim/vimrc ~/.vimrc
 ln -sF ~/dotfiles/vim/ ~/.vim

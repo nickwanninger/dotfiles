@@ -1,0 +1,56 @@
+import:
+  - ~/.config/alacritty/colors/dracula.yml
+
+scrolling:
+  multiplier: 6
+
+font:
+  normal:
+    family: mononoki
+    style: Regular
+
+  bold:
+    style: Bold
+
+  italic:
+    style: Bold Italic
+
+  bold_italic:
+    style: Bold Italic
+
+  size: 12
+
+background_opacity: 1.0
+
+custom_cursor_colors: true
+
+cursor:
+  blinking: On
+
+vi_mode_cursor:
+  blinking: On
+
+colors:
+  cursor:
+    text: '#000000'
+    cursor: '#FFFFFF'
+
+
+bell:
+  animation: EaseOutExpo
+  duration: 100
+  color: '#000000'
+
+
+window:
+  gtk_theme_variant: dark
+  dynamic_padding: true
+  padding:
+    x: 0
+    y: 0
+
+key_bindings:
+  - { key: Return,   mods: Control|Shift, action: SpawnNewInstance }
+  - { key: N,   mods: Control|Shift, action: SpawnNewInstance }
+  - { key: F11, command: { program: "/bin/sh", args: ["-c", "wmctrl -ir $(xdotool getwindowfocus) -b toggle,fullscreen" ] } }
+
