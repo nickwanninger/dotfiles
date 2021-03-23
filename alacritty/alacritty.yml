@@ -2,9 +2,9 @@ scrolling:
   multiplier: 6
 
 font:
-  normal:
-    family: Cascadia Code
-    style: Medium
+  # normal:
+    # family: Monospace
+    # style: Medium
 
   bold:
     style: Bold
