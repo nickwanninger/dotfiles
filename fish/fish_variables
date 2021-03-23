@@ -21,7 +21,7 @@ SETUVAR _fisher_jorgebucaran_2F_fisher_files:/home/nick/\x2econfig/fish/function
 SETUVAR _fisher_jorgebucaran_2F_hydro_files:/home/nick/\x2econfig/fish/functions/fish_mode_prompt\x2efish\x1e/home/nick/\x2econfig/fish/functions/fish_prompt\x2efish\x1e/home/nick/\x2econfig/fish/functions/fish_title\x2efish\x1e/home/nick/\x2econfig/fish/conf\x2ed/hydro\x2efish
 SETUVAR _fisher_plugins:jorgebucaran/fisher\x1ejorgebucaran/hydro\x1ePatrickF1/fzf\x2efish
 SETUVAR _hydro_git_13442:master\u2022\x20
-SETUVAR _hydro_git_1780:master\u2022\x20\u21911\x20\u21931\x20
+SETUVAR _hydro_git_1780:master\u2022\x20\u21912\x20\u21931\x20
 SETUVAR _hydro_git_31105:master\u2022\x20
 SETUVAR _hydro_git_3306:trunk\u2022\x20
 SETUVAR _hydro_git_35179:master\u2022\x20
