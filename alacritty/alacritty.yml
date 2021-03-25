@@ -38,8 +38,10 @@ vi_mode_cursor:
 colors:
   # Default colors
   primary:
-    # hard contrast: background = '0x1d2021'
-    background: '0x282828'
+    # hard contrast
+    background: '0x1d2021'
+    # Normal:
+    # background: '0x282828'
     # soft contrast: background = '0x32302f'
     foreground: '0xebdbb2'
 
