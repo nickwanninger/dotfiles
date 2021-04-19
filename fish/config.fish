@@ -24,6 +24,9 @@ mkdir -p ~/.bin
 # export PATH="$HOME/.bin:$PATH"
 # export PATH="$HOME/.cargo/bin:$PATH"
 
+
+export PATH="/opt/cuda/bin:$PATH"
+
 set -g fish_user_paths $HOME/.bin $HOME/.local/bin $HOME/.cargo/bin $fish_user_paths
 
 export EDITOR=(which nvim)

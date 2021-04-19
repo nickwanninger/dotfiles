@@ -108,6 +108,7 @@ Plug 'Shirk/vim-gas'
 
 Plug 'ayu-theme/ayu-vim'
 
+Plug 'tikhomirov/vim-glsl'
 
 call plug#end()
 
@@ -120,7 +121,8 @@ let ayucolor="light"  " for light version of theme
 let ayucolor="mirage" " for mirage version of theme
 let ayucolor="dark"   " for dark version of theme
 " colorscheme dracula
-colorscheme gruvbox
+" colorscheme gruvbox
+colorscheme ayu
 
 
 " Overwrite all colorscheme stuff

@@ -2,9 +2,9 @@ scrolling:
   multiplier: 6
 
 font:
-  # normal:
-    # family: Monospace
-    # style: Medium
+  normal:
+    family: "Cascadia Code"
+    style: Medium
 
   bold:
     style: Bold
@@ -40,6 +40,7 @@ colors:
   primary:
     # hard contrast
     background: '0x1d2021'
+    # background: '0x111111'
     # Normal:
     # background: '0x282828'
     # soft contrast: background = '0x32302f'
