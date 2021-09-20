@@ -2,10 +2,10 @@ scrolling:
   multiplier: 6
 
 font:
-  # normal:
-    # family: "Cascadia Code"
+  normal:
+    family: "Cascadia Code"
     # family: Menlo
-    # style: Medium
+    style: Medium
 
   bold:
     style: Bold
@@ -18,7 +18,7 @@ font:
 
   size: 12
 
-background_opacity: 1.0
+background_opacity: 0.9
 
 # custom_cursor_colors: true
 

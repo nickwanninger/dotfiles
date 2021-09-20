@@ -110,6 +110,9 @@ Plug 'ayu-theme/ayu-vim'
 
 Plug 'tikhomirov/vim-glsl'
 
+Plug 'tomasiser/vim-code-dark'
+
+
 call plug#end()
 
 
@@ -124,6 +127,8 @@ let ayucolor="dark"   " for dark version of theme
 " colorscheme gruvbox
 colorscheme ayu
 
+" let g:airline_theme = 'codedark'
+" colorscheme codedark
 
 " Overwrite all colorscheme stuff
 hi Normal  ctermbg=NONE guibg=NONE
