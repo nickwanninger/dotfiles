@@ -31,6 +31,8 @@ set -g fish_user_paths $HOME/.bin $HOME/.local/bin $HOME/.cargo/bin $fish_user_p
 
 export EDITOR=(which nvim)
 
+export RVTC="~/chariot/toolchain/local/bin/riscv64-elf-"
+
 alias cft "vim ~/dotfiles/tmux/tmux.conf"
 alias cff "vim ~/dotfiles/fish/config.fish"
 
@@ -44,6 +46,10 @@ alias glog "git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset
 
 alias lg "lazygit"
 alias lx "exa -lgaFBS"
+
+
+alias gs "git status"
+alias gsw "git switch"
 
 # disable homebrew auto update. Not sure if this works
 set -x HOMEBREW_NO_AUTO_UPDATE 1

@@ -1,14 +1,14 @@
 
 "////////////////////////////////////////////////////////
-"           ██
-"          ░░
-"  ██    ██ ██ ██████████  ██████  █████
-" ░██   ░██░██░░██░░██░░██░░██░░█ ██░░░██
-" ░░██ ░██ ░██ ░██ ░██ ░██ ░██ ░ ░██  ░░
-"  ░░████  ░██ ░██ ░██ ░██ ░██   ░██   ██
-"   ░░██   ░██ ███ ░██ ░██░███   ░░█████
-"    ░░    ░░ ░░░  ░░  ░░ ░░░     ░░░░░
-"
+"                 ██
+"                ░░
+"        ██    ██ ██ ██████████  ██████  █████
+"       ░██   ░██░██░░██░░██░░██░░██░░█ ██░░░██
+"  neo- ░░██ ░██ ░██ ░██ ░██ ░██ ░██ ░ ░██  ░░
+"        ░░████  ░██ ░██ ░██ ░██ ░██   ░██   ██
+"         ░░██   ░██ ███ ░██ ░██░███   ░░█████
+"          ░░    ░░ ░░░  ░░  ░░ ░░░     ░░░░░
+"       
 "    author: nick wanninger
 "    email:  nickwanninger@gmail.com
 "
@@ -123,9 +123,9 @@ set termguicolors     " enable true colors support
 let ayucolor="light"  " for light version of theme
 let ayucolor="mirage" " for mirage version of theme
 let ayucolor="dark"   " for dark version of theme
-" colorscheme dracula
+colorscheme dracula
 " colorscheme gruvbox
-colorscheme ayu
+" colorscheme ayu
 
 " let g:airline_theme = 'codedark'
 " colorscheme codedark
@@ -142,6 +142,10 @@ nnoremap <C-f> :Files<CR>
 
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
 
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call <SID>show_documentation()<CR>
