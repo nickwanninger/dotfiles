@@ -91,25 +91,17 @@ Plug 'jremmen/vim-ripgrep'
 Plug 'dag/vim-fish'
 Plug 'wsdjeg/FlyGrep.vim'
 Plug 'rust-lang/rust.vim'
-
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'stsewd/fzf-checkout.vim'
-
 Plug 'kdheepak/lazygit.nvim'
-
 Plug 'gruvbox-community/gruvbox'
-
 Plug 'preservim/tagbar'
 Plug 'cespare/vim-toml'
 Plug 'Shirk/vim-gas'
-
 Plug 'ayu-theme/ayu-vim'
-
 Plug 'tikhomirov/vim-glsl'
-
 Plug 'tomasiser/vim-code-dark'
 
 
@@ -158,6 +150,31 @@ function! s:show_documentation()
   endif
 endfunction
 
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" gd - go to definition of word under cursor
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+
+" gi - go to implementation
+nmap <silent> gi <Plug>(coc-implementation)
+
+" gh - get hint on whatever's under the cursor
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+nnoremap <silent> gh :call <SID>show_documentation()<CR>
+
+" rename the current word in the cursor
+nmap <leader>cr  <Plug>(coc-rename)
+nmap <leader>cf  <Plug>(coc-format-selected)
+vmap <leader>cf  <Plug>(coc-format-selected)
+" list commands available in tsserver (and others)
+nnoremap <silent> <leader>cc  :<C-u>CocList commands<cr>
+" restart when the language server gets wonky
+nnoremap <silent> <leader>cR  :<C-u>CocRestart<CR>
+" so i can hit tab and shift tab
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
 
 
 let g:rustfmt_autosave = 1
@@ -198,6 +215,12 @@ nnoremap <silent> <M-Left> :TmuxNavigateLeft<cr>
 nnoremap <silent> <M-Down> :TmuxNavigateDown<cr>
 nnoremap <silent> <M-Up> :TmuxNavigateUp<cr>
 nnoremap <silent> <M-Right> :TmuxNavigateRight<cr>
+
+
+nnoremap <silent> <M-h> :TmuxNavigateLeft<cr>
+nnoremap <silent> <M-j> :TmuxNavigateDown<cr>
+nnoremap <silent> <M-k> :TmuxNavigateUp<cr>
+nnoremap <silent> <M-l> :TmuxNavigateRight<cr>
 "////////////////////////////////////////////////////////
 
 
