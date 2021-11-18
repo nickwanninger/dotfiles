@@ -78,7 +78,6 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'scrooloose/nerdtree'
 Plug 'rhysd/vim-clang-format'
-" Plug 'flazz/vim-colorschemes'
 
 Plug 'lluchs/vim-wren'
 
@@ -104,6 +103,9 @@ Plug 'ayu-theme/ayu-vim'
 Plug 'tikhomirov/vim-glsl'
 Plug 'tomasiser/vim-code-dark'
 
+Plug 'flazz/vim-colorschemes'
+" Plug 'rainglow/vim'
+
 
 call plug#end()
 
@@ -115,17 +117,24 @@ set termguicolors     " enable true colors support
 let ayucolor="light"  " for light version of theme
 let ayucolor="mirage" " for mirage version of theme
 let ayucolor="dark"   " for dark version of theme
+set background=dark
 " colorscheme dracula
 " colorscheme gruvbox
-colorscheme ayu
+" colorscheme ayu
+" colorscheme Heahtraht
+" colorscheme hive-contrast
+
+colorscheme proton
+syntax reset
+colorscheme phoenix
+" colorscheme space-vim-dark
+
+" Disable the background color
+hi Normal  ctermbg=NONE guibg=NONE
 
 " let g:airline_theme = 'codedark'
 " colorscheme codedark
 
-" Overwrite all colorscheme stuff
-hi Normal  ctermbg=NONE guibg=NONE
-" hi NonText ctermbg=NONE guibg=NONE
-" hi SignColumn  ctermbg=NONE guibg=NONE
 
 
 nnoremap <C-p> :GFiles<CR>
