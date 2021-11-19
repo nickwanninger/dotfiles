@@ -78,14 +78,8 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'scrooloose/nerdtree'
 Plug 'rhysd/vim-clang-format'
-
 Plug 'lluchs/vim-wren'
-
-
 Plug 'dracula/vim', { 'as': 'dracula' }
-
-
-" Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
 Plug 'jremmen/vim-ripgrep'
 Plug 'dag/vim-fish'
 Plug 'wsdjeg/FlyGrep.vim'
@@ -102,10 +96,7 @@ Plug 'Shirk/vim-gas'
 Plug 'ayu-theme/ayu-vim'
 Plug 'tikhomirov/vim-glsl'
 Plug 'tomasiser/vim-code-dark'
-
 Plug 'flazz/vim-colorschemes'
-" Plug 'rainglow/vim'
-
 
 call plug#end()
 
