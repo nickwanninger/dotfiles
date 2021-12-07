@@ -80,7 +80,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'rhysd/vim-clang-format'
 Plug 'lluchs/vim-wren'
 Plug 'dracula/vim', { 'as': 'dracula' }
-Plug 'jremmen/vim-ripgrep'
+" Plug 'jremmen/vim-ripgrep'
 Plug 'dag/vim-fish'
 Plug 'wsdjeg/FlyGrep.vim'
 Plug 'rust-lang/rust.vim'
@@ -97,6 +97,10 @@ Plug 'ayu-theme/ayu-vim'
 Plug 'tikhomirov/vim-glsl'
 Plug 'tomasiser/vim-code-dark'
 Plug 'flazz/vim-colorschemes'
+
+
+" Plug 'nvim-lua/plenary.nvim'
+" Plug 'nvim-telescope/telescope.nvim'
 
 call plug#end()
 
@@ -130,6 +134,9 @@ hi Normal  ctermbg=NONE guibg=NONE
 
 nnoremap <C-p> :GFiles<CR>
 nnoremap <C-f> :Files<CR>
+
+nnoremap <C-t> <cmd>Telescope live_grep<cr>
+
 
 
 " Symbol renaming.
@@ -223,8 +230,8 @@ nnoremap <silent> <M-k> :TmuxNavigateUp<cr>
 nnoremap <silent> <M-l> :TmuxNavigateRight<cr>
 
 
-nnoremap <silent> <M--> :sp<cr>
-nnoremap <silent> <M-\> :vsp<cr>
+nnoremap <silent> <C-M--> :sp<cr>
+nnoremap <silent> <C-M-\> :vsp<cr>
 
 "////////////////////////////////////////////////////////
 
