@@ -1,3 +1,26 @@
 function fish_prompt -d Hydro
-    string unescape "$_hydro_color_pwd$hostname $_hydro_color_pwd$_hydro_pwd\x1b[0m $_hydro_prompt\x1b[0m "
+
+	set_color brblack
+	echo -n '['
+
+	set_color blue
+	echo -n (whoami)
+
+	set_color brblack
+	echo -n '@'
+
+	set_color green
+	echo -n (prompt_pwd)
+
+	set_color brblack
+	echo -n ']'
+
+	set_color -o brred
+
+	echo -n ' µ '
+
+	set_color reset
+
+
+
 end

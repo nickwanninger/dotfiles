@@ -107,29 +107,32 @@ call plug#end()
 
 " Most important thing first -- Colors
 syntax enable
+syntax reset
 
 set termguicolors     " enable true colors support
 let ayucolor="light"  " for light version of theme
 let ayucolor="mirage" " for mirage version of theme
 let ayucolor="dark"   " for dark version of theme
 set background=dark
-" colorscheme dracula
-" colorscheme gruvbox
-" colorscheme ayu
-" colorscheme Heahtraht
-" colorscheme hive-contrast
 
-colorscheme proton
-syntax reset
-colorscheme phoenix
-" colorscheme space-vim-dark
 
-" Disable the background color
-hi Normal  ctermbg=NONE guibg=NONE
 
-" let g:airline_theme = 'codedark'
-" colorscheme codedark
+let g:darktheme="molokai"
+let g:lighttheme="github"
 
+
+execute "colorscheme " . g:darktheme
+
+function ToggleColors()
+		syntax reset
+    if (g:colors_name == g:lighttheme)
+				execute "colorscheme " . g:darktheme
+    else
+				execute "colorscheme " . g:lighttheme
+    endif
+endfunction
+
+nnoremap <F5> :call ToggleColors()<cr>
 
 
 nnoremap <C-p> :GFiles<CR>
