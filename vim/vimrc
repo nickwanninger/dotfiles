@@ -117,20 +117,24 @@ set background=dark
 
 
 
-let g:darktheme="molokai"
+let g:darktheme="dracula-custom"
 let g:lighttheme="github"
 
 
-execute "colorscheme " . g:darktheme
 
 function ToggleColors()
 		syntax reset
     if (g:colors_name == g:lighttheme)
+				": hi Normal  ctermbg=NONE guibg=NONE
 				execute "colorscheme " . g:darktheme
     else
 				execute "colorscheme " . g:lighttheme
     endif
 endfunction
+
+
+
+execute "colorscheme " . g:darktheme
 
 nnoremap <F5> :call ToggleColors()<cr>
 
