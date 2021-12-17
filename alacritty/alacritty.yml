@@ -31,10 +31,10 @@ vi_mode_cursor:
   blinking: On
 
 
-colors_dracula:
+colors:
   primary:
-    # background: '0x282a36'
-    background: '0x1E1E1E'
+    background: '0x282a36'
+    # background: '0x1E1E1E'
     foreground: '0xf8f8f2'
   cursor:
     foreground: '0x44475a'
@@ -77,7 +77,7 @@ colors_dracula:
  
  
 # Colors (Gruvbox dark)
-colors:
+colors_gruvbox:
   primary:
     background: '0x000000'
     foreground: '0xffffff'

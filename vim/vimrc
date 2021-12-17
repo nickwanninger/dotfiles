@@ -80,11 +80,10 @@ Plug 'scrooloose/nerdtree'
 Plug 'rhysd/vim-clang-format'
 Plug 'lluchs/vim-wren'
 Plug 'dracula/vim', { 'as': 'dracula' }
-" Plug 'jremmen/vim-ripgrep'
+
 Plug 'dag/vim-fish'
 Plug 'wsdjeg/FlyGrep.vim'
 Plug 'rust-lang/rust.vim'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'stsewd/fzf-checkout.vim'
@@ -99,10 +98,36 @@ Plug 'tomasiser/vim-code-dark'
 Plug 'flazz/vim-colorschemes'
 
 
-" Plug 'nvim-lua/plenary.nvim'
-" Plug 'nvim-telescope/telescope.nvim'
+" autocompletion and analysis
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+
+if has('nvim')
+" Plug 'neovim/nvim-lspconfig'
+" Plug 'glepnir/lspsaga.nvim'
+" Plug 'hrsh7th/cmp-nvim-lsp'
+" Plug 'hrsh7th/cmp-buffer'
+" Plug 'hrsh7th/cmp-path'
+" Plug 'hrsh7th/cmp-cmdline'
+" Plug 'hrsh7th/nvim-cmp'
+" Plug 'ray-x/lsp_signature.nvim'
+" 
+" Plug 'nvim-treesitter/nvim-treesitter'
+endif
 
 call plug#end()
+
+
+" if using neovim, use lua
+if has('nvim')
+" lua require 'init'
+endif
+
+
+
+
+
+
 
 
 " Most important thing first -- Colors
@@ -138,12 +163,8 @@ execute "colorscheme " . g:darktheme
 
 nnoremap <F5> :call ToggleColors()<cr>
 
-
 nnoremap <C-p> :GFiles<CR>
 nnoremap <C-f> :Files<CR>
-
-nnoremap <C-t> <cmd>Telescope live_grep<cr>
-
 
 
 " Symbol renaming.
@@ -152,9 +173,6 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
-
-" Use K to show documentation in preview window.
-nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
@@ -175,7 +193,6 @@ nmap <silent> gi <Plug>(coc-implementation)
 
 " gh - get hint on whatever's under the cursor
 nnoremap <silent> K :call <SID>show_documentation()<CR>
-nnoremap <silent> gh :call <SID>show_documentation()<CR>
 
 " rename the current word in the cursor
 nmap <leader>cr  <Plug>(coc-rename)
@@ -378,4 +395,3 @@ if executable('rg')
     set grepprg=rg\ --nogroup\ --nocolor\ --column
     set grepformat=%f:%l:%c%m
 endif
-
