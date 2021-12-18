@@ -18,6 +18,8 @@ end
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/lib"
 
 
+export PATH="/opt/homebrew/bin:$PATH"
+
 # Setup ~/.bin as a PATH location.
 mkdir -p ~/.bin
 
