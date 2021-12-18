@@ -32,6 +32,6 @@ Temporary Items
 
 vim/plugged
 vim/bundle
-
+vim/autoload/plug.vim
 
 fish/fish_variables
