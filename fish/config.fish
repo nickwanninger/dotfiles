@@ -50,6 +50,10 @@ alias lg "lazygit"
 alias lx "exa -lgaFBS"
 
 
+
+alias gp "git push"
+alias gP "git pull"
+alias gc "git commit"
 alias gs "git status"
 alias gsw "git switch"
 
