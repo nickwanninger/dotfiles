@@ -13,11 +13,11 @@ function fish_prompt -d Hydro
 	echo -n (prompt_pwd)
 
 	set_color brblack
-	echo -n ']'
+	echo -n '] '
 
-	set_color -o brred
+	# set_color -o brred
 
-	echo -n ' µ '
+	# echo -n ' µ '
 
 	set_color reset
 
