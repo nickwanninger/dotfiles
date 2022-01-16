@@ -151,8 +151,8 @@ let g:lighttheme="github"
 function ToggleColors()
 		syntax reset
     if (g:colors_name == g:lighttheme)
-				": hi Normal  ctermbg=NONE guibg=NONE
 				execute "colorscheme " . g:darktheme
+				hi Normal  ctermbg=NONE guibg=NONE
     else
 				execute "colorscheme " . g:lighttheme
     endif
@@ -161,6 +161,7 @@ endfunction
 
 
 execute "colorscheme " . g:darktheme
+hi Normal  ctermbg=NONE guibg=NONE
 
 nnoremap <F5> :call ToggleColors()<cr>
 
