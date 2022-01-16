@@ -98,6 +98,9 @@ Plug 'tomasiser/vim-code-dark'
 Plug 'flazz/vim-colorschemes'
 
 
+Plug 'connorholyday/vim-snazzy'
+
+
 " autocompletion and analysis
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
@@ -143,7 +146,7 @@ set background=dark
 
 
 " let g:darktheme="dracula-custom"
-let g:darktheme="ayu"
+let g:darktheme="snazzy"
 let g:lighttheme="github"
 
 
