@@ -154,7 +154,7 @@ let g:lighttheme="github"
 function ToggleColors()
 		syntax reset
     if (g:colors_name == g:lighttheme)
-				": hi Normal  ctermbg=NONE guibg=NONE
+				hi Normal  ctermbg=NONE guibg=NONE
 				execute "colorscheme " . g:darktheme
     else
 				execute "colorscheme " . g:lighttheme
@@ -164,6 +164,7 @@ endfunction
 
 
 execute "colorscheme " . g:darktheme
+hi Normal  ctermbg=NONE guibg=NONE
 
 nnoremap <F5> :call ToggleColors()<cr>
 
@@ -379,6 +380,9 @@ autocmd filetype crontab setlocal nobackup nowritebackup
 
 
 " setup some filetype mappings
+au BufRead,BufNewFile *.L1 set filetype=l1
+au BufRead,BufNewFile *.L2 set filetype=l1
+
 " au BufRead,BufNewFile *.g set filetype=geode
 " au BufRead,BufNewFile *.wl set filetype=clojure
 " au BufRead,BufNewFile *.cdr set filetype=clojure

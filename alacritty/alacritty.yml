@@ -33,7 +33,8 @@ vi_mode_cursor:
 
 colors:
   primary:
-    background: '0x282a36'
+    # background: '0x282a36'
+    background: '0x000000'
     # background: '0x1E1E1E'
     foreground: '0xf8f8f2'
   cursor:
