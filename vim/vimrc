@@ -98,6 +98,9 @@ Plug 'tomasiser/vim-code-dark'
 Plug 'flazz/vim-colorschemes'
 
 
+Plug 'connorholyday/vim-snazzy'
+
+
 " autocompletion and analysis
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
@@ -143,7 +146,7 @@ set background=dark
 
 
 " let g:darktheme="dracula-custom"
-let g:darktheme="ayu"
+let g:darktheme="snazzy"
 let g:lighttheme="github"
 
 
@@ -151,8 +154,8 @@ let g:lighttheme="github"
 function ToggleColors()
 		syntax reset
     if (g:colors_name == g:lighttheme)
-				": hi Normal  ctermbg=NONE guibg=NONE
 				execute "colorscheme " . g:darktheme
+				hi Normal  ctermbg=NONE guibg=NONE
     else
 				execute "colorscheme " . g:lighttheme
     endif
@@ -161,6 +164,7 @@ endfunction
 
 
 execute "colorscheme " . g:darktheme
+hi Normal  ctermbg=NONE guibg=NONE
 
 nnoremap <F5> :call ToggleColors()<cr>
 
@@ -376,6 +380,9 @@ autocmd filetype crontab setlocal nobackup nowritebackup
 
 
 " setup some filetype mappings
+au BufRead,BufNewFile *.L1 set filetype=l1
+au BufRead,BufNewFile *.L2 set filetype=l1
+
 " au BufRead,BufNewFile *.g set filetype=geode
 " au BufRead,BufNewFile *.wl set filetype=clojure
 " au BufRead,BufNewFile *.cdr set filetype=clojure
