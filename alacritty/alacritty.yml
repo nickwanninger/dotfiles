@@ -20,7 +20,6 @@ font:
 
   size: 12
 
-background_opacity: 1.0
 
 # custom_cursor_colors: true
 
@@ -201,6 +200,7 @@ bell:
 
 
 window:
+  opacity: 1.0
   gtk_theme_variant: dark
   dynamic_padding: true
   padding:
