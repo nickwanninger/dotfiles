@@ -265,6 +265,8 @@ nnoremap <silent> <C-M-\> :vsp<cr>
 "////////////////////////////////////////////////////////
 
 
+map <leader>o :setlocal spell! spelllang=en_us<CR>
+
 
 "////////////////////////////////////////////////////////
 let g:indentLine_fileTypeExclude=['help']
@@ -382,6 +384,9 @@ autocmd filetype crontab setlocal nobackup nowritebackup
 " setup some filetype mappings
 au BufRead,BufNewFile *.L1 set filetype=l1
 au BufRead,BufNewFile *.L2 set filetype=l1
+au BufRead,BufNewFile *.L2f set filetype=l1
+au BufRead,BufNewFile *.L3 set filetype=l1
+au BufRead,BufNewFile *.tile set filetype=tile
 
 " au BufRead,BufNewFile *.g set filetype=geode
 " au BufRead,BufNewFile *.wl set filetype=clojure
