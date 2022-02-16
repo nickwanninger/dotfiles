@@ -201,6 +201,7 @@ bell:
 
 
 window:
+  opacity: 1.0
   gtk_theme_variant: dark
   dynamic_padding: true
   padding:
