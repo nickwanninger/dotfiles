@@ -100,6 +100,7 @@ Plug 'flazz/vim-colorschemes'
 
 Plug 'connorholyday/vim-snazzy'
 
+Plug 'airblade/vim-gitgutter'
 
 " autocompletion and analysis
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -386,6 +387,7 @@ au BufRead,BufNewFile *.L1 set filetype=l1
 au BufRead,BufNewFile *.L2 set filetype=l1
 au BufRead,BufNewFile *.L2f set filetype=l1
 au BufRead,BufNewFile *.L3 set filetype=l1
+au BufRead,BufNewFile *.IR set filetype=l1
 au BufRead,BufNewFile *.tile set filetype=tile
 
 " au BufRead,BufNewFile *.g set filetype=geode
