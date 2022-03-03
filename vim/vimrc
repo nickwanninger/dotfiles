@@ -10,19 +10,48 @@
 "          ░░    ░░ ░░░  ░░  ░░ ░░░     ░░░░░
 "       
 "    author: nick wanninger
-"    email:  nickwanninger@gmail.com
 "
 "////////////////////////////////////////////////////////
 
+call plug#begin('~/.vim/plugged')
+
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
+Plug 'scrooloose/nerdtree'
+Plug 'rust-lang/rust.vim'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'preservim/tagbar'
+
+Plug 'bfrg/vim-cpp-modern'
+Plug 'lluchs/vim-wren'
+Plug 'Shirk/vim-gas'
+Plug 'dag/vim-fish'
+
+Plug 'connorholyday/vim-snazzy'
+
+Plug 'nvim-lua/plenary.nvim'
+Plug 'lewis6991/gitsigns.nvim'
+
+Plug 'neovim/nvim-lspconfig'
+Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
+Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
+Plug 'ray-x/lsp_signature.nvim'
+
+call plug#end()
 
 
+" if using neovim, use lua
+if has('nvim')
+	lua require 'init'
+endif
 
-" a spot for general configuration and whatnot
 
-" Don't try to be vi compatible
 scriptencoding utf-8
 filetype off
-set nocompatible " Disable vi-compatibility
+set nocompatible
 set noshowmode
 set laststatus=0
 set winminheight=0
@@ -44,7 +73,6 @@ set lazyredraw
 set backspace=indent,eol,start
 set clipboard=unnamedplus
 set mouse=a
-" set cursorline
 set pastetoggle=<F2>
 set sidescroll=10
 set matchpairs+=<:>
@@ -56,184 +84,48 @@ set smartindent
 set noswapfile
 set nobackup
 set nowritebackup
-
 set undofile
 set undodir=~/.tmp//,/tmp//
-
 set hidden
-
 set shell=/bin/sh
-
-"//////////////////////////
-"//                      //
-"//        PLUGINS       //
-"//                      //
-"//////////////////////////
-
-call plug#begin('~/.vim/plugged')
-
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'bfrg/vim-cpp-modern'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'scrooloose/nerdtree'
-Plug 'rhysd/vim-clang-format'
-Plug 'lluchs/vim-wren'
-Plug 'dracula/vim', { 'as': 'dracula' }
-
-Plug 'dag/vim-fish'
-Plug 'wsdjeg/FlyGrep.vim'
-Plug 'rust-lang/rust.vim'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-Plug 'stsewd/fzf-checkout.vim'
-Plug 'kdheepak/lazygit.nvim'
-Plug 'gruvbox-community/gruvbox'
-Plug 'preservim/tagbar'
-Plug 'cespare/vim-toml'
-Plug 'Shirk/vim-gas'
-Plug 'ayu-theme/ayu-vim'
-Plug 'tikhomirov/vim-glsl'
-Plug 'tomasiser/vim-code-dark'
-Plug 'flazz/vim-colorschemes'
-
-
-Plug 'connorholyday/vim-snazzy'
-
-
-" autocompletion and analysis
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
-
-if has('nvim')
-" Plug 'neovim/nvim-lspconfig'
-" Plug 'glepnir/lspsaga.nvim'
-" Plug 'hrsh7th/cmp-nvim-lsp'
-" Plug 'hrsh7th/cmp-buffer'
-" Plug 'hrsh7th/cmp-path'
-" Plug 'hrsh7th/cmp-cmdline'
-" Plug 'hrsh7th/nvim-cmp'
-" Plug 'ray-x/lsp_signature.nvim'
-" 
-" Plug 'nvim-treesitter/nvim-treesitter'
-endif
-
-call plug#end()
-
-
-" if using neovim, use lua
-if has('nvim')
-" lua require 'init'
-endif
-
-
-
-
-
-
+set encoding=utf-8 " Necessary to show Unicode glyphs
+set termguicolors     " enable true colors support
+filetype plugin indent on    " required
 
 
 " Most important thing first -- Colors
 syntax enable
 syntax reset
-
-set termguicolors     " enable true colors support
-
-
-let ayucolor="dark"   " for dark version of theme
 set background=dark
 
-
-
-" let g:darktheme="dracula-custom"
 let g:darktheme="snazzy"
 let g:lighttheme="github"
-
 
 
 function ToggleColors()
 		syntax reset
     if (g:colors_name == g:lighttheme)
 				execute "colorscheme " . g:darktheme
+				hi Comment cterm=italic gui=italic
 				hi Normal  ctermbg=NONE guibg=NONE
     else
 				execute "colorscheme " . g:lighttheme
     endif
+
+		hi clear SignColumn
 endfunction
 
-
-
-execute "colorscheme " . g:darktheme
-hi Normal  ctermbg=NONE guibg=NONE
+execute "colorscheme " . g:lighttheme
+call ToggleColors()
 
 nnoremap <F5> :call ToggleColors()<cr>
 
-nnoremap <C-p> :GFiles<CR>
-nnoremap <C-f> :Files<CR>
-
-
-" Symbol renaming.
-nmap <leader>rn <Plug>(coc-rename)
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
-
-inoremap <silent><expr> <c-space> coc#refresh()
-
-" gd - go to definition of word under cursor
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-
-" gi - go to implementation
-nmap <silent> gi <Plug>(coc-implementation)
-
-" gh - get hint on whatever's under the cursor
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-" rename the current word in the cursor
-nmap <leader>cr  <Plug>(coc-rename)
-nmap <leader>cf  <Plug>(coc-format-selected)
-vmap <leader>cf  <Plug>(coc-format-selected)
-" list commands available in tsserver (and others)
-nnoremap <silent> <leader>cc  :<C-u>CocList commands<cr>
-" restart when the language server gets wonky
-nnoremap <silent> <leader>cR  :<C-u>CocRestart<CR>
-" so i can hit tab and shift tab
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+hi Normal  ctermbg=NONE guibg=NONE
 
 
 
-let g:rustfmt_autosave = 1
-
-" Highlight the symbol and its references when holding the cursor.
-" autocmd CursorHold * silent call CocActionAsync('highlight')
-
-let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.9, 'highlight': 'Comment' } }
-" let g:fzf_preview_window = 'bottom:30%'
 let $FZF_DEFAULT_OPTS="--reverse"
-" hit \gc to open the git branch checkout
-nnoremap <leader>gc :GCheckout<CR>
-
-
-
-"////////////////////////////////////////////////////////
-" Make nasm the default assembly syntax
-"let g:asmsyntax = 'nasm'
 let g:asmsyntax = 'gas'
-
-
-filetype plugin indent on    " required
-
 
 
 
@@ -251,18 +143,15 @@ nnoremap <silent> <M-Left> :TmuxNavigateLeft<cr>
 nnoremap <silent> <M-Down> :TmuxNavigateDown<cr>
 nnoremap <silent> <M-Up> :TmuxNavigateUp<cr>
 nnoremap <silent> <M-Right> :TmuxNavigateRight<cr>
-
-
 nnoremap <silent> <M-h> :TmuxNavigateLeft<cr>
 nnoremap <silent> <M-j> :TmuxNavigateDown<cr>
 nnoremap <silent> <M-k> :TmuxNavigateUp<cr>
 nnoremap <silent> <M-l> :TmuxNavigateRight<cr>
-
-
 nnoremap <silent> <C-M--> :sp<cr>
 nnoremap <silent> <C-M-\> :vsp<cr>
+nnoremap <C-p> :GFiles<CR>
+nnoremap <C-f> :Files<CR>
 
-"////////////////////////////////////////////////////////
 
 
 
@@ -282,11 +171,6 @@ hi Pmenu ctermbg=238 guibg=238 ctermfg=15
 let g:gitgutter_max_signs = 500
 
 let g:gitgutter_override_sign_column_highlight = 0
-highlight clear SignColumn
-highlight GitGutterAdd ctermfg=2
-highlight GitGutterChange ctermfg=3
-highlight GitGutterDelete ctermfg=1
-highlight GitGutterChangeDelete ctermfg=4
 
 
 " highlight ExtraWhitespace ctermbg=red guibg=red
@@ -296,16 +180,8 @@ highlight GitGutterChangeDelete ctermfg=4
 " enable italics mode and other things
 let &t_ZH="\e[3m"
 let &t_ZR="\e[23m"
-highlight Comment cterm=italic gui=italic
 
 
-" highlight clear SignColumn
-
-" disable folding, hopefully. Its the worse
-set nofoldenable " folding sucks
-
-" show unicode glyphs
-set encoding=utf-8 " Necessary to show Unicode glyphs
 
 au BufRead,BufNewFile *.hbs set filetype=html
 
@@ -326,11 +202,12 @@ xnoremap <leader>p "_dP
 map <space> <ESC>viw
 nnoremap Q q
 nnoremap q <Nop>
+nnoremap <leader>m :make<CR>
+
+
+
 imap <C-Bslash> λ
 imap <C-w> <esc>dbi
-
-
-nnoremap <leader>m :make<CR>
 
 
 " This keeps the current visual block selection active
@@ -366,33 +243,26 @@ map <C-Q> :q!<CR>
 map <leader>/ :let @/=''<cr>"
 
 " nice control-s meme
-noremap <C-S> :update<CR>
+noremap <C-S> :w<CR>
 vnoremap <C-S> <C-C>:update<CR>
 inoremap <C-S> <C-O>:update<CR>
-
-
 inoremap <C-_> /*  */<Left><Left><Left>
 
-autocmd FileType c map <leader>f :ClangFormat<CR>
-autocmd FileType cpp map <leader>f :ClangFormat<CR>
 
 autocmd filetype crontab setlocal nobackup nowritebackup
 
 
 " setup some filetype mappings
-" au BufRead,BufNewFile *.g set filetype=geode
-" au BufRead,BufNewFile *.wl set filetype=clojure
-" au BufRead,BufNewFile *.cdr set filetype=clojure
-" au BufRead,BufNewFile *.rad set filetype=radon
-" au BufRead,BufNewFile *.x set filetype=alex
-" au BufRead,BufNewFile *.he set filetype=helion
-" au BufRead,BufNewFile *.cr set filetype=ruby
-" autocmd Filetype c setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
-" autocmd Filetype cpp setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
-autocmd Filetype haskell setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
-autocmd Filetype happy setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
-autocmd Filetype lisp setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
-autocmd Filetype clojure setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
+au BufRead,BufNewFile *.L1 set filetype=l1
+au BufRead,BufNewFile *.L2 set filetype=l1
+au BufRead,BufNewFile *.L2f set filetype=l1
+au BufRead,BufNewFile *.L3 set filetype=l1
+au BufRead,BufNewFile *.IR set filetype=l1
+au BufRead,BufNewFile *.tile set filetype=tile
+au Filetype haskell setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
+au Filetype happy setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
+au Filetype lisp setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
+au Filetype clojure setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
 
 
 " use ripgrep, as its better.
