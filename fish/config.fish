@@ -8,14 +8,20 @@ mkdir -p ~/.local/bin
 
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/lib"
 
-export C_INCLUDE_PATH="/opt/homebrew/include:$C_INCLUDE_PATH"
+set -e LD_INCLUDE_PATH
 
-export CFLAGS="-I/opt/homebrew/include"
-export LDFLAGS="-L/opt/homebrew/lib"
+switch (uname)
+# Specific things to my mac
+	case Darwin
+		export C_INCLUDE_PATH="/opt/homebrew/include:$C_INCLUDE_PATH"
+		export CFLAGS="-I/opt/homebrew/include"
+		export LDFLAGS="-L/opt/homebrew/lib"
+		export PATH="/opt/homebrew/bin:$PATH"
+end
+
 
 set -x GOPATH $HOME/dev/go
 
-export PATH="/opt/homebrew/bin:$PATH"
 export PATH="$GOPATH/bin:$PATH"
 export PATH="/opt/cuda/bin:$PATH"
 
