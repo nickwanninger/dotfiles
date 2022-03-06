@@ -1,23 +1,14 @@
 function fish_prompt -d Hydro
 
-	set_color brblack
-	echo -n '['
-
 	set_color blue
 	echo -n (hostname)
-
-	# set_color yellow
-	# echo -n (hostname)
-
-	set_color green
-	echo -n (prompt_pwd)
-
 	set_color brblack
-	echo -n '] '
+	echo -n ":"
+	set_color green
+	echo -n (basename prompt_pwd)
 
-	# set_color -o brred
-
-	# echo -n ' µ '
+	set_color red
+	echo -n ' | '
 
 	set_color reset
 

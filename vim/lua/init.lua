@@ -25,7 +25,7 @@ local on_attach = function(client, bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 end
 
-local servers = { 'clangd' }
+local servers = { 'clangd', 'pyright' }
 for _, lsp in pairs(servers) do
   require('lspconfig')[lsp].setup(coq.lsp_ensure_capabilities({
 		on_attach = on_attach,
