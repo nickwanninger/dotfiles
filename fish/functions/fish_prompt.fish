@@ -5,7 +5,7 @@ function fish_prompt -d Hydro
 	set_color brblack
 	echo -n ":"
 	set_color green
-	echo -n (basename prompt_pwd)
+	echo -n (basename (pwd))
 
 	set_color red
 	echo -n ' | '

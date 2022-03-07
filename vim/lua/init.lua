@@ -2,12 +2,14 @@ local coq = require "coq" -- add this
 
 require('lsp_signature').setup {
 	bind = true,
-	hint_enable = false,
+	hint_enable = true,
 }
 
 require('gitsigns').setup {
   sign_priority=100
 }
+
+require'nvim-tree'.setup {}
 
 local on_attach = function(client, bufnr)
 	local opts = { noremap=true, silent=true }
@@ -29,6 +31,10 @@ local servers = { 'clangd', 'pyright' }
 for _, lsp in pairs(servers) do
   require('lspconfig')[lsp].setup(coq.lsp_ensure_capabilities({
 		on_attach = on_attach,
+		keymap = {
+			recommended = true,
+			jump_to_mark = '<c-Tab>'
+		},
 		flags = {
 			-- This will be the default in neovim 0.7+
 			debounce_text_changes = 150,

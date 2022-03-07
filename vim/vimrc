@@ -19,7 +19,7 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
-Plug 'scrooloose/nerdtree'
+" Plug 'scrooloose/nerdtree'
 Plug 'rust-lang/rust.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
@@ -30,15 +30,27 @@ Plug 'lluchs/vim-wren'
 Plug 'Shirk/vim-gas'
 Plug 'dag/vim-fish'
 
+
+" ================= Color Schemes =================
+Plug 'safv12/andromeda.vim'
+Plug 'morhetz/gruvbox'
 Plug 'connorholyday/vim-snazzy'
+Plug 'EdenEast/nightfox.nvim'
 
 Plug 'nvim-lua/plenary.nvim'
 Plug 'lewis6991/gitsigns.nvim'
 
+
+" NvimTree
+Plug 'kyazdani42/nvim-web-devicons' " for file icons
+Plug 'kyazdani42/nvim-tree.lua'
+
 Plug 'neovim/nvim-lspconfig'
 Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
 Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
+
 Plug 'ray-x/lsp_signature.nvim'
+
 
 call plug#end()
 
@@ -95,33 +107,30 @@ filetype plugin indent on    " required
 
 " Most important thing first -- Colors
 syntax enable
-syntax reset
-set background=dark
 
-let g:darktheme="snazzy"
+let g:darktheme="nordfox"
 let g:lighttheme="github"
 
 
 function ToggleColors()
+		let s:is_dark=(&background == 'dark')
 		syntax reset
-    if (g:colors_name == g:lighttheme)
-				execute "colorscheme " . g:darktheme
-				hi Comment cterm=italic gui=italic
-				hi Normal  ctermbg=NONE guibg=NONE
-    else
+    if s:is_dark
+				set bg=light
 				execute "colorscheme " . g:lighttheme
+    else
+				set bg=dark
+				execute "colorscheme " . g:darktheme
     endif
 
 		hi clear SignColumn
 endfunction
 
-execute "colorscheme " . g:lighttheme
+" indirectly switch to dark colors
+set bg=light
 call ToggleColors()
 
 nnoremap <F5> :call ToggleColors()<cr>
-
-hi Normal  ctermbg=NONE guibg=NONE
-
 
 
 let $FZF_DEFAULT_OPTS="--reverse"
@@ -152,6 +161,10 @@ nnoremap <silent> <C-M-\> :vsp<cr>
 nnoremap <C-p> :GFiles<CR>
 nnoremap <C-f> :Files<CR>
 
+
+nnoremap <C-n> :NvimTreeToggle<CR>
+" nnoremap <leader>r :NvimTreeRefresh<CR>
+" nnoremap <leader>n :NvimTreeFindFile<CR>
 
 
 
@@ -237,7 +250,7 @@ set nu
 nmap <C-a> :TagbarToggle<CR>
 
 map <C-c> :set nu!<CR>
-map <C-n> :NERDTreeToggle<CR>
+" map <C-n> :NERDTreeToggle<CR>
 map <C-q> :q<CR>
 map <C-Q> :q!<CR>
 map <leader>/ :let @/=''<cr>"
