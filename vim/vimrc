@@ -108,6 +108,8 @@ filetype plugin indent on    " required
 " Most important thing first -- Colors
 syntax enable
 
+let g:airline_theme='deus'
+
 let g:darktheme="nordfox"
 let g:lighttheme="github"
 
