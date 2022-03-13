@@ -25,7 +25,7 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'preservim/tagbar'
 
-Plug 'bfrg/vim-cpp-modern'
+" Plug 'bfrg/vim-cpp-modern'
 Plug 'lluchs/vim-wren'
 Plug 'Shirk/vim-gas'
 Plug 'dag/vim-fish'
@@ -48,6 +48,7 @@ Plug 'kyazdani42/nvim-tree.lua'
 Plug 'neovim/nvim-lspconfig'
 Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
 Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 Plug 'ray-x/lsp_signature.nvim'
 
@@ -58,6 +59,7 @@ call plug#end()
 " if using neovim, use lua
 if has('nvim')
 	lua require 'init'
+	nmap \gt :tab split<cr>:LspDefinition<cr>
 endif
 
 
@@ -110,7 +112,8 @@ syntax enable
 
 let g:airline_theme='deus'
 
-let g:darktheme="nordfox"
+" let g:darktheme="nordfox"
+let g:darktheme="snazzy"
 let g:lighttheme="github"
 
 
@@ -274,6 +277,7 @@ au BufRead,BufNewFile *.L2f set filetype=l1
 au BufRead,BufNewFile *.L3 set filetype=l1
 au BufRead,BufNewFile *.IR set filetype=l1
 au BufRead,BufNewFile *.tile set filetype=tile
+au BufRead,BufNewFile *.b set filetype=l1
 au Filetype haskell setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
 au Filetype happy setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
 au Filetype lisp setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
