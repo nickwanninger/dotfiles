@@ -130,6 +130,7 @@ function ToggleColors()
     else
 				set bg=dark
 				execute "colorscheme " . g:darktheme
+				hi Normal  ctermbg=NONE guibg=NONE
     endif
 
 		hi clear SignColumn
