@@ -51,6 +51,7 @@ Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 Plug 'ray-x/lsp_signature.nvim'
+Plug 'weilbith/nvim-code-action-menu'
 
 
 call plug#end()
@@ -60,6 +61,7 @@ call plug#end()
 if has('nvim')
 	lua require 'init'
 	nmap \gt :tab split<cr>:LspDefinition<cr>
+	let g:rustfmt_autosave = 1
 endif
 
 
@@ -109,6 +111,8 @@ filetype plugin indent on    " required
 
 " Most important thing first -- Colors
 syntax enable
+
+
 
 let g:airline_theme='deus'
 
@@ -168,6 +172,7 @@ nnoremap <C-f> :Files<CR>
 
 
 nnoremap <C-n> :NvimTreeToggle<CR>
+nnoremap <leader>ca :CodeActionMenu<CR>
 " nnoremap <leader>r :NvimTreeRefresh<CR>
 " nnoremap <leader>n :NvimTreeFindFile<CR>
 
