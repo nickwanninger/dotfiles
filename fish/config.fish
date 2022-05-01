@@ -87,3 +87,10 @@ set -g fish_pager_color_completion normal
 set -g fish_pager_color_description B3A06D yellow
 set -g fish_pager_color_prefix white --bold --underline
 set -g fish_pager_color_progress brwhite --background=cyan
+
+set -gx PNPM_HOME "/Users/nick/Library/pnpm"
+set -gx PATH "$PNPM_HOME" $PATH
+
+# opam configuration
+source /Users/nick/.opam/opam-init/init.fish > /dev/null 2> /dev/null; or true
+source ~/dotfiles/fish/iterm.fish; or true
