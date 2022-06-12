@@ -277,18 +277,13 @@ autocmd filetype crontab setlocal nobackup nowritebackup
 
 
 " setup some filetype mappings
-au BufRead,BufNewFile *.L1 set filetype=l1
-au BufRead,BufNewFile *.L2 set filetype=l1
-au BufRead,BufNewFile *.L2f set filetype=l1
-au BufRead,BufNewFile *.L3 set filetype=l1
-au BufRead,BufNewFile *.IR set filetype=l1
-au BufRead,BufNewFile *.tile set filetype=tile
-au BufRead,BufNewFile *.b set filetype=l1
 au Filetype haskell setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
 au Filetype happy setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
 au Filetype lisp setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
 au Filetype clojure setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
 
+au BufRead,BufNewFile *.sig set filetype=sml
+au BufRead,BufNewFile *.fun set filetype=sml
 
 " use ripgrep, as its better.
 if executable('rg')
