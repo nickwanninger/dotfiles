@@ -53,15 +53,24 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'ray-x/lsp_signature.nvim'
 Plug 'weilbith/nvim-code-action-menu'
 
+" Allow configuring vim in fennel (a lisp)
+Plug 'Olical/conjure'
+Plug 'Olical/aniseed'
+" Parinfer
+" Plug 'bhurlow/vim-parinfer'
+Plug 'gpanders/nvim-parinfer'
+
+
 
 call plug#end()
 
 
 " if using neovim, use lua
 if has('nvim')
-	lua require 'init'
+	"  lua require 'init'
 	nmap \gt :tab split<cr>:LspDefinition<cr>
 	let g:rustfmt_autosave = 1
+	let g:aniseed#env = v:true
 endif
 
 
