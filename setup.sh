@@ -3,6 +3,9 @@ set -x
 set -e
 mkdir -p ~/.config
 
+# Make sure that ~/.local/ is a valid prefix
+mkdir -p ~/.local/{bin,local,lib}
+
 echo "setting up fish config"
 rm -rf ~/.config/fish
 ln -sF ~/dotfiles/fish/ ~/.config
@@ -27,12 +30,6 @@ mkdir -p ~/.config/nvim
 ln -sf ~/dotfiles/git/.gitignore ~/.gitignore
 
 ln -sf ~/dotfiles/tmux/tmux.conf ~/.tmux.conf
-
-# defaults write com.apple.dock orientation -string left
-# defaults write com.apple.dock autohide-time-modifier -float 0.12
-# defaults write com.apple.dock autohide-delay -float 0
-# killall Dock
-
 
 echo "Setting up vim-plug"
 

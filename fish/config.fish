@@ -1,9 +1,6 @@
 # Remove the greeting from the fish prompt on first open
-#
 set fish_greeting ""
 export TERM="xterm-256color"
-
-mkdir -p ~/.local/bin
 
 
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/lib"
@@ -29,8 +26,6 @@ set -g fish_user_paths $HOME/.bin $HOME/.local/bin $HOME/.cargo/bin $fish_user_p
 
 export EDITOR=(which nvim)
 export RVTC="~/chariot/toolchain/local/bin/riscv64-elf-"
-
-
 
 alias cft "vim ~/dotfiles/tmux/tmux.conf"
 alias cff "vim ~/dotfiles/fish/config.fish"
