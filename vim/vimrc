@@ -59,7 +59,11 @@ Plug 'Olical/aniseed'
 " Parinfer
 " Plug 'bhurlow/vim-parinfer'
 Plug 'gpanders/nvim-parinfer'
+Plug 'folke/which-key.nvim'
 
+" Plug 'kyazdani42/nvim-web-devicons' " Recommended (for coloured icons)
+" Plug 'ryanoasis/vim-devicons' Icons without colours
+" Plug 'akinsho/bufferline.nvim', { 'tag': 'v2.*' }
 
 
 call plug#end()
@@ -73,6 +77,10 @@ if has('nvim')
 	let g:aniseed#env = v:true
 endif
 
+
+" let mapleader = "\\"
+" let maplocalleader = ","
+" let g:conjure#mapping#prefix = "<leader>"
 
 scriptencoding utf-8
 filetype off
@@ -274,6 +282,7 @@ map <C-c> :set nu!<CR>
 map <C-q> :q<CR>
 map <C-Q> :q!<CR>
 map <leader>/ :let @/=''<cr>"
+
 
 " nice control-s meme
 noremap <C-S> :w<CR>
