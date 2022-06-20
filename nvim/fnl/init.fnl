@@ -41,11 +41,14 @@
 (vim.cmd "syntax enable")
 (vim.cmd "colorscheme snazzy")
 
+(vim.cmd "set shell=fish")
+
 ;; (vim.cmd "let g:airline_theme='xcode'")
 (vim.cmd "hi Normal ctermbg=NONE guibg=NONE")
 (vim.cmd "hi NvimTreeNormal guibg=#090909")
 (vim.cmd "highlight VertSplit guibg=NONE guifg=#111111")
 
+(vim.cmd "autocmd TermOpen * setlocal nonumber norelativenumber")
 
 ;; Hide the lines in the splits
 ;; (vim.cmd "set fillchars+=vert:\\ ")

@@ -11,8 +11,6 @@ echo "Installing fish configuratin..."
 rm -rf ~/.config/fish
 ln -sF ${DOTFILES}/fish/ ~/.config
 
-
-
 echo "Installing tmux config"
 ln -sf ${DOTFILES}/tmux/tmux.conf ~/.tmux.conf
 
