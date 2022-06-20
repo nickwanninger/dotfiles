@@ -1,6 +1,5 @@
 (require :plugins)
 (require :core)
-(require :statusline)
 
 ;; setup neovimtree as a replacement for nerd tree
 (let [{: setup} (require :nvim-tree)]
