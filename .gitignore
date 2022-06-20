@@ -30,9 +30,10 @@ Temporary Items
 .fish_history
 # End of https://www.gitignore.io/api/macos
 
-vim/plugged
-vim/bundle
-vim/autoload/plug.vim
+nvim/plugged
+nvim/bundle
+nvim/autoload/plug.vim
+nvim/plugin/packer_compiled.lua
 
 fish/fish_variables
 vim/lua
