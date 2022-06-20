@@ -27,7 +27,7 @@
 
 (let [{: setup} (require :nvim-treesitter.configs)]
   ;; Usual setup for treesitter
-  (setup {;; :ensure_installed [ "c" "cpp" "fennel" "rust"]
+  (setup {:ensure_installed [ "c" "cpp" "fennel" "rust"]
           :ensure_maintained "maintained"
           :sync_install false
           :indent {:enable true}
@@ -36,11 +36,14 @@
                        :additional_vim_regex_highlighting false
                        :indent {:enable true}}}))
 
+
+;; TODO: stop using vim.cmd
+(vim.cmd "syntax enable")
 (vim.cmd "colorscheme snazzy")
 
 ;; (vim.cmd "let g:airline_theme='xcode'")
 (vim.cmd "hi Normal ctermbg=NONE guibg=NONE")
-(vim.cmd "hi NvimTreeNormal guibg=#101010")
+(vim.cmd "hi NvimTreeNormal guibg=#090909")
 (vim.cmd "highlight VertSplit guibg=NONE guifg=#111111")
 
 

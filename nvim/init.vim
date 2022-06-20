@@ -54,67 +54,6 @@ set termguicolors     " enable true colors support
 filetype plugin indent on    " required
 
 
-" Most important thing first -- Colors
-syntax enable
-
-
-
-" let g:airline_theme='deus'
-
-" let g:darktheme="nordfox"
-let g:darktheme="xcodedark"
-let g:lighttheme="xcodelight"
-
-
-function ToggleColors()
-		let s:is_dark=(&background == 'dark')
-		syntax reset
-    if s:is_dark
-				set bg=light
-				execute "colorscheme " . g:lighttheme
-    else
-				set bg=dark
-				execute "colorscheme " . g:darktheme
-				" hi Normal  ctermbg=NONE guibg=NONE
-    endif
-
-		hi clear SignColumn
-endfunction
-
-let $FZF_DEFAULT_OPTS="--reverse"
-let g:asmsyntax = 'gas'
-
-
-
-"////////////////////////////////////////////////////////
-let g:indent_guides_enable_on_vim_startup = 1
-let g:indent_guides_auto_colors = 0
-"////////////////////////////////////////////////////////
-
-
-noremap <C-l> :tabprevious<CR>
-noremap <C-h> :tabnext<CR>
-noremap <leader>t :tabnew<CR>
-
-
-"////////////////////////////////////////////////////////
-let g:tmux_navigator_no_mappings = 1 " disable builtin mappings, I think
-nnoremap <silent> <M-Left> :TmuxNavigateLeft<cr>
-nnoremap <silent> <M-Down> :TmuxNavigateDown<cr>
-nnoremap <silent> <M-Up> :TmuxNavigateUp<cr>
-nnoremap <silent> <M-Right> :TmuxNavigateRight<cr>
-nnoremap <silent> <M-h> :TmuxNavigateLeft<cr>
-nnoremap <silent> <M-j> :TmuxNavigateDown<cr>
-nnoremap <silent> <M-k> :TmuxNavigateUp<cr>
-nnoremap <silent> <M-l> :TmuxNavigateRight<cr>
-nnoremap <silent> <C-M--> :sp<cr>
-nnoremap <silent> <C-M-\> :vsp<cr>
-nnoremap <C-p> :GFiles<CR>
-nnoremap <C-f> :Files<CR>
-
-
-nnoremap <C-n> :NvimTreeToggle<CR>
-nnoremap <leader>ca :CodeActionMenu<CR>
 
 
 "////////////////////////////////////////////////////////
@@ -122,22 +61,9 @@ let g:indentLine_fileTypeExclude=['help']
 let g:indentLine_bufNameExclude=['NERD_tree.*']
 "////////////////////////////////////////////////////////
 
-
-"////////////////////////////////////////////////////////
-filetype plugin indent on
-
 hi CocFloat ctermbg=238 ctermfg=15
 hi CocFloating ctermbg=238 guibg=238 ctermfg=15
 hi Pmenu ctermbg=238 guibg=238 ctermfg=15
-
-let g:gitgutter_max_signs = 500
-
-let g:gitgutter_override_sign_column_highlight = 0
-
-
-" highlight ExtraWhitespace ctermbg=red guibg=red
-" match ExtraWhitespace /\s\+\%#\@<!$/
-"////////////////////////////////////////////////////////
 
 " enable italics mode and other things
 let &t_ZH="\e[3m"
@@ -156,15 +82,29 @@ command Q q
 nnoremap ; :
 
 
-nnoremap <leader>d "_d
-xnoremap <leader>d "_d
-xnoremap <leader>p "_dP
-
-
-map <space> <ESC>viw
+let g:tmux_navigator_no_mappings = 1 " disable builtin mappings, I think
+nnoremap <silent> <M-Left> :TmuxNavigateLeft<cr>
+nnoremap <silent> <M-Down> :TmuxNavigateDown<cr>
+nnoremap <silent> <M-Up> :TmuxNavigateUp<cr>
+nnoremap <silent> <M-Right> :TmuxNavigateRight<cr>
+nnoremap <silent> <M-h> :TmuxNavigateLeft<cr>
+nnoremap <silent> <M-j> :TmuxNavigateDown<cr>
+nnoremap <silent> <M-k> :TmuxNavigateUp<cr>
+nnoremap <silent> <M-l> :TmuxNavigateRight<cr>
+nnoremap <silent> <C-M--> :sp<cr>
+nnoremap <silent> <C-M-\> :vsp<cr>
+nnoremap <C-p> :GFiles<CR>
+nnoremap <C-f> :Files<CR>
+nnoremap <C-n> :NvimTreeFocus<CR>
+nnoremap <leader>ca :CodeActionMenu<CR>
 nnoremap Q q
 nnoremap q <Nop>
 nnoremap <leader>m :make<CR>
+nnoremap <leader>Q :qall<CR>
+
+noremap <C-l> :tabprevious<CR>
+noremap <C-h> :tabnext<CR>
+noremap <leader>t :tabnew<CR>
 
 
 
@@ -191,9 +131,9 @@ map <ScrollWheelUp> <Up>
 map <ScrollWheelDown> <Down>
 map <ScrollWheelRight> <Right>
 map <ScrollWheelLeft> <Left>
-
-
+map <space> <ESC>viw
 map <S-Up> <Up>
+
 set nu
 
 nmap <C-a> :TagbarToggle<CR>
@@ -214,18 +154,8 @@ inoremap <C-_> /*  */<Left><Left><Left>
 
 autocmd filetype crontab setlocal nobackup nowritebackup
 
-
-" setup some filetype mappings
-au Filetype haskell setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
-au Filetype happy setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
-au Filetype lisp setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
-au Filetype clojure setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
-
-au BufRead,BufNewFile *.sig set filetype=sml
-au BufRead,BufNewFile *.fun set filetype=sml
-
 " use ripgrep, as its better.
-if executable('rg')
-    set grepprg=rg\ --nogroup\ --nocolor\ --column
-    set grepformat=%f:%l:%c%m
-endif
+" if executable('rg')
+"     set grepprg=rg\ --nogroup\ --nocolor\ --column
+"     set grepformat=%f:%l:%c%m
+" endif
