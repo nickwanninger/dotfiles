@@ -19,7 +19,7 @@ ln -sf ${DOTFILES}/tmux/tmux.conf ~/.tmux.conf
 echo "Configuring NeoVIM and installing bundles..."
 
 rm -f ~/.config/nvim
-ln -sF ${DOTFILES}/vim ~/.config/nvim
+ln -sF ${DOTFILES}/nvim ~/.config/nvim
 nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
 
 echo "installing terminfos"
