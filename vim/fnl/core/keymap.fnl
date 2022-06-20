@@ -8,6 +8,7 @@
 (fn keybind [bufnr bindings]
   (which-key.register bindings {:buffer bufnr}))
 
+
 (fn set-lsp-keys! [bufnr]
   (keybind bufnr { "gd" (key vim.lsp.buf :definition)})
   (keybind bufnr { "gD" (key vim.lsp.buf :declaration)})

@@ -1,3 +1,0 @@
-# My dotfiles
-
-automatically updated

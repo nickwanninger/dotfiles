@@ -1,5 +1,6 @@
 (local lsp (require :lspconfig))
 (local {: set-lsp-keys!} (require :core.keymap))
+(local coq (require :coq))
 
 ;; 
 (fn on-attach [client bufnr]
@@ -20,6 +21,12 @@
   (each [_ lang (pairs servers)]
     (let [{: setup} (. lsp lang)]
       (setup { :on_attach on-attach 
-               :keymap { :recommended true
-                         :jump_to_mark "<c-Tab>"}
-               :flags { :debounce_text_changed 150}}))))
+               :keymap {:recommended true
+                        :jump_to_mark "<c-Tab>"}
+               :flags  {:debounce_text_changed 150}})
+      (setup (coq.lsp_ensure_capabilities {})))))
+
+
+
+;; Begin COQ
+(vim.cmd "COQnow -s")
