@@ -1,61 +1,16 @@
 
 "////////////////////////////////////////////////////////
-"                 ██
-"                ░░
-"        ██    ██ ██ ██████████  ██████  █████
-"       ░██   ░██░██░░██░░██░░██░░██░░█ ██░░░██
-"  neo- ░░██ ░██ ░██ ░██ ░██ ░██ ░██ ░ ░██  ░░
-"        ░░████  ░██ ░██ ░██ ░██ ░██   ░██   ██
-"         ░░██   ░██ ███ ░██ ░██░███   ░░█████
-"          ░░    ░░ ░░░  ░░  ░░ ░░░     ░░░░░
-"       
-"    author: nick wanninger
-"
+"//                                                    //
+"//           )         )          (       (           //
+"//        ( /(      ( /(          )\ )  (  `          //
+"//        )\()) (   )\()) (   (  (()/(  )\))(         //
+"//       ((_)\  )\ ((_)\  )\  )\  /(_))((_)()\        //
+"//        _((_)((_)  ((_)((_)((_)(_))  (_()((_)       //
+"//       | \| || __|/ _ \\ \ / / |_ _| |  \/  |       //
+"//       | .` || _|| (_) |\ V /   | |  | |\/| |       //
+"//       |_|\_||___|\___/  \_/   |___| |_|  |_|       //
+"//                                                    //
 "////////////////////////////////////////////////////////
-
-" call plug#begin('~/.vim/plugged')
-" 	Plug 'christoomey/vim-tmux-navigator'
-" 	Plug 'vim-airline/vim-airline'
-" 	Plug 'vim-airline/vim-airline-themes'
-" 	Plug 'rust-lang/rust.vim'
-" 	Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-" 	Plug 'junegunn/fzf.vim'
-" 	Plug 'preservim/tagbar'
-" 	Plug 'lluchs/vim-wren'
-" 	Plug 'Shirk/vim-gas'
-" 	Plug 'dag/vim-fish'
-" 	Plug 'safv12/andromeda.vim'
-" 	Plug 'morhetz/gruvbox'
-" 	Plug 'connorholyday/vim-snazzy'
-" 	Plug 'EdenEast/nightfox.nvim'
-" 	Plug 'nvim-lua/plenary.nvim'
-" 	Plug 'lewis6991/gitsigns.nvim'
-" 	Plug 'arzg/vim-colors-xcode'
-" 	Plug 'kyazdani42/nvim-web-devicons' " for file icons
-" 	Plug 'kyazdani42/nvim-tree.lua'
-" 	Plug 'neovim/nvim-lspconfig'
-" 	Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
-" 	Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
-" 	Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-" 	Plug 'ray-x/lsp_signature.nvim'
-" 	Plug 'weilbith/nvim-code-action-menu'
-" 	Plug 'gpanders/nvim-parinfer'
-" 	Plug 'folke/which-key.nvim'
-" call plug#end()
-
-
-" if using neovim, use lua
-if has('nvim')
-	" lua require('init')
-	" 	nmap \gt :tab split<cr>:LspDefinition<cr>
-	" let g:rustfmt_autosave = 1
-	" let g:aniseed#env = v:true
-endif
-
-
-" let mapleader = "\\"
-" let maplocalleader = ","
-" let g:conjure#mapping#prefix = "<leader>"
 
 scriptencoding utf-8
 filetype off
@@ -126,13 +81,6 @@ function ToggleColors()
 		hi clear SignColumn
 endfunction
 
-" indirectly switch to dark colors
-" set bg=light
-" call ToggleColors()
-
-" nnoremap <F5> :call ToggleColors()<cr>
-
-
 let $FZF_DEFAULT_OPTS="--reverse"
 let g:asmsyntax = 'gas'
 
@@ -167,9 +115,6 @@ nnoremap <C-f> :Files<CR>
 
 nnoremap <C-n> :NvimTreeToggle<CR>
 nnoremap <leader>ca :CodeActionMenu<CR>
-" nnoremap <leader>r :NvimTreeRefresh<CR>
-" nnoremap <leader>n :NvimTreeFindFile<CR>
-
 
 
 "////////////////////////////////////////////////////////
