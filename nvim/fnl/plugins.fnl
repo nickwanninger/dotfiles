@@ -28,6 +28,8 @@
 
   (use! :preservim/tagbar)
 
+  (use! :terrortylor/nvim-comment)
+
   ;; Some additional language support packages
   (use! :lluchs/vim-wren)
   (use! :Shirk/vim-gas)
@@ -41,11 +43,18 @@
   ;; Tree
   (use! :kyazdani42/nvim-tree.lua)
 
+  ;; Github Copilot
+  (comment use! :github/copilot.vim)
+
+  ;; Notify
+  (use! :rcarriga/nvim-notify)
+
   ;; language server support
   (use! :ms-jpq/coq_nvim)
   (use! :ms-jpq/coq.artifacts)
   (use! :neovim/nvim-lspconfig)
   (use! :ray-x/lsp_signature.nvim)
+  (use! :rhysd/vim-clang-format)
 
   ;; Treesitter packages
   (use! :nvim-treesitter/nvim-treesitter :run ":TSUpdate")

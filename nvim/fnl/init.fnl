@@ -1,6 +1,8 @@
 (require :plugins)
 (require :core)
 
+(local keys (require :core.keymap))
+
 ;; setup neovimtree as a replacement for nerd tree
 (let [{: setup} (require :nvim-tree)]
   (setup {:view {:side :left
@@ -36,6 +38,14 @@
                        :additional_vim_regex_highlighting false
                        :indent {:enable true}}}))
 
+
+(set vim.notify (require :notify))
+(vim.notify.setup {:background_colour "#000000"})
+                   
+
+;; Setup nvim-comment
+(let [{: setup} (require :nvim_comment)]
+  (setup {:line_mapping "<leader>cl"}))
 
 ;; TODO: stop using vim.cmd
 (vim.cmd "syntax enable")

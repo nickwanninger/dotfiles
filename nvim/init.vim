@@ -91,20 +91,15 @@ nnoremap <silent> <M-h> :TmuxNavigateLeft<cr>
 nnoremap <silent> <M-j> :TmuxNavigateDown<cr>
 nnoremap <silent> <M-k> :TmuxNavigateUp<cr>
 nnoremap <silent> <M-l> :TmuxNavigateRight<cr>
-nnoremap <silent> <C-M--> :sp<cr>
-nnoremap <silent> <C-M-\> :vsp<cr>
-nnoremap <C-p> :GFiles<CR>
-nnoremap <C-f> :Files<CR>
-nnoremap <C-n> :NvimTreeFocus<CR>
-nnoremap <leader>ca :CodeActionMenu<CR>
-nnoremap Q q
-nnoremap q <Nop>
 nnoremap <leader>m :make<CR>
 nnoremap <leader>Q :qall<CR>
 
 noremap <C-l> :tabprevious<CR>
 noremap <C-h> :tabnext<CR>
 noremap <leader>t :tabnew<CR>
+noremap <leader>f :ClangFormat<CR>
+
+nnoremap <leader>P :PackerSync<CR>
 
 
 
@@ -113,44 +108,19 @@ imap <C-w> <esc>dbi
 
 
 " This keeps the current visual block selection active
-" after changing indent with '<' or '>'. Usually the
-" visual block selection is lost after you shift it,
-" which is incredibly annoying.
-vmap > >gv
-vmap < <gv
-
 " disable writing different filename with :w<filename>
 :autocmd BufWritePre [:;]*
 \   try | echoerr 'Forbidden file name: ' . expand('<afile>') | endtry
 
-
-
-" Change the scroll wheel from an actual scroll
-" to just moving up and down with arrowkeys
-map <ScrollWheelUp> <Up>
-map <ScrollWheelDown> <Down>
-map <ScrollWheelRight> <Right>
-map <ScrollWheelLeft> <Left>
-map <space> <ESC>viw
-map <S-Up> <Up>
-
 set nu
 
 nmap <C-a> :TagbarToggle<CR>
-
 map <C-c> :set nu!<CR>
+
 " map <C-n> :NERDTreeToggle<CR>
 map <C-q> :q<CR>
 map <C-Q> :q!<CR>
 map <leader>/ :let @/=''<cr>"
-
-
-" nice control-s meme
-noremap <C-S> :w<CR>
-vnoremap <C-S> <C-C>:update<CR>
-inoremap <C-S> <C-O>:update<CR>
-inoremap <C-_> /*  */<Left><Left><Left>
-
 
 autocmd filetype crontab setlocal nobackup nowritebackup
 

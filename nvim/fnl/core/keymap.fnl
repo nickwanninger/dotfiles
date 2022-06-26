@@ -1,12 +1,15 @@
-(local which-key (require :which-key))
+(local wk (require :which-key))
 
+
+
+(wk.setup {})
 (fn key [tbl prop] [(. tbl prop) prop])
 
-(which-key.register {";" [":" "vim-ex"]})
+(wk.register {";" [":" "vim-ex"]})
 
 
 (fn keybind [bufnr bindings]
-  (which-key.register bindings {:buffer bufnr}))
+  (wk.register bindings {:buffer bufnr}))
 
 
 (fn set-lsp-keys! [bufnr]
@@ -20,7 +23,40 @@
                                "w" (key vim.diagnostic :open_float)}}))
                 
 
-;;(which-key.register {"<leader>d" {:name "lsp"
+
+(lambda map [binding name func ?opt]
+  (let [opt (or ?opt {})]
+    (wk.register { binding [func name]} opt)))
+
+
+
+(map "<C-n>" "Focus on the tree view" ":NvimTreeFocus<CR>" {:mode "n"})
+(map "<C-S-n>" "Focus on the tree view" ":NvimTreeFocus<CR>" {:mode "n"})
+(map "<M-n>" "Close the tree view" ":NvimTreeClose<CR>" {:mode "n"})
+
+(map "?" "Display keymaps" ":WhichKey<CR>" {:mode "n"})
+(map "<C-p>" "Display git files" ":Gfiles<CR>" {:mode "n"})
+(map "<C-f>" "Display all files" ":Files<CR>" {:mode "n"})
+(map "<leader>ca" "Open display code actions" ":CodeActionMenu" {:mode "n"})
+(map "<leader>f" "Clang Format" ":ClangFormat<CR>" {:silent true :mode "n"})
+
+
+(map "<" "Dedent" "<gv" {:mode "v"})
+(map ">" "Indent" ">gv" {:mode "v"})
+
+
+
+(map "<space>" "Select the word under the cursor" "<ESC>viw")
+
+(map "<leader>P>" "Run PackerSync" ":PackerSync"
+     {:silent true
+      :mode "n"})
+
+;; Unmap recording... It's annoying if you don't use it
+(vim.cmd "nnoremap <silent> Q q")
+(vim.cmd "nnoremap <silent> q <Nop>")
+
+;;(wk.register {"<leader>d" {:name "lsp"
 ;;                                  ; inspect
 ;;                                  "d" (key vim.lsp.buf :definition)
 ;;                                  "D" (key vim.lsp.buf :declaration)
@@ -51,4 +87,5 @@
 ;;              {:buffer bufnr}))
 
 
-{: set-lsp-keys!}
+{: set-lsp-keys!
+ : map}

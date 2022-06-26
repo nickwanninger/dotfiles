@@ -1,3 +1,3 @@
 function vimrc
-	vim ~/dotfiles/vim/vimrc
+	vim ~/.config/nvim/init.vim
 end
