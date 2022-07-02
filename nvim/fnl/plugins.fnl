@@ -17,6 +17,7 @@
   (use! :arzg/vim-colors-xcode)
   (use! :arcticicestudio/nord-vim)
   (use! :connorholyday/vim-snazzy)
+  (use! :RRethy/nvim-base16)
 
   ;; Statusline replacement
   ;; (use! :vim-airline/vim-airline)
@@ -27,6 +28,7 @@
   (use! :junegunn/fzf.vim)
 
   (use! :preservim/tagbar)
+  (use! :norcalli/nvim-colorizer.lua)
 
   (use! :terrortylor/nvim-comment)
 

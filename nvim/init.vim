@@ -66,8 +66,8 @@ hi CocFloating ctermbg=238 guibg=238 ctermfg=15
 hi Pmenu ctermbg=238 guibg=238 ctermfg=15
 
 " enable italics mode and other things
-let &t_ZH="\e[3m"
-let &t_ZR="\e[23m"
+" let &t_ZH="\e[3m"
+" let &t_ZR="\e[23m"
 
 
 
