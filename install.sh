@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -e
+set -ex
 
 DOTFILES="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
@@ -18,7 +18,7 @@ echo "Configuring NeoVIM and installing bundles..."
 
 rm -f ~/.config/nvim
 ln -sF ${DOTFILES}/nvim ~/.config/nvim
-nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+#  nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
 
 echo "installing terminfos"
 tic -x misc/xterm-256color-italic.terminfo
