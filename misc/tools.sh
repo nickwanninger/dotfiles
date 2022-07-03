@@ -33,26 +33,23 @@ pushd neovim
 	buildstep "neovim/install" make install
 popd
 
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+# fetch libevent https://github.com/libevent/libevent.git
+# pushd libevent
+# 	[ ! -f configure ] && buildstep "libevent/autoconf" sh autogen.sh
+# 	buildstep "libevent/configure" ./configure --prefix=$HOME/.local
+# 	buildstep "libevent/build" make -j $(nproc)
+# 	buildstep "libevent/install" make install
+# popd
 
-fetch libevent https://github.com/libevent/libevent.git
-pushd libevent
-	[ ! -f configure ] && buildstep "libevent/autoconf" sh autogen.sh
-	buildstep "libevent/configure" ./configure --prefix=$HOME/.local
-	buildstep "libevent/build" make -j $(nproc)
-	buildstep "libevent/install" make install
-popd
-
-
-
-fetch tmux https://github.com/tmux/tmux.git
-pushd tmux
-	buildstep "tmux/autoconf" sh autogen.sh
-	buildstep "tmux/configure" ./configure --prefix=$HOME/.local CFLAGS="-L$HOME/.local/lib"
-	buildstep "tmux/build" make -j $(nproc)
-	buildstep "tmux/install" make install
-
-popd
+# fetch tmux https://github.com/tmux/tmux.git
+# pushd tmux
+# 	buildstep "tmux/autoconf" sh autogen.sh
+# 	buildstep "tmux/configure" ./configure --prefix=$HOME/.local CFLAGS="-L$HOME/.local/lib"
+# 	buildstep "tmux/build" make -j $(nproc)
+# 	buildstep "tmux/install" make install
+# popd
 
 popd >/dev/null
 
