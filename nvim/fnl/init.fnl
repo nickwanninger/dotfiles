@@ -30,7 +30,7 @@
   (setup {:ensure_installed [ "c" "cpp" "fennel" "rust"]
           :ensure_maintained "maintained"
           :sync_install false
-          :indent {:enable true}
+          ;; :indent {:enable true}
           :incremental_selection {:enable true}
           :highlight { :enable true
                        :additional_vim_regex_highlighting false
