@@ -56,3 +56,4 @@
 
 (local colors (require :core.colors))
 (colors.select-colorscheme colors.snazzy-black)
+;(colors.select-colorscheme colors.material-darker)

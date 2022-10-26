@@ -47,6 +47,9 @@ alias gc "git commit"
 alias gs "git status"
 alias gsw "git switch"
 
+
+alias src "bass source"
+
 # disable homebrew auto update. Not sure if this works
 set -x HOMEBREW_NO_AUTO_UPDATE 1
 set HOMEBREW_NO_AUTO_UPDATE 1

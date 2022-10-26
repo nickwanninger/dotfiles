@@ -127,9 +127,19 @@
       :base04 "#000000" :base05 "#000000" :base06 "#000000" :base07 "#000000"
       :base08 "#000000" :base09 "#000000" :base0A "#000000" :base0B "#000000"
       :base0C "#000000" :base0D "#000000" :base0E "#000000" :base0F "#000000"})
+
+
+
+(local material-darker
+     {:base00 "#212121" :base01 "#303030" :base02 "#353535" :base03 "#4A4A4A"
+      :base04 "#B2CCD6" :base05 "#EEFFFF" :base06 "#EEFFFF" :base07 "#FFFFFF"
+      :base08 "#F07178" :base09 "#F78C6C" :base0A "#FFCB6B" :base0B "#C3E88D"
+      :base0C "#89DDFF" :base0D "#82AAFF" :base0E "#C792EA" :base0F "#FF5370"})
+
 {: select-colorscheme
  : snazzy
  : snazzy-black
  : carbon-dark
  : carbon-light
+ : material-darker
  : contrast-light}
