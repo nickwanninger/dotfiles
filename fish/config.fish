@@ -48,6 +48,9 @@ alias gs "git status"
 alias gsw "git switch"
 
 
+alias ea "bass source ~/dev/alaska/enable"
+
+
 alias src "bass source"
 
 # disable homebrew auto update. Not sure if this works
