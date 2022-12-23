@@ -30,7 +30,7 @@
   (use! :preservim/tagbar)
   (use! :norcalli/nvim-colorizer.lua)
 
-  (use! :terrortylor/nvim-comment)
+  (use! :numToStr/Comment.nvim)
 
   ;; Some additional language support packages
   (use! :lluchs/vim-wren)

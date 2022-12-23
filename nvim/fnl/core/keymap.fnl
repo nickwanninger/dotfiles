@@ -8,6 +8,7 @@
 (wk.register {";" [":" "vim-ex"]})
 
 
+
 (fn keybind [bufnr bindings]
   (wk.register bindings {:buffer bufnr}))
 
@@ -35,8 +36,8 @@
 (map "<M-n>" "Close the tree view" ":NvimTreeClose<CR>" {:mode "n"})
 
 (map "?" "Display keymaps" ":WhichKey<CR>" {:mode "n"})
-(map "<C-p>" "Display git files" ":GFiles<CR>" {:mode "n"})
-(map "<C-f>" "Display all files" ":Files<CR>" {:mode "n"})
+(map "<C-f>" "Display git files" ":GFiles<CR>" {:mode "n"})
+(map "<C-p>" "Display all files" ":Files<CR>" {:mode "n"})
 (map "<C-_>" "Fuzzy search" ":BLines<CR>" {:mode "n"})
 (map "<leader>ca" "Open display code actions" ":CodeActionMenu" {:mode "n"})
 (map "<leader>f" "Clang Format" ":ClangFormat<CR>" {:silent true :mode "n"})

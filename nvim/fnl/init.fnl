@@ -41,8 +41,8 @@
 (vim.notify.setup {})
 
 ;; Setup nvim-comment
-(let [{: setup} (require :nvim_comment)]
-  (setup {:line_mapping "<leader>cl"}))
+(let [{: setup} (require :Comment)]
+  (setup))
 
 ;; TODO: stop using vim.cmd
 (vim.cmd "syntax enable")
@@ -53,7 +53,16 @@
 (vim.cmd "let $FZF_DEFAULT_OPTS = '--reverse'")
 (vim.cmd "autocmd TermOpen * setlocal nonumber norelativenumber")
 
-
 (local colors (require :core.colors))
-(colors.select-colorscheme colors.snazzy-black)
-;(colors.select-colorscheme colors.material-darker)
+
+
+(local darktheme colors.snazzy-black)
+(local lighttheme colors.tomorrow-light)
+
+(keys.map "<leader>1" "Select Dark Theme"
+	(fn [] (colors.select-colorscheme darktheme)) {})
+
+(keys.map "<leader>2" "Select Light Theme"
+	(fn [] (colors.select-colorscheme lighttheme)) {})
+
+(colors.select-colorscheme darktheme)

@@ -18,6 +18,10 @@ function buildstep {
 function fetch {
 	if [ ! -d $1 ]; then
 		git clone --depth 1 $2 $1
+	else
+		pushd $1
+			git pull
+		popd
 	fi
 }
 

@@ -58,6 +58,10 @@
   (highlight! DiagnosticUnderlineInfo [:undercurl] {:fg theme.base04 :bg :NONE})
   (highlight! DiagnosticUnderlineHint [:undercurl] {:fg theme.base04 :bg :NONE})
 
+  (highlight! TSComment [] {:fg theme.base03 :bg :NONE })
+  ; hi.TSComment            = { guifg = M.colors.base03, guibg = nil, gui = 'italic', guisp = nil}
+
+
   ;; A nicer NvimTree theme
   (highlight! NvimTreeImageFile [] {:fg theme.base0C})
   (highlight! NvimTreeFolderIcon [] {:fg theme.base0C})
@@ -136,10 +140,18 @@
       :base08 "#F07178" :base09 "#F78C6C" :base0A "#FFCB6B" :base0B "#C3E88D"
       :base0C "#89DDFF" :base0D "#82AAFF" :base0E "#C792EA" :base0F "#FF5370"})
 
+
+
+(local tomorrow-light
+     {:base00 "#ffffff" :base01 "#e0e0e0" :base02 "#d6d6d6" :base03 "#8e908c"
+      :base04 "#969896" :base05 "#4d4d4c" :base06 "#282a2e" :base07 "#1d1f21"
+      :base08 "#c82829" :base09 "#f5871f" :base0A "#eab700" :base0B "#718c00"
+      :base0C "#3e999f" :base0D "#4271ae" :base0E "#8959a8" :base0F "#a3685a"})
 {: select-colorscheme
  : snazzy
  : snazzy-black
  : carbon-dark
  : carbon-light
  : material-darker
- : contrast-light}
+ : contrast-light
+ : tomorrow-light}
