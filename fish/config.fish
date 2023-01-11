@@ -94,3 +94,12 @@ set -gx PATH "$PNPM_HOME" $PATH
 # opam configuration
 source /Users/nick/.opam/opam-init/init.fish > /dev/null 2> /dev/null; or true
 source ~/dotfiles/fish/iterm.fish; or true
+
+
+alias enable_conda 'eval $HOME/anaconda3/bin/conda "shell.fish" "hook" $argv | source'
+#>>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+if [ -d $HOME/anaconda3 ]
+	# eval $HOME/anaconda3/bin/conda "shell.fish" "hook" $argv | source
+end
+# <<< conda initialize <<<
