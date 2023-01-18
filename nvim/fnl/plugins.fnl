@@ -4,6 +4,9 @@
 
 ;; Setup Packer
 (packer
+  ;; Goyo writing mode
+  (use! :junegunn/goyo.vim)
+
   ;; Merge tmux and vim navigation
   (use! :christoomey/vim-tmux-navigator)
 

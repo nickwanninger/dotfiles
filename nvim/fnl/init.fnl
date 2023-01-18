@@ -59,10 +59,21 @@
 (local darktheme colors.snazzy-black)
 (local lighttheme colors.tomorrow-light)
 
+
 (keys.map "<leader>1" "Select Dark Theme"
-	(fn [] (colors.select-colorscheme darktheme)) {})
+  (fn [] (vim.cmd ":Goyo!")
+         (colors.select-colorscheme darktheme))
+  {})
 
 (keys.map "<leader>2" "Select Light Theme"
-	(fn [] (colors.select-colorscheme lighttheme)) {})
+  (fn [] (vim.cmd ":Goyo!")
+         (colors.select-colorscheme lighttheme))
+  {})
+
+
+(keys.map "<leader>3" "Select Focus Theme"
+  (fn [] (colors.select-colorscheme lighttheme)
+         (vim.cmd ":Goyo 80"))
+  {})
 
 (colors.select-colorscheme darktheme)
