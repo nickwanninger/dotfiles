@@ -7,6 +7,11 @@
   ;; Goyo writing mode
   (use! :junegunn/goyo.vim)
 
+  ;; (use! :nvim-tree/nvim-web-devicons)
+  ;; (use! :romgrk/barbar.nvim)
+
+  (use! :junegunn/limelight.vim)
+
   ;; Merge tmux and vim navigation
   (use! :christoomey/vim-tmux-navigator)
 

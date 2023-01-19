@@ -76,4 +76,8 @@
          (vim.cmd ":Goyo 80"))
   {})
 
+
+(vim.cmd "autocmd! User GoyoEnter Limelight")
+(vim.cmd "autocmd! User GoyoLeave Limelight!")
+
 (colors.select-colorscheme darktheme)

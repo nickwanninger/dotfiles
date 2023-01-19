@@ -21,9 +21,8 @@
   (each [_ lang (pairs servers)]
     (let [{: setup} (. lsp lang)]
       (setup (coq.lsp_ensure_capabilities { :on_attach on-attach} 
-                  :keymap {:recommended true :jump_to_mark "<c-Tab>"}
-                  :flags  {:debounce_text_changed 150})))))
+                  :keymap  {:recommended true :jump_to_mark "<c-Tab>"}
+                  :flags   {:debounce_text_changed 150})))))
 
-
-;; Begin COQ
-(vim.cmd "COQnow -s")
+;; Start the lsp
+(coq.Now "-s")

@@ -34,7 +34,6 @@
 (vim.cmd "set background=dark")
 
 
-
 (lambda select-colorscheme [theme]
   (let [{: setup} (require :base16-colorscheme)] (setup theme))
 
@@ -58,7 +57,7 @@
   (highlight! DiagnosticUnderlineInfo [:undercurl] {:fg theme.base04 :bg :NONE})
   (highlight! DiagnosticUnderlineHint [:undercurl] {:fg theme.base04 :bg :NONE})
 
-  (highlight! TSComment [] {:fg theme.base03 :bg :NONE })
+  (highlight! TSComment [] {:fg theme.base03 :bg :NONE})
   ; hi.TSComment            = { guifg = M.colors.base03, guibg = nil, gui = 'italic', guisp = nil}
 
 
@@ -70,6 +69,16 @@
   (highlight! NvimTreeIndentMarker [] {:fg theme.base02})
   (highlight! NvimTreeEmptyFolderName [] {:fg theme.base0F})
   (highlight! NvimTreeOpenedFolderName [] {:fg theme.base0F})
+
+
+  ;; (highlight! BufferVisible [] {:bg theme.base00})
+  ;; (highlight! BufferTabpages [] {:bg theme.base00})
+  ;; (highlight! BufferTabpageFill [] {:bg theme.base00})
+  ;; (highlight! BufferInactive [] {:bg theme.base00})
+  ;; (highlight! BufferInactiveIndex [] {:bg theme.base00})
+  ;; (highlight! BufferInactiveMod [] {:bg theme.base00})
+  ;; (highlight! BufferInactiveTarget [] {:bg theme.base00})
+
   ;; (highlight! NvimTreeNormal [] {:fg theme.base04 :bg :NONE})
 
   ;; (highlight! Normal [] {:fg :NONE :bg :NONE})
