@@ -14,6 +14,7 @@ function fish_prompt -d Hydro
 	# set_color green
 	# printf '┌ '
 
+	# set -g __fish_git_prompt_show_informative_status 1
 
 	set_color reset
 	if [ $SSH_TTY ];
@@ -25,12 +26,14 @@ function fish_prompt -d Hydro
 
 	echo -n (prompt_pwd)
 
+	set_color brblack
+	echo -n (fish_git_prompt)
+
 
 	echo -en '\\n'
 
 	# set_color green
 	# printf '└ '
-	set_color reset
 	set_color brblack
 	echo -n '$ '
 	set_color reset

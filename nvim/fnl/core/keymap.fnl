@@ -31,7 +31,7 @@
 
 
 
-(map "<C-n>" "Focus on the tree view" ":NvimTreeFocus<CR>" {:mode "n"})
+(map "<C-n>" "Focus on the tree view" ":NvimTreeToggle<CR>" {:mode "n"})
 (map "<C-S-n>" "Focus on the tree view" ":NvimTreeFocus<CR>" {:mode "n"})
 (map "<M-n>" "Close the tree view" ":NvimTreeClose<CR>" {:mode "n"})
 
@@ -47,6 +47,9 @@
 (map ">" "Indent" ">gv" {:mode "v"})
 
 
+
+
+(map "qq" "exit" ":q<CR>")
 
 (map "<space>" "Select the word under the cursor" "<ESC>viw")
 

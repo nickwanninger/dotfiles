@@ -6,16 +6,29 @@
 ;; setup neovimtree as a replacement for nerd tree
 (let [{: setup} (require :nvim-tree)]
   (setup {:view {:side :left
-                 :width 30
-                 :hide_root_folder true}
+                 :width 30}
+          :filters {:dotfiles true}
           :disable_netrw true
           :hijack_netrw true
           :hijack_cursor true
           :open_on_tab true
           :update_cwd true
-          :git {:enable false :ignore true}
+          :git {:enable true :ignore true}
           :hijack_directories {:enable true :auto_open true}
           :renderer {:indent_markers {:enable false}}}))
+
+
+(let [{: setup} (require :gitsigns)]
+  (setup
+    {:current_line_blame true
+     :numhl false
+     :word_diff false}))
+     
+
+
+; (let [{: setup} (require :indent_blankline)]
+;   (setup {:show_current_context true
+;           :show_current_context_start true}))
 
 
 (let [{: setup} (require :colorizer)] (setup))
@@ -57,7 +70,8 @@
 
 
 (local darktheme colors.snazzy-black)
-(local lighttheme colors.tomorrow-light)
+; (local darktheme colors.carbon-black)
+(local lighttheme colors.one-light)
 
 
 (keys.map "<leader>1" "Select Dark Theme"
@@ -71,13 +85,8 @@
   {})
 
 
-(keys.map "<leader>3" "Select Focus Theme"
-  (fn [] (colors.select-colorscheme lighttheme)
-         (vim.cmd ":Goyo 80"))
+(keys.map "<leader>3" "Zen mode"
+  (fn [] (vim.cmd ":ZenMode"))
   {})
-
-
-(vim.cmd "autocmd! User GoyoEnter Limelight")
-(vim.cmd "autocmd! User GoyoLeave Limelight!")
 
 (colors.select-colorscheme darktheme)

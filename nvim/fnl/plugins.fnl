@@ -65,11 +65,15 @@
   (use! :neovim/nvim-lspconfig)
   (use! :ray-x/lsp_signature.nvim)
   (use! :rhysd/vim-clang-format)
+  (use! :ErichDonGubler/lsp_lines.nvim)
 
   ;; Treesitter packages
   (use! :nvim-treesitter/nvim-treesitter :run ":TSUpdate")
   (use! :nvim-treesitter/playground)
   (use! :weilbith/nvim-code-action-menu)
   (use! :gpanders/nvim-parinfer)
-  (use! :folke/which-key.nvim))
+  (use! :folke/which-key.nvim)
+
+  (use! :folke/zen-mode.nvim)
+  (comment use! :lukas-reineke/indent-blankline.nvim))
 

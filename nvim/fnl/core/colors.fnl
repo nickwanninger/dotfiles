@@ -49,10 +49,10 @@
 
   ;; diagnostic
   (highlight! DiagnosticWarn [] {:fg theme.base08 :bg :NONE})
-  (highlight! DiagnosticError [] {:fg theme.base0A :bg :NONE})
+  (highlight! DiagnosticError [] {:fg theme.base09 :bg :NONE})
   (highlight! DiagnosticInfo [] {:fg theme.base04 :bg :NONE})
   (highlight! DiagnosticHint [] {:fg theme.base04 :bg :NONE})
-  (highlight! DiagnosticUnderlineWarn [:undercurl] {:fg theme.base08 :bg :NONE})
+  (highlight! DiagnosticUnderlineWarn [:undercurl] {:fg theme.base09 :bg :NONE})
   (highlight! DiagnosticUnderlineError [:undercurl] {:fg theme.base0A :bg :NONE})
   (highlight! DiagnosticUnderlineInfo [:undercurl] {:fg theme.base04 :bg :NONE})
   (highlight! DiagnosticUnderlineHint [:undercurl] {:fg theme.base04 :bg :NONE})
@@ -110,9 +110,16 @@
   (vim.cmd "hi StatusLineDiagnosticWarn gui=bold guifg=#be95ff guibg=#161616")
   (vim.cmd "hi StatusLineDiagnosticError gui=bold guifg=#ff7eb6 guibg=#161616"))
 
-;; Definitions for the IBM carbon colorscheme are stolen from Nyoom.vim
+;
+; Definitions for the IBM carbon colorscheme are stolen from Nyoom.vim
 (local carbon-dark
      {:base00 "#161616" :base01 "#262626" :base02 "#393939" :base03 "#525252"
+      :base04 "#dde1e6" :base05 "#f2f4f8" :base06 "#ffffff" :base07 "#08bdba"
+      :base08 "#3ddbd9" :base09 "#ff7eb6" :base0A "#ee5396" :base0B "#33b1ff"
+      :base0C "#78a9ff" :base0D "#42be65" :base0E "#be95ff" :base0F "#82cfff"})
+
+(local carbon-black
+     {:base00 "#000000" :base01 "#262626" :base02 "#393939" :base03 "#525252"
       :base04 "#dde1e6" :base05 "#f2f4f8" :base06 "#ffffff" :base07 "#08bdba"
       :base08 "#3ddbd9" :base09 "#ff7eb6" :base0A "#ee5396" :base0B "#33b1ff"
       :base0C "#78a9ff" :base0D "#42be65" :base0E "#be95ff" :base0F "#82cfff"})
@@ -156,11 +163,73 @@
       :base04 "#969896" :base05 "#4d4d4c" :base06 "#282a2e" :base07 "#1d1f21"
       :base08 "#c82829" :base09 "#f5871f" :base0A "#eab700" :base0B "#718c00"
       :base0C "#3e999f" :base0D "#4271ae" :base0E "#8959a8" :base0F "#a3685a"})
+
+
+(local helios-dark
+  {:base00 "#1d2021"
+   :base01 "#383c3e"
+   :base02 "#53585b"
+   :base03 "#6f7579"
+   :base04 "#cdcdcd"
+   :base05 "#d5d5d5"
+   :base06 "#dddddd"
+   :base07 "#e5e5e5"
+   :base08 "#d72638"
+   :base09 "#eb8413"
+   :base0A "#f19d1a"
+   :base0B "#88b92d"
+   :base0C "#1ba595"
+   :base0D "#1e8bac"
+   :base0E "#be4264"
+   :base0F "#c85e0d"})
+   
+(local bro-dark
+  {:base00 "#1f1f1f"
+   :base01 "#f81118"
+   :base02 "#2dc55e"
+   :base03 "#ecba0f"
+   :base04 "#2a84d2"
+   :base05 "#4e5ab7"
+   :base06 "#1081d6"
+   :base07 "#d6dbe5"
+   :base08 "#d6dbe5"
+   :base09 "#de352e"
+   :base0A "#1dd361"
+   :base0B "#f3bd09"
+   :base0C "#1081d6"
+   :base0D "#5350b9"
+   :base0E "#0f7ddb"
+   :base0F "#ffffff"})
+(local one-light
+  {
+    :base00 "#fafafa"
+    :base01 "#f0f0f1"
+    :base02 "#e5e5e6"
+    :base03 "#a0a1a7"
+    :base04 "#696c77"
+    :base05 "#383a42"
+    :base06 "#202227"
+    :base07 "#090a0b"
+    :base08 "#ca1243"
+    :base09 "#d75f00"
+    :base0A "#c18401"
+    :base0B "#50a14f"
+    :base0C "#0184bc"
+    :base0D "#4078f2"
+    :base0E "#a626a4"
+    :base0F "#986801"})
+   
+
 {: select-colorscheme
  : snazzy
  : snazzy-black
  : carbon-dark
+ : carbon-black
  : carbon-light
  : material-darker
  : contrast-light
- : tomorrow-light}
+ : tomorrow-light
+ : helios-dark
+ : one-light
+ : bro-dark}
+

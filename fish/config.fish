@@ -44,8 +44,10 @@ alias lx "exa -lgaFBS"
 alias gp "git push"
 alias gP "git pull"
 alias gc "git commit"
+alias gcm "git commit -m"
 alias gs "git status"
 alias gsw "git switch"
+
 # cd to the git root
 alias gd "cd (git rev-parse --show-toplevel)"
 alias ea "bass source ~/dev/alaska/enable"
