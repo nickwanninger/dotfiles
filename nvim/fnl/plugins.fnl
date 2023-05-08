@@ -71,7 +71,7 @@
   (use! :nvim-treesitter/nvim-treesitter :run ":TSUpdate")
   (use! :nvim-treesitter/playground)
   (use! :weilbith/nvim-code-action-menu)
-  (use! :gpanders/nvim-parinfer)
+  (comment use! :gpanders/nvim-parinfer)
   (use! :folke/which-key.nvim)
 
   (use! :folke/zen-mode.nvim)

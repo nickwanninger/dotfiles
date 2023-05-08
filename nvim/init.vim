@@ -129,4 +129,6 @@ autocmd filetype crontab setlocal nobackup nowritebackup
 "     set grepprg=rg\ --nogroup\ --nocolor\ --column
 "     set grepformat=%f:%l:%c%m
 " endif
-" au BufRead,BufNewFile *.nesl set filetype=nesl
+au BufRead,BufNewFile *.nesl set filetype=nesl
+au BufRead,BufNewFile *.fun set filetype=sml
+
