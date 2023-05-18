@@ -39,7 +39,7 @@ alias :q "exit"
 alias glog "git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 
 alias lg "lazygit"
-alias lx "exa -lgaFBS"
+alias lx "exa -lgFBS"
 
 alias gp "git push"
 alias gP "git pull"

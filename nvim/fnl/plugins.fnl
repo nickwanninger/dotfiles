@@ -4,14 +4,6 @@
 
 ;; Setup Packer
 (packer
-  ;; Goyo writing mode
-  (use! :junegunn/goyo.vim)
-
-  ;; (use! :nvim-tree/nvim-web-devicons)
-  ;; (use! :romgrk/barbar.nvim)
-
-  (use! :junegunn/limelight.vim)
-
   ;; Merge tmux and vim navigation
   (use! :christoomey/vim-tmux-navigator)
 
@@ -27,16 +19,14 @@
   (use! :connorholyday/vim-snazzy)
   (use! :RRethy/nvim-base16)
 
-  ;; Statusline replacement
-  ;; (use! :vim-airline/vim-airline)
-  ;; (use! :vim-airline/vim-airline-themes)
-  
   ;; Fuzzy finder
   (use! :junegunn/fzf :run (fn [] (comment vim.cmd "fzf#install()")))
   (use! :junegunn/fzf.vim)
 
+  ;; The tag bar on the right
   (use! :preservim/tagbar)
-  (use! :norcalli/nvim-colorizer.lua)
+
+  (comment use! :norcalli/nvim-colorizer.lua)
 
   (use! :numToStr/Comment.nvim)
 
@@ -53,9 +43,6 @@
   ;; Tree
   (use! :kyazdani42/nvim-tree.lua)
 
-  ;; Github Copilot
-  (comment use! :github/copilot.vim)
-
   ;; Notify
   (use! :rcarriga/nvim-notify)
 
@@ -69,11 +56,12 @@
 
   ;; Treesitter packages
   (use! :nvim-treesitter/nvim-treesitter :run ":TSUpdate")
+  ;; Treesitter playground (view the S-Expression for the current code)
   (use! :nvim-treesitter/playground)
+  ;; Code actions
   (use! :weilbith/nvim-code-action-menu)
-  (comment use! :gpanders/nvim-parinfer)
+  ;; Keybinds
   (use! :folke/which-key.nvim)
-
-  (use! :folke/zen-mode.nvim)
-  (comment use! :lukas-reineke/indent-blankline.nvim))
+  ;; A decent zen-mode
+  (use! :folke/zen-mode.nvim))
 

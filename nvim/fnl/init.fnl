@@ -25,15 +25,6 @@
      :word_diff false}))
      
 
-
-; (let [{: setup} (require :indent_blankline)]
-;   (setup {:show_current_context true
-;           :show_current_context_start true}))
-
-
-(let [{: setup} (require :colorizer)] (setup))
-;; (let [{: setup} (require :gitsigns)] (setup))
-
 (local ts (require :nvim-treesitter))
 (local tsq (require :nvim-treesitter.query))
 (local tsp (require :nvim-treesitter.parsers))
