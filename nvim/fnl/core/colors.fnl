@@ -202,7 +202,7 @@
    :base0F "#ffffff"})
 (local one-light
   {
-    :base00 "#fafafa"
+    :base00 "#ffffff"
     :base01 "#f0f0f1"
     :base02 "#e5e5e6"
     :base03 "#a0a1a7"

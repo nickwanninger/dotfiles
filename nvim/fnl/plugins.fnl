@@ -14,10 +14,10 @@
   (use! :bakpakin/fennel.vim)
 
   ;; Colorschemes
-  (use! :arzg/vim-colors-xcode)
-  (use! :arcticicestudio/nord-vim)
-  (use! :connorholyday/vim-snazzy)
-  (use! :RRethy/nvim-base16)
+  ; (use! :arzg/vim-colors-xcode)
+  ; (use! :arcticicestudio/nord-vim)
+  ; (use! :connorholyday/vim-snazzy)
+  ; (use! :RRethy/nvim-base16)
 
   ;; Fuzzy finder
   (use! :junegunn/fzf :run (fn [] (comment vim.cmd "fzf#install()")))
@@ -32,8 +32,8 @@
 
   ;; Some additional language support packages
   (use! :lluchs/vim-wren)
-  (use! :Shirk/vim-gas)
-  (use! :dag/vim-fish)
+  (use! :Shirk/vim-gas) ;; Gnu Assembler
+  (use! :dag/vim-fish) ;; Fish Shell
 
   ;; Lua libraries
   (use! :nvim-lua/plenary.nvim)

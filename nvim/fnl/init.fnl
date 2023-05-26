@@ -66,13 +66,11 @@
 
 
 (keys.map "<leader>1" "Select Dark Theme"
-  (fn [] (vim.cmd ":Goyo!")
-         (colors.select-colorscheme darktheme))
+  (fn [] (colors.select-colorscheme darktheme))
   {})
 
 (keys.map "<leader>2" "Select Light Theme"
-  (fn [] (vim.cmd ":Goyo!")
-         (colors.select-colorscheme lighttheme))
+  (fn [] (colors.select-colorscheme lighttheme))
   {})
 
 
