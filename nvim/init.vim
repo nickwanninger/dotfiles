@@ -94,6 +94,8 @@ nnoremap <silent> <M-l> :TmuxNavigateRight<cr>
 nnoremap <leader>m :FloatermNew make -j<CR>
 nnoremap <leader>Q :qall<CR>
 
+nnoremap <leader>g :FloatermNew --height=0.9 --width=0.9 lazygit<CR>
+
 noremap <C-l> :tabprevious<CR>
 noremap <C-h> :tabnext<CR>
 noremap <leader>t :tabnew<CR>
