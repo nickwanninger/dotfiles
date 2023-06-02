@@ -91,7 +91,7 @@ nnoremap <silent> <M-h> :TmuxNavigateLeft<cr>
 nnoremap <silent> <M-j> :TmuxNavigateDown<cr>
 nnoremap <silent> <M-k> :TmuxNavigateUp<cr>
 nnoremap <silent> <M-l> :TmuxNavigateRight<cr>
-nnoremap <leader>m :FloatermNew make<CR>
+nnoremap <leader>m :FloatermNew make -j<CR>
 nnoremap <leader>Q :qall<CR>
 
 noremap <C-l> :tabprevious<CR>
