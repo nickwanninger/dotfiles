@@ -17,7 +17,7 @@
   ; (use! :arzg/vim-colors-xcode)
   ; (use! :arcticicestudio/nord-vim)
   ; (use! :connorholyday/vim-snazzy)
-  ; (use! :RRethy/nvim-base16)
+  (use! :RRethy/nvim-base16)
 
   ;; Fuzzy finder
   (use! :junegunn/fzf :run (fn [] (comment vim.cmd "fzf#install()")))
@@ -45,6 +45,9 @@
 
   ;; Notify
   (use! :rcarriga/nvim-notify)
+
+  ;; Floating Terminal Thing
+  (use! :voldikss/vim-floaterm)
 
   ;; language server support
   (use! :ms-jpq/coq_nvim)
