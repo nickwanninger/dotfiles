@@ -66,5 +66,7 @@
   ;; Keybinds
   (use! :folke/which-key.nvim)
   ;; A decent zen-mode
-  (use! :folke/zen-mode.nvim))
+  (use! :folke/zen-mode.nvim)
+  
+  (use! :gpanders/nvim-parinfer))
 

@@ -79,3 +79,19 @@
   {})
 
 (colors.select-colorscheme darktheme)
+
+
+(fn run-buffer-with [program]
+  (vim.cmd (.. ":FloatermNew --autoclose=0 --height=0.9 --width=0.9 " program " %")))
+ 
+
+;; Run certain programs
+(keys.map "<leader>r"
+     "run the current file"
+     (fn [] 
+       (let [buf (vim.api.nvim_get_current_buf)
+             ft (vim.api.nvim_buf_get_option buf "filetype")]
+         (if (= ft "scheme") (run-buffer-with "racket")))))
+
+
+

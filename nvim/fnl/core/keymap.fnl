@@ -53,7 +53,7 @@
 
 (map "<space>" "Select the word under the cursor" "<ESC>viw")
 
-(map "<leader>P>" "Run PackerSync" ":PackerSync"
+(map "<leader>P" "Run PackerSync" ":PackerSync"
      {:silent true
       :mode "n"})
 
@@ -61,6 +61,8 @@
 (vim.cmd "nnoremap <silent> Q q")
 (vim.cmd "nnoremap <silent> q <Nop>")
 
+
+              
 
 {: set-lsp-keys!
  : map}

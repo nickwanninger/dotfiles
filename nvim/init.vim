@@ -96,9 +96,9 @@ nnoremap <leader>Q :qall<CR>
 
 nnoremap <leader>g :FloatermNew --height=0.9 --width=0.9 lazygit<CR>
 
-noremap <C-l> :tabprevious<CR>
-noremap <C-h> :tabnext<CR>
-noremap <leader>t :tabnew<CR>
+" noremap <C-l> :tabprevious<CR>
+" noremap <C-h> :tabnext<CR>
+" noremap <leader>t :tabnew<CR>
 noremap <leader>f :ClangFormat<CR>
 
 nnoremap <leader>P :PackerSync<CR>
