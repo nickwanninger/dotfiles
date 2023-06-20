@@ -124,6 +124,25 @@ end
 local packer_bootstrap = ensure_packer()
 local packer = require('packer')
 
+function configure_tangerine()
+	local nvim_dir = vim.fn.stdpath [[config]]
+
+	require('tangerine').setup {
+		vimrc   = nvim_dir .. "/fnl/init.fnl",
+		source  = nvim_dir .. "/fnl",
+		-- target  = nvim_dir .. "/lua",
+		target = vim.fn.stdpath [[data]] .. "/tangerine",
+		-- target = vim.fn.stdpath [[data]] .. "/tangerine",
+		compiler = {
+			verbose = false,
+			-- if you want to compile before loading init.fnl (recommended)
+			hooks = { "oninit", "onsave" },
+			-- if you only want after VimEnter event has fired
+			-- hooks = { "onenter" },
+		}
+	}
+end
+
 packer.startup(function(use)
 	-- packer manages itself
   use 'wbthomason/packer.nvim'
@@ -151,7 +170,7 @@ packer.startup(function(use)
 	use 'ray-x/lsp_signature.nvim'
 	use 'rhysd/vim-clang-format'
 	use 'ErichDonGubler/lsp_lines.nvim'
-	use {'nvim-treesitter/nvim-treesitter', run=':TSUpdate'}
+	use {'nvim-treesitter/nvim-treesitter'}
 
 	-- use 'nvim-treesitter/playground)
 	use 'weilbith/nvim-code-action-menu'
@@ -162,27 +181,18 @@ packer.startup(function(use)
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if packer_bootstrap then
+		-- When PackerComplete occurs, configure tangerine to get the rest of the
+		-- configuration going. This is a bit of a hack, and really only exists to
+		-- make bootstrapping less error-y
+		vim.cmd([[
+			autocmd User PackerComplete lua configure_tangerine()
+		]])
+		-- setup autocmd
   	packer.sync()
+	else
+		configure_tangerine()
   end
 end)
 
 
 
--- Now, configure packer and it's plugins
-
-local nvim_dir = vim.fn.stdpath [[config]]
-
-require('tangerine').setup {
-  vimrc   = nvim_dir .. "/fnl/init.fnl",
-  source  = nvim_dir .. "/fnl",
-  -- target  = nvim_dir .. "/lua",
-  target = vim.fn.stdpath [[data]] .. "/tangerine",
-  -- target = vim.fn.stdpath [[data]] .. "/tangerine",
-  compiler = {
-  	verbose = false,
-  	-- if you want to compile before loading init.fnl (recommended)
-  	hooks = { "oninit", "onsave" },
-  	-- if you only want after VimEnter event has fired
-  	-- hooks = { "onenter" },
-  }
-}
