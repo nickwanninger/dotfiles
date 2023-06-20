@@ -14,6 +14,7 @@ switch (uname)
 		export CFLAGS="-I/opt/homebrew/include"
 		export LDFLAGS="-L/opt/homebrew/lib"
 		export PATH="/opt/homebrew/bin:$PATH"
+		export PATH="/Applications/Racket v8.9/bin:$PATH"
 end
 
 
