@@ -60,8 +60,8 @@
 (local colors (require :core.colors))
 
 
-(local darktheme colors.snazzy-black)
-; (local darktheme colors.carbon-black)
+; (local darktheme colors.snazzy-black)
+(local darktheme colors.nord-black)
 (local lighttheme colors.one-light)
 
 
