@@ -1,4 +1,3 @@
-(require :plugins)
 (require :core)
 
 (local keys (require :core.keymap))
