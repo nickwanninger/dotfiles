@@ -1,6 +1,4 @@
-(require :core)
-
-(local keys (require :core.keymap))
+(local keys (require :keymap))
 
 ;; setup neovimtree as a replacement for nerd tree
 (let [{: setup} (require :nvim-tree)]
@@ -30,7 +28,7 @@
 
 (let [{: setup} (require :nvim-treesitter.configs)]
   ;; Usual setup for treesitter
-  (setup {:ensure_installed [ "c" "cpp" "fennel" "rust"]
+  (setup {:ensure_installed [ "c" "cpp" "fennel" "rust" "racket"]
           :ensure_maintained "maintained"
           :sync_install false
           ;; :indent {:enable true}
@@ -56,7 +54,7 @@
 (vim.cmd "let $FZF_DEFAULT_OPTS = '--reverse'")
 (vim.cmd "autocmd TermOpen * setlocal nonumber norelativenumber")
 
-(local colors (require :core.colors))
+(local colors (require :highlight))
 
 
 ; (local darktheme colors.snazzy-black)
@@ -90,7 +88,7 @@
      (fn [] 
        (let [buf (vim.api.nvim_get_current_buf)
              ft (vim.api.nvim_buf_get_option buf "filetype")]
+         (if (= ft "racket") (run-buffer-with "racket"))
          (if (= ft "scheme") (run-buffer-with "racket")))))
-
 
 

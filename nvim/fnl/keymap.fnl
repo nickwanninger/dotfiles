@@ -1,8 +1,7 @@
 (local wk (require :which-key))
 
-
-
 (wk.setup {})
+
 (fn key [tbl prop] [(. tbl prop) prop])
 
 (wk.register {";" [":" "vim-ex"]})

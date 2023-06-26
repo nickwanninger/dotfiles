@@ -92,16 +92,14 @@ set nu
 nmap <C-a> :TagbarToggle<CR>
 map <C-c> :set nu!<CR>
 
-" map <C-n> :NERDTreeToggle<CR>
-map <C-q> :q<CR>
-map <C-Q> :q!<CR>
-map <leader>/ :let @/=''<cr>"
-
 autocmd filetype crontab setlocal nobackup nowritebackup
 
-au BufRead,BufNewFile *.nesl set filetype=nesl
-au BufRead,BufNewFile *.fun set filetype=sml
+" au BufRead,BufNewFile *.nesl set filetype=nesl
+" au BufRead,BufNewFile *.fun set filetype=sml
 ]])
+
+
+
 
 
 -- This function ensures that our package manager, packer, has been installed.
@@ -124,75 +122,95 @@ end
 local packer_bootstrap = ensure_packer()
 local packer = require('packer')
 
-function configure_tangerine()
-	local nvim_dir = vim.fn.stdpath [[config]]
-
-	require('tangerine').setup {
-		vimrc   = nvim_dir .. "/fnl/init.fnl",
-		source  = nvim_dir .. "/fnl",
-		-- target  = nvim_dir .. "/lua",
-		target = vim.fn.stdpath [[data]] .. "/tangerine",
-		-- target = vim.fn.stdpath [[data]] .. "/tangerine",
-		compiler = {
-			verbose = false,
-			-- if you want to compile before loading init.fnl (recommended)
-			hooks = { "oninit", "onsave" },
-			-- if you only want after VimEnter event has fired
-			-- hooks = { "onenter" },
-		}
-	}
-end
 
 packer.startup(function(use)
 	-- packer manages itself
   use 'wbthomason/packer.nvim'
 
-	use 'udayvir-singh/tangerine.nvim'
+	-- Install tangerine
+	use {
+		'udayvir-singh/tangerine.nvim',
+		-- When it's loaded, call this function to initialize tangerine and
+		-- start the fennel configuration
+		config = function()
+			local nvim_dir = vim.fn.stdpath [[config]]
+			require('tangerine').setup {
+				-- Start by using the init.fnl file
+				vimrc   = nvim_dir .. "/fnl/init.fnl",
+				-- And set the 'include path' for fennel files to $RT/fnl
+				source  = nvim_dir .. "/fnl",
+				-- target  = nvim_dir .. "/lua",
+				target = vim.fn.stdpath [[data]] .. "/tangerine",
+				compiler = {
+					verbose = false,
+					-- if you want to compile before loading init.fnl (recommended)
+					hooks = { "oninit", "onsave" },
+					-- if you only want after VimEnter event has fired
+					-- hooks = { "onenter" },
+				}
+			}
+		end,
+	}
+
+	-- Merge Tmux stuff
 	use 'christoomey/vim-tmux-navigator'
-	use 'bakpakin/fennel.vim'
+
+	-- A bunch of base16 themes
 	use 'RRethy/nvim-base16'
+
+	-- Fuzzy finder
 	use {'junegunn/fzf', run='fzf#install()'}
-	-- use 'junegunn/fzf :run (fn [] (comment vim.cmd "fzf#install()")))
 	use 'junegunn/fzf.vim'
+
+	-- tag bar on the right
 	use 'preservim/tagbar'
+	-- `gcc` key combo
 	use 'numToStr/Comment.nvim'
-	use 'lluchs/vim-wren'
+
+	-- Language support
+	use 'lluchs/vim-wren' -- wren (cause it's cool)
 	use 'Shirk/vim-gas' -- Gnu Assembler
 	use 'dag/vim-fish' -- Fish Shell
+
+	-- some stuff that some people want
 	use 'nvim-lua/plenary.nvim'
+
+	-- Show git info next to the numbers
 	use 'lewis6991/gitsigns.nvim'
+
+	-- A nice tree on the left
 	use 'kyazdani42/nvim-tree.lua'
+
+	-- Pretty notifications
 	use 'rcarriga/nvim-notify'
+
+	-- Floating terminal that I use in a bunch of places
 	use 'voldikss/vim-floaterm'
+
+	-- Autocompletion & Autocomplete
 	use 'ms-jpq/coq_nvim'
 	use 'ms-jpq/coq.artifacts'
 	use 'neovim/nvim-lspconfig'
 	use 'ray-x/lsp_signature.nvim'
 	use 'rhysd/vim-clang-format'
 	use 'ErichDonGubler/lsp_lines.nvim'
-	use {'nvim-treesitter/nvim-treesitter'}
+	use 'nvim-treesitter/nvim-treesitter'
 
 	-- use 'nvim-treesitter/playground)
 	use 'weilbith/nvim-code-action-menu'
 	use 'folke/which-key.nvim'
 	use 'folke/zen-mode.nvim'
-	use 'gpanders/nvim-parinfer'
 
-  -- Automatically set up your configuration after cloning packer.nvim
-  -- Put this at the end after all plugins
+	-- Lisp stuff
+	use 'gpanders/nvim-parinfer'
+	use 'Olical/conjure'
+	-- use 'rachitnigam/drracket.vim'
+	-- use 'wlangstroth/vim-racket'
+	-- Fennel syntax highlighting
+	use 'bakpakin/fennel.vim'
+
+  -- Automatically set up the configuration after cloning packer.nvim
   if packer_bootstrap then
-		-- When PackerComplete occurs, configure tangerine to get the rest of the
-		-- configuration going. This is a bit of a hack, and really only exists to
-		-- make bootstrapping less error-y
-		vim.cmd([[
-			autocmd User PackerComplete lua configure_tangerine()
-		]])
-		-- setup autocmd
   	packer.sync()
-	else
-		configure_tangerine()
   end
 end)
-
-
-
