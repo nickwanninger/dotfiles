@@ -1,5 +1,8 @@
 (local keys (require :keymap))
 
+(require :lsp)
+(require :statusline)
+
 ;; setup neovimtree as a replacement for nerd tree
 (let [{: setup} (require :nvim-tree)]
   (setup {:view {:side :left
@@ -90,5 +93,4 @@
              ft (vim.api.nvim_buf_get_option buf "filetype")]
          (if (= ft "racket") (run-buffer-with "racket"))
          (if (= ft "scheme") (run-buffer-with "racket")))))
-
 
