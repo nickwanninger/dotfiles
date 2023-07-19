@@ -94,3 +94,26 @@
          (if (= ft "racket") (run-buffer-with "racket"))
          (if (= ft "scheme") (run-buffer-with "racket")))))
 
+
+
+;; Remove the default menu items
+(vim.cmd "aunmenu PopUp.How-to\\ disable\\ mouse")
+(vim.cmd "aunmenu PopUp.-1-")
+
+(vim.cmd.anoremenu "PopUp.-1- :")
+(vim.cmd.anoremenu "PopUp.Go\\ to\\ definition gd")
+(vim.cmd.anoremenu "PopUp.Go\\ to\\ declaration gD")
+(vim.cmd.anoremenu "PopUp.Go\\ to\\ implementation gi")
+(vim.cmd.anoremenu "PopUp.More\\ info K")
+
+(vim.cmd.anoremenu "PopUp.-2- :")
+
+(vim.cmd.anoremenu "PopUp.VSplit :vsp<CR>")
+(vim.cmd.anoremenu "PopUp.HSplit :sp<CR>")
+(vim.cmd.anoremenu "PopUp.-3- :")
+(vim.cmd.anoremenu "PopUp.Save :w<CR>")
+(vim.cmd.anoremenu "PopUp.Save+Quit :q<CR>")
+(vim.cmd.anoremenu "PopUp.Quit! :q!<CR>")
+(vim.cmd.anoremenu "PopUp.-4- :")
+(vim.cmd.anoremenu "PopUp.Format :ClangFormat<CR>")
+(vim.cmd.anoremenu "PopUp.Zen :ZenMode<CR>")
