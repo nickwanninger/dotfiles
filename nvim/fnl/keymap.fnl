@@ -37,10 +37,16 @@
 (map "?" "Display keymaps" ":WhichKey<CR>" {:mode "n"})
 (map "<C-f>" "Display git files" ":GFiles<CR>" {:mode "n"})
 (map "<C-p>" "Display all files" ":Files<CR>" {:mode "n"})
-(map "<C-_>" "Fuzzy search" ":BLines<CR>" {:mode "n"})
 (map "<leader>ca" "Open display code actions" ":CodeActionMenu" {:mode "n"})
 (map "<leader>f" "Clang Format" ":ClangFormat<CR>" {:silent true :mode "n"})
 
+
+
+;; Some sane split commands
+(map "<C-_>" "Horizontal Split" ":sp<CR>" {:mode "n"})
+(map "<C-\\>" "Vertical Split" ":vsp<CR>" {:mode "n"})
+
+(map "<C-q>" "Close the current split" ":q<CR>" {:mode "n"})
 
 (map "<" "Dedent" "<gv" {:mode "v"})
 (map ">" "Indent" ">gv" {:mode "v"})
