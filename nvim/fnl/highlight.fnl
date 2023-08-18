@@ -37,12 +37,15 @@
 (lambda select-colorscheme [theme]
   (let [{: setup} (require :base16-colorscheme)] (setup theme))
 
+  (when (not (?. theme :cursor))
+    (tset theme :cursor theme.base01))
+
   ;; ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   ;; editor
   (highlight! ColorColumn [] {:fg :NONE :bg theme.base01})
   (highlight! Cursor [] {:fg theme.base00 :bg theme.base04})
-  (highlight! CursorLine [] {:fg :NONE :bg theme.base01})
-  (highlight! CursorColumn [] {:fg :NONE :bg theme.base01})
+  (highlight! CursorLine [] {:fg :NONE :bg theme.cursor})
+  (highlight! CursorColumn [] {:fg :NONE :bg theme.cursor})
   (highlight! CursorLineNr [] {:fg theme.base04 :bg :NONE})
   (highlight! Error [] {:fg theme.base04 :bg theme.base0B})
   (highlight! LineNr [] {:fg theme.base03 :bg :NONE})
@@ -223,42 +226,43 @@
 
 (local nord-dark
   {
-  :base00 "#2E3440"
-  :base01 "#3B4252"
-  :base02 "#434C5E"
-  :base03 "#4C566A"
-  :base04 "#D8DEE9"
-  :base05 "#E5E9F0"
-  :base06 "#ECEFF4"
-  :base07 "#8FBCBB"
-  :base08 "#88C0D0"
-  :base09 "#81A1C1"
-  :base0A "#5E81AC"
-  :base0B "#BF616A"
-  :base0C "#D08770"
-  :base0D "#EBCB8B"
-  :base0E "#A3BE8C"
-  :base0F "#B48EAD"})
+   :base00 "#2E3440"
+   :base01 "#3B4252"
+   :base02 "#434C5E"
+   :base03 "#4C566A"
+   :base04 "#D8DEE9"
+   :base05 "#E5E9F0"
+   :base06 "#ECEFF4"
+   :base07 "#8FBCBB"
+   :base08 "#88C0D0"
+   :base09 "#81A1C1"
+   :base0A "#5E81AC"
+   :base0B "#BF616A"
+   :base0C "#D08770"
+   :base0D "#EBCB8B"
+   :base0E "#A3BE8C"
+   :base0F "#B48EAD"})
    
 
 (local nord-black
   {
-  :base00 "#000000"
-  :base01 "#3B4252"
-  :base02 "#434C5E"
-  :base03 "#4C566A"
-  :base04 "#D8DEE9"
-  :base05 "#E5E9F0"
-  :base06 "#ECEFF4"
-  :base07 "#8FBCBB"
-  :base08 "#88C0D0"
-  :base09 "#81A1C1"
-  :base0A "#5E81AC"
-  :base0B "#BF616A"
-  :base0C "#D08770"
-  :base0D "#EBCB8B"
-  :base0E "#A3BE8C"
-  :base0F "#B48EAD"})
+   :cursor "#101820" ;; Custom cursor color
+   :base00 "#000000"
+   :base01 "#3B4252"
+   :base02 "#434C5E"
+   :base03 "#4C566A"
+   :base04 "#D8DEE9"
+   :base05 "#E5E9F0"
+   :base06 "#ECEFF4"
+   :base07 "#8FBCBB"
+   :base08 "#88C0D0"
+   :base09 "#81A1C1"
+   :base0A "#5E81AC"
+   :base0B "#BF616A"
+   :base0C "#D08770"
+   :base0D "#EBCB8B"
+   :base0E "#A3BE8C"
+   :base0F "#B48EAD"})
 
 {: select-colorscheme
  : snazzy

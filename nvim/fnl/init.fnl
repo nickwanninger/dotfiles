@@ -84,6 +84,14 @@
 (fn run-buffer-with [program]
   (vim.cmd (.. ":FloatermNew --autoclose=0 --height=0.9 --width=0.9 " program " %")))
  
+;; Toggle cursor "target"
+(keys.map "<leader>l"
+          "Toggle Cursor Target"
+          (fn []
+            (do
+              (vim.cmd "set cursorline!")
+              (vim.cmd "set cursorcolumn!")))
+          {})
 
 ;; Run certain programs
 (keys.map "<leader>r"
