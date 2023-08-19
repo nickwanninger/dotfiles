@@ -201,64 +201,99 @@
    :base0E "#0f7ddb"
    :base0F "#ffffff"})
 (local one-light
-  {
-    :base00 "#ffffff"
-    :base01 "#f0f0f1"
-    :base02 "#e5e5e6"
-    :base03 "#a0a1a7"
-    :base04 "#696c77"
-    :base05 "#383a42"
-    :base06 "#202227"
-    :base07 "#090a0b"
-    :base08 "#ca1243"
-    :base09 "#d75f00"
-    :base0A "#c18401"
-    :base0B "#50a14f"
-    :base0C "#0184bc"
-    :base0D "#4078f2"
-    :base0E "#a626a4"
-    :base0F "#986801"})
+  {:base00 "#ffffff"
+   :base01 "#f0f0f1"
+   :base02 "#e5e5e6"
+   :base03 "#a0a1a7"
+   :base04 "#696c77"
+   :base05 "#383a42"
+   :base06 "#202227"
+   :base07 "#090a0b"
+   :base08 "#ca1243"
+   :base09 "#d75f00"
+   :base0A "#c18401"
+   :base0B "#50a14f"
+   :base0C "#0184bc"
+   :base0D "#4078f2"
+   :base0E "#a626a4"
+   :base0F "#986801"})
 
 
 
 (local nord-dark
-  {
-  :base00 "#2E3440"
-  :base01 "#3B4252"
-  :base02 "#434C5E"
-  :base03 "#4C566A"
-  :base04 "#D8DEE9"
-  :base05 "#E5E9F0"
-  :base06 "#ECEFF4"
-  :base07 "#8FBCBB"
-  :base08 "#88C0D0"
-  :base09 "#81A1C1"
-  :base0A "#5E81AC"
-  :base0B "#BF616A"
-  :base0C "#D08770"
-  :base0D "#EBCB8B"
-  :base0E "#A3BE8C"
-  :base0F "#B48EAD"})
+  {:base00 "#2E3440"
+   :base01 "#3B4252"
+   :base02 "#434C5E"
+   :base03 "#4C566A"
+   :base04 "#D8DEE9"
+   :base05 "#E5E9F0"
+   :base06 "#ECEFF4"
+   :base07 "#8FBCBB"
+   :base08 "#88C0D0"
+   :base09 "#81A1C1"
+   :base0A "#5E81AC"
+   :base0B "#BF616A"
+   :base0C "#D08770"
+   :base0D "#EBCB8B"
+   :base0E "#A3BE8C"
+   :base0F "#B48EAD"})
    
 
 (local nord-black
-  {
-  :base00 "#000000"
-  :base01 "#3B4252"
-  :base02 "#434C5E"
-  :base03 "#4C566A"
-  :base04 "#D8DEE9"
-  :base05 "#E5E9F0"
-  :base06 "#ECEFF4"
-  :base07 "#8FBCBB"
-  :base08 "#88C0D0"
-  :base09 "#81A1C1"
-  :base0A "#5E81AC"
-  :base0B "#BF616A"
-  :base0C "#D08770"
-  :base0D "#EBCB8B"
-  :base0E "#A3BE8C"
-  :base0F "#B48EAD"})
+  {:base00 "#000000"
+   :base01 "#3B4252"
+   :base02 "#434C5E"
+   :base03 "#4C566A"
+   :base04 "#D8DEE9"
+   :base05 "#E5E9F0"
+   :base06 "#ECEFF4"
+   :base07 "#8FBCBB"
+   :base08 "#88C0D0"
+   :base09 "#81A1C1"
+   :base0A "#5E81AC"
+   :base0B "#BF616A"
+   :base0C "#D08770"
+   :base0D "#EBCB8B"
+   :base0E "#A3BE8C"
+   :base0F "#B48EAD"})
+
+
+(local gruvbox-light-hard
+  {:base00 "#f9f5d7"
+   :base01 "#ebdbb2"
+   :base02 "#d5c4a1"
+   :base03 "#bdae93"
+   :base04 "#665c54"
+   :base05 "#504945"
+   :base06 "#3c3836"
+   :base07 "#282828"
+   :base08 "#9d0006"
+   :base09 "#af3a03"
+   :base0A "#b57614"
+   :base0B "#79740e"
+   :base0C "#427b58"
+   :base0D "#076678"
+   :base0E "#8f3f71"
+   :base0F "#d65d0e"})
+   
+(local gruvbox-dark-hard
+  {:base00 "#1d2021"
+   :base01 "#3c3836"
+   :base02 "#504945"
+   :base03 "#665c54"
+   :base04 "#bdae93"
+   :base05 "#d5c4a1"
+   :base06 "#ebdbb2"
+   :base07 "#fbf1c7"
+   :base08 "#fb4934"
+   :base09 "#fe8019"
+   :base0A "#fabd2f"
+   :base0B "#b8bb26"
+   :base0C "#8ec07c"
+   :base0D "#83a598"
+   :base0E "#d3869b"
+   :base0F "#d65d0e"})
+
 
 {: select-colorscheme
  : snazzy
@@ -273,5 +308,7 @@
  : one-light
  : nord-dark
  : nord-black
+ : gruvbox-light-hard
+ : gruvbox-dark-hard
  : bro-dark}
 
