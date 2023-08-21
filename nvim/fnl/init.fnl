@@ -60,12 +60,12 @@
 (local colors (require :highlight))
 
 
-; (local darktheme colors.snazzy-black)
+(local darktheme colors.snazzy-black)
 ; (local darktheme colors.nord-black)
-; (local lighttheme colors.one-light)
+(local lighttheme colors.one-light)
 
-(local darktheme colors.gruvbox-dark-hard)
-(local lighttheme colors.gruvbox-light-hard)
+; (local darktheme colors.gruvbox-dark-hard)
+; (local lighttheme colors.gruvbox-light-hard)
 
 
 (keys.map "<leader>1" "Select Dark Theme"
