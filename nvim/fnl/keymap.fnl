@@ -66,9 +66,11 @@
 (vim.cmd "nnoremap <silent> Q q")
 (vim.cmd "nnoremap <silent> q <Nop>")
 
-(map "<C-j>" "scroll down" "<ScrollWheelDown>" {:mode "n"})
-(map "<C-k>" "scroll up" "<ScrollWheelUp>" {:mode "n"})
+; (map "<C-j>" "scroll down" "<ScrollWheelDown>" {:mode "n"})
+; (map "<C-k>" "scroll up" "<ScrollWheelUp>" {:mode "n"})
 
+(map "<C-j>" "scroll down" "5j" {:mode "n"})
+(map "<C-k>" "scroll up" "5k" {:mode "n"})
 
 {: set-lsp-keys!
  : map}
