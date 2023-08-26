@@ -15,6 +15,7 @@ set splitright
 set noeol
 set tabstop=2
 set shiftwidth=2
+set expandtab
 set nofoldenable     "don't fold by default
 set foldmethod=indent   " fold on indentations
 set foldnestmax=10   "only fold up to 10 levels
