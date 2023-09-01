@@ -106,3 +106,5 @@ if [ -d $HOME/anaconda3 ]
 	# eval $HOME/anaconda3/bin/conda "shell.fish" "hook" $argv | source
 end
 # <<< conda initialize <<<
+
+set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME ; set -gx PATH $HOME/.cabal/bin /home/nick/.ghcup/bin $PATH # ghcup-env

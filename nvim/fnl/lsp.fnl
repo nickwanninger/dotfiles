@@ -17,7 +17,7 @@
 
 
 ;; Go over the different language servers that I want to use and configure them
-(let [servers ["clangd" "pyright" "rust_analyzer"]]
+(let [servers ["clangd" "pyright" "rust_analyzer" "hls"]]
   (each [_ lang (pairs servers)]
     (let [{: setup} (. lsp lang)]
       (setup (coq.lsp_ensure_capabilities { :on_attach on-attach} 

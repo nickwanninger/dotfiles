@@ -57,6 +57,11 @@
 (vim.cmd "let $FZF_DEFAULT_OPTS = '--reverse'")
 (vim.cmd "autocmd TermOpen * setlocal nonumber norelativenumber")
 
+(vim.cmd "au BufRead,BufNewFile *.y set ft=haskell")
+(vim.cmd "au BufRead,BufNewFile *.x set ft=haskell")
+(vim.cmd "au BufRead,BufNewFile *.futz set syntax=haskell")
+
+
 (local colors (require :highlight))
 
 
