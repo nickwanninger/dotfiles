@@ -1,4 +1,5 @@
 (local keys (require :keymap))
+(local state (require :state))
 
 (require :lsp)
 (require :statusline)
@@ -72,13 +73,17 @@
 ; (local darktheme colors.gruvbox-dark-hard)
 ; (local lighttheme colors.gruvbox-light-hard)
 
+(state.register :colorscheme colors.select-colorscheme)
+(state.default :colorscheme darktheme)
 
 (keys.map "<leader>1" "Select Dark Theme"
-  (fn [] (colors.select-colorscheme darktheme))
+  (fn [] (state.set-val :colorscheme darktheme))
+  ;; (fn [] (colors.select-colorscheme darktheme))
   {})
 
 (keys.map "<leader>2" "Select Light Theme"
-  (fn [] (colors.select-colorscheme lighttheme))
+  (fn [] (state.set-val :colorscheme lighttheme))
+  ;; (fn [] (colors.select-colorscheme lighttheme))
   {})
 
 
@@ -133,3 +138,10 @@
 (vim.cmd.anoremenu "PopUp.-4- :")
 (vim.cmd.anoremenu "PopUp.Format :ClangFormat<CR>")
 (vim.cmd.anoremenu "PopUp.Zen :ZenMode<CR>")
+
+
+
+;; (state.write {:foo "hello"})
+
+
+(state.start)

@@ -210,6 +210,10 @@ packer.startup(function(use)
 	-- Fennel syntax highlighting
 	use 'bakpakin/fennel.vim'
 
+
+  -- A nice library to watch if a file changes
+  use 'rktjmp/fwatch.nvim'
+
   -- Automatically set up the configuration after cloning packer.nvim
   if packer_bootstrap then
   	packer.sync()
