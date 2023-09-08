@@ -107,4 +107,9 @@ if [ -d $HOME/anaconda3 ]
 end
 # <<< conda initialize <<<
 
-set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME ; set -gx PATH $HOME/.cabal/bin /home/nick/.ghcup/bin $PATH # ghcup-env
+# set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME ;
+set -gx PATH "$HOME/.cabal/bin" "$HOME/.ghcup/bin" $PATH # ghcup-env
+
+if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.fish' ]
+  . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.fish'
+end
