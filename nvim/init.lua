@@ -162,6 +162,7 @@ packer.startup(function(use)
 	-- Fuzzy finder
 	use {'junegunn/fzf', run='fzf#install()'}
 	use 'junegunn/fzf.vim'
+  use 'monkoose/fzf-hoogle.vim'
 
 	-- tag bar on the right
 	use 'preservim/tagbar'

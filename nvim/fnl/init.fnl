@@ -19,16 +19,24 @@
           :renderer {:indent_markers {:enable false}}}))
 
 
-(let [{: setup} (require :gitsigns)]
-  (setup
-    {:current_line_blame true
-     :numhl false
-     :word_diff false}))
+; (let [{: setup} (require :gitsigns)]
+;   (setup
+;     {:current_line_blame true
+;      :numhl false
+;      :word_diff false}))
      
 
 (local ts (require :nvim-treesitter))
 (local tsq (require :nvim-treesitter.query))
 (local tsp (require :nvim-treesitter.parsers))
+
+; (let [parser-config (tsp.get_parser_configs)]
+;   (tset parser-config :futz
+;      {:filetype "futz"
+;       :install_info {:url "~/.config/nvim/syntax/tree-sitter-futz"
+;                      :files ["src/parser.c" "src/scanner.cc" "bindings/node/binding.cc"]}}))
+                     
+                     
 
 (let [{: setup} (require :nvim-treesitter.configs)]
   ;; Usual setup for treesitter
@@ -60,14 +68,19 @@
 
 (vim.cmd "au BufRead,BufNewFile *.y set ft=haskell")
 (vim.cmd "au BufRead,BufNewFile *.x set ft=haskell")
-(vim.cmd "au BufRead,BufNewFile *.futz set syntax=haskell")
+;; (vim.cmd "au BufRead,BufNewFile *.fz set syntax=haskell")
+(vim.cmd "au BufRead,BufNewFile *.fz set syntax=futz")
+(vim.cmd "au BufRead,BufNewFile *.fz set filetype=futz")
+(vim.cmd "autocmd FileType futz setlocal commentstring=--%s")
 
 
 (local colors (require :highlight))
 
 
-(local darktheme colors.snazzy-black)
-; (local darktheme colors.nord-black)
+;; (local darktheme colors.snazzy-black)
+;; (local darktheme colors.atlas)
+;; (local darktheme colors.nord-black)
+(local darktheme colors.material-black)
 (local lighttheme colors.one-light)
 
 ; (local darktheme colors.gruvbox-dark-hard)
@@ -115,6 +128,14 @@
          (if (= ft "racket") (run-buffer-with "racket"))
          (if (= ft "scheme") (run-buffer-with "racket")))))
 
+
+
+(keys.map "<leader>h"
+          "Open the Hoogle Search"
+          (fn []
+            (do
+              (vim.cmd ":Hoogle")))
+          {})
 
 
 ;; Remove the default menu items

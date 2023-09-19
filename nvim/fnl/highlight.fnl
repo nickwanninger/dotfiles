@@ -160,6 +160,12 @@
       :base0C "#89DDFF" :base0D "#82AAFF" :base0E "#C792EA" :base0F "#FF5370"})
 
 
+(local material-black
+     {:base00 "#000000" :base01 "#303030" :base02 "#353535" :base03 "#4A4A4A"
+      :base04 "#B2CCD6" :base05 "#EEFFFF" :base06 "#EEFFFF" :base07 "#FFFFFF"
+      :base08 "#F07178" :base09 "#F78C6C" :base0A "#FFCB6B" :base0B "#C3E88D"
+      :base0C "#89DDFF" :base0D "#82AAFF" :base0E "#C792EA" :base0F "#FF5370"})
+
 
 (local tomorrow-light
      {:base00 "#ffffff" :base01 "#e0e0e0" :base02 "#d6d6d6" :base03 "#8e908c"
@@ -298,6 +304,27 @@
    :base0F "#d65d0e"})
 
 
+
+(local atlas
+  {;; :base00 "#002635"
+   :base00 "#000000"
+   :base01 "#00384d"
+   :base02 "#517F8D"
+   :base03 "#6C8B91"
+   :base04 "#869696"
+   :base05 "#a1a19a"
+   :base06 "#e6e6dc"
+   :base07 "#fafaf8"
+   :base08 "#ff5a67"
+   :base09 "#f08e48"
+   :base0A "#ffcc1b"
+   :base0B "#7fc06e"
+   :base0D "#5dd7b9"
+   :base0C "#14747e"
+   :base0E "#9a70a4"
+   :base0F "#c43060"})
+   
+
 {: select-colorscheme
  : snazzy
  : snazzy-black
@@ -305,6 +332,7 @@
  : carbon-black
  : carbon-light
  : material-darker
+ : material-black
  : contrast-light
  : tomorrow-light
  : helios-dark
@@ -313,5 +341,7 @@
  : nord-black
  : gruvbox-light-hard
  : gruvbox-dark-hard
- : bro-dark}
+ : bro-dark
+ : atlas}
+
 
