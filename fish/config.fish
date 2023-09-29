@@ -3,7 +3,7 @@ set fish_greeting ""
 export TERM="xterm-256color"
 
 
-export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/lib"
+# export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/lib"
 
 set -e LD_INCLUDE_PATH
 
