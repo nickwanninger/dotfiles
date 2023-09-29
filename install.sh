@@ -10,6 +10,7 @@ mkdir -p ~/.local/{bin,local,lib}
 echo "Installing fish configuratin..."
 rm -rf ~/.config/fish
 ln -sF ${DOTFILES}/fish/ ~/.config
+ln -sF ${DOTFILES}/emacs/ ~/.emacs.d
 
 echo "Installing tmux config"
 ln -sf ${DOTFILES}/tmux/tmux.conf ~/.tmux.conf
