@@ -2,10 +2,11 @@
 set fish_greeting ""
 export TERM="xterm-256color"
 
+set -e LD_LIBRARY_PATH
+set -e LD_INCLUDE_PATH
 
 # export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/lib"
 
-set -e LD_INCLUDE_PATH
 
 switch (uname)
 # Specific things to my mac
