@@ -55,6 +55,12 @@ hi Pmenu ctermbg=238 guibg=238 ctermfg=15
 
 au BufRead,BufNewFile *.hbs set filetype=html
 
+
+" augroup ScreenEdgeScroll
+"   autocmd!
+"   autocmd CursorMoved * if line('.') - &scrolloff <= line('w0') || line('.') + &scrolloff >= line('w$') | normal zz | endif
+" augroup END
+
 command WQ wq
 command Wq wq
 command W w
@@ -72,10 +78,12 @@ nnoremap <silent> <M-h> :TmuxNavigateLeft<cr>
 nnoremap <silent> <M-j> :TmuxNavigateDown<cr>
 nnoremap <silent> <M-k> :TmuxNavigateUp<cr>
 nnoremap <silent> <M-l> :TmuxNavigateRight<cr>
-nnoremap <leader>m :FloatermNew make -j<CR>
+"nnoremap <leader>m :FloatermNew make -j<CR>
 nnoremap <leader>Q :qall<CR>
 
 nnoremap <leader>g :FloatermNew --height=0.9 --width=0.9 lazygit<CR>
+nnoremap <leader>m :FloatermNew --height=0.9 --width=0.9 emacs -e magit-status -e delete-other-windows<CR>
+
 
 noremap <leader>f :ClangFormat<CR>
 nnoremap <leader>P :PackerSync<CR>

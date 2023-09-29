@@ -14,9 +14,7 @@
    :R :RA
    :Rv :RV
    :c :VIEX
-   :cv :VIEX
-   :ce :EX
-   :r :r
+   :cv :VIEX :ce :EX :r :r
    :rm :r
    :r? :r
    :! "!"

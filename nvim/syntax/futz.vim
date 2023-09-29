@@ -7,7 +7,7 @@ if exists("b:current_syntax")
 endif
 
 
-syn keyword futzKeywords let in do end case fn class def data to of super impl match on
+syn keyword futzKeywords let in do end case fn class def data to of super impl match on some
 syn match futzKeywords "λ"
 
 syn match   futzOperator "[-!#$%&\*\+/<=>\?@\\^|~:.]\+\|\<_\>"
