@@ -19,24 +19,10 @@
           :renderer {:indent_markers {:enable false}}}))
 
 
-; (let [{: setup} (require :gitsigns)]
-;   (setup
-;     {:current_line_blame true
-;      :numhl false
-;      :word_diff false}))
-     
-
 (local ts (require :nvim-treesitter))
 (local tsq (require :nvim-treesitter.query))
 (local tsp (require :nvim-treesitter.parsers))
 
-; (let [parser-config (tsp.get_parser_configs)]
-;   (tset parser-config :futz
-;      {:filetype "futz"
-;       :install_info {:url "~/.config/nvim/syntax/tree-sitter-futz"
-;                      :files ["src/parser.c" "src/scanner.cc" "bindings/node/binding.cc"]}}))
-                     
-                     
 
 (let [{: setup} (require :nvim-treesitter.configs)]
   ;; Usual setup for treesitter
@@ -48,7 +34,6 @@
           :highlight { :enable true
                        :additional_vim_regex_highlighting false
                        :indent {:enable true}}}))
-
 
 (set vim.notify (require :notify))
 (vim.notify.setup {})

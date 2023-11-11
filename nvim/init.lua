@@ -96,7 +96,7 @@ imap <C-w> <esc>dbi
 :autocmd BufWritePre [:;]*
 \   try | echoerr 'Forbidden file name: ' . expand('<afile>') | endtry
 
-set nu
+" set nu
 
 nmap <C-a> :TagbarToggle<CR>
 map <C-c> :set nu!<CR>
@@ -161,6 +161,11 @@ packer.startup(function(use)
 		end,
 	}
 
+
+  use 'MunifTanjim/nui.nvim'
+  use 'nvim-lua/plenary.nvim'
+  use 'nvim-telescope/telescope.nvim'
+
 	-- Merge Tmux stuff
 	use 'christoomey/vim-tmux-navigator'
 
@@ -222,6 +227,7 @@ packer.startup(function(use)
 
   -- A nice library to watch if a file changes
   use 'rktjmp/fwatch.nvim'
+
 
   -- Automatically set up the configuration after cloning packer.nvim
   if packer_bootstrap then

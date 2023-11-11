@@ -40,6 +40,7 @@
 (map "<leader>ca" "Open display code actions" ":CodeActionMenu" {:mode "n"})
 (map "<leader>f" "Clang Format" ":ClangFormat<CR>" {:silent true :mode "n"})
 
+(map "<M-f>" "Search" ":Rg<CR>" {:mode "n"})
 
 
 ;; Some sane split commands
