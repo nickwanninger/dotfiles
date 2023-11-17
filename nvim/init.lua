@@ -163,10 +163,9 @@ packer.startup(function(use)
 
 
   use 'MunifTanjim/nui.nvim'
-  use 'nvim-lua/plenary.nvim'
   use 'nvim-telescope/telescope.nvim'
 
-  use 'jreybert/vimagit'
+  use 'tpope/vim-fugitive'
 
 	-- Merge Tmux stuff
 	use 'christoomey/vim-tmux-navigator'
