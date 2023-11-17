@@ -46,10 +46,13 @@
 ;; Setup Neogit
 (let [neogit (require :neogit)]
   ;; Setup neogit
-  (neogit.setup {:kind "split"})
+  (neogit.setup {:kind "tab"})
   (keys.map "<leader>g"
             "Open neogit"
             neogit.open))
+
+(keys.map "<C-S-Left>"  "Prev Tab" ":tabprev<CR>")
+(keys.map "<C-S-Right>" "Next Tab" ":tabnext<CR>")
   
 
 
