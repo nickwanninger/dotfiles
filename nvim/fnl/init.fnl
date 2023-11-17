@@ -44,8 +44,11 @@
 
 
 ;; Setup Neogit
-(let [{: setup} (require :neogit)]
-  (setup {:kind "vsplit"}))
+(let [neogit (require :neogit)]
+  (neogit.setup {:kind "vsplit"})
+  (keys.map "<leader>g"
+            "Open neogit"
+            neogit.open))
   
 
 
