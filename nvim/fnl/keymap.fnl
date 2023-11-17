@@ -4,6 +4,7 @@
 
 (fn key [tbl prop] [(. tbl prop) prop])
 
+
 (wk.register {";" [":" "vim-ex"]})
 
 
@@ -27,7 +28,6 @@
 (lambda map [binding name func ?opt]
   (let [opt (or ?opt {})]
     (wk.register { binding [func name]} opt)))
-
 
 
 (map "<C-n>" "Focus on the tree view" ":NvimTreeToggle<CR>" {:mode "n"})

@@ -45,7 +45,14 @@
 
 ;; Setup Neogit
 (let [{: setup} (require :neogit)]
-  (setup))
+  (setup {:kind "vsplit"}))
+  
+
+
+  
+
+
+
 
 ;; TODO: stop using vim.cmd
 (vim.cmd "syntax enable")
