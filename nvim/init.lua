@@ -166,6 +166,8 @@ packer.startup(function(use)
   use 'nvim-lua/plenary.nvim'
   use 'nvim-telescope/telescope.nvim'
 
+  use 'jreybert/vimagit'
+
 	-- Merge Tmux stuff
 	use 'christoomey/vim-tmux-navigator'
 
