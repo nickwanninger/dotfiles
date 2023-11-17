@@ -162,6 +162,10 @@ packer.startup(function(use)
 	}
 
 
+
+  use 'NeogitOrg/neogit'
+
+
   use 'MunifTanjim/nui.nvim'
   use 'nvim-telescope/telescope.nvim'
 

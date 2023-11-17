@@ -42,6 +42,11 @@
 (let [{: setup} (require :Comment)]
   (setup))
 
+
+;; Setup Neogit
+(let [{: setup} (require :neogit)]
+  (setup))
+
 ;; TODO: stop using vim.cmd
 (vim.cmd "syntax enable")
 ;; (vim.cmd "colorscheme snazzy")
