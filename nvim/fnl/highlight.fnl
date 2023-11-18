@@ -114,24 +114,14 @@
   (vim.cmd "hi StatusLineDiagnosticError gui=bold guifg=#ff7eb6 guibg=#161616")
 
 
-  ; NeogitHunkHeader
-  ; NeogitDiffContext
-  ; NeogitDiffAdd
-  ; NeogitDiffDelete
-  ; NeogitDiffHeader
-  (highlight! NeogitDiffContext   [] {:bg "#000000" :fg "#FFFFFF"})
-  (highlight! NeogitDiffAdd       [] {:bg "#001100" :fg "#00FF00"})
-  (highlight! NeogitDiffDelete    [] {:bg "#110000" :fg "#FF0000"})
+  (highlight! NeogitDiffContext   [] {:bg "#111111" :fg "#FFFFFF"})
+  (highlight! NeogitDiffAdd       [] {:bg "#003300" :fg "#00FF00"})
+  (highlight! NeogitDiffDelete    [] {:bg "#330000" :fg "#FF0000"})
 
 
-  (highlight! NeogitDiffContextHighlight   [] {:bg "#000000" :fg "#FFFFFF"})
-  (highlight! NeogitDiffAddHighlight       [] {:bg "#001100" :fg "#00FF00"})
-  (highlight! NeogitDiffDeleteHighlight    [] {:bg "#110000" :fg "#FF0000"}))
-
-
-  ; NeogitDiffAddHighlight
-  ; NeogitDiffDeleteHighlight
-  ; NeogitDiffHeaderHighlight
+  (highlight! NeogitDiffContextHighlight   [] {:bg "#111111" :fg "#FFFFFF"})
+  (highlight! NeogitDiffAddHighlight       [] {:bg "#003300" :fg "#00FF00"})
+  (highlight! NeogitDiffDeleteHighlight    [] {:bg "#330000" :fg "#FF0000"}))
 
 
 
