@@ -18,6 +18,9 @@
           :hijack_directories {:enable true :auto_open true}
           :renderer {:indent_markers {:enable false}}}))
 
+(let [{: setup} (require :gitsigns)]
+  (setup {:signcolumn false
+          :numhl true}))
 
 (local ts (require :nvim-treesitter))
 (local tsq (require :nvim-treesitter.query))
