@@ -10,7 +10,7 @@ function fish_prompt
   set status_color "red"
 
   if [ $last_status -eq "0" ]
-    set status_color "green"
+    set status_color "blue"
   end
 
   set_color $status_color
