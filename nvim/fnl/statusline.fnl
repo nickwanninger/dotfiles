@@ -86,7 +86,7 @@
                         " %f "
                         "%#StatusPosition#"
                         "%="
-                        (get-git-status)
+                        ;; (get-git-status)
                         "%#StatusPosition#"
                         " %l:%c "
                         (get-lsp-diagnostic)])))

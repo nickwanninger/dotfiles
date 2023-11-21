@@ -40,7 +40,8 @@ alias tm "tmux new-session -A -s main"
 alias :q "exit"
 alias glog "git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 
-alias lg "lazygit"
+# alias lg "lazygit"
+alias lg "nvim -c :Neogit"
 alias lx "exa -lgFBS"
 
 alias gp "git push"
