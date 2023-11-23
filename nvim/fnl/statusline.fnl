@@ -3,18 +3,20 @@
 (local modes
   {:n :RW
    :no :RO
-   :v "**"
-   :V "**"
+   :v  "**"
+   :V  "**"
    "\022" "**"
-   :s :S
-   :S :SL
+   :s  :S
+   :S  :SL
    "\019" :SB
-   :i "**"
+   :i  "**"
    :ic "**"
-   :R :RA
+   :R  :RA
    :Rv :RV
-   :c :VIEX
-   :cv :VIEX :ce :EX :r :r
+   :c  :VIEX
+   :cv :VIEX
+   :ce :EX
+   :r  :r
    :rm :r
    :r? :r
    :! "!"
@@ -55,16 +57,36 @@
   (string.format " %%#StatusLineDiagnosticWarn#%s %%#StatusLineDiagnosticError#%s "
                  (or (. result :warnings) 0) (or (. result :errors) 0)))
 
+
+(local json (require :json))
+
+(fn get-git-status []
+  (if vim.b.gitsigns_status_dict
+    (let [s vim.b.gitsigns_status_dict]
+      ;; (print (json.encode s))
+      (table.concat [s.head
+                     "%#StatusLineDiagnosticWarn#"
+                     (string.format " +%d " s.added)
+
+                     "%#StatusLineDiagnosticError#"
+                     (string.format " -%d " s.removed)
+
+                     "%#StatusLineDiagnosticHint#"
+                     (string.format " ~%d " s.changed)
+                     "%#StatusLine#"]))
+    ""))
+
 (global statusline
   (fn [] (table.concat [(mode-color)
                         (: (string.format " %s "
                               (. modes
                                 (. (vim.api.nvim_get_mode) :mode)))
                            :upper)
-                        "%#StatusLine#" " %f "
+                        "%#StatusLine#"
+                        " %f "
                         "%#StatusPosition#"
-                        ;; (get-git-status)
                         "%="
+                        ;; (get-git-status)
                         "%#StatusPosition#"
                         " %l:%c "
                         (get-lsp-diagnostic)])))

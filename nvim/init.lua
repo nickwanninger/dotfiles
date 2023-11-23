@@ -78,12 +78,12 @@ nnoremap <silent> <M-h> :TmuxNavigateLeft<cr>
 nnoremap <silent> <M-j> :TmuxNavigateDown<cr>
 nnoremap <silent> <M-k> :TmuxNavigateUp<cr>
 nnoremap <silent> <M-l> :TmuxNavigateRight<cr>
+
+
 "nnoremap <leader>m :FloatermNew make -j<CR>
 nnoremap <leader>Q :qall<CR>
 
-" nnoremap <leader>g :FloatermNew --height=0.9 --width=0.9 lazygit<CR>
-nnoremap <leader>m :FloatermNew --height=0.9 --width=0.9 emacs -e magit-status -e delete-other-windows<CR>
-
+nnoremap <leader>m :FloatermNew --height=0.9 --width=0.9 make -j<CR>
 
 noremap <leader>f :ClangFormat<CR>
 nnoremap <leader>P :PackerSync<CR>
@@ -91,20 +91,14 @@ nnoremap <leader>P :PackerSync<CR>
 imap <C-Bslash> λ
 imap <C-w> <esc>dbi
 
-" This keeps the current visual block selection active
 " disable writing different filename with :w<filename>
 :autocmd BufWritePre [:;]*
 \   try | echoerr 'Forbidden file name: ' . expand('<afile>') | endtry
-
-" set nu
 
 nmap <C-a> :TagbarToggle<CR>
 map <C-c> :set nu!<CR>
 
 autocmd filetype crontab setlocal nobackup nowritebackup
-
-" au BufRead,BufNewFile *.nesl set filetype=nesl
-" au BufRead,BufNewFile *.fun set filetype=sml
 ]])
 
 
@@ -126,6 +120,9 @@ local ensure_packer = function()
   end
   return false
 end
+
+
+
 
 
 local packer_bootstrap = ensure_packer()
@@ -163,13 +160,16 @@ packer.startup(function(use)
 
 
 
-  use 'NeogitOrg/neogit'
 
-
+	-- some stuff that some people want
+	use 'nvim-lua/plenary.nvim'
   use 'MunifTanjim/nui.nvim'
   use 'nvim-telescope/telescope.nvim'
+  use 'sindrets/diffview.nvim'
 
-  use 'tpope/vim-fugitive'
+
+  -- A fantastic reimplementation of magit from emacs
+  use 'NeogitOrg/neogit'
 
 	-- Merge Tmux stuff
 	use 'christoomey/vim-tmux-navigator'
@@ -180,7 +180,6 @@ packer.startup(function(use)
 	-- Fuzzy finder
 	use {'junegunn/fzf', run='fzf#install()'}
 	use 'junegunn/fzf.vim'
-  use 'monkoose/fzf-hoogle.vim'
 
 	-- tag bar on the right
 	use 'preservim/tagbar'
@@ -191,9 +190,6 @@ packer.startup(function(use)
 	use 'lluchs/vim-wren' -- wren (cause it's cool)
 	use 'Shirk/vim-gas' -- Gnu Assembler
 	use 'dag/vim-fish' -- Fish Shell
-
-	-- some stuff that some people want
-	use 'nvim-lua/plenary.nvim'
 
 	-- Show git info next to the numbers
 	use 'lewis6991/gitsigns.nvim'
@@ -214,9 +210,8 @@ packer.startup(function(use)
 	use 'ray-x/lsp_signature.nvim'
 	use 'rhysd/vim-clang-format'
 	use 'ErichDonGubler/lsp_lines.nvim'
-	use 'nvim-treesitter/nvim-treesitter'
+	use 'nvim-treesitter/nvim-treesitter' -- very important
 
-	-- use 'nvim-treesitter/playground)
 	use 'weilbith/nvim-code-action-menu'
 	use 'folke/which-key.nvim'
 	use 'folke/zen-mode.nvim'
@@ -224,15 +219,10 @@ packer.startup(function(use)
 	-- Lisp stuff
 	use 'gpanders/nvim-parinfer'
 	use 'Olical/conjure'
-	-- use 'rachitnigam/drracket.vim'
-	-- use 'wlangstroth/vim-racket'
 	-- Fennel syntax highlighting
 	use 'bakpakin/fennel.vim'
-
-
   -- A nice library to watch if a file changes
   use 'rktjmp/fwatch.nvim'
-
 
   -- Automatically set up the configuration after cloning packer.nvim
   if packer_bootstrap then
