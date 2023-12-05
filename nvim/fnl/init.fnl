@@ -136,15 +136,6 @@
          (if (= ft "scheme") (run-buffer-with "racket")))))
 
 
-
-(keys.map "<leader>h"
-          "Open the Hoogle Search"
-          (fn []
-            (do
-              (vim.cmd ":Hoogle")))
-          {})
-
-
 ;; Remove the default menu items
 (vim.cmd "aunmenu PopUp.How-to\\ disable\\ mouse")
 (vim.cmd "aunmenu PopUp.-1-")
