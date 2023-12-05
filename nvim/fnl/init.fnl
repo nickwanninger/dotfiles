@@ -49,7 +49,9 @@
 ;; Setup Neogit
 (let [neogit (require :neogit)]
   ;; Setup neogit
-  (neogit.setup {:kind "tab"})
+  (neogit.setup {:kind "tab"
+                 :mappings {:popup {:p false}}})
+
   (keys.map "<leader>g"
             "Open neogit"
             neogit.open))
