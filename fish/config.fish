@@ -24,6 +24,11 @@ set -x GOPATH $HOME/dev/go
 export PATH="$GOPATH/bin:$PATH"
 export PATH="/opt/cuda/bin:$PATH"
 
+
+
+export PATH="/usr/local/cuda/bin:$PATH"
+export LD_LIBRARY_PATH="/usr/local/cuda/lib:$LD_LIBRARY_PATH"
+
 set -g fish_user_paths $HOME/.bin $HOME/.local/bin $HOME/.cargo/bin $fish_user_paths
 
 export EDITOR=(which nvim)
@@ -57,7 +62,7 @@ alias ea "bass source ~/dev/alaska/enable"
 
 alias src "bass source"
 
-alias magit "emacs -e 'magit-status' -e 'delete-other-windows'"
+alias magit "nvim -c :Neogit"
 
 # disable homebrew auto update. Not sure if this works
 set -x HOMEBREW_NO_AUTO_UPDATE 1
@@ -113,6 +118,7 @@ end
 
 # set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME ;
 set -gx PATH "$HOME/.cabal/bin" "$HOME/.ghcup/bin" $PATH # ghcup-env
+set -gx PATH "/nix/var/nix/profiles/default/bin" $PATH # ghcup-env
 
 if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.fish' ]
   . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.fish'
