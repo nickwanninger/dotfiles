@@ -57,7 +57,7 @@ alias ea "bass source ~/dev/alaska/enable"
 
 alias src "bass source"
 
-alias magit "emacs -e 'magit-status' -e 'delete-other-windows'"
+alias magit "nvim -c :Neogit"
 
 # disable homebrew auto update. Not sure if this works
 set -x HOMEBREW_NO_AUTO_UPDATE 1
