@@ -1,11 +1,10 @@
 (local keys (require :core.keymap))
 (local state (require :core.state))
+(local {: setup} (require :core.setup))
+(local io (require :core.io))
 
-(fn setup [name config cb]
-  (let [pkg (require name)]
-      (pkg.setup config)
-      (when cb
-        (cb pkg))))
+
+
 
 (require :lsp)
 (require :statusline)
@@ -152,6 +151,5 @@
 
 
 ;; (state.write {:foo "hello"})
-
 
 (state.start)
