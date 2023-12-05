@@ -50,7 +50,8 @@
 (let [neogit (require :neogit)]
   ;; Setup neogit
   (neogit.setup {:kind "tab"
-                 :mappings {:popup {:p false}}})
+                 :mappings {:popup {;; Disable pull
+                                    :p false}}})
 
   (keys.map "<leader>g"
             "Open neogit"
