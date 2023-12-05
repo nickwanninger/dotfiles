@@ -1,5 +1,5 @@
 (local lsp (require :lspconfig))
-(local {: set-lsp-keys!} (require :keymap))
+(local {: set-lsp-keys!} (require :core.keymap))
 (local coq (require :coq))
 
 ;; 

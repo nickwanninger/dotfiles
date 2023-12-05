@@ -53,6 +53,13 @@ hi CocFloat ctermbg=238 ctermfg=15
 hi CocFloating ctermbg=238 guibg=238 ctermfg=15
 hi Pmenu ctermbg=238 guibg=238 ctermfg=15
 
+
+" Bring back the purple.
+try
+  colorscheme vim
+catch /^Vim\%((\a\+)\)\=:E185/
+endtry
+
 au BufRead,BufNewFile *.hbs set filetype=html
 
 

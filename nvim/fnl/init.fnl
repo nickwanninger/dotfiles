@@ -1,75 +1,71 @@
-(local keys (require :keymap))
-(local state (require :state))
+(local keys (require :core.keymap))
+(local state (require :core.state))
+
+(fn setup [name config cb]
+  (let [pkg (require name)]
+      (pkg.setup config)
+      (when cb
+        (cb pkg))))
 
 (require :lsp)
 (require :statusline)
 
-;; setup neovimtree as a replacement for nerd tree
-(let [{: setup} (require :nvim-tree)]
-  (setup {:view {:side :left
-                 :width 30}
-          :filters {:dotfiles true}
-          :disable_netrw true
-          :hijack_netrw true
-          :hijack_cursor true
-          :open_on_tab true
-          :update_cwd true
-          :git {:enable true :ignore true}
-          :hijack_directories {:enable true :auto_open true}
-          :renderer {:indent_markers {:enable false}}}))
+(setup :nvim-tree
+  {:view {:side :left
+          :width 30}
+   :filters {:dotfiles true}
+   :disable_netrw true
+   :hijack_netrw true
+   :hijack_cursor true
+   :open_on_tab true
+   :update_cwd true
+   :git {:enable true :ignore true}
+   :hijack_directories {:enable true :auto_open true}
+   :renderer {:indent_markers {:enable false}}})
 
-(let [{: setup} (require :gitsigns)]
-  (setup {:signcolumn false
-          :numhl true}))
+(setup :gitsigns
+  {:signcolumn false
+   :numhl true})
 
-(local ts (require :nvim-treesitter))
-(local tsq (require :nvim-treesitter.query))
-(local tsp (require :nvim-treesitter.parsers))
+; (local ts (require :nvim-treesitter))
+; (local tsq (require :nvim-treesitter.query))
+; (local tsp (require :nvim-treesitter.parsers))
 
-
-(let [{: setup} (require :nvim-treesitter.configs)]
-  ;; Usual setup for treesitter
-  (setup {:ensure_installed [ "c" "cpp" "fennel" "rust" "racket" ]
-          :ensure_maintained "maintained"
-          :sync_install false
-          ;; :indent {:enable true}
-          :incremental_selection {:enable true}
-          :highlight { :enable true
-                       :additional_vim_regex_highlighting false
-                       :indent {:enable true}}}))
-
-(set vim.notify (require :notify))
-(vim.notify.setup {})
-
-;; Setup nvim-comment
-(let [{: setup} (require :Comment)]
-  (setup))
+(setup :nvim-treesitter.configs
+  {:ensure_installed [ "c" "cpp" "fennel" "rust" "racket"]
+   :ensure_maintained "maintained"
+   :sync_install false
+   ;; :indent {:enable true}
+   :incremental_selection {:enable true}
+   :highlight { :enable true
+                :additional_vim_regex_highlighting false
+                :indent {:enable true}}})
 
 
-;; Setup Neogit
-(let [neogit (require :neogit)]
-  ;; Setup neogit
-  (neogit.setup {:kind "tab"
-                 :mappings {:popup {;; Disable pull
-                                    :p false}}})
+(setup :neogit 
+       {:disable_signs false
+        :disable_hint true
+        :disable_context_highlighting false
+        :disable_builtin_notifications true
+        :status {:recent_commit_count 10}
+        :signs {:section ["" ""]
+                :item ["" ""]
+                :hunk ["" ""]}
+        :integrations {:diffview true}
+        :sections {:recent {:folded false}}}
+      (fn [neogit]
+        ;; map \g to open neogit
+          (keys.map "<leader>g" "Open neogit" neogit.open)))
 
-  (keys.map "<leader>g"
-            "Open neogit"
-            neogit.open))
+(setup :Comment {})
+
+(setup :notify {}
+       (fn [notify] (set vim.notify notify)))
 
 (keys.map "<C-S-Left>"  "Prev Tab" ":tabprev<CR>")
 (keys.map "<C-S-Right>" "Next Tab" ":tabnext<CR>")
-  
-
-
-  
-
-
-
-
 ;; TODO: stop using vim.cmd
 (vim.cmd "syntax enable")
-
 (vim.cmd "set shell=fish")
 
 (vim.cmd "let $FZF_DEFAULT_OPTS = '--reverse'")
