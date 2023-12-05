@@ -29,7 +29,7 @@
 
 (let [{: setup} (require :nvim-treesitter.configs)]
   ;; Usual setup for treesitter
-  (setup {:ensure_installed [ "c" "cpp" "fennel" "rust" "racket"]
+  (setup {:ensure_installed [ "c" "cpp" "fennel" "rust" "racket" ]
           :ensure_maintained "maintained"
           :sync_install false
           ;; :indent {:enable true}
@@ -69,7 +69,6 @@
 
 ;; TODO: stop using vim.cmd
 (vim.cmd "syntax enable")
-;; (vim.cmd "colorscheme snazzy")
 
 (vim.cmd "set shell=fish")
 
@@ -78,7 +77,6 @@
 
 (vim.cmd "au BufRead,BufNewFile *.y set ft=haskell")
 (vim.cmd "au BufRead,BufNewFile *.x set ft=haskell")
-;; (vim.cmd "au BufRead,BufNewFile *.fz set syntax=haskell")
 (vim.cmd "au BufRead,BufNewFile *.fz set syntax=futz")
 (vim.cmd "au BufRead,BufNewFile *.fz set filetype=futz")
 (vim.cmd "autocmd FileType futz setlocal commentstring=--%s")
@@ -87,14 +85,8 @@
 (local colors (require :highlight))
 
 
-;; (local darktheme colors.snazzy-black)
-;; (local darktheme colors.atlas)
-;; (local darktheme colors.nord-black)
 (local darktheme colors.material-black)
 (local lighttheme colors.one-light)
-
-; (local darktheme colors.gruvbox-dark-hard)
-; (local lighttheme colors.gruvbox-light-hard)
 
 (state.register :colorscheme colors.select-colorscheme)
 (state.default :colorscheme darktheme)
