@@ -46,7 +46,7 @@
         :disable_hint true
         :disable_context_highlighting false
         :disable_builtin_notifications true
-        :status {:recent_commit_count 10}
+        :status {:recent_commit_count 30}
         :signs {:section ["" ""]
                 :item ["" ""]
                 :hunk ["" ""]}
@@ -55,7 +55,7 @@
         :mappings {:popup {:p false}}}
       (fn [neogit]
         ;; map \g to open neogit
-          (keys.map "<leader>g" "Open neogit" neogit.open)))
+        (keys.map "<leader>g" "Open neogit" neogit.open)))
 
 (setup :Comment {})
 
@@ -103,6 +103,12 @@
   {})
 
 (colors.select-colorscheme darktheme)
+
+
+; (vim.cmd "colorscheme oxocarbon")
+; (vim.api.nvim_set_hl 0 "Normal" {:bg "none"})
+; (vim.api.nvim_set_hl 0 "NormalFloat" {:bg "none"})
+
 
 
 (fn run-buffer-with [program]

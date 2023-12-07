@@ -174,6 +174,9 @@ packer.startup(function(use)
   use 'nvim-telescope/telescope.nvim'
   use 'sindrets/diffview.nvim'
 
+  -- Fancy ui lib?
+  use 'MunifTanjim/nui.nvim'
+
 
   -- A fantastic reimplementation of magit from emacs
   use 'NeogitOrg/neogit'
@@ -230,6 +233,8 @@ packer.startup(function(use)
 	use 'bakpakin/fennel.vim'
   -- A nice library to watch if a file changes
   use 'rktjmp/fwatch.nvim'
+
+  use { 'echasnovski/mini.nvim', branch = 'stable' }
 
   -- Automatically set up the configuration after cloning packer.nvim
   if packer_bootstrap then

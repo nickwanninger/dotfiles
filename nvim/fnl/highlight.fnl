@@ -35,7 +35,8 @@
 
 
 (lambda select-colorscheme [theme]
-  (let [{: setup} (require :base16-colorscheme)] (setup theme))
+  ; (let [{: setup} (require :base16-colorscheme)] (setup theme))
+  (let [{: setup} (require :mini.base16)] (setup {:palette theme}))
 
   (when (not (?. theme :cursor))
     (tset theme :cursor theme.base01))
@@ -73,20 +74,6 @@
   (highlight! NvimTreeEmptyFolderName [] {:fg theme.base0F})
   (highlight! NvimTreeOpenedFolderName [] {:fg theme.base0F})
 
-
-  ;; (highlight! BufferVisible [] {:bg theme.base00})
-  ;; (highlight! BufferTabpages [] {:bg theme.base00})
-  ;; (highlight! BufferTabpageFill [] {:bg theme.base00})
-  ;; (highlight! BufferInactive [] {:bg theme.base00})
-  ;; (highlight! BufferInactiveIndex [] {:bg theme.base00})
-  ;; (highlight! BufferInactiveMod [] {:bg theme.base00})
-  ;; (highlight! BufferInactiveTarget [] {:bg theme.base00})
-
-  ;; (highlight! NvimTreeNormal [] {:fg theme.base04 :bg :NONE})
-
-  ;; (highlight! Normal [] {:fg :NONE :bg :NONE})
-  ;; (highlight! InactiveWindow [] {:fg :NONE :bg :NONE})
-
   ;; Normal Config
   (vim.cmd "hi MatchParen gui=underline guibg=#393939")
   (highlight! NonText [] {:fg theme.base02})
@@ -117,8 +104,6 @@
   (highlight! NeogitDiffContext   [] {:bg "#111111" :fg "#FFFFFF"})
   (highlight! NeogitDiffAdd       [] {:bg "#003300" :fg "#00FF00"})
   (highlight! NeogitDiffDelete    [] {:bg "#330000" :fg "#FF0000"})
-
-
   (highlight! NeogitDiffContextHighlight   [] {:bg "#111111" :fg "#FFFFFF"})
   (highlight! NeogitDiffAddHighlight       [] {:bg "#003300" :fg "#00FF00"})
   (highlight! NeogitDiffDeleteHighlight    [] {:bg "#330000" :fg "#FF0000"}))
