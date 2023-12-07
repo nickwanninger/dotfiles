@@ -51,7 +51,8 @@
                 :item ["" ""]
                 :hunk ["" ""]}
         :integrations {:diffview true}
-        :sections {:recent {:folded false}}}
+        :sections {:recent {:folded false}}
+        :mappings {:popup {:p false}}}
       (fn [neogit]
         ;; map \g to open neogit
           (keys.map "<leader>g" "Open neogit" neogit.open)))
