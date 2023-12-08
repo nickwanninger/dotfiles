@@ -9,6 +9,7 @@
 (require :lsp)
 (require :statusline)
 
+
 (setup :nvim-tree
   {:view {:side :left
           :width 30}
@@ -56,6 +57,9 @@
       (fn [neogit]
         ;; map \g to open neogit
         (keys.map "<leader>g" "Open neogit" neogit.open)))
+
+
+(setup :nvim-highlight-colors {})
 
 (setup :Comment {})
 

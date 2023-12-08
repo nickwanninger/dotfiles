@@ -187,6 +187,10 @@ packer.startup(function(use)
 	-- A bunch of base16 themes
 	use 'RRethy/nvim-base16'
 
+
+  -- use 'norcalli/nvim-colorizer.lua'
+  use 'brenoprata10/nvim-highlight-colors'
+
 	-- Fuzzy finder
 	use {'junegunn/fzf', run='fzf#install()'}
 	use 'junegunn/fzf.vim'
