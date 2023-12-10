@@ -54,7 +54,6 @@ hi CocFloating ctermbg=238 guibg=238 ctermfg=15
 hi Pmenu ctermbg=238 guibg=238 ctermfg=15
 
 
-" Bring back the purple.
 try
   colorscheme vim
 catch /^Vim\%((\a\+)\)\=:E185/
@@ -103,6 +102,8 @@ imap <C-w> <esc>dbi
 \   try | echoerr 'Forbidden file name: ' . expand('<afile>') | endtry
 
 nmap <C-a> :TagbarToggle<CR>
+
+set nu
 map <C-c> :set nu!<CR>
 
 autocmd filetype crontab setlocal nobackup nowritebackup
@@ -174,10 +175,6 @@ packer.startup(function(use)
   use 'nvim-telescope/telescope.nvim'
   use 'sindrets/diffview.nvim'
 
-  -- Fancy ui lib?
-  use 'MunifTanjim/nui.nvim'
-
-
   -- A fantastic reimplementation of magit from emacs
   use 'NeogitOrg/neogit'
 
@@ -225,6 +222,10 @@ packer.startup(function(use)
 	use 'rhysd/vim-clang-format'
 	use 'ErichDonGubler/lsp_lines.nvim'
 	use 'nvim-treesitter/nvim-treesitter' -- very important
+  use 'nvim-treesitter/playground'
+
+  use { "catppuccin/nvim", as = "catppuccin" }
+
 
 	use 'weilbith/nvim-code-action-menu'
 	use 'folke/which-key.nvim'
@@ -239,6 +240,20 @@ packer.startup(function(use)
   use 'rktjmp/fwatch.nvim'
 
   use { 'echasnovski/mini.nvim', branch = 'stable' }
+
+
+  use({
+    "utilyre/barbecue.nvim",
+    tag = "*",
+    requires = {
+      "SmiteshP/nvim-navic",
+      "nvim-tree/nvim-web-devicons", -- optional dependency
+    },
+    after = "nvim-web-devicons", -- keep this if you're using NvChad
+    config = function()
+      require("barbecue").setup()
+    end,
+  })
 
   -- Automatically set up the configuration after cloning packer.nvim
   if packer_bootstrap then

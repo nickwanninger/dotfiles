@@ -29,49 +29,5 @@
   (let [opt (or ?opt {})]
     (wk.register { binding [func name]} opt)))
 
-
-(map "<C-n>" "Focus on the tree view" ":NvimTreeToggle<CR>" {:mode "n"})
-(map "<C-S-n>" "Focus on the tree view" ":NvimTreeFocus<CR>" {:mode "n"})
-(map "<M-n>" "Close the tree view" ":NvimTreeClose<CR>" {:mode "n"})
-
-(map "?" "Display keymaps" ":WhichKey<CR>" {:mode "n"})
-(map "<C-f>" "Display git files" ":GFiles<CR>" {:mode "n"})
-(map "<C-p>" "Display all files" ":Files<CR>" {:mode "n"})
-(map "<leader>ca" "Open display code actions" ":CodeActionMenu" {:mode "n"})
-(map "<leader>f" "Clang Format" ":ClangFormat<CR>" {:silent true :mode "n"})
-
-(map "<M-f>" "Search" ":Rg<CR>" {:mode "n"})
-
-
-;; Some sane split commands
-(map "<C-_>" "Horizontal Split" ":sp<CR>" {:mode "n"})
-(map "<C-\\>" "Vertical Split" ":vsp<CR>" {:mode "n"})
-
-(map "<C-q>" "Close the current split" ":q<CR>" {:mode "n"})
-
-(map "<" "Dedent" "<gv" {:mode "v"})
-(map ">" "Indent" ">gv" {:mode "v"})
-
-
-
-
-(map "qq" "exit" ":q<CR>")
-
-(map "<space>" "Select the word under the cursor" "<ESC>viw")
-
-(map "<leader>P" "Run PackerSync" ":PackerSync"
-     {:silent true
-      :mode "n"})
-
-;; Unmap recording... It's annoying if you don't use it
-(vim.cmd "nnoremap <silent> Q q")
-(vim.cmd "nnoremap <silent> q <Nop>")
-
-; (map "<C-j>" "scroll down" "<ScrollWheelDown>" {:mode "n"})
-; (map "<C-k>" "scroll up" "<ScrollWheelUp>" {:mode "n"})
-
-(map "<C-j>" "scroll down" "5j" {:mode "n"})
-(map "<C-k>" "scroll up" "5k" {:mode "n"})
-
 {: set-lsp-keys!
  : map}

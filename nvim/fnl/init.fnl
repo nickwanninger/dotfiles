@@ -10,6 +10,10 @@
 (require :statusline)
 
 
+
+(setup :catppuccin
+       {:transparent_background false})
+
 (setup :nvim-tree
   {:view {:side :left
           :width 30}
@@ -45,7 +49,8 @@
 (setup :neogit 
        {:disable_signs false
         :disable_hint true
-        :disable_context_highlighting false
+        ;; :graph_style "unicode"
+        :disable_context_highlighting true
         :disable_builtin_notifications true
         :status {:recent_commit_count 30}
         :signs {:section ["" ""]
@@ -68,7 +73,7 @@
 
 (keys.map "<C-S-Left>"  "Prev Tab" ":tabprev<CR>")
 (keys.map "<C-S-Right>" "Next Tab" ":tabnext<CR>")
-;; TODO: stop using vim.cmd
+
 (vim.cmd "syntax enable")
 (vim.cmd "set shell=fish")
 
@@ -88,26 +93,27 @@
 (local darktheme colors.material-black)
 (local lighttheme colors.one-light)
 
-(state.register :colorscheme colors.select-colorscheme)
-(state.default :colorscheme darktheme)
+; (state.register :colorscheme colors.select-colorscheme)
+; (state.default :colorscheme darktheme)
+;
+; (keys.map "<leader>1" "Select Dark Theme"
+;   (fn [] (state.set-val :colorscheme darktheme))
+;   ;; (fn [] (colors.select-colorscheme darktheme))
+;   {})
+;
+; (keys.map "<leader>2" "Select Light Theme"
+;   (fn [] (state.set-val :colorscheme lighttheme))
+;   ;; (fn [] (colors.select-colorscheme lighttheme))
+;   {})
+;
+;
+; (keys.map "<leader>3" "Zen mode"
+;   (fn [] (vim.cmd ":ZenMode"))
+;   {})
+;
+; (colors.select-colorscheme darktheme)
 
-(keys.map "<leader>1" "Select Dark Theme"
-  (fn [] (state.set-val :colorscheme darktheme))
-  ;; (fn [] (colors.select-colorscheme darktheme))
-  {})
-
-(keys.map "<leader>2" "Select Light Theme"
-  (fn [] (state.set-val :colorscheme lighttheme))
-  ;; (fn [] (colors.select-colorscheme lighttheme))
-  {})
-
-
-(keys.map "<leader>3" "Zen mode"
-  (fn [] (vim.cmd ":ZenMode"))
-  {})
-
-(colors.select-colorscheme darktheme)
-
+(vim.cmd "colorscheme catppuccin")
 
 ; (vim.cmd "colorscheme oxocarbon")
 ; (vim.api.nvim_set_hl 0 "Normal" {:bg "none"})
@@ -159,6 +165,38 @@
 (vim.cmd.anoremenu "PopUp.Format :ClangFormat<CR>")
 (vim.cmd.anoremenu "PopUp.Zen :ZenMode<CR>")
 
+
+
+(keys.map "<C-n>" "Focus on the tree view" ":NvimTreeToggle<CR>" {:mode "n"})
+(keys.map "<C-S-n>" "Focus on the tree view" ":NvimTreeFocus<CR>" {:mode "n"})
+(keys.map "<M-n>" "Close the tree view" ":NvimTreeClose<CR>" {:mode "n"})
+(keys.map "?" "Display keymaps" ":WhichKey<CR>" {:mode "n"})
+(keys.map "<C-f>" "Display git files" ":GFiles<CR>" {:mode "n"})
+(keys.map "<C-p>" "Display all files" ":Files<CR>" {:mode "n"})
+(keys.map "<leader>ca" "Open display code actions" ":CodeActionMenu" {:mode "n"})
+(keys.map "<leader>f" "Clang Format" ":ClangFormat<CR>" {:silent true :mode "n"})
+(keys.map "<M-f>" "Search" ":Rg<CR>" {:mode "n"})
+; Some sane split commands
+(keys.map "<C-_>" "Horizontal Split" ":sp<CR>" {:mode "n"})
+(keys.map "<C-\\>" "Vertical Split" ":vsp<CR>" {:mode "n"})
+(keys.map "<C-q>" "Close the current split" ":q<CR>" {:mode "n"})
+(keys.map "<" "Dedent" "<gv" {:mode "v"})
+(keys.map ">" "Indent" ">gv" {:mode "v"})
+(keys.map "qq" "exit" ":q<CR>")
+(keys.map "<space>" "Select the word under the cursor" "<ESC>viw")
+(keys.map "<leader>P" "Run PackerSync" ":PackerSync"
+     {:silent true
+      :mode "n"})
+
+;; Unmap recording... It's annoying if you don't use it
+(vim.cmd "nnoremap <silent> Q q")
+(vim.cmd "nnoremap <silent> q <Nop>")
+
+; (map "<C-j>" "scroll down" "<ScrollWheelDown>" {:mode "n"})
+; (map "<C-k>" "scroll up" "<ScrollWheelUp>" {:mode "n"})
+
+(keys.map "<C-j>" "scroll down" "5j" {:mode "n"})
+(keys.map "<C-k>" "scroll up" "5k" {:mode "n"})
 
 
 ;; (state.write {:foo "hello"})

@@ -35,6 +35,8 @@
 
 
 (lambda select-colorscheme [theme]
+
+  (vim.cmd "hi clear")
   ; (let [{: setup} (require :base16-colorscheme)] (setup theme))
   (let [{: setup} (require :mini.base16)] (setup {:palette theme}))
 
@@ -108,7 +110,11 @@
   (highlight! NeogitDiffDelete    [] {:bg "#330000" :fg "#FF0000"})
   (highlight! NeogitDiffContextHighlight   [] {:bg "#111111" :fg "#FFFFFF"})
   (highlight! NeogitDiffAddHighlight       [] {:bg "#003300" :fg "#00FF00"})
-  (highlight! NeogitDiffDeleteHighlight    [] {:bg "#330000" :fg "#FF0000"}))
+  (highlight! NeogitDiffDeleteHighlight    [] {:bg "#330000" :fg "#FF0000"})
+
+  (highlight! NeogitChangeAdded [] {:fg "#C3E88D"})
+  (highlight! NeogitChangeDeleted [] {:fg "#FF5370"})
+  (highlight! NeogitChangeModified [] {:fg "#FFCB6B"}))
 
 
 
