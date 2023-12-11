@@ -3,16 +3,10 @@
 (local {: setup} (require :core.setup))
 (local io (require :core.io))
 
-
-
-
 (require :lsp)
 (require :statusline)
 
 
-
-(setup :catppuccin
-       {:transparent_background false})
 
 (setup :nvim-tree
   {:view {:side :left
@@ -93,27 +87,30 @@
 (local darktheme colors.material-black)
 (local lighttheme colors.one-light)
 
-; (state.register :colorscheme colors.select-colorscheme)
-; (state.default :colorscheme darktheme)
-;
-; (keys.map "<leader>1" "Select Dark Theme"
-;   (fn [] (state.set-val :colorscheme darktheme))
-;   ;; (fn [] (colors.select-colorscheme darktheme))
-;   {})
-;
-; (keys.map "<leader>2" "Select Light Theme"
-;   (fn [] (state.set-val :colorscheme lighttheme))
-;   ;; (fn [] (colors.select-colorscheme lighttheme))
-;   {})
-;
-;
-; (keys.map "<leader>3" "Zen mode"
-;   (fn [] (vim.cmd ":ZenMode"))
-;   {})
-;
-; (colors.select-colorscheme darktheme)
+(state.register :colorscheme colors.select-colorscheme)
+(state.default :colorscheme darktheme)
 
-(vim.cmd "colorscheme catppuccin")
+(keys.map "<leader>1" "Select Dark Theme"
+  (fn [] (state.set-val :colorscheme darktheme))
+  ;; (fn [] (colors.select-colorscheme darktheme))
+  {})
+
+(keys.map "<leader>2" "Select Light Theme"
+  (fn [] (state.set-val :colorscheme lighttheme))
+  ;; (fn [] (colors.select-colorscheme lighttheme))
+  {})
+
+
+(keys.map "<leader>3" "Zen mode"
+  (fn [] (vim.cmd ":ZenMode"))
+  {})
+
+(colors.select-colorscheme darktheme)
+
+; (setup :catppuccin
+;        {:transparent_background false})
+;
+; (vim.cmd "colorscheme catppuccin")
 
 ; (vim.cmd "colorscheme oxocarbon")
 ; (vim.api.nvim_set_hl 0 "Normal" {:bg "none"})
