@@ -2,7 +2,7 @@
 
 return {
   "NeogitOrg/neogit",
-  event = 'UiEnter',
+
   dependencies = {
     "nvim-lua/plenary.nvim",         -- required
     "nvim-telescope/telescope.nvim", -- optional
