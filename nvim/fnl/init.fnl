@@ -7,6 +7,39 @@
 (require :statusline)
 
 
+;; Setup a sane set of defaults
+(set vim.o.nocompatible true)
+(set vim.o.noshowmode true)
+(set vim.o.laststatus 0)
+(set vim.o.winminheight 0)
+(set vim.o.splitbelow true)
+(set vim.o.splitright true)
+(set vim.o.noeol true)
+(set vim.o.tabstop 2)
+(set vim.o.shiftwidth 1)
+(set vim.o.expandtab true)
+(set vim.o.nofoldenable true) ; don't fold by default
+(set vim.o.visualbell "t_vb=")
+(set vim.o.ttyfast true)
+(set vim.o.lazyredraw true)
+(set vim.o.backspace "indent,eol,start")
+(set vim.o.clipboard :unnamedplus)
+(set vim.o.mouse :a)
+(set vim.o.pastetoggle "<F2>")
+(set vim.o.sidescroll 10)
+(set vim.o.incsearch true)
+(set vim.o.ignorecase true)
+(set vim.o.smartcase true)
+(set vim.o.showmatch true)
+(set vim.o.smartindent true)
+(set vim.o.noswapfile true)
+(set vim.o.nobackup true)
+(set vim.o.nowritebackup true)
+(set vim.o.undofile true)
+(set vim.o.undodir "~/.tmp//,/tmp//")
+(set vim.o.hidden true)
+(set vim.o.shell "/bin/sh")
+(set vim.o.encoding "utf-8")  ; Necessary to show Unicode glyphs
 
 (setup :nvim-tree
   {:view {:side :left
@@ -154,6 +187,7 @@
 (keys.map "<leader>l" "Open lazy" ":Lazy")
 (keys.map "<leader>ca" "Open display code actions" ":CodeActionMenu" {:mode "n"})
 (keys.map "<leader>f" "Clang Format" ":ClangFormat<CR>" {:silent true :mode "n"})
+(keys.map "<leader>u" "Toggle Undotree" ":UndotreeToggle<cr>" {:silent true :mode "n"})
 
 ;; Misc
 (keys.map "<C-Bslash>" "Place a lambda" "λ" {:mode "i"})
