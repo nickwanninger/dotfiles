@@ -14,7 +14,6 @@ nnoremap ; :
 
 
 " disable writing different filename with :w<filename>
-:autocmd BufWritePre [:;]*
-\   try | echoerr 'Forbidden file name: ' . expand('<afile>') | endtry
+:autocmd BufWritePre [:;]* try | echoerr 'Forbidden file name: ' . expand('<afile>') | endtry
 
 autocmd filetype crontab setlocal nobackup nowritebackup

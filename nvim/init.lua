@@ -1,9 +1,3 @@
--- This file is a relatively simple bootstrapping script for my neovim configuration
--- It's main job is to setup a bunch of sane defaults, make sure packer is installed,
--- the plugins are `used`, and the initial sync is performed.
--- As part of that sync, it will install "tangerine", which allows the rest of the
--- configuration to be made in "fennel", which is a lisp
-
 vim.loader.enable()
 
 -- Execute the Vimscript code in the .vim file
@@ -56,12 +50,11 @@ require('lazy').setup {
   { 'udayvir-singh/tangerine.nvim',
     priority = 1000,
     config = function()
-      local nvim_dir = vim.fn.stdpath [[config]]
       require('tangerine').setup {
        -- Start by using the init.fnl file
-       vimrc   = nvim_dir .. "/fnl/init.fnl",
+       vimrc   = vim.fn.stdpath [[config]] .. "/fnl/init.fnl",
        -- And set the 'include path' for fennel files to $RT/fnl
-       source  = nvim_dir .. "/fnl",
+       source  = vim.fn.stdpath [[config]] .. "/fnl",
        target = vim.fn.stdpath [[data]] .. "/tangerine",
        compiler = {
          verbose = false,
@@ -69,6 +62,16 @@ require('lazy').setup {
        }
       }
     end
+  },
+
+  { "nvim-neo-tree/neo-tree.nvim",
+    branch = "v3.x",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+      "MunifTanjim/nui.nvim",
+      -- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
+    }
   },
 
   "folke/which-key.nvim",
@@ -88,7 +91,7 @@ require('lazy').setup {
   'Shirk/vim-gas', -- Gnu Assembler
   'dag/vim-fish', -- Fish Shell
   'lewis6991/gitsigns.nvim',
-  'kyazdani42/nvim-tree.lua',
+  -- 'kyazdani42/nvim-tree.lua',
   'rcarriga/nvim-notify',
   'voldikss/vim-floaterm',
   'ms-jpq/coq_nvim',

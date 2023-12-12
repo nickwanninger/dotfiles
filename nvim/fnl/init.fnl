@@ -10,18 +10,18 @@
 
 
 
-(setup :nvim-tree
-  {:view {:side :left
-          :width 30}
-   :filters {:dotfiles true}
-   :disable_netrw true
-   :hijack_netrw true
-   :hijack_cursor true
-   :open_on_tab true
-   :update_cwd true
-   :git {:enable true :ignore true}
-   :hijack_directories {:enable true :auto_open true}
-   :renderer {:indent_markers {:enable false}}})
+;; (setup :nvim-tree
+;;   {:view {:side :left
+;;           :width 30}
+;;    :filters {:dotfiles true}
+;;    :disable_netrw true
+;;    :hijack_netrw true
+;;    :hijack_cursor true
+;;    :open_on_tab true
+;;    :update_cwd true
+;;    :git {:enable true :ignore true}
+;;    :hijack_directories {:enable true :auto_open true}
+;;    :renderer {:indent_markers {:enable false}}})
 
 (setup :gitsigns
   {:signcolumn false
@@ -114,9 +114,7 @@
  
 
 
-(keys.map "<C-n>" "Focus on the tree view" ":NvimTreeToggle<CR>" {:mode "n"})
-(keys.map "<C-S-n>" "Focus on the tree view" ":NvimTreeFocus<CR>" {:mode "n"})
-(keys.map "<M-n>" "Close the tree view" ":NvimTreeClose<CR>" {:mode "n"})
+(keys.map "<C-n>" "Focus on the tree view" ":Neotree float<CR>" {:mode "n"})
 (keys.map "?" "Display keymaps" ":WhichKey<CR>" {:mode "n"})
 
 ; (keys.map "<C-f>" "Display git files" ":GFiles<CR>" {:mode "n"})
