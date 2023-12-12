@@ -14,7 +14,8 @@ set splitbelow
 set splitright
 set noeol
 set tabstop=2
-set shiftwidth=1
+set softtabstop=2
+set shiftwidth=2
 set expandtab
 set nofoldenable     "don't fold by default
 set foldmethod=indent   " fold on indentations
@@ -56,6 +57,7 @@ command Q q
 nnoremap ; :
 
 let g:tmux_navigator_no_mappings = 1 " disable builtin mappings, I think
+let g:python_recommended_style = 0
 
 
 " disable writing different filename with :w<filename>

@@ -134,6 +134,8 @@ require('lazy').setup {
     },
   },
 
+  'stevearc/conform.nvim',
+
 
   'rhysd/vim-clang-format',
   { 'nvim-treesitter/nvim-treesitter', build = ":TSUpdate" }, -- very important

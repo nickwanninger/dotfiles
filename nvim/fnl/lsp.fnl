@@ -1,6 +1,6 @@
 (local keys (require :core.keymap))
 
-(local lsps ["clangd" "pyright" "rust_analyzer"])
+(local lsps ["clangd" "rust_analyzer"])
 
 
 ;;; Setup Mason
@@ -18,6 +18,8 @@
 (local cmp-nvim-lsp (require :cmp_nvim_lsp))
 (local capabilities (cmp-nvim-lsp.default_capabilities))
 
+
+
 (fn on-attach [client bufnr]
   (let [opts {:noremap true :silent true :buffer bufnr}
         map (fn [combo help cmd]
@@ -33,6 +35,7 @@
     (map "<leader>d" "Show Line Diagnostics" vim.diagnostic.open_float)
     (map "K" "Show documentation" vim.lsp.buf.hover)
     (map "<c-k>" "Show Signature Help" vim.lsp.buf.signature_help)
+    (map "<leader>f" "Format" vim.lsp.buf.format)
     (map "<leader>rs" "Restart LSP" ":LspRestart<CR>")))
 
 ; ;; Go over the different language servers that I want to use and configure them
@@ -46,7 +49,9 @@
   [(fn [server_name]
      (let [{: setup} (. lsp server_name)]
         (setup {:capabilities capabilities
-                :on_attach on-attach})))])
+                :on_attach on-attach
+                :keymap  {:recommended true :jump_to_mark "<c-Tab>"}
+                :flags   {:debounce_text_changed 150}})))])
 
 
 
@@ -79,4 +84,11 @@
 
 
 
+(local conform (require :conform))
+(conform.setup
+  {:formatters_by_ft
+   {:c [:clang-format]}
+   {:cpp [:clang-format]}
+   {:python [:black]}})
 
+(keys.map "<leader>f" "Format" (fn []))

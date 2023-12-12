@@ -33,14 +33,12 @@
   {;; :ensure_installed [ "c" "cpp" "fennel" "rust" "racket"]
    :ensure_maintained "maintained"
    :sync_install false
-   ;; :indent {:enable true}
+   :indent {:enable true}
    :incremental_selection {:enable true}
    :highlight { :enable true
                 :additional_vim_regex_highlighting false
                 :indent {:enable true}}})
 
-
-(setup :mason {})
 
 (setup :neogit 
        {:disable_signs false
@@ -153,7 +151,7 @@
 ;; Leader bindings
 (keys.map "<leader>l" "Open lazy" ":Lazy<CR>")
 (keys.map "<leader>ca" "Open display code actions" ":CodeActionMenu" {:mode "n"})
-(keys.map "<leader>f" "Clang Format" ":ClangFormat<CR>" {:silent true :mode "n"})
+;; (keys.map "<leader>f" "Clang Format" ":ClangFormat<CR>" {:silent true :mode "n"})
 (keys.map "<leader>u" "Toggle Undotree" ":UndotreeToggle<cr>" {:silent true :mode "n"})
 
 ;; Misc
