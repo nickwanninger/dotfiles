@@ -131,118 +131,93 @@ end
 
 
 
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
 
 
-local packer_bootstrap = ensure_packer()
-local packer = require('packer')
+
+require("lazy").setup({
+  "folke/which-key.nvim",
+  { "folke/neoconf.nvim", cmd = "Neoconf" },
+  "folke/neodev.nvim",
 
 
-packer.startup(function(use)
-	-- packer manages itself
-  use 'wbthomason/packer.nvim'
-
-	-- Install tangerine
-	use {
-		'udayvir-singh/tangerine.nvim',
-		-- When it's loaded, call this function to initialize tangerine and
-		-- start the fennel configuration
-		config = function()
+  { 'udayvir-singh/tangerine.nvim',
+    config = function()
 			local nvim_dir = vim.fn.stdpath [[config]]
 			require('tangerine').setup {
 				-- Start by using the init.fnl file
 				vimrc   = nvim_dir .. "/fnl/init.fnl",
 				-- And set the 'include path' for fennel files to $RT/fnl
 				source  = nvim_dir .. "/fnl",
-				-- target  = nvim_dir .. "/lua",
 				target = vim.fn.stdpath [[data]] .. "/tangerine",
 				compiler = {
 					verbose = false,
-					-- if you want to compile before loading init.fnl (recommended)
 					hooks = { "oninit", "onsave" },
-					-- if you only want after VimEnter event has fired
-					-- hooks = { "onenter" },
 				}
 			}
-		end,
-	}
+    end
+  },
 
 
+  -- some stuff that some people want
+	'nvim-lua/plenary.nvim',
+  'MunifTanjim/nui.nvim',
+  'nvim-telescope/telescope.nvim',
+  'sindrets/diffview.nvim',
 
+  -- Reimplementation of Magit
+  'NeogitOrg/neogit',
 
-	-- some stuff that some people want
-	use 'nvim-lua/plenary.nvim'
-  use 'MunifTanjim/nui.nvim'
-  use 'nvim-telescope/telescope.nvim'
-  use 'sindrets/diffview.nvim'
+  -- Merge Tmux Stuff
+  'christoomey/vim-tmux-navigator',
 
-  -- A fantastic reimplementation of magit from emacs
-  use 'NeogitOrg/neogit'
-
-	-- Merge Tmux stuff
-	use 'christoomey/vim-tmux-navigator'
-
-	-- A bunch of base16 themes
-	use 'RRethy/nvim-base16'
-
+  'RRethy/nvim-base16',
 
   -- use 'norcalli/nvim-colorizer.lua'
-  use 'brenoprata10/nvim-highlight-colors'
+  'brenoprata10/nvim-highlight-colors',
 
 	-- Fuzzy finder
-	use {'junegunn/fzf', run='fzf#install()'}
-	use 'junegunn/fzf.vim'
+	{'junegunn/fzf', run='fzf#install()'},
+	'junegunn/fzf.vim',
+	'preservim/tagbar',
+	'numToStr/Comment.nvim',
+	'lluchs/vim-wren', -- wren (cause it's cool)
+	'Shirk/vim-gas', -- Gnu Assembler
+	'dag/vim-fish', -- Fish Shell
+	'lewis6991/gitsigns.nvim',
+	'kyazdani42/nvim-tree.lua',
+	'rcarriga/nvim-notify',
+	'voldikss/vim-floaterm',
+	'ms-jpq/coq_nvim',
+	'ms-jpq/coq.artifacts',
+	'neovim/nvim-lspconfig',
+	'ray-x/lsp_signature.nvim',
+	'rhysd/vim-clang-format',
+	'ErichDonGubler/lsp_lines.nvim',
+	'nvim-treesitter/nvim-treesitter', -- very important
+  'nvim-treesitter/playground',
 
-	-- tag bar on the right
-	use 'preservim/tagbar'
-	-- `gcc` key combo
-	use 'numToStr/Comment.nvim'
+  { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
 
-	-- Language support
-	use 'lluchs/vim-wren' -- wren (cause it's cool)
-	use 'Shirk/vim-gas' -- Gnu Assembler
-	use 'dag/vim-fish' -- Fish Shell
+	'weilbith/nvim-code-action-menu',
+	'folke/which-key.nvim',
+	'folke/zen-mode.nvim',
 
-	-- Show git info next to the numbers
-	use 'lewis6991/gitsigns.nvim'
+	'gpanders/nvim-parinfer',
+	'Olical/conjure',
+	'bakpakin/fennel.vim',
+  'rktjmp/fwatch.nvim',
 
-	-- A nice tree on the left
-	use 'kyazdani42/nvim-tree.lua'
-
-	-- Pretty notifications
-	use 'rcarriga/nvim-notify'
-
-	-- Floating terminal that I use in a bunch of places
-	use 'voldikss/vim-floaterm'
-
-	-- Autocompletion & Autocomplete
-	use 'ms-jpq/coq_nvim'
-	use 'ms-jpq/coq.artifacts'
-	use 'neovim/nvim-lspconfig'
-	use 'ray-x/lsp_signature.nvim'
-	use 'rhysd/vim-clang-format'
-	use 'ErichDonGubler/lsp_lines.nvim'
-	use 'nvim-treesitter/nvim-treesitter' -- very important
-  use 'nvim-treesitter/playground'
-
-  use { "catppuccin/nvim", as = "catppuccin" }
-
-
-	use 'weilbith/nvim-code-action-menu'
-	use 'folke/which-key.nvim'
-	use 'folke/zen-mode.nvim'
-
-	-- Lisp stuff
-	use 'gpanders/nvim-parinfer'
-	use 'Olical/conjure'
-	-- Fennel syntax highlighting
-	use 'bakpakin/fennel.vim'
-  -- A nice library to watch if a file changes
-  use 'rktjmp/fwatch.nvim'
-
-  use { 'echasnovski/mini.nvim', branch = 'stable' }
-
-  -- Automatically set up the configuration after cloning packer.nvim
-  if packer_bootstrap then
-  	packer.sync()
-  end
-end)
+  { 'echasnovski/mini.nvim', branch = 'stable' },
+})
