@@ -1,4 +1,4 @@
-local key = require('core.keymap')
+local keys = require('core.keymap')
 local lsp = require('lspconfig')
 local cmp_nvim_lsp = require('cmp_nvim_lsp')
 
@@ -19,7 +19,7 @@ M.setup_server = function(server_name)
     },
     on_attach = function(client, bufnr)
       local opts = {noremap = true, silent = true, buffer = bufnr}
-    
+  
       keys.map("gR", "Show LSP References", ":Telescope lsp_references<CR>", opts)
       keys.map("gD", "Go to declaration", vim.lsp.buf.declaration, opts)
       keys.map("gd", "Show Definitions", ":Telescope lsp_definitions<CR>", opts)

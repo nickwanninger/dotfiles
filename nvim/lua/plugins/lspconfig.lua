@@ -4,7 +4,5 @@ return {
     "hrsh7th/cmp-nvim-lsp",
     { "antosha417/nvim-lsp-file-operations", config = true },
   },
-  config = function()
-    
-  end
+  -- We don't configure it here, yet. Config happens when the actual language server loads
 }
