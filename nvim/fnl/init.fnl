@@ -30,7 +30,7 @@
 ; (local tsp (require :nvim-treesitter.parsers))
 
 (setup :nvim-treesitter.configs
-  {:ensure_installed [ "c" "cpp" "fennel" "rust" "racket"]
+  {;; :ensure_installed [ "c" "cpp" "fennel" "rust" "racket"]
    :ensure_maintained "maintained"
    :sync_install false
    ;; :indent {:enable true}
