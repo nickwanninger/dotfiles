@@ -4,11 +4,13 @@
 -- As part of that sync, it will install "tangerine", which allows the rest of the
 -- configuration to be made in "fennel", which is a lisp
 
+vim.loader.enable()
 
 -- Execute the Vimscript code in the .vim file
 vim.cmd('source ' .. vim.fn.stdpath('config') .. '/config.vim')
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+vim.opt.rtp:prepend(lazypath)
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
     "git",
@@ -19,55 +21,67 @@ if not vim.loop.fs_stat(lazypath) then
     lazypath,
   })
 end
-vim.opt.rtp:prepend(lazypath)
-vim.loader.enable()
 
-plugins = {
-  "folke/which-key.nvim",
-  'folke/zen-mode.nvim',
-  { "folke/neodev.nvim", opts = {} },
+
+
+local tangpath = vim.fn.stdpath("data") .. "/tangerine"
+vim.opt.rtp:prepend(tangpath)
+if not vim.loop.fs_stat(tangpath) then
+  vim.fn.system({
+    "git", "clone", "--filter=blob:none", "https://github.com/udayvir-singh/tangerine.nvim", tangpath,
+  })
+
+  vim.fn.system({
+    "git", "-C", tangpath, "checkout", "v2.8",
+  })
+end
+
+
+
+-- local nvim_dir = vim.fn.stdpath [[config]]
+-- require('tangerine').setup {
+--   -- Start by using the init.fnl file
+--   vimrc   = nvim_dir .. "/fnl/init.fnl",
+--   -- And set the 'include path' for fennel files to $RT/fnl
+--   source  = nvim_dir .. "/fnl",
+--   target = vim.fn.stdpath [[data]] .. "/tangerine",
+--   compiler = {
+--     verbose = false,
+--     hooks = { "oninit", "onsave" },
+--   }
+-- }
+
+require('lazy').setup {
 
   { 'udayvir-singh/tangerine.nvim',
     priority = 1000,
     config = function()
       local nvim_dir = vim.fn.stdpath [[config]]
       require('tangerine').setup {
-      -- Start by using the init.fnl file
-      vimrc   = nvim_dir .. "/fnl/init.fnl",
-      -- And set the 'include path' for fennel files to $RT/fnl
-      source  = nvim_dir .. "/fnl",
-      target = vim.fn.stdpath [[data]] .. "/tangerine",
-      compiler = {
-        verbose = false,
-          hooks = { "oninit", "onsave" },
-        }
+       -- Start by using the init.fnl file
+       vimrc   = nvim_dir .. "/fnl/init.fnl",
+       -- And set the 'include path' for fennel files to $RT/fnl
+       source  = nvim_dir .. "/fnl",
+       target = vim.fn.stdpath [[data]] .. "/tangerine",
+       compiler = {
+         verbose = false,
+         hooks = { "oninit", "onsave" },
+       }
       }
     end
   },
 
-
-  -- some stuff that some people want
+  "folke/which-key.nvim",
+  'folke/zen-mode.nvim',
+  'NeogitOrg/neogit',
   'nvim-lua/plenary.nvim',
   'MunifTanjim/nui.nvim',
   'nvim-telescope/telescope.nvim',
   'sindrets/diffview.nvim',
-
-  -- Reimplementation of Magit
-  'NeogitOrg/neogit',
-
   'mbbill/undotree',
-
-  -- Merge Tmux Stuff
   'christoomey/vim-tmux-navigator',
-
   'RRethy/nvim-base16',
-
-  -- use 'norcalli/nvim-colorizer.lua'
   'brenoprata10/nvim-highlight-colors',
-
-  -- Fuzzy finder
-  {'junegunn/fzf', run='fzf#install()'},
-  'junegunn/fzf.vim',
   'preservim/tagbar',
   'numToStr/Comment.nvim',
   'lluchs/vim-wren', -- wren (cause it's cool)
@@ -84,18 +98,12 @@ plugins = {
   'rhysd/vim-clang-format',
   'ErichDonGubler/lsp_lines.nvim',
   { 'nvim-treesitter/nvim-treesitter', build = ":TSUpdate" }, -- very important
-  'nvim-treesitter/playground',
+  { 'nvim-treesitter/playground' },
   { "nvim-tree/nvim-web-devicons", lazy = true },
-
   { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
-
   'weilbith/nvim-code-action-menu',
-
   'gpanders/nvim-parinfer',
   'bakpakin/fennel.vim',
   'rktjmp/fwatch.nvim',
-
   { 'echasnovski/mini.nvim', branch = 'stable' },
 }
-
-require("lazy").setup(plugins)
