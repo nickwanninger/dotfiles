@@ -22,8 +22,6 @@
   (let [opts {:noremap true :silent true :buffer bufnr}
         map (fn [combo help cmd]
               (keys.map combo help cmd opts))]
-
-
     (map "gR" "Show LSP References" ":Telescope lsp_references<CR>")
     (map "gD" "Go to declaration" vim.lsp.buf.declaration)
     (map "gd" "Show Definitions" ":Telescope lsp_definitions<CR>")
@@ -59,7 +57,8 @@
 (local luasnip-from-vscode (require :luasnip.loaders.from_vscode))
 
 (luasnip-from-vscode.lazy_load)
-(cmp.setup {:completion {:completeopt "menu,menuone,preview"}
+(cmp.setup {:completion {:completeopt "menu,menuone,preview,insert"}
+            :experimental {:ghost_text true}
             :snippet {:expand (fn [args]
                                 (luasnip.lsp_expand args.body))}
             :mapping (cmp.mapping.preset.insert
@@ -69,7 +68,7 @@
                        "<C-f>" (cmp.mapping.scroll_docs 4)
                        "<Tab>" (cmp.mapping.complete)
                        "<C-e>" (cmp.mapping.abort)
-                       "<Tab>" (cmp.mapping.confirm {:select true})
+                       ;; "<Tab>" (cmp.mapping.confirm {:select true})
                        "<CR>"  (cmp.mapping.confirm {:select true})})
             :sources (cmp.config.sources
                        [{:name "nvim_lsp"}
