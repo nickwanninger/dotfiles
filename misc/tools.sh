@@ -33,7 +33,7 @@ pushd $ROOT
 
 fetch neovim https://github.com/neovim/neovim.git
 pushd neovim
-	buildstep "neovim/build" make CMAKE_BUILD_TYPE=RelWithDebInfo CMAKE_INSTALL_PREFIX=$HOME/.local
+	buildstep "neovim/build" make CMAKE_BUILD_TYPE=RelWithDebInfo CMAKE_INSTALL_PREFIX=$HOME/.local CMAKE_EXTRA_FLAGS="-DCMAKE_C_FLAGS=-D__kernel_ptr_semantics="
 	buildstep "neovim/install" make install
 popd
 

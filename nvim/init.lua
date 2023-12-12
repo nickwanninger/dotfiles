@@ -110,27 +110,6 @@ autocmd filetype crontab setlocal nobackup nowritebackup
 ]])
 
 
-
-
-
--- This function ensures that our package manager, packer, has been installed.
-local ensure_packer = function()
-  local fn = vim.fn
-  local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
-  if fn.empty(fn.glob(install_path)) > 0 then
-
-		print("Bootstrapping packer")
-    fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
-    vim.cmd [[packadd packer.nvim]]
-
-		vim.cmd "redraw"
-    return true
-  end
-  return false
-end
-
-
-
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
@@ -143,7 +122,6 @@ if not vim.loop.fs_stat(lazypath) then
   })
 end
 vim.opt.rtp:prepend(lazypath)
-
 
 
 require("lazy").setup({
@@ -205,7 +183,7 @@ require("lazy").setup({
 	'ray-x/lsp_signature.nvim',
 	'rhysd/vim-clang-format',
 	'ErichDonGubler/lsp_lines.nvim',
-	'nvim-treesitter/nvim-treesitter', -- very important
+  { 'nvim-treesitter/nvim-treesitter', build = ":TSUpdate" }, -- very important
   'nvim-treesitter/playground',
 
   { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
