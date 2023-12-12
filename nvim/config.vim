@@ -7,8 +7,8 @@ filetype plugin indent on    " required
 
 filetype off
 set nocompatible
-set noshowmode
-set laststatus=0
+" set noshowmode
+" set laststatus=0
 set winminheight=0
 set splitbelow
 set splitright
