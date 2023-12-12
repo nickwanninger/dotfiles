@@ -43,7 +43,6 @@
 (setup :neogit 
        {:disable_signs false
         :disable_hint true
-        ;; :graph_style "unicode"
         :disable_context_highlighting true
         :disable_builtin_notifications true
         :status {:recent_commit_count 30}
@@ -110,67 +109,21 @@
 
 (vim.cmd "colorscheme catppuccin")
 
-; (vim.cmd "colorscheme oxocarbon")
-; (vim.api.nvim_set_hl 0 "Normal" {:bg "none"})
-; (vim.api.nvim_set_hl 0 "NormalFloat" {:bg "none"})
-
-
-
-(fn run-buffer-with [program]
-  (vim.cmd (.. ":FloatermNew --autoclose=0 --height=0.9 --width=0.9 " program " %")))
  
-;; Toggle cursor "target"
-(keys.map "<leader>l"
-          "Toggle Cursor Target"
-          (fn []
-            (do
-              (vim.cmd "set cursorline!")
-              (vim.cmd "set cursorcolumn!")))
-          {})
-
-;; Run certain programs
-(keys.map "<leader>r"
-     "run the current file"
-     (fn [] 
-       (let [buf (vim.api.nvim_get_current_buf)
-             ft (vim.api.nvim_buf_get_option buf "filetype")]
-         (if (= ft "racket") (run-buffer-with "racket"))
-         (if (= ft "scheme") (run-buffer-with "racket")))))
-
-
-;; Remove the default menu items
-(vim.cmd "aunmenu PopUp.How-to\\ disable\\ mouse")
-(vim.cmd "aunmenu PopUp.-1-")
-
-(vim.cmd.anoremenu "PopUp.-1- :")
-(vim.cmd.anoremenu "PopUp.Go\\ to\\ definition gd")
-(vim.cmd.anoremenu "PopUp.Go\\ to\\ declaration gD")
-(vim.cmd.anoremenu "PopUp.Go\\ to\\ implementation gi")
-(vim.cmd.anoremenu "PopUp.More\\ info K")
-
-(vim.cmd.anoremenu "PopUp.-2- :")
-
-(vim.cmd.anoremenu "PopUp.VSplit :vsp<CR>")
-(vim.cmd.anoremenu "PopUp.HSplit :sp<CR>")
-(vim.cmd.anoremenu "PopUp.-3- :")
-(vim.cmd.anoremenu "PopUp.Save :w<CR>")
-(vim.cmd.anoremenu "PopUp.Save+Quit :q<CR>")
-(vim.cmd.anoremenu "PopUp.Quit! :q!<CR>")
-(vim.cmd.anoremenu "PopUp.-4- :")
-(vim.cmd.anoremenu "PopUp.Format :ClangFormat<CR>")
-(vim.cmd.anoremenu "PopUp.Zen :ZenMode<CR>")
-
 
 
 (keys.map "<C-n>" "Focus on the tree view" ":NvimTreeToggle<CR>" {:mode "n"})
 (keys.map "<C-S-n>" "Focus on the tree view" ":NvimTreeFocus<CR>" {:mode "n"})
 (keys.map "<M-n>" "Close the tree view" ":NvimTreeClose<CR>" {:mode "n"})
 (keys.map "?" "Display keymaps" ":WhichKey<CR>" {:mode "n"})
-(keys.map "<C-f>" "Display git files" ":GFiles<CR>" {:mode "n"})
-(keys.map "<C-p>" "Display all files" ":Files<CR>" {:mode "n"})
-(keys.map "<leader>ca" "Open display code actions" ":CodeActionMenu" {:mode "n"})
-(keys.map "<leader>f" "Clang Format" ":ClangFormat<CR>" {:silent true :mode "n"})
-(keys.map "<M-f>" "Search" ":Rg<CR>" {:mode "n"})
+
+; (keys.map "<C-f>" "Display git files" ":GFiles<CR>" {:mode "n"})
+; (keys.map "<C-p>" "Display all files" ":Files<CR>" {:mode "n"})
+
+(keys.map "<M-f>" "Search" ":Telescope live_grep<CR>" {:mode "n"})
+(keys.map "<C-f>" "Display git files" ":Telescope git_files<cr>" {:mode "n"})
+(keys.map "<C-p>" "Display all files" ":Telescope find_files<CR>" {:mode "n"})
+
 ; Some sane split commands
 (keys.map "<C-_>" "Horizontal Split" ":sp<CR>" {:mode "n"})
 (keys.map "<C-\\>" "Vertical Split" ":vsp<CR>" {:mode "n"})
@@ -179,9 +132,6 @@
 (keys.map ">" "Indent" ">gv" {:mode "v"})
 (keys.map "qq" "exit" ":q<CR>")
 (keys.map "<space>" "Select the word under the cursor" "<ESC>viw")
-(keys.map "<leader>P" "Run PackerSync" ":PackerSync"
-     {:silent true
-      :mode "n"})
 
 ;; Unmap recording... It's annoying if you don't use it
 (vim.cmd "nnoremap <silent> Q q")
@@ -191,9 +141,26 @@
 ; (map "<C-k>" "scroll up" "<ScrollWheelUp>" {:mode "n"})
 
 (keys.map "<C-j>" "scroll down" "5j" {:mode "n"})
-(keys.map "<C-k>" "scroll up" "5k" {:mode "n"})
+(keys.map "<C-k>" "scroll up" "4k" {:mode "n"})
+
+;; Map the Tmux movement commands
+(keys.map "<M-Left>"  "Nav Left"  ":TmuxNavigateLeft<cr>"  {:silent true})
+(keys.map "<M-Right>" "Nav Right" ":TmuxNavigateRight<cr>" {:silent true})
+(keys.map "<M-Up>"    "Nav Up"    ":TmuxNavigateUp<cr>"    {:silent true})
+(keys.map "<M-Down>"  "Nav Down"  ":TmuxNavigateDown<cr>"  {:silent true})
 
 
-;; (state.write {:foo "hello"})
+;; Leader bindings
+(keys.map "<leader>l" "Open lazy" ":Lazy")
+(keys.map "<leader>ca" "Open display code actions" ":CodeActionMenu" {:mode "n"})
+(keys.map "<leader>f" "Clang Format" ":ClangFormat<CR>" {:silent true :mode "n"})
+
+;; Misc
+(keys.map "<C-Bslash>" "Place a lambda" "λ" {:mode "i"})
+
+
+(set vim.wo.number true)
+(keys.map "<C-c>" "Toggle line numbers"
+    (fn [] (set vim.wo.number (not vim.wo.number))))
 
 (state.start)

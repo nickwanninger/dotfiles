@@ -4,111 +4,9 @@
 -- As part of that sync, it will install "tangerine", which allows the rest of the
 -- configuration to be made in "fennel", which is a lisp
 
-vim.cmd([[
-filetype off
-set nocompatible
-set noshowmode
-set laststatus=0
-set winminheight=0
-set splitbelow
-set splitright
-set noeol
-set tabstop=2
-set shiftwidth=2
-set expandtab
-set nofoldenable     "don't fold by default
-set foldmethod=indent   " fold on indentations
-set foldnestmax=10   "only fold up to 10 levels
-set foldlevel=1     " only show me first fold level
-let g:indentLine_enabled = 1
-set visualbell t_vb= " disable visual bell
-set ttyfast  " we have a fast terminal
-set lazyredraw
-set backspace=indent,eol,start
-set clipboard=unnamedplus
-set mouse=a
-set pastetoggle=<F2>
-set sidescroll=10
-set matchpairs+=<:>
-set incsearch
-set ignorecase
-set smartcase
-set showmatch
-set smartindent
-set noswapfile
-set nobackup
-set nowritebackup
-set undofile
-set undodir=~/.tmp//,/tmp//
-set hidden
-set shell=/bin/sh
-set encoding=utf-8 " Necessary to show Unicode glyphs
-set termguicolors     " enable true colors support
-filetype plugin indent on    " required
 
-let g:indentLine_fileTypeExclude=['help']
-let g:indentLine_bufNameExclude=['NERD_tree.*']
-
-hi CocFloat ctermbg=238 ctermfg=15
-hi CocFloating ctermbg=238 guibg=238 ctermfg=15
-hi Pmenu ctermbg=238 guibg=238 ctermfg=15
-
-
-try
-  colorscheme vim
-catch /^Vim\%((\a\+)\)\=:E185/
-endtry
-
-au BufRead,BufNewFile *.hbs set filetype=html
-
-
-" augroup ScreenEdgeScroll
-"   autocmd!
-"   autocmd CursorMoved * if line('.') - &scrolloff <= line('w0') || line('.') + &scrolloff >= line('w$') | normal zz | endif
-" augroup END
-
-command WQ wq
-command Wq wq
-command W w
-command Q q
-nnoremap ; :
-
-
-" TODO: move this to a which-key configuration in fennel
-let g:tmux_navigator_no_mappings = 1 " disable builtin mappings, I think
-nnoremap <silent> <M-Left> :TmuxNavigateLeft<cr>
-nnoremap <silent> <M-Down> :TmuxNavigateDown<cr>
-nnoremap <silent> <M-Up> :TmuxNavigateUp<cr>
-nnoremap <silent> <M-Right> :TmuxNavigateRight<cr>
-nnoremap <silent> <M-h> :TmuxNavigateLeft<cr>
-nnoremap <silent> <M-j> :TmuxNavigateDown<cr>
-nnoremap <silent> <M-k> :TmuxNavigateUp<cr>
-nnoremap <silent> <M-l> :TmuxNavigateRight<cr>
-
-
-"nnoremap <leader>m :FloatermNew make -j<CR>
-nnoremap <leader>Q :qall<CR>
-
-nnoremap <leader>m :FloatermNew --height=0.9 --width=0.9 make -j<CR>
-
-noremap <leader>f :ClangFormat<CR>
-nnoremap <leader>P :PackerSync<CR>
-
-imap <C-Bslash> λ
-imap <C-w> <esc>dbi
-
-" disable writing different filename with :w<filename>
-:autocmd BufWritePre [:;]*
-\   try | echoerr 'Forbidden file name: ' . expand('<afile>') | endtry
-
-nmap <C-a> :TagbarToggle<CR>
-
-set nu
-map <C-c> :set nu!<CR>
-
-autocmd filetype crontab setlocal nobackup nowritebackup
-]])
-
+-- Execute the Vimscript code in the .vim file
+vim.cmd('source ' .. vim.fn.stdpath('config') .. '/config.vim')
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -122,7 +20,7 @@ if not vim.loop.fs_stat(lazypath) then
   })
 end
 vim.opt.rtp:prepend(lazypath)
-
+vim.loader.enable()
 
 require("lazy").setup({
   "folke/which-key.nvim",
@@ -185,6 +83,7 @@ require("lazy").setup({
 	'ErichDonGubler/lsp_lines.nvim',
   { 'nvim-treesitter/nvim-treesitter', build = ":TSUpdate" }, -- very important
   'nvim-treesitter/playground',
+  { "nvim-tree/nvim-web-devicons", lazy = true },
 
   { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
 
