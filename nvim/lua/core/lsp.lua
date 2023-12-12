@@ -17,9 +17,9 @@ M.setup_server = function(server_name)
     flags = {
       debounce_text_changed = 150,
     },
-    on_attach = function(client, bufnr)
+    on_attach = function(_, bufnr)
       local opts = {noremap = true, silent = true, buffer = bufnr}
-  
+
       keys.map("gR", "Show LSP References", ":Telescope lsp_references<CR>", opts)
       keys.map("gD", "Go to declaration", vim.lsp.buf.declaration, opts)
       keys.map("gd", "Show Definitions", ":Telescope lsp_definitions<CR>", opts)

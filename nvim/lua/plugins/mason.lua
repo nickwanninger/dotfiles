@@ -8,17 +8,21 @@ return {
     local mason = require('mason')
     local mason_lspconfig = require('mason-lspconfig')
 
-    local lsp = require('lspconfig')
-    local core_lsp = require('core.lsp')
-
     mason.setup {}
     mason_lspconfig.setup {
-      ensure_installed = {'clangd', 'rust_analyzer'},
+      ensure_installed = {
+        'clangd',
+        'rust_analyzer',
+        -- 'lua-language-server',
+        'pyright',
+      },
       automatic_installation = true,
     }
 
+    -- Next, hook up mason so that when a language server
+    -- becomes available, it starts the server w/ lspconfig
     mason_lspconfig.setup_handlers {
-      core_lsp.setup_server
+      require'core.lsp'.setup_server
     }
   end
 }
