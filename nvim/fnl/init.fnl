@@ -184,7 +184,7 @@
 
 
 ;; Leader bindings
-(keys.map "<leader>l" "Open lazy" ":Lazy")
+(keys.map "<leader>l" "Open lazy" ":Lazy<CR>")
 (keys.map "<leader>ca" "Open display code actions" ":CodeActionMenu" {:mode "n"})
 (keys.map "<leader>f" "Clang Format" ":ClangFormat<CR>" {:silent true :mode "n"})
 (keys.map "<leader>u" "Toggle Undotree" ":UndotreeToggle<cr>" {:silent true :mode "n"})

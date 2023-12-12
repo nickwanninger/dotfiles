@@ -24,11 +24,11 @@ vim.loader.enable()
 
 plugins = {
   "folke/which-key.nvim",
-  { "folke/neoconf.nvim", cmd = "Neoconf" },
-  "folke/neodev.nvim",
-
+  'folke/zen-mode.nvim',
+  { "folke/neodev.nvim", opts = {} },
 
   { 'udayvir-singh/tangerine.nvim',
+    priority = 1000,
     config = function()
       local nvim_dir = vim.fn.stdpath [[config]]
       require('tangerine').setup {
@@ -90,11 +90,8 @@ plugins = {
   { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
 
   'weilbith/nvim-code-action-menu',
-  'folke/which-key.nvim',
-  'folke/zen-mode.nvim',
 
   'gpanders/nvim-parinfer',
-  'Olical/conjure',
   'bakpakin/fennel.vim',
   'rktjmp/fwatch.nvim',
 
