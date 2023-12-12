@@ -42,6 +42,8 @@
                 :indent {:enable true}}})
 
 
+(setup :mason {})
+
 (setup :neogit 
        {:disable_signs false
         :disable_hint true

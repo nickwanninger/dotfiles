@@ -76,7 +76,18 @@ require('lazy').setup {
 
   "folke/which-key.nvim",
   'folke/zen-mode.nvim',
-  'NeogitOrg/neogit',
+  { "NeogitOrg/neogit",
+    dependencies = {
+      "nvim-lua/plenary.nvim",         -- required
+      "nvim-telescope/telescope.nvim", -- optional
+      "sindrets/diffview.nvim",        -- optional
+      "ibhagwan/fzf-lua",              -- optional
+    },
+  },
+  {
+    'stevearc/dressing.nvim',
+    opts = {},
+  },
   'nvim-lua/plenary.nvim',
   'MunifTanjim/nui.nvim',
   'nvim-telescope/telescope.nvim',
@@ -94,12 +105,37 @@ require('lazy').setup {
   -- 'kyazdani42/nvim-tree.lua',
   'rcarriga/nvim-notify',
   'voldikss/vim-floaterm',
-  'ms-jpq/coq_nvim',
-  'ms-jpq/coq.artifacts',
-  'neovim/nvim-lspconfig',
-  'ray-x/lsp_signature.nvim',
+
+
+  { 'williamboman/mason.nvim',
+    dependencies = {
+      'williamboman/mason-lspconfig.nvim'
+    }
+  },
+  -- 'ms-jpq/coq_nvim',
+  -- 'ms-jpq/coq.artifacts',
+  -- 'ray-x/lsp_signature.nvim',
+  -- 'ErichDonGubler/lsp_lines.nvim',
+  
+  { 'neovim/nvim-lspconfig',
+    dependencies = {
+     "hrsh7th/cmp-nvim-lsp",
+     { "antosha417/nvim-lsp-file-operations", config = true },
+    },
+  },
+  { 'hrsh7th/nvim-cmp',
+    event = 'InsertEnter',
+    dependencies = {
+     'hrsh7th/cmp-buffer', -- source for text buffer
+     'hrsh7th/cmp-path', -- source for filesystem path
+     'L3MON4D3/LuaSnip', -- snippet engine
+     'saadparwaiz1/cmp_luasnip', -- for autocompletion
+     'rafamadriz/friendly-snippets', -- useful snippets
+    },
+  },
+
+
   'rhysd/vim-clang-format',
-  'ErichDonGubler/lsp_lines.nvim',
   { 'nvim-treesitter/nvim-treesitter', build = ":TSUpdate" }, -- very important
   { 'nvim-treesitter/playground' },
   { "nvim-tree/nvim-web-devicons", lazy = true },
