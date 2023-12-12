@@ -1,5 +1,3 @@
-(require :sane)
-
 (local keys (require :core.keymap))
 (local state (require :core.state))
 (local {: setup} (require :core.setup))
