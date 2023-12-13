@@ -31,8 +31,13 @@ M.setup_server = function(server_name)
       keys.map("<leader>d", "Show Line Diagnostics", vim.diagnostic.open_float, opts)
       keys.map("K", "Show documentation", vim.lsp.buf.hover, opts)
       keys.map("<c-k>", "Show Signature Help", vim.lsp.buf.signature_help, opts)
-      keys.map("<leader>f", "Format", vim.lsp.buf.format, opts)
       keys.map("<leader>rs", "Restart LSP", ":LspRestart<CR>", opts)
+
+      if server_name == "clangd" then
+        keys.map("<leader>f", "Clang Format", ":ClangFormat<cr>", opts)
+      else
+        keys.map("<leader>f", "Format", vim.lsp.buf.format, opts)
+      end
     end
   }
 end
