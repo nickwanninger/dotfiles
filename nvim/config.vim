@@ -24,7 +24,7 @@ set foldlevel=1     " only show me first fold level
 let g:indentLine_enabled = 1
 set visualbell t_vb= " disable visual bell
 set ttyfast  " we have a fast terminal
-set lazyredraw
+" set lazyredraw
 set backspace=indent,eol,start
 set clipboard=unnamedplus
 set mouse=a

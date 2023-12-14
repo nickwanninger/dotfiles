@@ -31,10 +31,9 @@ require('lazy').setup {
   'preservim/tagbar',
 
   'lluchs/vim-wren', -- wren (cause it's cool)
-  'Shirk/vim-gas', -- Gnu Assembler
-  'dag/vim-fish', -- Fish Shell
+  'Shirk/vim-gas',   -- Gnu Assembler
+  'dag/vim-fish',    -- Fish Shell
   -- 'kyazdani42/nvim-tree.lua',
-
 
 
   'rhysd/vim-clang-format',
