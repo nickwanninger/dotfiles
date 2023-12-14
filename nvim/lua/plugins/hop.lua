@@ -1,7 +1,5 @@
 return {
   'smoka7/hop.nvim',
-
-  branch = 'v2', -- optional but strongly recommended
   config = function()
     local keys = require('core.keymap')
     -- you can configure Hop the way you like here; see :h hop-config
