@@ -30,8 +30,8 @@ function fish_prompt
 
 	echo -n (prompt_pwd)
 
-	set_color brblack
-	echo -n (fish_git_prompt)
+	# set_color brblack
+	# echo -n (fish_git_prompt)
 
 
 	echo -en '\\n'
