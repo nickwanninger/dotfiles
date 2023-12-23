@@ -47,6 +47,12 @@ M.setup = function(opts)
   keys.map("<C-Bslash>", "Place a lambda", "\206\187", { mode = "i" })
 
 
+
+  keys.map("<A-x>g", "Open Neogit", function ()
+    require'neogit'.open()
+  end)
+
+
   vim.wo.number = true
   keys.map("<C-c>", "Toggle line numbers", function()
     vim.wo.number = not vim.wo.number
