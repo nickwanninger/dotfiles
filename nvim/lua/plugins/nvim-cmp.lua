@@ -29,12 +29,7 @@ return {
 
     luasnip_from_vscode.lazy_load()
     cmp.setup {
-      window = {
-        border = "rounded",
-      },
-
       completion = {
-        border = "rounded",
         completeopt = "menu,menuone,insert"
       },
 
