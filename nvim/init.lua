@@ -23,7 +23,6 @@ require('lazy').setup {
   'folke/zen-mode.nvim',
   'nvim-lua/plenary.nvim',
   'MunifTanjim/nui.nvim',
-  'nvim-telescope/telescope.nvim',
   'sindrets/diffview.nvim',
   'mbbill/undotree',
   'christoomey/vim-tmux-navigator',

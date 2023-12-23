@@ -29,10 +29,19 @@ return {
 
     luasnip_from_vscode.lazy_load()
     cmp.setup {
-      completion = { completeopt = "menu,menuone,insert" },
+      window = {
+        border = "rounded",
+      },
+
+      completion = {
+        border = "rounded",
+        completeopt = "menu,menuone,insert"
+      },
+
       experimental = {
         ghost_text = true
       },
+
       snippet = {
         expand = function(args)
           luasnip.lsp_expand(args.body)
