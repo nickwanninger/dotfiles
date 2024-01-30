@@ -22,17 +22,33 @@ M.setup = function(opts)
   keys.map("<C-S-Left>", "Prev Tab", ":tabprev<CR>")
   keys.map("<C-S-Right>", "Next Tab", ":tabnext<CR>")
 
-  keys.map("<C-n>", "Focus on the tree view", ":Neotree float<CR>", { mode = "n" })
+  keys.map("<C-n>", "View the filesystem", ":Neotree filesystem float<CR>", { mode = "n" })
+  keys.map("<C-b>", "View the buffers", ":Neotree filesystem float<CR>", { mode = "n" })
+
+  keys.map("<M-q>", "Close tab", function()
+    local is_modified = vim.api.nvim_buf_get_option(0, 'modified')
+    if is_modified then
+      vim.notify('Save first')
+    else
+      vim.api.nvim_buf_delete(0, {})
+    end
+  end)
+
   keys.map("?", "Display keymaps", ":WhichKey<CR>", { mode = "n" })
   keys.map("<M-f>", "Search", ":Telescope live_grep<CR>", { mode = "n" })
   keys.map("<C-f>", "Display git files", ":Telescope git_files<cr>", { mode = "n" })
   keys.map("<C-p>", "Display all files", ":Telescope find_files<CR>", { mode = "n" })
   keys.map("<C-_>", "Horizontal Split", ":sp<CR>", { mode = "n" })
   keys.map("<C-\\>", "Vertical Split", ":vsp<CR>", { mode = "n" })
+
+
+  keys.map("<leader>b", "Balance splits", "CTRL-W_=")
+
+
+
   -- keys.map("<C-q>", "Close the current split", ":q<CR>", {mode = "n"})
   keys.map("<", "Dedent", "<gv", { mode = "v" })
   keys.map(">", "Indent", ">gv", { mode = "v" })
-  keys.map("qq", "exit", ":q<CR>")
   keys.map("<space>", "Select the word under the cursor", "<ESC>viw")
 
   keys.map("<C-j>", "scroll down", "5j", { mode = "n" })
@@ -48,8 +64,8 @@ M.setup = function(opts)
 
 
 
-  keys.map("<A-x>g", "Open Neogit", function ()
-    require'neogit'.open()
+  keys.map("<A-x>g", "Open Neogit", function()
+    require 'neogit'.open()
   end)
 
 

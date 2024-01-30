@@ -1,5 +1,3 @@
-
-
 return {
   "NeogitOrg/neogit",
 
@@ -10,34 +8,36 @@ return {
     "ibhagwan/fzf-lua",              -- optional
   },
   config = function()
-   local neogit = require('neogit')
-   local keys = require('core.keymap')
-   neogit.setup {
-    disable_hint = true,
-    disable_context_highlighting = true,
-    disable_builtin_notifications = true,
-    status = {
-      recent_commit_count = 30
-    },
-    integrations = {
-      diffview = true,
-    },
-    sections = {
-      recent = {
-        folded = false,
+    local neogit = require('neogit')
+    local keys = require('core.keymap')
+    neogit.setup {
+      disable_hint = true,
+      disable_context_highlighting = true,
+      disable_builtin_notifications = true,
+      status = {
+        recent_commit_count = 30
       },
-    },
-    mappings = {
-      popup = {
-        p = false
+      integrations = {
+        diffview = true,
+      },
+      sections = {
+        recent = {
+          folded = false,
+        },
+      },
+      mappings = {
+        popup = {
+          p = false
+        }
+      },
+      disable_signs = false
+    }
+
+
+    keys.map("<leader>g", "Open Neogit", function()
+      neogit.open {
+        kind = 'tab'
       }
-    },
-    disable_signs = false
-  }
-
-
-  keys.map("<leader>g", "Open Neogit", neogit.open)
-
-
+    end)
   end
 }
