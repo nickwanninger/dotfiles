@@ -23,7 +23,7 @@ M.setup = function(opts)
   keys.map("<C-S-Right>", "Next Tab", ":tabnext<CR>")
 
   keys.map("<C-n>", "View the filesystem", ":Neotree filesystem float<CR>", { mode = "n" })
-  keys.map("<C-N>", "View the filesystem", ":Neotree filesystem reveal left<CR>", { mode = "n" })
+  -- keys.map("<C-N>", "View the filesystem", ":Neotree filesystem reveal left<CR>", { mode = "n" })
   keys.map("<A-b>", "View the buffers", ":Neotree buffers float<CR>", { mode = "n" })
 
   keys.map("<M-q>", "Close buffer", function()
