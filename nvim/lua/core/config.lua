@@ -23,9 +23,10 @@ M.setup = function(opts)
   keys.map("<C-S-Right>", "Next Tab", ":tabnext<CR>")
 
   keys.map("<C-n>", "View the filesystem", ":Neotree filesystem float<CR>", { mode = "n" })
+  keys.map("<C-N>", "View the filesystem", ":Neotree filesystem reveal left<CR>", { mode = "n" })
   keys.map("<A-b>", "View the buffers", ":Neotree buffers float<CR>", { mode = "n" })
 
-  keys.map("<M-q>", "Close tab", function()
+  keys.map("<M-q>", "Close buffer", function()
     local is_modified = vim.api.nvim_buf_get_option(0, 'modified')
     if is_modified then
       vim.notify('Save first')
@@ -33,6 +34,13 @@ M.setup = function(opts)
       vim.api.nvim_buf_delete(0, {})
     end
   end)
+
+
+
+  keys.map("t<left>", "Prev tab", ":tabp<CR>", { mode = "n" })
+  keys.map("t<right>", "Next tab", ":tabn<CR>", { mode = "n" })
+  keys.map("tn", "New tab", ":tabnew<CR>", { mode = "n" })
+  keys.map("tq", "Close tab", ":tabclose<CR>", { mode = "n" })
 
   keys.map("?", "Display keymaps", ":WhichKey<CR>", { mode = "n" })
   keys.map("<M-f>", "Search", ":Telescope live_grep<CR>", { mode = "n" })
