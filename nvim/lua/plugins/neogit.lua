@@ -39,5 +39,8 @@ return {
         kind = 'tab'
       }
     end)
+    keys.map("<leader>c", "Commit", ":Neogit commit<CR>")
+    keys.map("<leader>a", "Stage Hunk", ":Git stage_hunk<CR>")
+    keys.map("<leader>A", "Stage Buffer", ":Git stage_buffer<CR>")
   end
 }

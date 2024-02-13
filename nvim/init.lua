@@ -34,6 +34,7 @@ require('lazy').setup {
   'dag/vim-fish',    -- Fish Shell
   -- 'kyazdani42/nvim-tree.lua',
 
+  'tpope/vim-fugitive',
 
   'rhysd/vim-clang-format',
   { "nvim-tree/nvim-web-devicons", lazy = true },
