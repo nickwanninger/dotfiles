@@ -27,7 +27,7 @@ return {
       },
       ['<leader>2'] = {
         function()
-          vim.cmd('colorscheme base16-cupertino')
+          vim.cmd('colorscheme base16-gruvbox-material-light-soft')
         end,
         "Light Theme"
       }
