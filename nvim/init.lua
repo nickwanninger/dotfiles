@@ -45,6 +45,7 @@ require('lazy').setup {
   { 'echasnovski/mini.nvim', branch = 'stable' },
 }
 
+
 -- Now, configure the rest of the dotfiles!
 local config = require('core.config')
 config.setup {}
