@@ -1,21 +1,19 @@
 return {
-  "catppuccin/nvim",
-  name = "catppuccin",
+  -- "catppuccin/nvim",
+  -- name = "catppuccin",
 
 
+  "olimorris/onedarkpro.nvim",
 
-  -- 'loctvl842/monokai-pro.nvim',
+
   priority = 1000,
   config = function()
-    -- require 'monokai-pro'.setup {
-    --   -- transparent_background = true,
-    --   background_clear = { "float_win" }
-    -- }
 
     local wk = require('which-key')
 
-    local theme_name = 'catppuccin-mocha'
+    -- local theme_name = 'catppuccin-mocha'
     -- theme_name = 'monokai-pro-spectrum'
+    local theme_name = 'onedark_dark'
     vim.cmd('colorscheme ' .. theme_name)
 
     wk.register {
