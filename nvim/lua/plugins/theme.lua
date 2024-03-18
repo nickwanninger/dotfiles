@@ -11,6 +11,13 @@ return {
 
     local wk = require('which-key')
 
+    require("onedarkpro").setup({
+      colors = {
+        onedark_dark = { fg = "#FFFFFF" },
+        onelight = { fg = '#000000', bg = "#ffffff" }, -- green
+      }
+    })
+
     -- local theme_name = 'catppuccin-mocha'
     -- theme_name = 'monokai-pro-spectrum'
     local theme_name = 'onedark_dark'
@@ -25,7 +32,7 @@ return {
       },
       ['<leader>2'] = {
         function()
-          vim.cmd('colorscheme base16-gruvbox-material-light-soft')
+          vim.cmd('colorscheme onelight')
         end,
         "Light Theme"
       }
