@@ -7,9 +7,14 @@ DOTFILES="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 mkdir -p ~/.config
 mkdir -p ~/.local/{bin,local,lib}
 
-echo "Installing fish configuratin..."
+echo "Installing fish configuration..."
 rm -rf ~/.config/fish
 ln -sF ${DOTFILES}/fish/ ~/.config
+
+
+echo "Installing nix configuration..."
+rm -rf ~/.config/nix
+ln -sF ${DOTFILES}/nix/ ~/.config
 
 # Setup emacs
 ln -sF ${DOTFILES}/emacs ~/.emacs.d
