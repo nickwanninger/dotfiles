@@ -41,6 +41,8 @@ alias vim="nvim"
 alias vi="nvim"
 alias oldvim="vim"
 
+alias ndev="NDEV_DIR=(pwd) nix develop --command fish"
+
 alias tm "tmux new-session -A -s main"
 alias :q "exit"
 alias glog "git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)' --all"
@@ -112,4 +114,13 @@ set -gx PATH "/nix/var/nix/profiles/default/bin" $PATH # ghcup-env
 
 if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.fish' ]
   . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.fish'
+end
+
+
+if test -e ~/.nix-profile/etc/profile.d/hm-session-vars.sh
+  bass source ~/.nix-profile/etc/profile.d/hm-session-vars.sh
+end
+
+if type -q direnv
+  direnv hook fish | source
 end

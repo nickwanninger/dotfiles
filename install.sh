@@ -16,7 +16,11 @@ echo "Installing nix configuration..."
 rm -rf ~/.config/nix
 ln -sF ${DOTFILES}/nix/ ~/.config
 
+rm -rf ~/.config/home-manager
+ln -sF ${DOTFILES}/home-manager/ ~/.config
+
 # Setup emacs
+rm -rf ~/.emacs.d
 ln -sF ${DOTFILES}/emacs ~/.emacs.d
 
 echo "Installing tmux config"
