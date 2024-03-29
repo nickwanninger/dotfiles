@@ -15,6 +15,7 @@
   outputs = { nixpkgs, home-manager, ... }:
     let
       machines = {
+        # Dev machine at work
         "nick@roquefort" = {
           system = "x86_64-linux";
           username = "nick";
@@ -23,6 +24,8 @@
           stateVersion = "23.05";
         };
 
+
+        # My Macbook Pro
         "nick@caladan" = {
           system = "aarch64-darwin";
           username = "nick";
