@@ -19,6 +19,7 @@
           system = "x86_64-linux";
           username = "nick";
           home = "/home/nick";
+          local = false;
           stateVersion = "23.05";
         };
 
@@ -26,6 +27,7 @@
           system = "aarch64-darwin";
           username = "nick";
           home = "/Users/nick";
+          local = true;
           stateVersion = "23.05";
         };
       };
@@ -36,6 +38,7 @@
         username,
         home,
         stateVersion,
+        local,
       }:
       let
         pkgs = import nixpkgs { inherit system; };
@@ -45,7 +48,7 @@
         modules = [
           {nixpkgs.config.allowUnfree = true; }
           (import ./home.nix {
-            inherit system pkgs username home stateVersion;
+            inherit system pkgs username home stateVersion local;
           })
         ];
       };
