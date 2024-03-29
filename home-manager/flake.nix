@@ -8,22 +8,43 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
   };
+
 
   outputs = { nixpkgs, home-manager, ... }:
     let
-      system = "x86_64-linux";
-      pkgs = nixpkgs.legacyPackages.${system};
-    in {
-      homeConfigurations."nick" = home-manager.lib.homeManagerConfiguration {
+      machines = {
+        "nick@roquefort" = {
+          system = "x86_64-linux";
+          username = "nick";
+          home = "/home/nick";
+          stateVersion = "23.05";
+        };
+      };
+
+
+      homeManagerConfiguration = {
+        system,
+        username,
+        home,
+        stateVersion,
+      }:
+      let
+        pkgs = import nixpkgs { inherit system; };
+      in home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
 
-        # Specify your home configuration modules here, for example,
-        # the path to your home.nix.
-        modules = [ ./home.nix ];
-
-        # Optionally use extraSpecialArgs
-        # to pass through arguments to home.nix
+        modules = [
+          {nixpkgs.config.allowUnfree = true; }
+          (import ./home.nix {
+            inherit system pkgs username home stateVersion;
+          })
+        ];
       };
+    in {
+      homeConfigurations = nixpkgs.lib.attrsets.mapAttrs
+        (ident: cfg: homeManagerConfiguration cfg)
+        machines;
     };
 }
