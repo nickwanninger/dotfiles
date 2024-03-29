@@ -19,3 +19,6 @@
  
 ;; (load-theme 'modus-vivendi)
 (setq confirm-kill-emacs nil)
+(setq echo-keystrokes 0.01)
+
+(define-key key-translation-map (kbd "ESC") (kbd "C-g"))
