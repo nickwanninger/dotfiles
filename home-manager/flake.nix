@@ -33,23 +33,15 @@
       };
 
 
-      homeManagerConfiguration = {
-        system,
-        username,
-        home,
-        stateVersion,
-        local,
-      }:
+      homeManagerConfiguration = config:
       let
-        pkgs = import nixpkgs { inherit system; };
+        pkgs = import nixpkgs { system = config.system; };
       in home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
 
         modules = [
           {nixpkgs.config.allowUnfree = true; }
-          (import ./home.nix {
-            inherit system pkgs username home stateVersion local;
-          })
+          (import ./home.nix { inherit pkgs config; })
         ];
       };
     in {

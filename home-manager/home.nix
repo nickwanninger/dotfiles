@@ -1,9 +1,9 @@
-{ pkgs, username, home, stateVersion, ... }:
+{ pkgs, config, ... }:
 
 {
-  home.username = username;
-  home.homeDirectory = home;
-  home.stateVersion = stateVersion;
+  home.username = config.username;
+  home.homeDirectory = config.home;
+  home.stateVersion = config.stateVersion;
 
   home.packages = [
     pkgs.neovim
