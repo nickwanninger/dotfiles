@@ -1,5 +1,5 @@
 {
-  description = "Home Manager configuration of nick";
+  description = "There's no place like home. There's no place like home. There's no place like home. (...)";
 
   inputs = {
     # Specify the source of Home Manager and Nixpkgs.
