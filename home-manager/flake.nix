@@ -21,6 +21,13 @@
           home = "/home/nick";
           stateVersion = "23.05";
         };
+
+        "nick@caladan" = {
+          system = "aarch64-darwin";
+          username = "nick";
+          home = "/Users/nick";
+          stateVersion = "23.05";
+        };
       };
 
 
