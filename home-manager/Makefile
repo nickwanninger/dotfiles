@@ -1,4 +1,4 @@
 userAtHost:=${USER}@$(shell hostname)
 
 switch:
-	home-manager switch --flake .#${userAtHost}
+	nix shell nixpkgs#home-manager --command home-manager switch --flake .#${userAtHost}
