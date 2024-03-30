@@ -28,6 +28,7 @@
 ;; Evil Mode
 (ensure-package 'evil)
 (require 'evil)
+
 (evil-mode 1)
 
 (add-hook 'evil-insert-state-entry-hook (lambda () (send-string-to-terminal "\033[5 q")))
@@ -36,6 +37,10 @@
 (setq evil-insert-state-cursor 'bar)
 
 
+
+(ensure-package 'ace-window)
+(require 'ace-window)
+(global-set-key (kbd "M-o") 'ace-window)
 
 
 ;; LSP mode
