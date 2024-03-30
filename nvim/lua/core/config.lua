@@ -84,6 +84,39 @@ M.setup = function(opts)
   keys.map("<C-c>", "Toggle line numbers", function()
     vim.wo.number = not vim.wo.number
   end)
+
+
+
+  -- Now, setup color schemes
+  local wk = require('which-key')
+
+  require("onedarkpro").setup({
+    colors = {
+      onedark_dark = { fg = "#FFFFFF" },
+      onelight = { fg = '#000000', bg = "#ffffff" },   -- green
+    }
+  })
+
+  -- local theme_name = 'catppuccin-mocha'
+  -- theme_name = 'monokai-pro-spectrum'
+  local theme_name = 'onedark_dark'
+  -- local theme_name = 'modus_operandi'
+  vim.cmd('colorscheme ' .. theme_name)
+
+  wk.register {
+    ['<leader>1'] = {
+      function()
+        vim.cmd('colorscheme ' .. theme_name)
+      end,
+      "Dark Theme"
+    },
+    ['<leader>2'] = {
+      function()
+        vim.cmd('colorscheme modus_operandi')
+      end,
+      "Light Theme"
+    }
+  }
 end
 
 -- vim.keymap.del('n', '<space>')
