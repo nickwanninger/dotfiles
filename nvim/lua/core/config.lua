@@ -19,9 +19,6 @@ M.setup = function(opts)
   vim.cmd("nnoremap <silent> q <Nop>")
 
 
-  vim.g.maplocalleader = '\\'
-
-
   keys.map("<C-S-Left>", "Prev Tab", ":tabprev<CR>")
   keys.map("<C-S-Right>", "Next Tab", ":tabnext<CR>")
 

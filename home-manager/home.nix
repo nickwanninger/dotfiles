@@ -8,7 +8,7 @@
   home.packages = [
     pkgs.neovim
     pkgs.direnv
-    pkgs.emacs
+    pkgs.emacs-nox
   ];
 
   home.file = {};

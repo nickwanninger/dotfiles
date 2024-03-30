@@ -81,6 +81,9 @@
 ;; Enable mouse mode cause I like rats
 (xterm-mouse-mode nil)
 
-(setq confirm-kill-emacs nil)
+(setq confirm-kill-emacs #'y-or-n-p)
 (setq echo-keystrokes 0.01)
 (global-display-line-numbers-mode)
+
+
+(setq make-backup-files nil) ; stop creating ~ files
