@@ -73,6 +73,7 @@
 
 ;; Enable mouse mode cause I like rats
 (xterm-mouse-mode 1)
+(mouse-wheel-mode)
 
 (setq confirm-kill-emacs #'y-or-n-p)
 (setq echo-keystrokes 0.01)
@@ -89,3 +90,8 @@
 (global-set-key (kbd "C-c <right>") 'windmove-right)
 (global-set-key (kbd "C-c <up>")    'windmove-up)
 (global-set-key (kbd "C-c <down>")  'windmove-down)
+
+
+
+(global-set-key (kbd "C-\\") 'split-window-right)
+(global-set-key (kbd "C-_") 'split-window-below)
