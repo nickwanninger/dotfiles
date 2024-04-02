@@ -56,6 +56,7 @@
 (global-set-key (kbd "C-x C-h 1") 'modus-themes-toggle)
 
 (use-package company
+  :ensure t
   :hook (prog-mode . company-mode)
   :bind (:map company-mode-map
          ([remap completion-at-point] . company-complete))
@@ -69,6 +70,7 @@
 
 ;; Enable rich annotations using the Marginalia package
 (use-package marginalia
+  :ensure t
   ;; Bind `marginalia-cycle' locally in the minibuffer. To make the binding
   ;; available in the *Completions* buffer, add it to the
   ;; `completion-list-mode-map'a.
@@ -82,6 +84,19 @@
   ;; the mode gets enabled right away. Note that this forces loading the
   ;; package.
   (marginalia-mode))
+
+
+
+(use-package racket-mode
+  :ensure t)
+
+
+(add-hook 'racket-mode-hook
+          (lambda ()
+            (define-key racket-mode-map (kbd "<f5>") 'racket-run)))
+
+;; ====-----------------------------------------------====
+
 
 ;; Enable mouse mode cause I like rats
 (xterm-mouse-mode 1)
