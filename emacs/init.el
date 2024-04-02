@@ -107,8 +107,9 @@
   :config
    (add-hook 'racket-mode-hook
 	     (lambda ()
-		(racket-xp-mode)
-		(define-key racket-mode-map (kbd "C-c r") 'racket-run))))
+	       (racket-xp-mode)
+	       (set-input-method 'TeX)
+	       (define-key racket-mode-map (kbd "C-c r") 'racket-run))))
 
 (use-package org
   :ensure t)
