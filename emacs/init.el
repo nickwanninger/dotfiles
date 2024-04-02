@@ -29,10 +29,12 @@
 (ensure-package 'evil)
 (require 'evil)
 
-(evil-mode 1)
 
-(add-hook 'evil-insert-state-entry-hook (lambda () (send-string-to-terminal "\033[5 q")))
-(add-hook 'evil-insert-state-exit-hook  (lambda () (send-string-to-terminal "\033[2 q")))
+
+(evil-mode 1)
+(unless (display-graphic-p)
+  (add-hook 'evil-insert-state-entry-hook (lambda () (send-string-to-terminal "\033[5 q")))
+  (add-hook 'evil-insert-state-exit-hook  (lambda () (send-string-to-terminal "\033[2 q"))))
 
 (setq evil-insert-state-cursor 'bar)
 
@@ -63,9 +65,9 @@
 
 ;; Enable rich annotations using the Marginalia package
 (use-package marginalia
-  ;; Bind `marginalia-cycle' locally in the minibuffer.  To make the binding
+  ;; Bind `marginalia-cycle' locally in the minibuffer. To make the binding
   ;; available in the *Completions* buffer, add it to the
-  ;; `completion-list-mode-map'.
+  ;; `completion-list-mode-map'a.
   :bind (:map minibuffer-local-map
          ("M-A" . marginalia-cycle))
 
