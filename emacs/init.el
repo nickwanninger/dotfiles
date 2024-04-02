@@ -6,6 +6,7 @@
 (setq custom-file
     (expand-file-name "custom.el" user-emacs-directory))
 
+(setq use-package-always-ensure t)
 
 
 (defun ensure-package (name)
@@ -22,16 +23,16 @@
 (load-theme 'modus-operandi 't)
 
 
-
-
-
+(setq evil-want-keybinding nil)
 ;; Evil Mode
-(ensure-package 'evil)
-(require 'evil)
+(use-package evil
+  :init
+  (evil-mode 1))
 
+(use-package evil-collection
+  :init
+  (evil-collection-init))
 
-
-(evil-mode 1)
 (unless (display-graphic-p)
   (add-hook 'evil-insert-state-entry-hook (lambda () (send-string-to-terminal "\033[5 q")))
   (add-hook 'evil-insert-state-exit-hook  (lambda () (send-string-to-terminal "\033[2 q"))))
@@ -51,7 +52,6 @@
 
 
 (use-package company
-  :ensure t
   :hook (prog-mode . company-mode)
   :bind (:map company-mode-map
          ([remap completion-at-point] . company-complete))
