@@ -82,6 +82,8 @@
 ;; Enable mouse mode cause I like rats
 (xterm-mouse-mode 1)
 (mouse-wheel-mode)
+(menu-bar-mode -1)
+(scroll-bar-mode -1)
 
 (setq confirm-kill-emacs #'y-or-n-p)
 (setq echo-keystrokes 0.01)
@@ -91,7 +93,6 @@
 (setq make-backup-files nil) ; stop creating ~ files
 
 
-(menu-bar-mode -1) 
 
 
 (global-set-key (kbd "C-c <left>")  'windmove-left)
