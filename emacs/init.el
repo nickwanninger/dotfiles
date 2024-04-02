@@ -15,7 +15,8 @@
     (package-install name)))
 
 
-(ensure-package 'magit)
+
+(use-package magit)
 
 
 ;; Modus Theme
@@ -83,7 +84,9 @@
 (xterm-mouse-mode 1)
 (mouse-wheel-mode)
 (menu-bar-mode -1)
-(scroll-bar-mode -1)
+
+(when (display-graphic-p)
+  (scroll-bar-mode -1))
 
 (setq confirm-kill-emacs #'y-or-n-p)
 (setq echo-keystrokes 0.01)
