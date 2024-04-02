@@ -99,17 +99,22 @@
          ("M-<down>" . tmux-pane-omni-window-down)
          ("M-<right>" . tmux-pane-omni-window-right)))
 
+
+
+
 (use-package racket-mode
-  :ensure t)
+  :ensure t
+  :config
+   (add-hook 'racket-mode-hook
+	     (lambda ()
+		(racket-xp-mode)
+		(define-key racket-mode-map (kbd "C-c r") 'racket-run))))
 
 (use-package org
   :ensure t)
 
 
 
-(add-hook 'racket-mode-hook
-          (lambda ()
-            (define-key racket-mode-map (kbd "C-c r") 'racket-run)))
 
 ;; ====-----------------------------------------------====
 
@@ -124,7 +129,7 @@
 
 (setq confirm-kill-emacs #'y-or-n-p)
 (setq echo-keystrokes 0.01)
-(global-display-line-numbers-mode)
+(global-display-line-numbers-mode -1)
 
 
 (setq make-backup-files nil) ; stop creating ~ files
