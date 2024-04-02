@@ -30,13 +30,16 @@
   :init
   (evil-mode 1))
 
+
 (use-package evil-collection
   :init
   (evil-collection-init))
 
+
 (unless (display-graphic-p)
-  (add-hook 'evil-insert-state-entry-hook (lambda () (send-string-to-terminal "\033[5 q")))
-  (add-hook 'evil-insert-state-exit-hook  (lambda () (send-string-to-terminal "\033[2 q"))))
+  (use-package evil-terminal-cursor-changer
+    :init
+    (evil-terminal-cursor-changer-activate)))
 
 (setq evil-insert-state-cursor 'bar)
 
@@ -87,13 +90,25 @@
 
 
 
+;; tmux integration
+(use-package tmux-pane
+  :ensure t
+  :bind (("M-<up>" . tmux-pane-omni-window-up)
+         ("M-<left>" . tmux-pane-omni-window-left)
+         ("M-<down>" . tmux-pane-omni-window-down)
+         ("M-<right>" . tmux-pane-omni-window-right)))
+
 (use-package racket-mode
   :ensure t)
+
+(use-package org
+  :ensure t)
+
 
 
 (add-hook 'racket-mode-hook
           (lambda ()
-            (define-key racket-mode-map (kbd "<f5>") 'racket-run)))
+            (define-key racket-mode-map (kbd "C-c r") 'racket-run)))
 
 ;; ====-----------------------------------------------====
 
