@@ -52,6 +52,9 @@
 (global-set-key (kbd "M-o") 'ace-window)
 
 
+;; Switch between modus themes
+(global-set-key (kbd "C-x C-h 1") 'modus-themes-toggle)
+
 (use-package company
   :hook (prog-mode . company-mode)
   :bind (:map company-mode-map
