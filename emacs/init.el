@@ -38,6 +38,7 @@
 
 (unless (display-graphic-p)
   (use-package evil-terminal-cursor-changer
+    :ensure t
     :init
     (evil-terminal-cursor-changer-activate)))
 
