@@ -3,6 +3,14 @@
              '("melpa" . "https://melpa.org/packages/") t)
 
 
+;; Change the user-emacs-directory to keep unwanted things out of ~/.emacs.d
+(setq user-emacs-directory (expand-file-name "~/.cache/emacs/")
+      url-history-file (expand-file-name "url/history" user-emacs-directory))
+;; Use no-littering to automatically set common paths to the new user-emacs-directory
+(use-package no-littering)
+
+
+
 (setq custom-file
     (expand-file-name "custom.el" user-emacs-directory))
 
@@ -15,6 +23,9 @@
     (package-install name)))
 
 
+(use-package which-key
+  :init
+  (which-key-mode))
 
 (use-package magit)
 
@@ -113,6 +124,10 @@
 
 (use-package org
   :ensure t)
+
+
+(use-package parinfer-rust-mode
+  :hook emacs-lisp-mode racket-mode)
 
 
 
