@@ -25,6 +25,8 @@
 
 (use-package which-key
   :init
+  (setq which-key-idle-delay 0.1)
+  (setq which-key-idle-secondary-delay 0.05)
   (which-key-mode))
 
 (use-package magit)
@@ -32,7 +34,7 @@
 
 ;; Modus Theme
 (ensure-package 'modus-themes)
-(load-theme 'modus-operandi 't)
+(load-theme 'modus-vivendi 't)
 
 
 (setq evil-want-keybinding nil)
