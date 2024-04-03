@@ -106,19 +106,32 @@
   :ensure t
   :config
    (add-hook 'racket-mode-hook
-	     (lambda ()
-	       (racket-xp-mode)
-	       (set-input-method 'TeX)
-	       (define-key racket-mode-map (kbd "C-c r") 'racket-run))))
+       (lambda ()
+         (racket-xp-mode)
+         (set-input-method 'TeX)
+         (define-key racket-mode-map (kbd "C-c r") 'racket-run))))
 
 (use-package org
   :ensure t)
 
 
 
+(defun edit-init ()
+  (interactive)
+  (find-file "~/dotfiles/emacs/init.el"))
+
 
 ;; ====-----------------------------------------------====
 
+
+(show-paren-mode 1)
+
+;; hitting tab does 2 spaces
+(setq-default indent-tabs-mode nil)
+(setq-default tab-width 2)
+
+(setq split-width-threshold 0)
+(setq split-height-threshold nil)
 
 ;; Enable mouse mode cause I like rats
 (xterm-mouse-mode 1)
@@ -133,8 +146,11 @@
 (global-display-line-numbers-mode -1)
 
 
+;; Save autosave files to ~/.cache/emacs (this won't work on emacs, but I don't care)
+(mkdir "~/.cache/emacs/" t)
 (setq make-backup-files nil) ; stop creating ~ files
-
+(setq auto-save-file-name-transforms
+      `((".*" "~/.cache/emacs/" t)))
 
 
 
@@ -147,3 +163,7 @@
 
 (global-set-key (kbd "C-\\") 'split-window-right)
 (global-set-key (kbd "C-_") 'split-window-below)
+
+
+;; Binding to eval buffer
+(global-set-key (kbd "C-c e") 'eval-buffer)
