@@ -25,12 +25,34 @@
 
 (use-package which-key
   :init
-  (setq which-key-idle-delay 0.1)
+  (setq which-key-idle-delay 0.3)
   (setq which-key-idle-secondary-delay 0.05)
   (which-key-mode))
 
 (use-package magit)
 
+;; ====--------------------------------------------------====
+
+;; I'm told that these few packages make the minibuffer much nicer to use.
+(use-package vertico
+  :ensure t
+  :init
+  (vertico-mode))
+
+(use-package orderless
+  :ensure t
+  :custom
+  (completion-styles '(orderless basic))
+  (completion-category-overrides '((file (styles basic partial-completion)))))
+
+(use-package consult
+  :ensure t)
+
+
+(global-set-key (kbd "C-c f") #'consult-ripgrep)
+
+
+;; ====--------------------------------------------------====
 
 ;; Modus Theme
 (ensure-package 'modus-themes)
@@ -62,6 +84,9 @@
 
 (add-hook 'c-mode-hook #'eglot-ensure)
 (add-hook 'c++-mode-hook #'eglot-ensure)
+
+(use-package eldoc-box
+   :ensure t)
 
 
 (ensure-package 'ace-window)
@@ -124,6 +149,15 @@
          (set-input-method 'TeX)
          (define-key racket-mode-map (kbd "C-c r") 'racket-run))))
 
+
+
+(defun expand ()
+        (interactive)
+        (set-input-method 'TeX)
+        (quail-select-current)
+        (set-input-method nil))
+
+
 (use-package org
   :ensure t)
 
@@ -133,9 +167,37 @@
 
 
 
+(require 'project)
+(global-set-key (kbd "C-p")  #'project-find-file)
+
+
+
 (defun edit-init ()
   (interactive)
   (find-file "~/dotfiles/emacs/init.el"))
+
+
+
+(require 'quail)
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+ 
+
+
+;; ====-----------------------------------------------====
+
+
+;; (setq treesit-language-source-alist
+;;    '((bash "https://github.com/tree-sitter/tree-sitter-bash")
+;;      (cpp "https://github.com/ikatyang/tree-sitter-cpp")
+;;      (c "https://github.com/ikatyang/tree-sitter-c")
+;;      (java "https://github.com/ikatyang/tree-sitter-java")
+;;      (rust "https://github.com/ikatyang/tree-sitter-rust")))
+
+;; (mapc #'treesit-install-language-grammar (mapcar #'car treesit-language-source-alist))
 
 
 ;; ====-----------------------------------------------====
@@ -168,6 +230,7 @@
 (setq make-backup-files nil) ; stop creating ~ files
 (setq auto-save-file-name-transforms
       `((".*" "~/.cache/emacs/" t)))
+
 
 
 
