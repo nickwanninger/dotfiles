@@ -9,6 +9,18 @@
 ;; Use no-littering to automatically set common paths to the new user-emacs-directory
 (use-package no-littering)
 
+;; Try to use UTF-8 for everything
+(set-language-environment "UTF-8")
+(setq locale-coding-system 'utf-8)
+(set-default-coding-systems 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+(set-selection-coding-system 'utf-8)
+(prefer-coding-system 'utf-8) ;; Catch-all
+
+(add-to-list 'load-path "~/.emacs.d/")
+
+(require 'pl-greek)
 
 
 (setq custom-file
@@ -22,7 +34,7 @@
   (unless (package-installed-p name)
     (package-install name)))
 
-
+;; 
 (use-package which-key
   :init
   (setq which-key-idle-delay 0.3)
@@ -153,7 +165,7 @@
 
 (defun expand ()
         (interactive)
-        (set-input-method 'TeX)
+        (set-input-method 'pl-greek)
         (quail-select-current)
         (set-input-method nil))
 
@@ -178,8 +190,6 @@
 
 
 
-(require 'quail)
-
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -189,15 +199,6 @@
 
 ;; ====-----------------------------------------------====
 
-
-;; (setq treesit-language-source-alist
-;;    '((bash "https://github.com/tree-sitter/tree-sitter-bash")
-;;      (cpp "https://github.com/ikatyang/tree-sitter-cpp")
-;;      (c "https://github.com/ikatyang/tree-sitter-c")
-;;      (java "https://github.com/ikatyang/tree-sitter-java")
-;;      (rust "https://github.com/ikatyang/tree-sitter-rust")))
-
-;; (mapc #'treesit-install-language-grammar (mapcar #'car treesit-language-source-alist))
 
 
 ;; ====-----------------------------------------------====

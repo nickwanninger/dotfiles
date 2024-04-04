@@ -1,0 +1,4 @@
+*
+!.gitignore
+!init.el
+!pl-greek.el
