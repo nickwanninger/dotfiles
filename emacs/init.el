@@ -71,6 +71,14 @@
 
 ;; ====--------------------------------------------------====
 
+(use-package undo-tree
+  :ensure t
+  :bind (("C-c u v" . #'undo-tree-visualize))
+  :config
+  (global-undo-tree-mode t)
+  (setq undo-tree-visualizer-diff t)
+  (setq-default undo-tree-history-directory-alist
+                `(("." . ,(concat no-littering-var-directory "undo-tree-hist")))))
 
 (use-package modus-themes
   :ensure t
@@ -84,8 +92,8 @@
 ;; Evil Mode
 (use-package evil
   :init
+  (evil-set-undo-system 'undo-tree)
   (evil-mode 1))
-
 
 (use-package evil-collection
   :init
@@ -194,6 +202,9 @@
   :hook emacs-lisp-mode racket-mode)
 
 
+
+  
+  
 
 (require 'project)
 (global-set-key (kbd "C-p")  #'project-find-file)
