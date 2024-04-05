@@ -1,3 +1,6 @@
+;; Make sure we load this file, instead of the precompiled file, if it is newer
+(setq load-prefer-newer t)
+
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (add-to-list 'package-archives '("elpa" . "https://elpa.gnu.org/packages/") t)
@@ -71,14 +74,6 @@
 
 ;; ====--------------------------------------------------====
 
-(use-package undo-tree
-  :ensure t
-  :bind (("C-c u v" . #'undo-tree-visualize))
-  :config
-  (global-undo-tree-mode t)
-  (setq undo-tree-visualizer-diff t)
-  (setq-default undo-tree-history-directory-alist
-                `(("." . ,(concat no-littering-var-directory "undo-tree-hist")))))
 
 (use-package modus-themes
   :ensure t
@@ -91,8 +86,10 @@
 
 ;; Evil Mode
 (use-package evil
+  :ensure t
+  :config
+  (evil-set-undo-system 'undo-redo)
   :init
-  (evil-set-undo-system 'undo-tree)
   (evil-mode 1))
 
 (use-package evil-collection
@@ -270,9 +267,23 @@
 (global-set-key (kbd "C-c <down>")  'windmove-down)
 
 
+(global-set-key (kbd "C-c g d") 'xref-find-definitions)
 
-(global-set-key (kbd "C-\\") 'split-window-right)
-(global-set-key (kbd "C-_") 'split-window-below)
+(defun split-window-right-and-switch ()
+  "Split a window right, then switch focus to it."
+  (interactive)
+  (select-window (split-window-right)))
+
+
+(defun split-window-below-and-switch ()
+  "Split a window below, then switch focus to it."
+  (interactive)
+  (select-window (split-window-below)))
+
+(global-set-key (kbd "C-\\") #'split-window-right-and-switch)
+(global-unset-key (kbd "C-_"))
+(global-set-key (kbd "C-_") #'split-window-below-and-switch)
+(global-set-key (kbd "C--") #'split-window-below-and-switch)
 
 
 ;; Binding to eval buffer
