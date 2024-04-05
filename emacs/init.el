@@ -29,6 +29,7 @@
 
 
 
+
 (use-package no-littering
    :ensure t)
 
@@ -78,6 +79,8 @@
 
 
 (setq evil-want-keybinding nil)
+;; (setq evil-want-C-i-jump nil)
+
 ;; Evil Mode
 (use-package evil
   :init
@@ -165,20 +168,26 @@
    (add-hook 'racket-mode-hook
        (lambda ()
          (racket-xp-mode)
-         (set-input-method 'TeX)
+         (set-input-method 'pl-greek)
          (define-key racket-mode-map (kbd "C-c r") 'racket-run))))
 
 
 
-(defun expand ()
-        (interactive)
-        (set-input-method 'pl-greek)
-        (quail-select-current)
-        (set-input-method nil))
+
+(defun ncw/org-mode-setup ()
+  (org-indent-mode)
+  ;; (variable-pitch-mode)
+  (auto-fill-mode 0)
+  (visual-line-mode 1)
+  (set-input-method 'pl-greek)
+  (setq evil-auto-indent nil))
 
 
 (use-package org
-  :ensure t)
+  :ensure t
+  :hook (org-mode . ncw/org-mode-setup)
+  :config
+  (setq org-hide-emphasis-markers t))
 
 
 (use-package parinfer-rust-mode
@@ -216,6 +225,7 @@
 ;; hitting tab does 2 spaces
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 2)
+(setq-default tab-always-indent 'complete)
 
 (setq split-width-threshold 0)
 (setq split-height-threshold nil)
@@ -226,6 +236,7 @@
 (menu-bar-mode -1)
 
 (when (display-graphic-p)
+  (tool-bar-mode -1)
   (scroll-bar-mode -1))
 
 (setq confirm-kill-emacs #'y-or-n-p)
