@@ -1,13 +1,12 @@
 (require 'package)
-(add-to-list 'package-archives
-             '("melpa" . "https://melpa.org/packages/") t)
-
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+(add-to-list 'package-archives '("elpa" . "https://elpa.gnu.org/packages/") t)
+(add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/") t)
 
 ;; Change the user-emacs-directory to keep unwanted things out of ~/.emacs.d
 (setq user-emacs-directory (expand-file-name "~/.cache/emacs/")
       url-history-file (expand-file-name "url/history" user-emacs-directory))
 ;; Use no-littering to automatically set common paths to the new user-emacs-directory
-(use-package no-littering)
 
 ;; Try to use UTF-8 for everything
 (set-language-environment "UTF-8")
@@ -27,6 +26,11 @@
     (expand-file-name "custom.el" user-emacs-directory))
 
 (setq use-package-always-ensure t)
+
+
+
+(use-package no-littering
+   :ensure t)
 
 
 (defun ensure-package (name)
@@ -66,9 +70,11 @@
 
 ;; ====--------------------------------------------------====
 
-;; Modus Theme
-(ensure-package 'modus-themes)
-(load-theme 'modus-vivendi 't)
+
+(use-package modus-themes
+  :ensure t
+  :init
+  (load-theme 'modus-vivendi 't))
 
 
 (setq evil-want-keybinding nil)
@@ -101,9 +107,10 @@
    :ensure t)
 
 
-(ensure-package 'ace-window)
-(require 'ace-window)
-(global-set-key (kbd "M-o") 'ace-window)
+(use-package ace-window
+  :ensure t
+  :init
+  (global-set-key (kbd "M-o") 'ace-window))
 
 
 ;; Switch between modus themes

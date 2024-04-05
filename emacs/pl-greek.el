@@ -1,3 +1,5 @@
+(provide 'pl-greek)
+
 (require 'quail)
 
 (quail-define-package
@@ -370,3 +372,5 @@
  ("\\supsetneqq" ?⊋)
  ("\\to" ?→)
  ("\\top" ?⊤))
+
+
