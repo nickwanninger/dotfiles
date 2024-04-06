@@ -3,7 +3,7 @@
 (require 'quail)
 
 (quail-define-package
- "pl-greek" "PlGreek" "Programming languages greek mode thingy" t
+ "pl-greek" "PlGreek" "" t
  "pl-greek"
  nil t t t t nil nil nil nil nil t)
 
