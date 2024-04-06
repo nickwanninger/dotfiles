@@ -4,19 +4,25 @@
 
 (add-to-list 'load-path "~/.emacs.d/lisp")
 
-;; Use no-littering to automatically set common paths to the new user-emacs-directory
-(use-package no-littering
-             :ensure t)
-
-
+;; Setup the package repos
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (add-to-list 'package-archives '("elpa" . "https://elpa.gnu.org/packages/") t)
 (add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/") t)
 
+(package-initialize)
+(unless package-archive-contents
+   (package-refresh-contents))
+
 ;; Change the user-emacs-directory to keep unwanted things out of ~/.emacs.d
 (setq user-emacs-directory (expand-file-name "~/.cache/emacs/")
       url-history-file (expand-file-name "url/history" user-emacs-directory))
+
+
+;; Use no-littering to automatically set common paths to the new user-emacs-directory
+(use-package no-littering
+             :ensure t)
+
 
 
 ;; Try to use UTF-8 for everything
@@ -94,6 +100,7 @@
   :ensure t
   :config
   (evil-set-undo-system 'undo-redo)
+  (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
   :init
   (evil-mode 1))
 
@@ -161,13 +168,6 @@
 
 
 
-;; tmux integration
-(use-package tmux-pane
-  :ensure t
-  :bind (("M-<up>" . tmux-pane-omni-window-up)
-         ("M-<left>" . tmux-pane-omni-window-left)
-         ("M-<down>" . tmux-pane-omni-window-down)
-         ("M-<right>" . tmux-pane-omni-window-right)))
 
 
 
@@ -190,13 +190,27 @@
   (auto-fill-mode 0)
   (visual-line-mode 1)
   (set-input-method 'pl-greek)
-  (setq evil-auto-indent nil))
+  (setq evil-auto-indent nil)
+  (define-key org-mode-map (kbd "M-<up>") nil)
+  (define-key org-mode-map (kbd "M-<left>") nil)
+  (define-key org-mode-map (kbd "M-<down>") nil)
+  (define-key org-mode-map (kbd "M-<right>") nil))
+  ;; (define-key org-mode-map (kbd "M-up")))
 
 
 (use-package org
   :ensure t
   :hook (org-mode . ncw/org-mode-setup)
   :config
+  (setq org-agenda-start-with-log-mode t)
+  (setq org-log-done 'time)
+  (setq org-log-into-drawer t)
+
+  (setq org-agenda-files
+        '("~/Documents/Tasks.org"))
+  (require 'org-habit)
+  (add-to-list 'org-modules 'org-habit)
+  (setq org-habit-graph-column 60)
   (setq org-hide-emphasis-markers t))
 
 
@@ -204,6 +218,14 @@
   :hook emacs-lisp-mode racket-mode)
 
 
+;; tmux integration
+(use-package tmux-pane
+  :ensure t
+  :init
+  (global-set-key (kbd "M-<up>") #'tmux-pane-omni-window-up)
+  (global-set-key (kbd "M-<left>") #'tmux-pane-omni-window-left)
+  (global-set-key (kbd "M-<down>") #'tmux-pane-omni-window-down)
+  (global-set-key (kbd "M-<right>") #'tmux-pane-omni-window-right))
 
   
   
