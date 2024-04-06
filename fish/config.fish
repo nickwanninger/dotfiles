@@ -57,7 +57,7 @@ alias src "bass source"
 alias magit "nvim -c :Neogit"
 
 # Run emacs in a client
-alias emacs "emacsclient --create-frame --alternate-editor=''"
+alias em "emacsclient --create-frame --alternate-editor=''"
 
 # disable homebrew auto update. Not sure if this works
 set -x HOMEBREW_NO_AUTO_UPDATE 1
