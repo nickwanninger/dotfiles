@@ -1,5 +1,13 @@
+(provide 'init)
 ;; Make sure we load this file, instead of the precompiled file, if it is newer
 (setq load-prefer-newer t)
+
+(add-to-list 'load-path "~/.emacs.d/lisp")
+
+;; Use no-littering to automatically set common paths to the new user-emacs-directory
+(use-package no-littering
+             :ensure t)
+
 
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
@@ -9,7 +17,7 @@
 ;; Change the user-emacs-directory to keep unwanted things out of ~/.emacs.d
 (setq user-emacs-directory (expand-file-name "~/.cache/emacs/")
       url-history-file (expand-file-name "url/history" user-emacs-directory))
-;; Use no-littering to automatically set common paths to the new user-emacs-directory
+
 
 ;; Try to use UTF-8 for everything
 (set-language-environment "UTF-8")
@@ -20,7 +28,6 @@
 (set-selection-coding-system 'utf-8)
 (prefer-coding-system 'utf-8) ;; Catch-all
 
-(add-to-list 'load-path "~/.emacs.d/")
 
 (require 'pl-greek)
 
@@ -33,8 +40,6 @@
 
 
 
-(use-package no-littering
-   :ensure t)
 
 
 (defun ensure-package (name)
@@ -253,10 +258,18 @@
 
 
 ;; Save autosave files to ~/.cache/emacs (this won't work on emacs, but I don't care)
-(mkdir "~/.cache/emacs/" t)
 (setq make-backup-files nil) ; stop creating ~ files
-(setq auto-save-file-name-transforms
-      `((".*" "~/.cache/emacs/" t)))
+
+(setq create-lockfiles nil) ; don't be annoying
+
+(let ((my-auto-save-dir (locate-user-emacs-file "auto-save")))
+  (setq auto-save-file-name-transforms
+        `((".*" ,(expand-file-name "\\2" my-auto-save-dir) t)))
+  (unless (file-exists-p my-auto-save-dir)
+    (make-directory my-auto-save-dir)))
+(setq auto-save-default t
+      auto-save-timeout 10
+      auto-save-interval 200)
 
 
 

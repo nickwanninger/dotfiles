@@ -1,4 +1,7 @@
 *
+
 !.gitignore
-!init.el
+!*.el
 !pl-greek.el
+custom.el
+!lisp/
