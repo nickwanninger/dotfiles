@@ -323,3 +323,9 @@
 
 ;; Binding to eval buffer
 (global-set-key (kbd "C-c e") 'eval-buffer)
+
+;; Delete the tailing whitespace whenever you save
+(add-hook 'before-save-hook
+          (lambda () (interactive)
+            "Commands to execute before saving any buffer."
+            (delete-trailing-whitespace)))
