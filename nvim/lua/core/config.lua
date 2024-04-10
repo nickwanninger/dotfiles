@@ -61,10 +61,17 @@ M.setup = function(opts)
 
   keys.map("<C-j>", "scroll down", "5j", { mode = "n" })
   keys.map("<C-k>", "scroll up", "4k", { mode = "n" })
+
   keys.map("<M-Left>", "Nav Left", ":TmuxNavigateLeft<cr>", { silent = true })
   keys.map("<M-Right>", "Nav Right", ":TmuxNavigateRight<cr>", { silent = true })
   keys.map("<M-Up>", "Nav Up", ":TmuxNavigateUp<cr>", { silent = true })
   keys.map("<M-Down>", "Nav Down", ":TmuxNavigateDown<cr>", { silent = true })
+
+  keys.map("<M-h>", "Nav Left", ":TmuxNavigateLeft<cr>", { silent = true })
+  keys.map("<M-l>", "Nav Right", ":TmuxNavigateRight<cr>", { silent = true })
+  keys.map("<M-k>", "Nav Up", ":TmuxNavigateUp<cr>", { silent = true })
+  keys.map("<M-j>", "Nav Down", ":TmuxNavigateDown<cr>", { silent = true })
+
   keys.map("<leader>l", "Open lazy", ":Lazy<CR>")
   keys.map("<leader>ca", "Open display code actions", ":CodeActionMenu", { mode = "n" })
   keys.map("<leader>u", "Toggle Undotree", ":UndotreeToggle<cr>", { silent = true, mode = "n" })
