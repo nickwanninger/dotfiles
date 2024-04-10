@@ -53,7 +53,6 @@
   (unless (package-installed-p name)
     (package-install name)))
 
-;; 
 (use-package which-key
   :init
   (setq which-key-idle-delay 0.3)
@@ -227,8 +226,8 @@
   (global-set-key (kbd "M-<down>") #'tmux-pane-omni-window-down)
   (global-set-key (kbd "M-<right>") #'tmux-pane-omni-window-right))
 
-  
-  
+
+
 
 (require 'project)
 (global-set-key (kbd "C-p")  #'project-find-file)
@@ -245,7 +244,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
- 
+
 
 
 ;; ====-----------------------------------------------====
@@ -329,3 +328,10 @@
           (lambda () (interactive)
             "Commands to execute before saving any buffer."
             (delete-trailing-whitespace)))
+
+
+
+(define-key evil-normal-state-map (kbd "\\ g") #'magit-status)
+(define-key evil-normal-state-map (kbd "\\ f") #'eglot-format)
+(define-key evil-normal-state-map (kbd "\\ 1") #'modus-themes-toggle)
+(define-key evil-normal-state-map (kbd "g d") #'xref-find-definitions)
