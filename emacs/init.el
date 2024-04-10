@@ -173,7 +173,8 @@
 
   (general-def 'motion
     ";" 'evil-ex
-    ":" 'evil-ex))
+    ":" 'evil-ex
+    "q" nil))
 
 
 
