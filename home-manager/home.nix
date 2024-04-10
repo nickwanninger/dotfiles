@@ -9,7 +9,7 @@
     pkgs.neovim
     pkgs.direnv
     pkgs.emacs-nox
-    pkgs.racket # The racket language
+    # pkgs.racket # The racket language
   ];
 
   home.file = {};
