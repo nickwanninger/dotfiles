@@ -149,51 +149,58 @@
 
 
 
+;;; Themes
 
+(use-package modus-themes :ensure t)
+(use-package catppuccin-theme :ensure t)
 
-(use-package modus-themes
-  :ensure t
-  :init
-  (load-theme 'modus-vivendi 't))
-
-
-(use-package catppuccin-theme
-  :ensure t)
 
 (defun dark-theme ()
-  "Select the light theme"
+  "Select the dark theme"
   (interactive)
-  (setq catppuccin-flavor 'frappe) ;; or 'latte, 'macchiato, or 'mocha
-  (load-theme 'catppuccin t))
+  ;; (setq catppuccin-flavor 'frappe) ;; or 'latte, 'macchiato, or 'mocha
+  ;; (load-theme 'catppuccin t)
+  (load-theme 'modus-vivendi t))
+
 
 (defun light-theme ()
   "Select the light theme"
   (interactive)
   (load-theme 'modus-operandi t))
 
+;; Set the dark theme right away
+(dark-theme)
+
+
+
+;;; Keybindings
+
 (use-package general
   :ensure t
   :config
   (general-evil-setup t)
-  (general-auto-unbind-keys)
-  (general-create-definer ncw/leader-def
-    :states '(normal visual motion emacs insert)
-    :keymaps 'override
-    :prefix "\\"
-    :global-prefix "M-\\")
-  (ncw/leader-def
-    "g" 'magit-status
-    "f" 'eglot-format
-    "1" 'dark-theme
-    "2" 'light-theme
-    "b" 'consult-buffer
-    "B" 'switch-to-buffer
-    "q" 'delete-window)
+  (general-auto-unbind-keys))
 
-  (general-def 'motion
-    ";" 'evil-ex
-    ":" 'evil-ex
-    "q" nil))
+
+(general-create-definer ncw/leader-def
+  :states '(normal visual motion emacs insert)
+  :keymaps 'override
+  :prefix "\\"
+  :global-prefix "M-\\")
+
+(ncw/leader-def
+  "g" 'magit-status
+  "f" 'eglot-format
+  "1" 'dark-theme
+  "2" 'light-theme
+  "b" 'consult-buffer
+  "B" 'switch-to-buffer
+  "q" 'delete-window)
+
+(general-def 'motion
+  ";" 'evil-ex
+  ":" 'evil-ex
+  "q" nil)
 
 
 
@@ -208,9 +215,6 @@
   :init
   (global-set-key (kbd "M-o") 'ace-window))
 
-
-;; Switch between modus themes
-(global-set-key (kbd "C-x C-h 1") 'modus-themes-toggle)
 
 (use-package company
   :ensure t
