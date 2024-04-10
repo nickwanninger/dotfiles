@@ -105,6 +105,7 @@
   :config
   (evil-set-undo-system 'undo-redo)
   (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
+  (evil-set-leader 'motion (kbd "\\"))
   :init
   (evil-mode 1))
 
@@ -127,8 +128,36 @@
 (add-hook 'c-mode-hook #'eglot-ensure)
 (add-hook 'c++-mode-hook #'eglot-ensure)
 
+
+
+
+(use-package general
+  :ensure t
+  :config
+  (general-evil-setup t)
+  (general-auto-unbind-keys)
+  (general-create-definer ncw/leader-def
+    :states '(normal visual motion emacs insert)
+    :keymaps 'override
+    :prefix "\\"
+    :global-prefix "C-\\")
+  (ncw/leader-def
+    "g" 'magit-status
+    "f" 'eglot-format
+    "1" 'modus-themes-toggle
+    "b" 'project-switch-to-buffer
+    "B" 'switch-to-buffer)
+
+  (general-def 'motion
+    ";" 'evil-ex
+    ":" 'evil-ex))
+
+
+
+
+
 (use-package eldoc-box
-   :ensure t)
+  :ensure t)
 
 
 (use-package ace-window
@@ -333,10 +362,3 @@
           (lambda () (interactive)
             "Commands to execute before saving any buffer."
             (delete-trailing-whitespace)))
-
-
-
-(define-key evil-normal-state-map (kbd "\\ g") #'magit-status)
-(define-key evil-normal-state-map (kbd "\\ f") #'eglot-format)
-(define-key evil-normal-state-map (kbd "\\ 1") #'modus-themes-toggle)
-(define-key evil-normal-state-map (kbd "g d") #'xref-find-definitions)
