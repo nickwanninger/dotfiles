@@ -2,6 +2,11 @@
 ;; Make sure we load this file, instead of the precompiled file, if it is newer
 (setq load-prefer-newer t)
 
+(setq gc-cons-threshold (* 50 1024 1024))
+
+;; Silence compiler warnings, as they can be pretty disruptive
+(setq native-comp-async-report-warnings-errors nil)
+
 (add-to-list 'load-path "~/.emacs.d/lisp")
 
 ;; Setup the package repos
