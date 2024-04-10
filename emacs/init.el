@@ -86,9 +86,21 @@
 
 (global-set-key (kbd "C-c f") #'consult-ripgrep)
 
+(use-package embark
+  :ensure t
+  :bind (("C-." . embark-act)
+         ("M-," . embark-dwim)
+         ("C-h B" . embark-bindings))
+  :init
+  (setq prefix-help-command #'embark-prefix-help-command))
+
+(use-package embark-consult
+  :ensure t
+  :hook
+  (embark-collect-mode . consult-preview-at-point-mode))
+
 
 ;; ====--------------------------------------------------====
-
 
 (use-package modus-themes
   :ensure t
@@ -105,6 +117,7 @@
   :config
   (evil-set-undo-system 'undo-redo)
   (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
+  (define-key evil-normal-state-map (kbd "C-.") nil)
   (evil-set-leader 'motion (kbd "\\"))
   :init
   (evil-mode 1))
@@ -129,6 +142,14 @@
 (add-hook 'c++-mode-hook #'eglot-ensure)
 
 
+(use-package treesit-auto
+  :custom
+  (treesit-auto-install 'prompt)
+  :config
+  (treesit-auto-add-to-auto-mode-alist 'all)
+  (global-treesit-auto-mode))
+
+
 
 
 (use-package general
@@ -140,13 +161,14 @@
     :states '(normal visual motion emacs insert)
     :keymaps 'override
     :prefix "\\"
-    :global-prefix "C-\\")
+    :global-prefix "M-\\")
   (ncw/leader-def
     "g" 'magit-status
     "f" 'eglot-format
     "1" 'modus-themes-toggle
-    "b" 'project-switch-to-buffer
-    "B" 'switch-to-buffer)
+    "b" 'consult-buffer
+    "B" 'switch-to-buffer
+    "q" 'delete-window)
 
   (general-def 'motion
     ";" 'evil-ex
@@ -348,8 +370,8 @@
   (interactive)
   (select-window (split-window-below)))
 
-(global-set-key (kbd "C-\\") #'split-window-right-and-switch)
 (global-unset-key (kbd "C-_"))
+(global-set-key (kbd "C-\\") #'split-window-right-and-switch)
 (global-set-key (kbd "C-_") #'split-window-below-and-switch)
 (global-set-key (kbd "C--") #'split-window-below-and-switch)
 
