@@ -118,6 +118,7 @@
   (evil-set-undo-system 'undo-redo)
   (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
   (define-key evil-normal-state-map (kbd "C-.") nil)
+  (define-key evil-normal-state-map (kbd "q") nil)
   (evil-set-leader 'motion (kbd "\\"))
   :init
   (evil-mode 1))
