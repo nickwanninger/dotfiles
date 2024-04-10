@@ -86,6 +86,8 @@
 
 (global-set-key (kbd "C-c f") #'consult-ripgrep)
 
+
+
 (use-package embark
   :ensure t
   :bind (("C-." . embark-act)
@@ -101,11 +103,6 @@
 
 
 ;; ====--------------------------------------------------====
-
-(use-package modus-themes
-  :ensure t
-  :init
-  (load-theme 'modus-vivendi 't))
 
 
 (setq evil-want-keybinding nil)
@@ -153,6 +150,27 @@
 
 
 
+
+(use-package modus-themes
+  :ensure t
+  :init
+  (load-theme 'modus-vivendi 't))
+
+
+(use-package catppuccin-theme
+  :ensure t)
+
+(defun dark-theme ()
+  "Select the light theme"
+  (interactive)
+  (setq catppuccin-flavor 'frappe) ;; or 'latte, 'macchiato, or 'mocha
+  (load-theme 'catppuccin t))
+
+(defun light-theme ()
+  "Select the light theme"
+  (interactive)
+  (load-theme 'modus-operandi t))
+
 (use-package general
   :ensure t
   :config
@@ -166,7 +184,8 @@
   (ncw/leader-def
     "g" 'magit-status
     "f" 'eglot-format
-    "1" 'modus-themes-toggle
+    "1" 'dark-theme
+    "2" 'light-theme
     "b" 'consult-buffer
     "B" 'switch-to-buffer
     "q" 'delete-window)
