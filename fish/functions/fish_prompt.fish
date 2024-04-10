@@ -1,5 +1,10 @@
 function fish_prompt
 
+  if [ "$TERM" = "dumb" ]
+    printf "> "
+    return
+  end
+
   set last_status $status
 	
 	# set_color green
