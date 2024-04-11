@@ -133,19 +133,88 @@
 
 (setq evil-insert-state-cursor 'bar)
 
-(add-hook 'c-ts-mode-hook #'eglot-ensure)
-(add-hook 'c++-ts-mode-hook #'eglot-ensure)
+(defun ncw/setup-lsp-mode ()
+  (message "ncw/setup-lsp-mode called")
+  (company-mode 1)
+  (lsp-which-key-integration)
+  (lsp-diagnostics-mode 1)
+  (lsp-completion-mode 1))
 
-(add-hook 'c-mode-hook #'eglot-ensure)
-(add-hook 'c++-mode-hook #'eglot-ensure)
-
-
-(use-package treesit-auto
-  :custom
-  (treesit-auto-install 'prompt)
+(use-package lsp-mode
+  :ensure t
+  :commands (lsp lsp-deferred)
+  :hook ((c-ts-mode . lsp)
+         (c-mode . lsp)
+         (c++-ts-mode . lsp)
+         (c++-mode . lsp)
+         (lsp-mode . ncw/setup-lsp-mode))
+  :init
+  (setq lsp-keymap-prefix "C-c l")
+  (setq lsp-headerline-breadcrumb-enable nil)
   :config
-  (treesit-auto-add-to-auto-mode-alist 'all)
-  (global-treesit-auto-mode))
+  (lsp-enable-which-key-integration t)
+  :custom
+  (lsp-log-io nil)
+  (lsp-print-performance nil)
+  ;; (lsp-report-if-no-buffer nil)
+  ;; (lsp-keep-workspace-alive nil)
+  ;; (lsp-enable-snippet t)
+  ;; (lsp-auto-guess-root t)
+  (lsp-restart 'iteractive)
+ ;(lsp-session-file)
+  ;; (lsp-auto-configure nil)
+ ;(lsp-document-sync-method)
+  (lsp-auto-execute-action nil)
+  (lsp-eldoce-render-all nil)
+  (lsp-enable-completion-at-point t)
+  (lsp-enable-xref t)
+  (lsp-enable-indentation t)
+  (lsp-enable-on-type-formatting nil)
+  (lsp-before-save-edits nil)
+  (lsp-imenu-show-container-name t)
+  (lsp-imenu-container-name-separator "/")
+  (lsp-imenu-sort-methods '(kind name))
+  (lsp-response-timeout 5)
+  (lsp-enable-file-watchers nil)
+  (lsp-server-trace nil)
+  (lsp-semantic-highlighting nil)
+  (lsp-enable-imenu t)
+  (lsp-signature-auto-activate t)
+  (lsp-signature-render-documentation nil)
+  (lsp-enable-text-document-color nil)
+  (lsp-completion-provider :capf)
+  (gc-cons-threshold 100000000)
+  (read-process-output-max (* 3 1024 1024)))
+
+
+(use-package lsp-ui
+  :commands (lsp-ui-mode)
+  :custom
+  ;; Sideline
+  (lsp-ui-sideline-show-diagnostics t)
+  (lsp-ui-sideline-show-hover nil)
+  (lsp-ui-sideline-show-code-actions nil)
+  (lsp-ui-sideline-update-mode 'line)
+  (lsp-ui-sideline-delay 0)
+  ;; Peek
+  (lsp-ui-peek-enable t)
+  (lsp-ui-peek-show-directory nil)
+  ;; Documentation
+  (lsp-ui-doc-enable t)
+  (lsp-ui-doc-position 'at-point)
+  (lsp-ui-doc-delay 0.2)
+  ;; IMenu
+  (lsp-ui-imenu-window-width 0)
+  (lsp-ui-imenu--custom-mode-line-format nil)
+  :hook (lsp-mode . lsp-ui-mode))
+
+
+;; (add-hook 'c-ts-mode-hook #'eglot-ensure)
+;; (add-hook 'c++-ts-mode-hook #'eglot-ensure)
+;; (add-hook 'c-mode-hook #'eglot-ensure)
+;; (add-hook 'c++-mode-hook #'eglot-ensure)
+
+
 
 
 
@@ -171,6 +240,17 @@
 ;; Set the dark theme right away
 (dark-theme)
 
+
+
+;; Pulse the current line when performing certain actions in Emacs.
+;; The functions that cause the pulse are in the `pulsar-pulse-functions' list.
+(use-package pulsar
+  :ensure t
+  :config
+  (pulsar-global-mode)
+  :custom
+  (pulsar-face 'pulsar-magenta)
+  (pulsar-delay 0.005))
 
 
 ;;; Keybindings
@@ -205,9 +285,124 @@
 
 
 
-
-(use-package eldoc-box
+(use-package popup
   :ensure t)
+
+(use-package eldoc
+  :ensure t)
+
+(defvar-local eldoc-tip--old-eldoc-functions nil
+  "The original value of ‘eldoc-display-functions’. The original value before enabling eldoc-box.")
+
+(defface eldoc-tip-tooltip
+  '((((class color) (min-colors 88) (background light))
+     (:foreground "black" :background "cornsilk"))
+    (((class color) (min-colors 88) (background dark))
+     (:background "gray26"))
+    (t (:foreground "black" :background "yellow")))
+
+  "Face used for the tooltip.")
+(defun eldoc-tip--compose-doc (doc)
+  "Compose a doc passed from eldoc.
+
+DOC has the form of (TEXT :KEY VAL...), and KEY can be ‘:thing’
+and ‘:face’, among other things. If ‘:thing’ exists, it is put at
+the start of the doc followed by a colon. If ‘:face’ exists, it
+is applied to the thing.
+
+Return the composed string."
+  (let ((thing (plist-get (cdr doc) :thing))
+        (face (plist-get (cdr doc) :face)))
+    (concat (if thing
+                (concat (propertize (format "%s" thing) 'face face) ": ")
+              "")
+            (car doc))))
+
+;; (defface eldoc-tip-body '((t . nil)))
+
+
+(defun eldoc-tip--eldoc-message-function (str &rest args)
+  "Front-end for eldoc."
+  (when (stringp str)
+    (let* ((doc (string-trim-right (apply #'format str args))))
+       (popup-tip doc
+                  :point (point)
+                  ;; :min-height 10
+                  :max-width 80
+                  :truncate nil
+                  :margin 2
+                  :face 'eldoc-tip-tooltip))))
+             ;; :face 'eldoc-tip-body))
+
+(defcustom eldoc-tip-doc-separator "\n----\n"
+  "The separator between documentation from different sources.
+
+Since Emacs 28, Eldoc can combine documentation from different
+sources, this separator is used to separate documentation from
+different sources.
+
+This separator is used for the documentation shown in
+‘eldoc-tip-bover-mode’ but not ‘eldoc-box-help-at-point’."
+  :type 'string)
+
+(defun eldoc-tip--eldoc-display-function (docs interactive)
+  "Display DOCS in childframe.
+For DOCS and INTERACTIVE see ‘eldoc-display-functions’. Maybe
+display the docs in echo area depending on
+‘eldoc-box-only-multi-line’."
+  (let ((doc (string-trim (string-join
+                              (mapcar #'eldoc-tip--compose-doc docs)
+                              eldoc-tip-doc-separator))))
+    (when (eldoc-tip--eldoc-message-function "%s" doc)
+      (eldoc-display-in-echo-area docs interactive))))
+
+
+(defun eldoc-tip--enable ()
+  "Enable eldoc-tip hover. Intended for internal use."
+  (message "eldoc-tip-enable")
+  (if (not (boundp 'eldoc-display-functions))
+      (add-function :before-while (local 'eldoc-message-function)
+                    #'eldoc-tip--eldoc-message-function)
+
+    (setq-local eldoc-tip--old-eldoc-functions eldoc-display-functions)
+    (setq-local eldoc-display-functions
+                (cons 'eldoc-tip--eldoc-display-function
+                      (remq 'eldoc-display-in-echo-area eldoc-display-functions)))))
+
+
+(defun eldoc-display-functionsoc-tip--disable ()
+  "Disable eldoc-box hover. Intended for internal use."
+  (if (not (boundp 'eldoc-display-functions))
+      (remove-function (local 'eldoc-message-function) #'eldoc-tip--eldoc-message-function)
+
+    (setq-local eldoc-display-functions
+                (remq 'eldoc-tip--eldoc-display-function
+                      eldoc-display-functions))
+    ;; If we removed eldoc-display-in-echo-area when enabling
+    ;; eldoc-box, add it back.
+    (when (memq 'eldoc-display-in-echo-area
+                eldoc-tip--old-eldoc-functions)
+      (setq-local eldoc-display-functions
+                  (cons 'eldoc-display-in-echo-area
+                        eldoc-display-functions)))))
+  ;; (advice-remove #'keyboard-quit #'eldoc-box-quit-frame))
+
+(define-minor-mode eldoc-tip-hover-at-point-mode
+  "A convenient minor mode to display doc at point.
+You can use \\[keyboard-quit] to hide the doc."
+  :lighter " TIP"
+  :global t
+  (if eldoc-tip-hover-at-point-mode
+      (progn (remove-hook 'pre-command-hook #'eldoc-pre-command-refresh-echo-area t)
+             (eldoc-tip--enable))
+    (eldoc-tip--disable)))
+(require 'eldoc)
+
+;; (eldoc-tip-hover-at-point-mode 1)
+
+;; (general-def 'motion
+;;   "K" 'tooltip-eldoc)
+
 
 
 (use-package ace-window
