@@ -298,7 +298,7 @@
   '((((class color) (min-colors 88) (background light))
      (:foreground "black" :background "cornsilk"))
     (((class color) (min-colors 88) (background dark))
-     (:background "gray26"))
+     (:background "gray26" :foreground "white"))
     (t (:foreground "black" :background "yellow")))
 
   "Face used for the tooltip.")
@@ -365,9 +365,9 @@ display the docs in echo area depending on
                     #'eldoc-tip--eldoc-message-function)
 
     (setq-local eldoc-tip--old-eldoc-functions eldoc-display-functions)
-    (setq-local eldoc-display-functions
-                (cons 'eldoc-tip--eldoc-display-function
-                      (remq 'eldoc-display-in-echo-area eldoc-display-functions)))))
+    (setq-local eldoc-display-functions (list 'eldoc-tip--eldoc-display-function))))
+                ;; (cons 'eldoc-tip--eldoc-display-function
+                ;;       (remq 'eldoc-display-in-echo-area eldoc-display-functions)))))
 
 
 (defun eldoc-display-functionsoc-tip--disable ()
@@ -500,9 +500,16 @@ You can use \\[keyboard-quit] to hide the doc."
   (global-set-key (kbd "M-<up>") #'tmux-pane-omni-window-up)
   (global-set-key (kbd "M-<left>") #'tmux-pane-omni-window-left)
   (global-set-key (kbd "M-<down>") #'tmux-pane-omni-window-down)
-  (global-set-key (kbd "M-<right>") #'tmux-pane-omni-window-right))
+  (global-set-key (kbd "M-<right>") #'tmux-pane-omni-window-right)
+
+  (add-to-list 'pulsar-pulse-functions #'tmux-pane-omni-window-up)
+  (add-to-list 'pulsar-pulse-functions #'tmux-pane-omni-window-left)
+  (add-to-list 'pulsar-pulse-functions #'tmux-pane-omni-window-down)
+  (add-to-list 'pulsar-pulse-functions #'tmux-pane-omni-window-right))
 
 
+(global-set-key (kbd "M-j") #'next-buffer)
+(global-set-key (kbd "M-k") #'previous-buffer)
 
 
 (require 'project)
@@ -576,7 +583,6 @@ You can use \\[keyboard-quit] to hide the doc."
 (global-set-key (kbd "C-c <up>")    'windmove-up)
 (global-set-key (kbd "C-c <down>")  'windmove-down)
 
-
 (global-set-key (kbd "C-c g d") 'xref-find-definitions)
 
 (defun split-window-right-and-switch ()
@@ -595,6 +601,9 @@ You can use \\[keyboard-quit] to hide the doc."
 (global-set-key (kbd "C-_") #'split-window-below-and-switch)
 (global-set-key (kbd "C--") #'split-window-below-and-switch)
 
+
+(add-to-list 'pulsar-pulse-functions #'split-window-right-and-switch)
+(add-to-list 'pulsar-pulse-functions #'split-window-below-and-switch)
 
 ;; Binding to eval buffer
 (global-set-key (kbd "C-c e") 'eval-buffer)
