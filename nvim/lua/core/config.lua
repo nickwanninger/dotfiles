@@ -46,11 +46,17 @@ M.setup = function(opts)
   keys.map("<M-f>", "Search", ":Telescope live_grep<CR>", { mode = "n" })
   keys.map("<C-f>", "Display git files", ":Telescope git_files<cr>", { mode = "n" })
   keys.map("<C-p>", "Display all files", ":Telescope find_files<CR>", { mode = "n" })
+  keys.map("<leader>b", "Buffers", ":Telescope buffers<CR>", { mode = "n" })
+
   keys.map("<C-_>", "Horizontal Split", ":sp<CR>", { mode = "n" })
   keys.map("<C-\\>", "Vertical Split", ":vsp<CR>", { mode = "n" })
 
 
-  keys.map("<leader>b", "Balance splits", "CTRL-W_=")
+  keys.map("<M-j>", "Next Buffer", ":bnext<CR>", { mode = "n" })
+  keys.map("<M-k>", "Prev Buffer", ":bprev<CR>", { mode = "n" })
+
+
+  -- keys.map("<leader>b", "Balance splits", "CTRL-W_=")
 
 
 
@@ -67,10 +73,10 @@ M.setup = function(opts)
   keys.map("<M-Up>", "Nav Up", ":TmuxNavigateUp<cr>", { silent = true })
   keys.map("<M-Down>", "Nav Down", ":TmuxNavigateDown<cr>", { silent = true })
 
-  keys.map("<M-h>", "Nav Left", ":TmuxNavigateLeft<cr>", { silent = true })
-  keys.map("<M-l>", "Nav Right", ":TmuxNavigateRight<cr>", { silent = true })
-  keys.map("<M-k>", "Nav Up", ":TmuxNavigateUp<cr>", { silent = true })
-  keys.map("<M-j>", "Nav Down", ":TmuxNavigateDown<cr>", { silent = true })
+  -- keys.map("<M-h>", "Nav Left", ":TmuxNavigateLeft<cr>", { silent = true })
+  -- keys.map("<M-l>", "Nav Right", ":TmuxNavigateRight<cr>", { silent = true })
+  -- keys.map("<M-k>", "Nav Up", ":TmuxNavigateUp<cr>", { silent = true })
+  -- keys.map("<M-j>", "Nav Down", ":TmuxNavigateDown<cr>", { silent = true })
 
   keys.map("<leader>l", "Open lazy", ":Lazy<CR>")
   keys.map("<leader>ca", "Open display code actions", ":CodeActionMenu", { mode = "n" })
