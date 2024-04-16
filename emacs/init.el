@@ -151,8 +151,8 @@
   :init
   (setq lsp-keymap-prefix "C-c l")
   (setq lsp-headerline-breadcrumb-enable nil)
-  :config
-  (lsp-enable-which-key-integration t)
+  ;; :config
+  ;; (lsp-enable-which-key-integration t)
   :custom
   (lsp-log-io nil)
   (lsp-print-performance nil)
@@ -270,7 +270,8 @@
 
 (ncw/leader-def
   "g" 'magit-status
-  "f" 'eglot-format
+  ;; "f" 'eglot-format
+  "f" 'lsp-format-buffer
   "1" 'dark-theme
   "2" 'light-theme
   "b" 'consult-buffer
