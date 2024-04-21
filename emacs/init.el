@@ -459,6 +459,11 @@ You can use \\[keyboard-quit] to hide the doc."
 
 
 
+(use-package nix-mode
+  :ensure t
+  :mode "\\.nix\\'")
+
+
 
 (defun ncw/org-mode-setup ()
   (org-indent-mode)
@@ -491,7 +496,7 @@ You can use \\[keyboard-quit] to hide the doc."
 
 
 (use-package parinfer-rust-mode
-  :hook emacs-lisp-mode racket-mode)
+  :hook emacs-lisp-mode racket-mode scheme-mode)
 
 
 ;; tmux integration
