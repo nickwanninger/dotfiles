@@ -100,7 +100,7 @@ set -gx PATH "$PNPM_HOME" $PATH
 
 # opam configuration
 source /Users/nick/.opam/opam-init/init.fish > /dev/null 2> /dev/null; or true
-source ~/dotfiles/fish/iterm.fish; or true
+# source ~/dotfiles/fish/iterm.fish; or true
 
 
 

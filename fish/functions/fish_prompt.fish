@@ -41,7 +41,7 @@ function fish_prompt
 
     if test -n "$NDEV_DIR"
 	    set_color brblack
-      echo -n " in $(basename $NDEV_DIR)"
+      echo -n " in (basename $NDEV_DIR)"
       set_color red
     end
 

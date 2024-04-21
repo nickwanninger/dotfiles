@@ -33,6 +33,15 @@
           local = true;
           stateVersion = "23.05";
         };
+
+        # The Linux VM on my Macbook
+        "nick@quark" = {
+          system = "aarch64-linux";
+          username = "nick";
+          home = "/home/nick";
+          local = true;
+          stateVersion = "23.05";
+        };
       };
 
 
