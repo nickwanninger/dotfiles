@@ -54,11 +54,10 @@
 
 
 
+(use-package direnv
+ :config
+ (direnv-mode))
 
-(defun ensure-package (name)
-  "Ensure a package is installed"
-  (unless (package-installed-p name)
-    (package-install name)))
 
 (use-package which-key
   :init
