@@ -40,6 +40,8 @@
 (prefer-coding-system 'utf-8) ;; Catch-all
 
 
+(setq enable-local-variables nil)
+
 (require 'pl-greek)
 
 
@@ -102,6 +104,10 @@
   (embark-collect-mode . consult-preview-at-point-mode))
 
 
+(use-package neotree
+  :ensure t)
+
+
 ;; ====--------------------------------------------------====
 
 
@@ -116,6 +122,7 @@
   (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
   (define-key evil-normal-state-map (kbd "C-.") nil)
   (define-key evil-normal-state-map (kbd "q") nil)
+  (define-key evil-normal-state-map (kbd "C-n") 'neotree)
   (evil-set-leader 'motion (kbd "\\"))
   :init
   (evil-mode 1))
