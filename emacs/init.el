@@ -490,6 +490,10 @@ You can use \\[keyboard-quit] to hide the doc."
   (setq org-hide-emphasis-markers t))
 
 
+(use-package rainbow-delimiters
+  :ensure t
+  :hook ((prog-mode . rainbow-delimiters-mode)))
+
 (use-package parinfer-rust-mode
   :hook emacs-lisp-mode racket-mode)
 
