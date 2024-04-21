@@ -477,6 +477,9 @@ You can use \\[keyboard-quit] to hide the doc."
   :ensure t
   :mode "\\.nix\\'")
 
+;; Use geiser to make Guile development nicer
+(use-package geiser-guile
+  :ensure t)
 
 
 (defun ncw/org-mode-setup ()
