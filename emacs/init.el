@@ -113,6 +113,10 @@
 (setq evil-want-keybinding nil)
 ;; (setq evil-want-C-i-jump nil)
 
+;; Make it so underscores and dashes are considered part of a word
+(modify-syntax-entry ?_ "w")
+(modify-syntax-entry ?- "w")
+
 ;; Evil Mode
 (use-package evil
   :ensure t
@@ -122,6 +126,10 @@
   (define-key evil-normal-state-map (kbd "C-.") nil)
   (define-key evil-normal-state-map (kbd "q") nil)
   (define-key evil-normal-state-map (kbd "C-n") 'neotree)
+  (define-key evil-normal-state-map (kbd "SPC")
+              (lambda ()
+                (interactive)
+                (evil-execute-macro 1 "viw")))
   (evil-set-leader 'motion (kbd "\\"))
   :init
   (evil-mode 1))
