@@ -29,6 +29,7 @@
              :ensure t)
 
 
+(require 'cl-lib)
 
 ;; Try to use UTF-8 for everything
 (set-language-environment "UTF-8")
@@ -51,12 +52,40 @@
 (setq use-package-always-ensure t)
 
 
+(cl-defun setup-repl (map &key run-buffer send-to-repl)
+  (define-key map (kbd "C-c e") run-buffer)
+  (define-key map (kbd "C-c C-r") send-to-repl))
+
+(setup-repl emacs-lisp-mode-map
+            :run-buffer #'eval-buffer)
 
 
+
+(use-package racket-mode
+  :ensure t
+  :config
+   (add-hook 'racket-mode-hook
+       (lambda ()
+         (racket-xp-mode)
+         (set-input-method 'pl-greek)
+         (setup-repl racket-mode-map
+                     :run-buffer #'racket-run
+                     :send-to-repl #'racket-send-last-sexp))))
+
+;; Use geiser to make Guile development nicer
+(use-package geiser-guile
+  :ensure t
+  :config
+  (add-hook 'geiser-mode-hook
+            (lambda ()
+              (geiser)
+              (setup-repl geiser-mode-map :run-buffer #'geiser-eval-buffer
+                                          :send-to-repl #'geiser-eval-last-sexp))))
 
 (use-package direnv
- :config
- (direnv-mode))
+  :config
+  (setq direnv-always-show-summary nil)
+  (direnv-mode))
 
 
 (use-package which-key
@@ -107,6 +136,8 @@
   :ensure t)
 
 
+
+
 ;; ====--------------------------------------------------====
 
 
@@ -150,7 +181,7 @@
 (defun ncw/setup-lsp-mode ()
   (message "ncw/setup-lsp-mode called")
   (company-mode 1)
-  (lsp-which-key-integration)
+  ;; (lsp-which-key-integration)
   (lsp-diagnostics-mode 1)
   (lsp-completion-mode 1))
 
@@ -231,6 +262,45 @@
 
 
 
+
+(use-package treesit-auto
+  :custom
+  (treesit-auto-install 'prompt)
+  :config
+  (treesit-auto-add-to-auto-mode-alist 'all)
+  (global-treesit-auto-mode))
+
+(use-package evil-textobj-tree-sitter
+  :ensure t)
+
+(define-key evil-outer-text-objects-map "f" (evil-textobj-tree-sitter-get-textobj "function.outer"))
+(define-key evil-inner-text-objects-map "f" (evil-textobj-tree-sitter-get-textobj "function.inner"))
+;; You can also bind multiple items and we will match the first one we can find
+(define-key evil-outer-text-objects-map "a" (evil-textobj-tree-sitter-get-textobj ("conditional.outer" "loop.outer")))
+
+;; Goto start of next function
+(define-key evil-normal-state-map
+            (kbd "]f")
+            (lambda ()
+              (interactive)
+              (evil-textobj-tree-sitter-goto-textobj "function.outer")))
+
+;; Goto start of previous function
+(define-key evil-normal-state-map
+            (kbd "[f")
+            (lambda ()
+              (interactive)
+              (evil-textobj-tree-sitter-goto-textobj "function.outer" t)))
+
+
+;; (use-package ts-movement
+;;   :load-path "lisp/ts-movement"
+;;   :config
+;;   (define-key ts-movement-map (kbd "C-c .") #'tsm/node-parent)
+;;   (define-key ts-movement-map (kbd "C-c ,") #'tsm/node-children)
+;;   :hook
+;;   (c++-ts-mode . ts-movement-mode)
+;;   (c-ts-mode . ts-movement-mode))
 
 ;;; Themes
 
@@ -462,24 +532,12 @@ You can use \\[keyboard-quit] to hide the doc."
 
 
 
-(use-package racket-mode
-  :ensure t
-  :config
-   (add-hook 'racket-mode-hook
-       (lambda ()
-         (racket-xp-mode)
-         (set-input-method 'pl-greek)
-         (define-key racket-mode-map (kbd "C-c r") 'racket-run))))
 
 
 
 (use-package nix-mode
   :ensure t
   :mode "\\.nix\\'")
-
-;; Use geiser to make Guile development nicer
-(use-package geiser-guile
-  :ensure t)
 
 
 (defun ncw/org-mode-setup ()
@@ -542,6 +600,23 @@ You can use \\[keyboard-quit] to hide the doc."
 (require 'project)
 (global-set-key (kbd "C-p")  #'project-find-file)
 
+
+(setq-default mode-line-buffer-identification
+            '(:eval (propertize "%12b"
+                     'face (if (mode-line-window-selected-p)
+                             'bold
+                            'italic))))
+
+
+
+;; (use-package spaceline :ensure t
+;;   :config
+;;   (setq-default mode-line-format '("%e" (:eval (spaceline-ml-main)))))
+
+;; (use-package spaceline-config :ensure spaceline
+;;   :config
+;;   (spaceline-helm-mode 1)
+;;   (spaceline-spacemacs-theme))
 
 
 (defun edit-init ()

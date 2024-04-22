@@ -9,6 +9,7 @@
     pkgs.neovim
     pkgs.direnv
     pkgs.emacs-nox
+    pkgs.guile
     # pkgs.racket # The racket language
   ];
 
