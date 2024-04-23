@@ -39,7 +39,8 @@
 (set-keyboard-coding-system 'utf-8)
 (set-selection-coding-system 'utf-8)
 (prefer-coding-system 'utf-8) ;; Catch-all
-
+;; Scroll by one line
+(setq scroll-conservatively 1)
 
 (setq enable-local-variables nil)
 
@@ -50,6 +51,22 @@
     (expand-file-name "custom.el" user-emacs-directory))
 
 (setq use-package-always-ensure t)
+
+
+
+(global-display-line-numbers-mode 1)
+
+;; (use-package git-gutter
+;;   :hook (prog-mode . git-gutter-mode)
+;;   :config
+;;   (setq git-gutter:update-interval 0.02))
+
+
+
+
+
+
+
 
 
 (cl-defun setup-repl (map &key run-buffer send-to-repl)
@@ -86,6 +103,11 @@
   :config
   (setq direnv-always-show-summary nil)
   (direnv-mode))
+
+
+;; (use-package expand-region
+;;   :ensure t
+;;   :bind ("C-=" . er/expand-region))
 
 
 (use-package which-key
@@ -136,6 +158,8 @@
   :ensure t)
 
 
+(use-package scope-creep
+  :ensure nil)
 
 
 ;; ====--------------------------------------------------====
@@ -154,7 +178,11 @@
   :config
   (evil-set-undo-system 'undo-redo)
   (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
-  (define-key evil-normal-state-map (kbd "C-.") nil)
+
+  (define-key evil-normal-state-map (kbd ".") #'scope-creep-expand-selection)
+  (define-key evil-visual-state-map (kbd ".") #'scope-creep-expand-selection)
+  (define-key evil-visual-state-map (kbd ",") #'scope-creep-contract-selection)
+
   (define-key evil-normal-state-map (kbd "q") nil)
   (define-key evil-normal-state-map (kbd "C-n") 'neotree)
   (define-key evil-normal-state-map (kbd "SPC")
@@ -504,7 +532,7 @@ You can use \\[keyboard-quit] to hide the doc."
   :custom
   (company-idle-delay 0)
   (company-echo-delay 0)
-  (company-show-numbers t)
+  (company-show-numbers nil)
   (company-require-match nil)
   (company-tooltip-align-annotations t)
   (company-backends '(company-capf)))
@@ -538,6 +566,8 @@ You can use \\[keyboard-quit] to hide the doc."
 (use-package nix-mode
   :ensure t
   :mode "\\.nix\\'")
+
+(use-package cmake-mode :ensure t)
 
 
 (defun ncw/org-mode-setup ()
@@ -660,7 +690,6 @@ You can use \\[keyboard-quit] to hide the doc."
 
 (setq confirm-kill-emacs #'y-or-n-p)
 (setq echo-keystrokes 0.01)
-(global-display-line-numbers-mode -1)
 
 
 ;; Save autosave files to ~/.cache/emacs (this won't work on emacs, but I don't care)
