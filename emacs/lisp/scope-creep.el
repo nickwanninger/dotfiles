@@ -6,11 +6,6 @@
 (make-variable-buffer-local 'scope-creep-selection)
 
 
-(defun scope-creep--current-selection-valid? ()
-  (if (not scope-creep-mode)
-      nil
-    (...)))
-
 
 (defun scope-creep--node-at-point ()
   (condition-case nil

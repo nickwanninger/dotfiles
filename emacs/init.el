@@ -105,8 +105,8 @@
   (direnv-mode))
 
 
-;; (use-package expand-region
-;;   :ensure t
+(use-package expand-region
+  :ensure t)
 ;;   :bind ("C-=" . er/expand-region))
 
 
@@ -179,9 +179,12 @@
   (evil-set-undo-system 'undo-redo)
   (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
 
-  (define-key evil-normal-state-map (kbd ".") #'scope-creep-expand-selection)
-  (define-key evil-visual-state-map (kbd ".") #'scope-creep-expand-selection)
-  (define-key evil-visual-state-map (kbd ",") #'scope-creep-contract-selection)
+  ;; (define-key evil-normal-state-map (kbd ".") #'scope-creep-expand-selection)
+  ;; (define-key evil-visual-state-map (kbd ".") #'scope-creep-expand-selection)
+  ;; (define-key evil-visual-state-map (kbd ",") #'scope-creep-contract-selection)
+  (define-key evil-normal-state-map (kbd ".") #'er/expand-region)
+  (define-key evil-visual-state-map (kbd ".") #'er/expand-region)
+  (define-key evil-visual-state-map (kbd ",") #'er/contract-region)
 
   (define-key evil-normal-state-map (kbd "q") nil)
   (define-key evil-normal-state-map (kbd "C-n") 'neotree)
@@ -290,6 +293,12 @@
 
 
 
+(setq treesit-language-source-alist
+      '((elisp "https://github.com/Wilfred/tree-sitter-elisp")
+        (racket "https://github.com/6cdh/tree-sitter-racket")))
+
+(setq major-mode-remap-alist nil)
+      ;; '((emacs-lisp-mode . emacs-lisp-ts-mode)))
 
 (use-package treesit-auto
   :custom
@@ -297,6 +306,18 @@
   :config
   (treesit-auto-add-to-auto-mode-alist 'all)
   (global-treesit-auto-mode))
+
+
+(setq elisp-tsauto-config
+      (make-treesit-auto-recipe
+       :lang 'elisp
+       :ts-mode 'emacs-lisp-ts-mode
+       :remap 'emacs-lisp-mode
+       :url "https://github.com/Wilfred/tree-sitter-elisp"
+       :ext "\\.el\\'"))
+
+(add-to-list 'treesit-auto-recipe-list elisp-tsauto-config)
+
 
 (use-package evil-textobj-tree-sitter
   :ensure t)
