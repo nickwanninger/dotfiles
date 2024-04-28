@@ -21,6 +21,8 @@ end
 
 set -x GOPATH $HOME/dev/go
 
+export COLORTERM="truecolor"
+
 export PATH="$GOPATH/bin:$PATH"
 export PATH="/opt/cuda/bin:$PATH"
 

@@ -40,7 +40,7 @@
 (set-selection-coding-system 'utf-8)
 (prefer-coding-system 'utf-8) ;; Catch-all
 ;; Scroll by one line
-(setq scroll-conservatively 1)
+(setq scroll-conservatively 1000000000000000)
 
 (setq enable-local-variables nil)
 
@@ -54,7 +54,7 @@
 
 
 
-(global-display-line-numbers-mode 1)
+(global-display-line-numbers-mode -1)
 
 ;; (use-package git-gutter
 ;;   :hook (prog-mode . git-gutter-mode)
@@ -342,6 +342,11 @@
               (evil-textobj-tree-sitter-goto-textobj "function.outer" t)))
 
 
+
+(define-key evil-normal-state-map (kbd "g r") 'lsp-find-references)
+(define-key evil-normal-state-map (kbd "g d") 'lsp-find-declaration)
+(define-key evil-normal-state-map (kbd "g D") 'lsp-find-definition)
+
 ;; (use-package ts-movement
 ;;   :load-path "lisp/ts-movement"
 ;;   :config
@@ -360,7 +365,8 @@
 (defun dark-theme ()
   "Select the dark theme"
   (interactive)
-  ;; (setq catppuccin-flavor 'frappe) ;; or 'latte, 'macchiato, or 'mocha
+  ;; (catppuccin-set-color 'base "#000000")
+  ;; (setq catppuccin-flavor 'macchiato) ;; or 'latte, 'macchiato, or 'mocha
   ;; (load-theme 'catppuccin t)
   (load-theme 'modus-vivendi t))
 
@@ -595,7 +601,7 @@ You can use \\[keyboard-quit] to hide the doc."
   (org-indent-mode)
   ;; (variable-pitch-mode)
   (auto-fill-mode 0)
-  (visual-line-mode 1)
+  ;; (visual-line-mode 1)
   (set-input-method 'pl-greek)
   (setq evil-auto-indent nil)
   (define-key org-mode-map (kbd "M-<up>") nil)
