@@ -29,6 +29,10 @@
              :ensure t)
 
 
+(if (not (fboundp 'x-hide-tip))
+    (defun x-hide-tip ()
+      (interactive)))
+
 (require 'cl-lib)
 
 ;; Try to use UTF-8 for everything
@@ -345,7 +349,14 @@
 
 (define-key evil-normal-state-map (kbd "g r") 'lsp-find-references)
 (define-key evil-normal-state-map (kbd "g d") 'lsp-find-declaration)
+(define-key evil-normal-state-map (kbd "g d") 'lsp-find-declaration)
 (define-key evil-normal-state-map (kbd "g D") 'lsp-find-definition)
+
+
+(define-key evil-normal-state-map (kbd "K")
+            (lambda () (interactive)
+              (lsp-describe-thing-at-point)))
+
 
 ;; (use-package ts-movement
 ;;   :load-path "lisp/ts-movement"
@@ -663,6 +674,17 @@ You can use \\[keyboard-quit] to hide the doc."
                      'face (if (mode-line-window-selected-p)
                              'bold
                             'italic))))
+
+
+(add-to-list 'display-buffer-alist
+             '((lambda (buffer _) (with-current-buffer buffer
+                                    (seq-some (lambda (mode)
+                                                (derived-mode-p mode))
+                                              '(help-mode))))
+               (display-buffer-reuse-window display-buffer-below-selected)
+               (reusable-frames . visible)
+               (window-height . 0.25)))
+
 
 
 
