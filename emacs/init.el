@@ -43,8 +43,9 @@
 (set-keyboard-coding-system 'utf-8)
 (set-selection-coding-system 'utf-8)
 (prefer-coding-system 'utf-8) ;; Catch-all
+(global-hl-line-mode 1)
 ;; Scroll by one line
-(setq scroll-conservatively 1000000000000000)
+(setq scroll-conservatively -1)
 
 (setq enable-local-variables nil)
 
@@ -213,86 +214,87 @@
 
 (setq evil-insert-state-cursor 'bar)
 
-(defun ncw/setup-lsp-mode ()
-  (message "ncw/setup-lsp-mode called")
-  (company-mode 1)
-  ;; (lsp-which-key-integration)
-  (lsp-diagnostics-mode 1)
-  (lsp-completion-mode 1))
+;; (defun ncw/setup-lsp-mode ()
+;;   (message "ncw/setup-lsp-mode called")
+;;   (company-mode 1)
+;;   ;; (lsp-which-key-integration)
+;;   (lsp-diagnostics-mode 1)
+;;   (lsp-completion-mode 1))
 
-(use-package lsp-mode
-  :ensure t
-  :commands (lsp lsp-deferred)
-  :hook ((c-ts-mode . lsp)
-         (c-mode . lsp)
-         (c++-ts-mode . lsp)
-         (c++-mode . lsp)
-         (lsp-mode . ncw/setup-lsp-mode))
-  :init
-  (setq lsp-keymap-prefix "C-c l")
-  (setq lsp-headerline-breadcrumb-enable nil)
-  ;; :config
-  ;; (lsp-enable-which-key-integration t)
-  :custom
-  (lsp-log-io nil)
-  (lsp-print-performance nil)
-  ;; (lsp-report-if-no-buffer nil)
-  ;; (lsp-keep-workspace-alive nil)
-  ;; (lsp-enable-snippet t)
-  ;; (lsp-auto-guess-root t)
-  (lsp-restart 'iteractive)
- ;(lsp-session-file)
-  ;; (lsp-auto-configure nil)
- ;(lsp-document-sync-method)
-  (lsp-auto-execute-action nil)
-  (lsp-eldoce-render-all nil)
-  (lsp-enable-completion-at-point t)
-  (lsp-enable-xref t)
-  (lsp-enable-indentation t)
-  (lsp-enable-on-type-formatting nil)
-  (lsp-before-save-edits nil)
-  (lsp-imenu-show-container-name t)
-  (lsp-imenu-container-name-separator "/")
-  (lsp-imenu-sort-methods '(kind name))
-  (lsp-response-timeout 5)
-  (lsp-enable-file-watchers nil)
-  (lsp-server-trace nil)
-  (lsp-semantic-highlighting nil)
-  (lsp-enable-imenu t)
-  (lsp-signature-auto-activate t)
-  (lsp-signature-render-documentation nil)
-  (lsp-enable-text-document-color nil)
-  (lsp-completion-provider :capf)
-  (gc-cons-threshold 100000000)
-  (read-process-output-max (* 3 1024 1024)))
-
-
-(use-package lsp-ui
-  :commands (lsp-ui-mode)
-  :custom
-  ;; Sideline
-  (lsp-ui-sideline-show-diagnostics t)
-  (lsp-ui-sideline-show-hover nil)
-  (lsp-ui-sideline-show-code-actions nil)
-  (lsp-ui-sideline-update-mode 'line)
-  (lsp-ui-sideline-delay 0)
-  ;; Peek
-  (lsp-ui-peek-enable t)
-  (lsp-ui-peek-show-directory nil)
-  ;; Documentation
-  (lsp-ui-doc-enable t)
-  (lsp-ui-doc-position 'at-point)
-  (lsp-ui-doc-delay 0.2)
-  ;; IMenu
-  (lsp-ui-imenu-window-width 0)
-  (lsp-ui-imenu--custom-mode-line-format nil)
-  :hook (lsp-mode . lsp-ui-mode))
+;; (use-package lsp-mode
+;;   :ensure t
+;;   :commands (lsp lsp-deferred)
+;;   :hook ((c-ts-mode . lsp)
+;;          (c-mode . lsp)
+;;          (c++-ts-mode . lsp)
+;;          (c++-mode . lsp)
+;;          (lsp-mode . ncw/setup-lsp-mode))
+;;   :init
+;;   (setq lsp-keymap-prefix "C-c l")
+;;   (setq lsp-headerline-breadcrumb-enable nil)
+;;   ;; :config
+;;   ;; (lsp-enable-which-key-integration t)
+;;   :custom
+;;   (lsp-log-io nil)
+;;   (lsp-print-performance nil)
+;;   ;; (lsp-report-if-no-buffer nil)
+;;   ;; (lsp-keep-workspace-alive nil)
+;;   ;; (lsp-enable-snippet t)
+;;   ;; (lsp-auto-guess-root t)
+;;   (lsp-restart 'iteractive)
+;;  ;(lsp-session-file)
+;;   ;; (lsp-auto-configure nil)
+;;  ;(lsp-document-sync-method)
+;;   (lsp-auto-execute-action nil)
+;;   (lsp-eldoce-render-all nil)
+;;   (lsp-enable-completion-at-point t)
+;;   (lsp-enable-xref t)
+;;   (lsp-enable-indentation t)
+;;   (lsp-enable-on-type-formatting nil)
+;;   (lsp-before-save-edits nil)
+;;   (lsp-imenu-show-container-name t)
+;;   (lsp-imenu-container-name-separator "/")
+;;   (lsp-imenu-sort-methods '(kind name))
+;;   (lsp-response-timeout 5)
+;;   (lsp-enable-file-watchers nil)
+;;   (lsp-server-trace nil)
+;;   (lsp-semantic-highlighting nil)
+;;   (lsp-enable-imenu t)
+;;   (lsp-signature-auto-activate t)
+;;   (lsp-signature-render-documentation nil)
+;;   (lsp-enable-text-document-color nil)
+;;   (lsp-completion-provider :capf)
+;;   (gc-cons-threshold 100000000)
+;;   (read-process-output-max (* 3 1024 1024)))
 
 
-;; (add-hook 'c-ts-mode-hook #'eglot-ensure)
-;; (add-hook 'c++-ts-mode-hook #'eglot-ensure)
-;; (add-hook 'c-mode-hook #'eglot-ensure)
-;; (add-hook 'c++-mode-hook #'eglot-ensure)
+;; (use-package lsp-ui
+;;   :commands (lsp-ui-mode)
+;;   :custom
+;;   ;; Sideline
+;;   (lsp-ui-sideline-show-diagnostics t)
+;;   (lsp-ui-sideline-show-hover nil)
+;;   (lsp-ui-sideline-show-code-actions nil)
+;;   (lsp-ui-sideline-enable nil)
+;;   (lsp-ui-sideline-update-mode 'line)
+;;   (lsp-ui-sideline-delay 0)
+;;   ;; Peek
+;;   (lsp-ui-peek-enable t)
+;;   (lsp-ui-peek-show-directory nil)
+;;   ;; Documentation
+;;   (lsp-ui-doc-enable nil)
+;;   (lsp-ui-doc-position 'top)
+;;   (lsp-ui-doc-delay 0)
+;;   ;; IMenu
+;;   (lsp-ui-imenu-window-width 0)
+;;   (lsp-ui-imenu--custom-mode-line-format nil)
+;;   :hook (lsp-mode . lsp-ui-mode))
+
+
+(add-hook 'c-ts-mode-hook #'eglot-ensure)
+(add-hook 'c++-ts-mode-hook #'eglot-ensure)
+(add-hook 'c-mode-hook #'eglot-ensure)
+(add-hook 'c++-mode-hook #'eglot-ensure)
 
 
 
@@ -420,13 +422,14 @@
 
 (ncw/leader-def
   "g" 'magit-status
-  ;; "f" 'eglot-format
-  "f" 'lsp-format-buffer
+  "f" 'eglot-format
+  ;; "f" 'lsp-format-buffer
   "1" 'dark-theme
   "2" 'light-theme
   "b" 'consult-buffer
   "B" 'switch-to-buffer
-  "q" 'delete-window)
+  "q" 'delete-window
+  "=" 'balance-windows)
 
 (general-def 'motion
   ";" 'evil-ex
@@ -556,11 +559,12 @@ You can use \\[keyboard-quit] to hide the doc."
 
 
 
-(use-package ace-window
-  :ensure t
-  :init
-  (global-set-key (kbd "M-o") 'ace-window))
+;; (use-package ace-window
+;;   :ensure t
+;;   :init
+;;   (global-set-key (kbd "M-o") 'ace-window))
 
+(global-set-key (kbd "M-o") 'other-window)
 
 (use-package company
   :ensure t

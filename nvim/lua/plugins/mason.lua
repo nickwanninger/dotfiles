@@ -11,7 +11,7 @@ return {
     mason.setup {}
     mason_lspconfig.setup {
       ensure_installed = {
-        'clangd',
+        -- 'clangd',
         'rust_analyzer',
         -- 'lua-language-server',
         'pyright',
@@ -24,5 +24,9 @@ return {
     mason_lspconfig.setup_handlers {
       require'core.lsp'.setup_server
     }
+
+    require('core.lsp').setup_server('clangd')
+
+
   end
 }
