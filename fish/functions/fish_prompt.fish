@@ -36,13 +36,13 @@ function fish_prompt
 	echo -n (prompt_pwd)
 
   if test -n "$NIX_STORE"
-    set_color red
+    set_color green
     echo -n ' (nix'
 
     if test -n "$NDEV_DIR"
 	    set_color brblack
       echo -n " in (basename $NDEV_DIR)"
-      set_color red
+      set_color green
     end
 
 

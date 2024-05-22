@@ -11,12 +11,10 @@ return {
     mason.setup {}
     mason_lspconfig.setup {
       ensure_installed = {
-        -- 'clangd',
         'rust_analyzer',
-        -- 'lua-language-server',
         'pyright',
       },
-      automatic_installation = true,
+      automatic_installation = { exclude = { "clangd" } }
     }
 
     -- Next, hook up mason so that when a language server
