@@ -43,7 +43,7 @@
 (set-keyboard-coding-system 'utf-8)
 (set-selection-coding-system 'utf-8)
 (prefer-coding-system 'utf-8) ;; Catch-all
-(global-hl-line-mode 1)
+;; (global-hl-line-mode 1)
 ;; Scroll by one line
 (setq scroll-conservatively -1)
 
