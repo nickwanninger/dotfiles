@@ -10,6 +10,8 @@
     pkgs.direnv
     pkgs.emacs-nox
     pkgs.guile
+
+    pkgs.nodejs
     # pkgs.racket # The racket language
   ];
 

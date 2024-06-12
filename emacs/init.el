@@ -29,6 +29,20 @@
              :ensure t)
 
 
+
+(unless (package-installed-p 'quelpa)
+  (with-temp-buffer
+    (url-insert-file-contents "https://raw.githubusercontent.com/quelpa/quelpa/master/quelpa.el")
+    (eval-buffer)
+    (quelpa-self-upgrade)))
+
+(quelpa
+ '(quelpa-use-package
+   :fetcher git
+   :url "https://github.com/quelpa/quelpa-use-package.git"))
+(require 'quelpa-use-package)
+
+
 (if (not (fboundp 'x-hide-tip))
     (defun x-hide-tip ()
       (interactive)))
@@ -648,6 +662,19 @@ You can use \\[keyboard-quit] to hide the doc."
 
 (use-package parinfer-rust-mode
   :hook emacs-lisp-mode racket-mode scheme-mode)
+
+
+
+(use-package copilot
+  :quelpa (copilot :fetcher github
+                   :repo "copilot-emacs/copilot.el"
+                   :branch "main"
+                   :files ("*.el"))
+  :hook ((prog-mode . copilot-mode))
+  :config
+  (define-key copilot-completion-map (kbd "C-c <tab>") 'copilot-accept-completion)
+  (define-key copilot-completion-map (kbd "C-c TAB") 'copilot-accept-completion))
+
 
 
 ;; tmux integration
