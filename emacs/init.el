@@ -49,6 +49,17 @@
 
 (require 'cl-lib)
 
+
+
+(use-package direnv
+  :config
+  (setq direnv-always-show-summary nil)
+  (direnv-mode))
+
+
+
+
+
 ;; Try to use UTF-8 for everything
 (set-language-environment "UTF-8")
 (setq locale-coding-system 'utf-8)
@@ -62,6 +73,17 @@
 (setq scroll-conservatively -1)
 
 (setq enable-local-variables nil)
+
+
+
+(c-add-style "my-c-style" '((c-tab-always-indent . t)
+                            (c-basic-offset . 4)
+                            (c-offsets-alist (access-label . 1)
+                                             (label . +))))
+;; Setting this as the default style:
+(setq c-default-style "my-c-style")
+(setq c-ts-default-style "my-c-style")
+
 
 (require 'pl-greek)
 
@@ -118,10 +140,6 @@
               (setup-repl geiser-mode-map :run-buffer #'geiser-eval-buffer
                                           :send-to-repl #'geiser-eval-last-sexp))))
 
-(use-package direnv
-  :config
-  (setq direnv-always-show-summary nil)
-  (direnv-mode))
 
 
 (use-package expand-region
@@ -228,87 +246,125 @@
 
 (setq evil-insert-state-cursor 'bar)
 
-;; (defun ncw/setup-lsp-mode ()
-;;   (message "ncw/setup-lsp-mode called")
-;;   (company-mode 1)
-;;   ;; (lsp-which-key-integration)
-;;   (lsp-diagnostics-mode 1)
-;;   (lsp-completion-mode 1))
+(evil-ex-define-cmd "W" "w")
 
-;; (use-package lsp-mode
-;;   :ensure t
-;;   :commands (lsp lsp-deferred)
-;;   :hook ((c-ts-mode . lsp)
-;;          (c-mode . lsp)
-;;          (c++-ts-mode . lsp)
-;;          (c++-mode . lsp)
-;;          (lsp-mode . ncw/setup-lsp-mode))
-;;   :init
-;;   (setq lsp-keymap-prefix "C-c l")
-;;   (setq lsp-headerline-breadcrumb-enable nil)
-;;   ;; :config
-;;   ;; (lsp-enable-which-key-integration t)
+
+(defun ncw/setup-lsp-mode ()
+  (message "ncw/setup-lsp-mode called")
+  (company-mode 1)
+  ;; (lsp-which-key-integration)
+  (lsp-diagnostics-mode 1)
+  (lsp-completion-mode 1))
+
+
+(use-package lsp-mode
+  :ensure t
+  :commands (lsp lsp-deferred)
+  :hook ((c-ts-mode . lsp)
+         (c-mode . lsp)
+         (c++-ts-mode . lsp)
+         (c++-mode . lsp)
+         (lsp-mode . ncw/setup-lsp-mode))
+  :init
+  (setq lsp-keymap-prefix "C-c l")
+  (setq lsp-ui-doc-show-with-mouse nil)
+  (setq lsp-headerline-breadcrumb-enable nil)
+  :config
+  (lsp-enable-which-key-integration t)
+  :custom
+  (lsp-log-io nil)
+  (lsp-print-performance nil)
+  ;; (lsp-report-if-no-buffer nil)
+  ;; (lsp-keep-workspace-alive nil)
+  ;; (lsp-enable-snippet t)
+  ;; (lsp-auto-guess-root t)
+  (lsp-restart 'iteractive)
+ ;(lsp-session-file)
+  ;; (lsp-auto-configure nil)
+ ;(lsp-document-sync-method)
+  (lsp-auto-execute-action nil)
+  (lsp-eldoce-render-all nil)
+  (lsp-enable-completion-at-point t)
+  (lsp-enable-xref t)
+  (lsp-enable-indentation t)
+  (lsp-enable-on-type-formatting nil)
+  (lsp-before-save-edits nil)
+  (lsp-imenu-show-container-name t)
+  (lsp-imenu-container-name-separator "/")
+  (lsp-imenu-sort-methods '(kind name))
+  (lsp-response-timeout 5)
+  (lsp-enable-file-watchers nil)
+  (lsp-server-trace nil)
+  (lsp-semantic-highlighting nil)
+  (lsp-enable-imenu t)
+  (lsp-signature-auto-activate t)
+  (lsp-signature-render-documentation nil)
+  (lsp-enable-text-document-color nil)
+  (lsp-completion-provider :capf)
+  (gc-cons-threshold 100000000)
+  (read-process-output-max (* 3 1024 1024)))
+
+
+(use-package lsp-ui
+  :commands (lsp-ui-mode)
+  :custom
+  ;; Sideline
+  (lsp-ui-sideline-show-diagnostics t)
+  (lsp-ui-sideline-show-hover nil)
+  (lsp-ui-sideline-show-code-actions nil)
+  (lsp-ui-sideline-update-mode 'line)
+  (lsp-ui-sideline-delay 0)
+  ;; Peek
+  (lsp-ui-peek-enable t)
+  (lsp-ui-peek-show-directory nil)
+  ;; Documentation
+  (lsp-ui-doc-enable t)
+  (lsp-ui-doc-position 'at-point)
+  (lsp-ui-doc-delay 0.2)
+  ;; IMenu
+  (lsp-ui-imenu-window-width 0)
+  (lsp-ui-imenu--custom-mode-line-format nil)
+  :hook (lsp-mode . lsp-ui-mode))
+
+
+;; (use-package eglot
+;;   :ensure nil ;; built-in
+;;   :defer t
+;;   :after (eldoc)
+;;   :hook (((c-mode c++-mode c-ts-mode c++-ts-mode rust-mode rust-ts-mode) . eglot-ensure))
 ;;   :custom
-;;   (lsp-log-io nil)
-;;   (lsp-print-performance nil)
-;;   ;; (lsp-report-if-no-buffer nil)
-;;   ;; (lsp-keep-workspace-alive nil)
-;;   ;; (lsp-enable-snippet t)
-;;   ;; (lsp-auto-guess-root t)
-;;   (lsp-restart 'iteractive)
-;;  ;(lsp-session-file)
-;;   ;; (lsp-auto-configure nil)
-;;  ;(lsp-document-sync-method)
-;;   (lsp-auto-execute-action nil)
-;;   (lsp-eldoce-render-all nil)
-;;   (lsp-enable-completion-at-point t)
-;;   (lsp-enable-xref t)
-;;   (lsp-enable-indentation t)
-;;   (lsp-enable-on-type-formatting nil)
-;;   (lsp-before-save-edits nil)
-;;   (lsp-imenu-show-container-name t)
-;;   (lsp-imenu-container-name-separator "/")
-;;   (lsp-imenu-sort-methods '(kind name))
-;;   (lsp-response-timeout 5)
-;;   (lsp-enable-file-watchers nil)
-;;   (lsp-server-trace nil)
-;;   (lsp-semantic-highlighting nil)
-;;   (lsp-enable-imenu t)
-;;   (lsp-signature-auto-activate t)
-;;   (lsp-signature-render-documentation nil)
-;;   (lsp-enable-text-document-color nil)
-;;   (lsp-completion-provider :capf)
-;;   (gc-cons-threshold 100000000)
-;;   (read-process-output-max (* 3 1024 1024)))
+;;   ;; When no buffers are connected to an LSP server, shut down the server and
+;;   ;; eglot, to lighten the load on Emacs.
+;;   (eglot-autoshutdown t)
+;;   ;; For performance, set this to a low number. When debugging, comment this out.
+;;   ;; Setting to 0 means no messages/events are logged in the EGLOT events buffer.
+;;   ;; NOTE: In eglot 1.16, this variable was deprecated! If you still want to set
+;;   ;; the events buffer size to 0, you need the following:
+;;   ;; (setf (plist-get eglot-events-buffer-config :size) 0)
+;;   (eglot-events-buffer-size 0)
+;;   ;; For performance, set this to ignore. When debugging, comment this out.
+;;   ;; fset-ing to ignore means no jsonrpc event are logged by Emacs.
+;;   (fset #'jsonrpc--log-event #'ignore)
+;;   ;; XRef look-ups can leave the project Eglot is running a server for
+;;   (eglot-extend-to-xref t)
+;;   ;; Wait some number of seconds before waiting for the connection to the LSP.
+;;   ;; With nil, do not wait to connect at all, just try to connect immediately.
+;;   (eglot-sync-connect nil)
+;;   ;; Reduce the amount of time required for eglot to time-out LSP server
+;;   ;; connection attempts.
+;;   (eglot-connect-timeout 10)
+;;   (eglot-ignored-server-capabilities
+;;    '(;; Disable LSP from providing highlighting, since I use treesitter-based or
+;;      ;; Emacs' built-in regexp-based major modes for font-locking.
+;;      :colorProvider
+;;      :documentHighlightProvider
+;;      :foldingRangeProvider))
+;;   (eglot-stay-out-of '(yasnippet)))
 
-
-;; (use-package lsp-ui
-;;   :commands (lsp-ui-mode)
-;;   :custom
-;;   ;; Sideline
-;;   (lsp-ui-sideline-show-diagnostics t)
-;;   (lsp-ui-sideline-show-hover nil)
-;;   (lsp-ui-sideline-show-code-actions nil)
-;;   (lsp-ui-sideline-enable nil)
-;;   (lsp-ui-sideline-update-mode 'line)
-;;   (lsp-ui-sideline-delay 0)
-;;   ;; Peek
-;;   (lsp-ui-peek-enable t)
-;;   (lsp-ui-peek-show-directory nil)
-;;   ;; Documentation
-;;   (lsp-ui-doc-enable nil)
-;;   (lsp-ui-doc-position 'top)
-;;   (lsp-ui-doc-delay 0)
-;;   ;; IMenu
-;;   (lsp-ui-imenu-window-width 0)
-;;   (lsp-ui-imenu--custom-mode-line-format nil)
-;;   :hook (lsp-mode . lsp-ui-mode))
-
-
-(add-hook 'c-ts-mode-hook #'eglot-ensure)
-(add-hook 'c++-ts-mode-hook #'eglot-ensure)
-(add-hook 'c-mode-hook #'eglot-ensure)
-(add-hook 'c++-mode-hook #'eglot-ensure)
+;; (add-hook 'c-ts-mode-hook #'eglot-ensure)
+;; (add-hook 'c++-ts-mode-hook #'eglot-ensure)
+;; (add-hook 'c-mode-hook #'eglot-ensure)
+;; (add-hook 'c++-mode-hook #'eglot-ensure)
 
 
 
@@ -371,7 +427,9 @@
 
 (define-key evil-normal-state-map (kbd "K")
             (lambda () (interactive)
-              (lsp-describe-thing-at-point)))
+                 (lsp-ui-doc-glance)))
+;; (lsp-describe-thing-at-point)))
+
 
 
 ;; (use-package ts-movement
@@ -436,8 +494,8 @@
 
 (ncw/leader-def
   "g" 'magit-status
-  "f" 'eglot-format
-  ;; "f" 'lsp-format-buffer
+  ;; "f" 'eglot-format
+  "f" 'lsp-format-buffer
   "1" 'dark-theme
   "2" 'light-theme
   "b" 'consult-buffer
@@ -670,10 +728,21 @@ You can use \\[keyboard-quit] to hide the doc."
                    :repo "copilot-emacs/copilot.el"
                    :branch "main"
                    :files ("*.el"))
-  :hook ((prog-mode . copilot-mode))
-  :config
-  (define-key copilot-completion-map (kbd "C-c <tab>") 'copilot-accept-completion)
-  (define-key copilot-completion-map (kbd "C-c TAB") 'copilot-accept-completion))
+
+  :custom
+  (copilot-idle-delay nil)
+
+  :hook
+  ((prog-mode . copilot-mode))
+
+  :bind
+  (("C-c SPC" . copilot-complete)
+   :map copilot-completion-map
+   ("TAB" . copilot-accept-completion)
+   ("<tab>" . copilot-accept-completion)))
+
+
+
 
 
 
@@ -692,8 +761,8 @@ You can use \\[keyboard-quit] to hide the doc."
   (add-to-list 'pulsar-pulse-functions #'tmux-pane-omni-window-right))
 
 
-(global-set-key (kbd "M-j") #'next-buffer)
-(global-set-key (kbd "M-k") #'previous-buffer)
+;; (global-set-key (kbd "M-j") #'next-buffer)
+;; (global-set-key (kbd "M-k") #'previous-buffer)
 
 
 (require 'project)
@@ -730,9 +799,11 @@ You can use \\[keyboard-quit] to hide the doc."
 
 
 (defun edit-init ()
+  "Edit the init.el file in the current buffer"
   (interactive)
   (find-file "~/dotfiles/emacs/init.el"))
 
+(global-set-key (kbd "C-c i")  #'edit-init)
 
 
 
