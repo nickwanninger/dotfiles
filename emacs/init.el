@@ -268,6 +268,7 @@
   :init
   (setq lsp-keymap-prefix "C-c l")
   (setq lsp-ui-doc-show-with-mouse nil)
+  (setq lsp-ui-doc-position 'at-point)
   (setq lsp-headerline-breadcrumb-enable nil)
   :config
   (lsp-enable-which-key-integration t)
@@ -426,8 +427,7 @@
 
 
 (define-key evil-normal-state-map (kbd "K")
-            (lambda () (interactive)
-                 (lsp-ui-doc-glance)))
+      (lambda () (interactive) (lsp-ui-doc-glance)))
 ;; (lsp-describe-thing-at-point)))
 
 
@@ -451,8 +451,8 @@
   "Select the dark theme"
   (interactive)
   ;; (catppuccin-set-color 'base "#000000")
-  ;; (setq catppuccin-flavor 'macchiato) ;; or 'latte, 'macchiato, or 'mocha
-  ;; (load-theme 'catppuccin t)
+  ;; (setq catppuccin-flavor 'mocha) ;; or 'latte, 'macchiato, or 'mocha
+  ;; (load-theme 'catppuccin t))
   (load-theme 'modus-vivendi t))
 
 
