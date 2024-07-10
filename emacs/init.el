@@ -97,16 +97,17 @@
 
 (global-display-line-numbers-mode -1)
 
-;; (use-package git-gutter
-;;   :hook (prog-mode . git-gutter-mode)
-;;   :config
-;;   (setq git-gutter:update-interval 0.02))
 
 
+(defvar previous-window-count (length (window-list)))
 
+(defun window-config-hook ()
+  (let ((current-window-count (length (window-list))))
+    (when (not (equal current-window-count previous-window-count))
+      (setq previous-window-count current-window-count)
+      (balance-windows))))
 
-
-
+(add-hook 'window-configuration-change-hook 'window-config-hook)
 
 
 
@@ -144,13 +145,13 @@
 
 (use-package expand-region
   :ensure t)
-;;   :bind ("C-=" . er/expand-region))
 
 
 (use-package which-key
   :init
   (setq which-key-idle-delay 0.3)
   (setq which-key-idle-secondary-delay 0.05)
+  :config
   (which-key-mode))
 
 (use-package magit)
@@ -263,7 +264,7 @@
   :hook ((c-ts-mode . lsp)
          (c-mode . lsp)
          (c++-ts-mode . lsp)
-         (c++-mode . lsp)
+         ;; (c++-mode . lsp)
          (lsp-mode . ncw/setup-lsp-mode))
   :init
   (setq lsp-keymap-prefix "C-c l")
@@ -383,6 +384,24 @@
   :config
   (treesit-auto-add-to-auto-mode-alist 'all)
   (global-treesit-auto-mode))
+
+
+(setq ncw/cpp-tsauto-config
+      (make-treesit-auto-recipe
+         :lang 'cpp
+         :ts-mode 'c++-ts-mode
+         :remap 'c++-mode
+         :requires nil
+         :url "https://github.com/tree-sitter/tree-sitter-cpp"
+         :revision "v0.22.0"
+         :source-dir nil
+         :cc nil
+         :c++ nil
+         :ext "\\.cpp\\'"))
+
+(add-to-list 'treesit-auto-recipe-list ncw/cpp-tsauto-config)
+
+
 
 
 (setq elisp-tsauto-config
@@ -718,8 +737,8 @@ You can use \\[keyboard-quit] to hide the doc."
   :ensure t
   :hook ((prog-mode . rainbow-delimiters-mode)))
 
-(use-package parinfer-rust-mode
-  :hook emacs-lisp-mode racket-mode scheme-mode)
+;; (use-package parinfer-rust-mode
+;;   :hook emacs-lisp-mode racket-mode scheme-mode)
 
 
 
