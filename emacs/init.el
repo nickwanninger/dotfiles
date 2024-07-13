@@ -69,7 +69,6 @@
 (set-selection-coding-system 'utf-8)
 (prefer-coding-system 'utf-8) ;; Catch-all
 ;; (global-hl-line-mode 1)
-;; Scroll by one line
 (setq scroll-conservatively -1)
 
 (setq enable-local-variables nil)
@@ -914,3 +913,43 @@ You can use \\[keyboard-quit] to hide the doc."
           (lambda () (interactive)
             "Commands to execute before saving any buffer."
             (delete-trailing-whitespace)))
+
+
+
+
+
+
+
+
+(defun ncw/title-to-slug (title)
+  "Process INPUT by removing symbols, converting to lowercase, and replacing spaces with dashes."
+  (let ((cleaned (replace-regexp-in-string "[^[:alnum:] ]" "" title)))
+    (downcase (replace-regexp-in-string " " "-" cleaned))))
+
+(defun ncw/new-blog-post (title)
+  (interactive "sPost Title: ")
+  (let* ((slug (ncw/title-to-slug title))
+         (file (format "~/dev/website/posts/%s-%s.md"
+                       (format-time-string "%Y-%m-%d")
+                       slug)))
+    (with-temp-file file
+      (insert (concat "---\n"
+                      (format "title: \"%s\"\n" title)
+                      (format "date: \"%s\"\n" (format-time-string "%b %d %Y"))
+                      "---\n"
+                      "\n\n"
+                      "# " title "\n")))
+    ;; Open the file in the editor
+    (find-file-other-window file)))
+
+
+(defun ncw/blog-paste-image ()
+  (interactive)
+
+  (let ((image-slug (format-time-string "%b-%d-%Y-%H-%M-%S.png")))
+    ;; Create the image directory
+    (shell-command "mkdir -p ~/dev/website/public/post/res/")
+    ;; Paste the image to the filesystem
+    (shell-command (format "pngpaste ~/dev/website/public/post/res/%s" image-slug))
+    ;; And insert the image markdown
+    (insert (format "![ALT](/post/res/%s)" image-slug))))
