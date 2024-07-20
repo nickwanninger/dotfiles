@@ -465,13 +465,24 @@
 (use-package catppuccin-theme :ensure t)
 
 
+(use-package vscode-dark-plus-theme
+  :ensure t
+  :config)
+
+
+(use-package doom-themes
+  :ensure t
+  :config
+  (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
+        doom-themes-enable-italic t))
+ 
+
 (defun dark-theme ()
   "Select the dark theme"
   (interactive)
-  ;; (catppuccin-set-color 'base "#000000")
-  ;; (setq catppuccin-flavor 'mocha) ;; or 'latte, 'macchiato, or 'mocha
-  ;; (load-theme 'catppuccin t))
-  (load-theme 'modus-vivendi t))
+  (load-theme 'doom-horizon t))
+  ;; (load-theme 'modus-vivendi t))
+  ;; (load-theme 'vscode-dark-plus t))
 
 
 (defun light-theme ()
