@@ -461,6 +461,15 @@
 
 ;;; Themes
 
+
+
+
+;; Advise load-theme, so that it first disables all custom themes before loading (enabling) another one.
+;; https://emacs.stackexchange.com/a/3114
+(defadvice load-theme (before theme-dont-propagate activate)
+ (mapcar #'disable-theme custom-enabled-themes))
+
+
 (use-package modus-themes :ensure t)
 (use-package catppuccin-theme :ensure t)
 
@@ -475,7 +484,7 @@
   :config
   (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
         doom-themes-enable-italic t))
- 
+
 
 (defun dark-theme ()
   "Select the dark theme"
