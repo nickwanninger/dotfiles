@@ -964,3 +964,18 @@ You can use \\[keyboard-quit] to hide the doc."
     (shell-command (format "pngpaste ~/dev/website/public/post/res/%s" image-slug))
     ;; And insert the image markdown
     (insert (format "![ALT](/post/res/%s)" image-slug))))
+
+
+(defun ncw/blog-paste-image-base64 ()
+  (interactive)
+
+  (let* ((image-slug (format-time-string "%b-%d-%Y-%H-%M-%S.png"))
+         (image-path (format "~/dev/website/raw-images/%s" image-slug)))
+    ;; Create the image directory
+    (shell-command "mkdir -p ~/dev/website/raw-images")
+    ;; Paste the image to the filesystem
+    (shell-command (format "pngpaste %s" image-path))
+    ;; And insert the image markdown
+    (insert (format "![ALT](data:image/png;base64, %s)"
+                    (shell-command-to-string (format "base64 --wrap=0 %s"
+                                                    image-path))))))
