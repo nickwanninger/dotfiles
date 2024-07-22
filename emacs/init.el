@@ -249,6 +249,14 @@
 (evil-ex-define-cmd "W" "w")
 
 
+
+
+(when (display-graphic-p)
+  (set-frame-font "JetBrains Mono Bold 12" nil t))
+
+
+
+
 (defun ncw/setup-lsp-mode ()
   (message "ncw/setup-lsp-mode called")
   (company-mode 1)
