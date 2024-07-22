@@ -467,7 +467,7 @@
 ;; Advise load-theme, so that it first disables all custom themes before loading (enabling) another one.
 ;; https://emacs.stackexchange.com/a/3114
 (defadvice load-theme (before theme-dont-propagate activate)
- (mapcar #'disable-theme custom-enabled-themes))
+ (mapc #'disable-theme custom-enabled-themes))
 
 
 (use-package modus-themes :ensure t)
@@ -489,7 +489,8 @@
 (defun dark-theme ()
   "Select the dark theme"
   (interactive)
-  (load-theme 'doom-horizon t))
+  ;; (load-theme 'doom-horizon t))
+  (load-theme 'doom-ayu-dark t))
   ;; (load-theme 'modus-vivendi t))
   ;; (load-theme 'vscode-dark-plus t))
 
