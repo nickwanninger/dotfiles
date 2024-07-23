@@ -84,6 +84,9 @@
 (setq c-default-style "my-c-style")
 (setq c-ts-default-style "my-c-style")
 
+;; Make it so underscores and dashes are considered part of a word
+(modify-syntax-entry ?_ "w")
+(modify-syntax-entry ?- "w")
 
 (require 'pl-greek)
 
@@ -96,6 +99,61 @@
 
 
 (global-display-line-numbers-mode -1)
+
+
+
+;; The most important thing we want here is evil mode, cause I can't use emacs without it :)
+(setq evil-want-keybinding nil)
+
+
+;; Evil Mode
+(use-package evil
+  :ensure t
+  :config
+  (evil-set-undo-system 'undo-redo)
+  (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
+
+  (define-key evil-normal-state-map (kbd ".") #'er/expand-region)
+  (define-key evil-visual-state-map (kbd ".") #'er/expand-region)
+  (define-key evil-visual-state-map (kbd ",") #'er/contract-region)
+
+  (define-key evil-normal-state-map (kbd "q") nil)
+  (define-key evil-normal-state-map (kbd "C-n") 'neotree)
+  (define-key evil-normal-state-map (kbd "SPC")
+              (lambda ()
+                (interactive)
+                (evil-execute-macro 1 "viw")))
+  (evil-set-leader 'motion (kbd "\\"))
+  :init
+  (evil-mode 1))
+
+(use-package evil-collection
+  :init
+  (evil-collection-init))
+
+
+(unless (display-graphic-p)
+  (use-package evil-terminal-cursor-changer
+    :ensure t
+    :init
+    (evil-terminal-cursor-changer-activate)))
+
+(setq evil-insert-state-cursor 'bar)
+
+(evil-ex-define-cmd "W" "w")
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -148,13 +206,15 @@
 
 
 (use-package which-key
+  :ensure t
   :init
   (setq which-key-idle-delay 0.3)
   (setq which-key-idle-secondary-delay 0.05)
   :config
   (which-key-mode))
 
-(use-package magit)
+(use-package magit
+  :ensure t)
 
 ;; ====--------------------------------------------------====
 
@@ -196,58 +256,7 @@
   :ensure t)
 
 
-;; (use-package scope-creep
-;;   :ensure nil)
 
-
-;; ====--------------------------------------------------====
-
-
-(setq evil-want-keybinding nil)
-;; (setq evil-want-C-i-jump nil)
-
-;; Make it so underscores and dashes are considered part of a word
-(modify-syntax-entry ?_ "w")
-(modify-syntax-entry ?- "w")
-
-;; Evil Mode
-(use-package evil
-  :ensure t
-  :config
-  (evil-set-undo-system 'undo-redo)
-  (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
-
-  ;; (define-key evil-normal-state-map (kbd ".") #'scope-creep-expand-selection)
-  ;; (define-key evil-visual-state-map (kbd ".") #'scope-creep-expand-selection)
-  ;; (define-key evil-visual-state-map (kbd ",") #'scope-creep-contract-selection)
-  (define-key evil-normal-state-map (kbd ".") #'er/expand-region)
-  (define-key evil-visual-state-map (kbd ".") #'er/expand-region)
-  (define-key evil-visual-state-map (kbd ",") #'er/contract-region)
-
-  (define-key evil-normal-state-map (kbd "q") nil)
-  (define-key evil-normal-state-map (kbd "C-n") 'neotree)
-  (define-key evil-normal-state-map (kbd "SPC")
-              (lambda ()
-                (interactive)
-                (evil-execute-macro 1 "viw")))
-  (evil-set-leader 'motion (kbd "\\"))
-  :init
-  (evil-mode 1))
-
-(use-package evil-collection
-  :init
-  (evil-collection-init))
-
-
-(unless (display-graphic-p)
-  (use-package evil-terminal-cursor-changer
-    :ensure t
-    :init
-    (evil-terminal-cursor-changer-activate)))
-
-(setq evil-insert-state-cursor 'bar)
-
-(evil-ex-define-cmd "W" "w")
 
 
 

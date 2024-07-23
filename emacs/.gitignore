@@ -1,5 +1,6 @@
 straight/
 elpa/
 eln-cache/
+auto-save-list/
 
 !straight/versions/default.el
