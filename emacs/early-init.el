@@ -1,7 +1,6 @@
 ;; Disable package.el from start-up, because using elpaca
 (setq package-enable-at-startup nil)
 
-
 (defvar bootstrap-version)
 (let ((bootstrap-file
        (expand-file-name
@@ -17,3 +16,6 @@
       (goto-char (point-max))
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
+
+
+(setq straight-use-package-by-default t)

@@ -1,7 +1,5 @@
-*
+straight/
+elpa/
+eln-cache/
 
-!.gitignore
-!*.el
-!pl-greek.el
-custom.el
-!lisp/
+!straight/versions/default.el
