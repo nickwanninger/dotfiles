@@ -2,6 +2,8 @@
 ;; Make sure we load this file, instead of the precompiled file, if it is newer
 (setq load-prefer-newer t)
 
+(setq use-package-compute-statistics t)
+
 (setq gc-cons-threshold (* 50 1024 1024))
 
 ;; Silence compiler warnings, as they can be pretty disruptive
@@ -16,8 +18,8 @@
 (add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/") t)
 
 (package-initialize)
-(unless package-archive-contents
-   (package-refresh-contents))
+;; (unless package-archive-contents
+;;    (package-refresh-contents))
 
 ;; Change the user-emacs-directory to keep unwanted things out of ~/.emacs.d
 (setq user-emacs-directory (expand-file-name "~/.cache/emacs/")
@@ -106,6 +108,13 @@
 (setq evil-want-keybinding nil)
 
 
+(use-package benchmark-init
+  :ensure t
+  :config
+  ;; To disable collection of benchmark data after init is done.
+  (add-hook 'after-init-hook 'benchmark-init/deactivate))
+
+
 ;; Evil Mode
 (use-package evil
   :ensure t
@@ -189,15 +198,15 @@
                      :run-buffer #'racket-run
                      :send-to-repl #'racket-send-last-sexp))))
 
-;; Use geiser to make Guile development nicer
-(use-package geiser-guile
-  :ensure t
-  :config
-  (add-hook 'geiser-mode-hook
-            (lambda ()
-              (geiser)
-              (setup-repl geiser-mode-map :run-buffer #'geiser-eval-buffer
-                                          :send-to-repl #'geiser-eval-last-sexp))))
+;; ;; Use geiser to make Guile development nicer
+;; (use-package geiser-guile
+;;   :ensure t
+;;   :config
+;;   (add-hook 'geiser-mode-hook
+;;             (lambda ()
+;;               (geiser)
+;;               (setup-repl geiser-mode-map :run-buffer #'geiser-eval-buffer
+;;                                           :send-to-repl #'geiser-eval-last-sexp))))
 
 
 
@@ -489,13 +498,6 @@
 
 
 (use-package modus-themes :ensure t)
-(use-package catppuccin-theme :ensure t)
-
-
-(use-package vscode-dark-plus-theme
-  :ensure t
-  :config)
-
 
 (use-package doom-themes
   :ensure t
@@ -508,7 +510,8 @@
   "Select the dark theme"
   (interactive)
   ;; (load-theme 'doom-horizon t))
-  (load-theme 'doom-ayu-dark t))
+  ;; (load-theme 'doom-ayu-dark t))
+  (load-theme 'doom-molokai t))
   ;; (load-theme 'modus-vivendi t))
   ;; (load-theme 'vscode-dark-plus t))
 
@@ -780,23 +783,23 @@ You can use \\[keyboard-quit] to hide the doc."
 
 
 
-(use-package copilot
-  :quelpa (copilot :fetcher github
-                   :repo "copilot-emacs/copilot.el"
-                   :branch "main"
-                   :files ("*.el"))
+;; (use-package copilot
+;;   :quelpa (copilot :fetcher github
+;;                    :repo "copilot-emacs/copilot.el"
+;;                    :branch "main"
+;;                    :files ("*.el"))
 
-  :custom
-  (copilot-idle-delay nil)
+;;   :custom
+;;   (copilot-idle-delay nil)
 
-  :hook
-  ((prog-mode . copilot-mode))
+;;   :hook
+;;   ((prog-mode . copilot-mode))
 
-  :bind
-  (("C-c SPC" . copilot-complete)
-   :map copilot-completion-map
-   ("TAB" . copilot-accept-completion)
-   ("<tab>" . copilot-accept-completion)))
+;;   :bind
+;;   (("C-c SPC" . copilot-complete)
+;;    :map copilot-completion-map
+;;    ("TAB" . copilot-accept-completion)
+;;    ("<tab>" . copilot-accept-completion)))
 
 
 
