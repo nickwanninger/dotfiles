@@ -63,6 +63,18 @@
 
 
 
+(use-package dired
+  :ensure nil
+  :straight nil
+  :commands (dired dired-jump)
+  :bind (("C-x C-j" . dired-jump))
+  :custom ((dired-listing-switches "-lah --group-directories-first"))
+  :config
+  (evil-collection-define-key 'normal 'dired-mode-map
+    "h" 'dired-up-directory
+    "l" 'dired-find-file))
+
+
 ;; Try to use UTF-8 for everything
 (set-language-environment "UTF-8")
 (setq locale-coding-system 'utf-8)
@@ -778,8 +790,8 @@ You can use \\[keyboard-quit] to hide the doc."
   :ensure t
   :hook ((prog-mode . rainbow-delimiters-mode)))
 
-;; (use-package parinfer-rust-mode
-;;   :hook emacs-lisp-mode racket-mode scheme-mode)
+(use-package parinfer-rust-mode
+  :hook emacs-lisp-mode racket-mode scheme-mode)
 
 
 

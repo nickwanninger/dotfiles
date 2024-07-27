@@ -1,4 +1,4 @@
 function just-flame
-	perf record -g $argv
-	perf script | inferno-collapse-perf | inferno-flamegraph > flamegraph.svg
+	sudo perf record -g $argv
+	sudo perf script | inferno-collapse-perf | inferno-flamegraph > flamegraph.svg
 end
