@@ -37,3 +37,17 @@ tic -x misc/xterm-256color-italic.terminfo
 tic -x misc/tmux-256color.terminfo
 
 echo "Setup Complete!"
+
+
+
+# Compile emacs's parinfer binary for this arch
+
+mkdir -p ~/dev
+pushd ~/dev
+  rm -rf parinfer-rust-emacs
+  git clone https://github.com/justinbarclay/parinfer-rust-emacs.git
+  cd parinfer-rust-emacs
+  cargo build --release
+  mkdir -p ~/.emacs.d/parinfer-rust/
+  cp ./target/release/libparinfer_rust* ~/.emacs.d/parinfer-rust/
+popd

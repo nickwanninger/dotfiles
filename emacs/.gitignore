@@ -2,5 +2,6 @@ straight/
 elpa/
 eln-cache/
 auto-save-list/
+parinfer-rust/
 
 !straight/versions/default.el

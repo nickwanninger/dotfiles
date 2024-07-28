@@ -62,7 +62,6 @@
 
 
 
-
 (use-package dired
   :ensure nil
   :straight nil
@@ -573,7 +572,8 @@
   "b" 'consult-buffer
   "B" 'switch-to-buffer
   "q" 'delete-window
-  "=" 'balance-windows)
+  "=" 'balance-windows
+  "c" 'global-display-line-numbers-mode)
 
 (general-def 'motion
   ";" 'evil-ex
@@ -789,6 +789,7 @@ You can use \\[keyboard-quit] to hide the doc."
 (use-package rainbow-delimiters
   :ensure t
   :hook ((prog-mode . rainbow-delimiters-mode)))
+
 
 (use-package parinfer-rust-mode
   :hook emacs-lisp-mode racket-mode scheme-mode)
