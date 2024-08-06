@@ -187,6 +187,7 @@
   (lambda-line-space-top +.50)  ;; padding on top and bottom of line
   (lambda-line-space-bottom -.50)
   (lambda-line-symbol-position 0.1) ;; adjust the vertical placement of symbol
+  (lambda-line-vc-symbol " ")
   :config
   ;; activate lambda-line
   (lambda-line-mode)
