@@ -32,17 +32,17 @@
 
 
 
-(unless (package-installed-p 'quelpa)
-  (with-temp-buffer
-    (url-insert-file-contents "https://raw.githubusercontent.com/quelpa/quelpa/master/quelpa.el")
-    (eval-buffer)
-    (quelpa-self-upgrade)))
+;; (unless (package-installed-p 'quelpa)
+;;   (with-temp-buffer
+;;     (url-insert-file-contents "https://raw.githubusercontent.com/quelpa/quelpa/master/quelpa.el")
+;;     (eval-buffer)
+;;     (quelpa-self-upgrade)))
 
-(quelpa
- '(quelpa-use-package
-   :fetcher git
-   :url "https://github.com/quelpa/quelpa-use-package.git"))
-(require 'quelpa-use-package)
+;; (quelpa
+;;  '(quelpa-use-package
+;;    :fetcher git
+;;    :url "https://github.com/quelpa/quelpa-use-package.git"))
+;; (require 'quelpa-use-package)
 
 
 (if (not (fboundp 'x-hide-tip))
@@ -56,7 +56,15 @@
   :config
   (setq tab-always-indent t)
   (setq resize-mini-windows t)
-  (setq max-mini-window-height 0.2))
+  (setq max-mini-window-height 0.2)
+  ;; Setup the display-buffer-alist
+  (setq display-buffer-alist nil))
+  ;; (add-to-list 'display-buffer-alist
+  ;;               '("magit:.*?"
+  ;;                 (display-buffer-reuse-window display-buffer-in-side-window)
+  ;;                 (side . right)
+  ;;                 (dedicated . nil)
+  ;;                 (window-width . 80))))
 
 
 
@@ -207,19 +215,6 @@
 
 
 
-
-
-
-
-(defvar previous-window-count (length (window-list)))
-
-(defun window-config-hook ()
-  (let ((current-window-count (length (window-list))))
-    (when (not (equal current-window-count previous-window-count))
-      (setq previous-window-count current-window-count)
-      (balance-windows))))
-
-(add-hook 'window-configuration-change-hook 'window-config-hook)
 
 
 
@@ -882,6 +877,7 @@ You can use \\[keyboard-quit] to hide the doc."
                             'italic))))
 
 
+
 ;; (add-to-list 'display-buffer-alist
 ;;              '((lambda (buffer _) (with-current-buffer buffer
 ;;                                     (seq-some (lambda (mode)
@@ -975,13 +971,15 @@ You can use \\[keyboard-quit] to hide the doc."
 (defun split-window-right-and-switch ()
   "Split a window right, then switch focus to it."
   (interactive)
-  (select-window (split-window-right)))
+  (select-window (split-window-right))
+  (balance-windows))
 
 
 (defun split-window-below-and-switch ()
   "Split a window below, then switch focus to it."
   (interactive)
-  (select-window (split-window-below)))
+  (select-window (split-window-below))
+  (balance-windows))
 
 (global-unset-key (kbd "C-_"))
 (global-set-key (kbd "C-\\") #'split-window-right-and-switch)
