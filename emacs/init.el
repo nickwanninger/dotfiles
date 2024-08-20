@@ -51,6 +51,14 @@
 
 (require 'cl-lib)
 
+(use-package emacs
+  :bind (("RET" . newline-and-indent))
+  :config
+  (setq tab-always-indent t)
+  (setq resize-mini-windows t)
+  (setq max-mini-window-height 0.2))
+
+
 
 
 (use-package direnv
@@ -112,6 +120,7 @@
 
 
 (global-display-line-numbers-mode -1)
+(electric-indent-mode -1)
 
 
 
@@ -255,6 +264,7 @@
   :init
   (setq which-key-idle-delay 0.3)
   (setq which-key-idle-secondary-delay 0.05)
+  (which-key-setup-minibuffer)
   :config
   (which-key-mode))
 
@@ -276,11 +286,8 @@
   (completion-category-overrides '((file (styles basic partial-completion)))))
 
 (use-package consult
-  :ensure t)
-
-
-(global-set-key (kbd "C-c f") #'consult-ripgrep)
-
+  :ensure t
+  :bind (("C-c f" . #'consult-ripgrep)))
 
 
 (use-package embark
@@ -924,7 +931,6 @@ You can use \\[keyboard-quit] to hide the doc."
 ;; hitting tab does 2 spaces
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 2)
-(setq-default tab-always-indent 'complete)
 
 (setq split-width-threshold 0)
 (setq split-height-threshold nil)

@@ -29,7 +29,7 @@ export PATH="/opt/cuda/bin:$PATH"
 
 
 export PATH="/usr/local/cuda/bin:$PATH"
-export LD_LIBRARY_PATH="/usr/local/cuda/lib:$LD_LIBRARY_PATH"
+# export LD_LIBRARY_PATH="/usr/local/cuda/lib:$LD_LIBRARY_PATH"
 
 set -g fish_user_paths $HOME/.bin $HOME/.local/bin $HOME/.cargo/bin $fish_user_paths
 
