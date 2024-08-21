@@ -20,6 +20,7 @@
           system = "x86_64-linux";
           username = "nick";
           home = "/home/nick";
+          graphical = false;
           local = false;
           stateVersion = "23.05";
         };
@@ -30,6 +31,7 @@
           system = "aarch64-darwin";
           username = "nick";
           home = "/Users/nick";
+          graphical = true;
           local = true;
           stateVersion = "23.05";
         };
@@ -39,6 +41,7 @@
           system = "aarch64-linux";
           username = "nick";
           home = "/home/nick";
+          graphical = false;
           local = true;
           stateVersion = "23.05";
         };

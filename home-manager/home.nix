@@ -12,6 +12,9 @@
     pkgs.guile
 
     pkgs.nodejs
+    pkgs.git
+
+    pkgs.texliveFull
     # pkgs.racket # The racket language
   ];
 
