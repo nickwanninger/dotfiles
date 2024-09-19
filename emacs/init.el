@@ -60,13 +60,24 @@
   (setq visible-bell nil)
   (setq ring-bell-function #'ignore)
   ;; Setup the display-buffer-alist
-  (setq display-buffer-alist nil))
+  (setq display-buffer-alist nil)
+  ;; don't show ANSI escape sequences in compile buffer
+  (add-hook 'compilation-filter-hook 'ansi-color-compilation-filter)
   ;; (add-to-list 'display-buffer-alist
-  ;;               '("magit:.*?"
-  ;;                 (display-buffer-reuse-window display-buffer-in-side-window)
-  ;;                 (side . right)
-  ;;                 (dedicated . nil)
-  ;;                 (window-width . 80))))
+  (setq compile-command "make -k -j")
+  (setq compilation-scroll-output t)
+
+  (setq split-width-threshold 120)
+  (setq split-height-threshold nil)
+    ;; Setup the display-buffer-alist
+  (setq display-buffer-alist nil)
+  (add-to-list 'display-buffer-alist
+           '(("*magit:"
+              (display-buffer-reuse-window
+               display-buffer-below-selected)
+              (reusable-frames . visible)
+              (side            . bottom)
+              (window-height   . 0.4)))))
 
 
 
@@ -481,6 +492,11 @@
 (add-to-list 'treesit-auto-recipe-list elisp-tsauto-config)
 
 
+
+
+
+
+
 (use-package evil-textobj-tree-sitter
   :ensure t)
 
@@ -578,6 +594,18 @@
   (pulsar-delay 0.005))
 
 
+
+(defun ncw/project-make ()
+  "Run `make -k -j' in the project root."
+  (declare (interactive-only compile))
+  (interactive)
+  (let ((default-directory (project-root (project-current t)))
+        (compilation-buffer-name-function
+         (or project-compilation-buffer-name-function
+             compilation-buffer-name-function)))
+    (compile "make -k -j")))
+
+
 ;;; Keybindings
 
 (use-package general
@@ -603,7 +631,8 @@
   "B" 'switch-to-buffer
   "q" 'delete-window
   "=" 'balance-windows
-  "c" 'global-display-line-numbers-mode)
+  "c" 'global-display-line-numbers-mode
+  "m" 'ncw/project-make)
 
 (general-def 'motion
   ";" 'evil-ex
@@ -866,7 +895,9 @@ You can use \\[keyboard-quit] to hide the doc."
 ;; (global-set-key (kbd "M-k") #'previous-buffer)
 
 
-(require 'project)
+(use-package project
+  :config
+  (setq project-vc-merge-submodules nil))
 (global-set-key (kbd "C-p")  #'project-find-file)
 
 
@@ -928,8 +959,6 @@ You can use \\[keyboard-quit] to hide the doc."
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 2)
 
-(setq split-width-threshold 0)
-(setq split-height-threshold nil)
 
 ;; Enable mouse mode cause I like rats
 (xterm-mouse-mode 1)
