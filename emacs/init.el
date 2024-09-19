@@ -53,9 +53,9 @@
 
 (use-package emacs
   :bind (("RET" . newline-and-indent))
+
   :config
-  (setq tab-always-indent t)
-  (setq resize-mini-windows t)
+  (setq resize-mini-windows 'grow-only)
   (setq max-mini-window-height 0.2)
   ;; Setup the display-buffer-alist
   (setq display-buffer-alist nil))
@@ -128,7 +128,7 @@
 
 
 (global-display-line-numbers-mode -1)
-(electric-indent-mode -1)
+;; (electric-indent-mode -1)
 
 
 
@@ -262,6 +262,7 @@
   (which-key-setup-minibuffer)
   :config
   (which-key-mode))
+
 
 (use-package magit
   :ensure t)
@@ -824,23 +825,21 @@ You can use \\[keyboard-quit] to hide the doc."
 
 
 
-;; (use-package copilot
-;;   :quelpa (copilot :fetcher github
-;;                    :repo "copilot-emacs/copilot.el"
-;;                    :branch "main"
-;;                    :files ("*.el"))
+(use-package copilot
+  :straight (:host github :repo "copilot-emacs/copilot.el" :files ("*.el"))
+  :ensure t
 
-;;   :custom
-;;   (copilot-idle-delay nil)
+  :custom
+  (copilot-idle-delay nil)
 
-;;   :hook
-;;   ((prog-mode . copilot-mode))
+  :hook
+  ((prog-mode . copilot-mode))
 
-;;   :bind
-;;   (("C-c SPC" . copilot-complete)
-;;    :map copilot-completion-map
-;;    ("TAB" . copilot-accept-completion)
-;;    ("<tab>" . copilot-accept-completion)))
+  :bind
+  (("C-c SPC" . copilot-complete)
+   :map copilot-completion-map
+   ("TAB" . copilot-accept-completion)
+   ("<tab>" . copilot-accept-completion)))
 
 
 
