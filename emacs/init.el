@@ -1014,8 +1014,7 @@ You can use \\[keyboard-quit] to hide the doc."
 (defun ncw/new-blog-post (title)
   (interactive "sPost Title: ")
   (let* ((slug (ncw/title-to-slug title))
-         (file (format "~/dev/website/posts/%s-%s.md"
-                       (format-time-string "%Y-%m-%d")
+         (file (format "~/dev/website/posts/%s.md"
                        slug)))
     (with-temp-file file
       (insert (concat "---\n"
