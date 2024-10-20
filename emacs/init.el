@@ -71,14 +71,16 @@
   (setq split-height-threshold nil)
     ;; Setup the display-buffer-alist
   (setq display-buffer-alist nil)
-  (add-to-list 'display-buffer-alist
-           '(("*magit:"
-              (display-buffer-reuse-window
-               display-buffer-below-selected)
-              (reusable-frames . visible)
-              (side            . bottom)
-              (window-height   . 0.4)))))
+  ;; (add-to-list 'display-buffer-alist
+  ;;         `((derived-mode . magit-mode)
+  ;;           (display-buffer-reuse-mode-window
+  ;;            display-buffer-in-direction)
+  ;;           (mode magit-mode)
+  ;;           (window . root)
+  ;;           (window-width . 80)
+  ;;           (direction . right)))
 
+  (global-display-line-numbers-mode))
 
 
 
@@ -140,9 +142,13 @@
 
 
 
-(global-display-line-numbers-mode -1)
 ;; (electric-indent-mode -1)
 
+
+;; clipetty: copy to native clipboard using OSC 52
+(use-package clipetty
+  :ensure t
+  :hook (after-init . global-clipetty-mode))
 
 
 ;; The most important thing we want here is evil mode, cause I can't use emacs without it :)
@@ -197,47 +203,12 @@
 
 
 
-
-
-
-;; (use-package lambda-line
-;;   :straight (:type git :host github :repo "lambda-emacs/lambda-line")
-;;   :custom
-;;   (lambda-line-icon-time nil) ;; requires ClockFace font (see below)
-;;   (lambda-line-position 'bottom) ;; Set position of status-line
-;;   (lambda-line-abbrev nil) ;; abbreviate major modes
-;;   (lambda-line-hspace "  ")  ;; add some cushion
-;;   (lambda-line-prefix t) ;; use a prefix symbol
-;;   (lambda-line-prefix-padding nil) ;; no extra space for prefix
-;;   (lambda-line-status-invert nil)  ;; no invert colors
-;;   (lambda-line-gui-ro-symbol  " ⨂") ;; symbols
-;;   (lambda-line-gui-mod-symbol " ⬤")
-;;   (lambda-line-gui-rw-symbol  " ◯")
-;;   (lambda-line-space-top +.50)  ;; padding on top and bottom of line
-;;   (lambda-line-space-bottom -.50)
-;;   (lambda-line-symbol-position 0.1) ;; adjust the vertical placement of symbol
-;;   (lambda-line-vc-symbol " ")
-;;   :config
-;;   ;; activate lambda-line
-;;   (lambda-line-mode)
-;;   ;; set divider line in footer
-;;   (when (eq lambda-line-position 'top)
-;;     (setq-default mode-line-format (list "%_"))
-;;     (setq mode-line-format (list "%_"))))
-
-
-
-
-
-
 (cl-defun setup-repl (map &key run-buffer send-to-repl)
   (define-key map (kbd "C-c e") run-buffer)
   (define-key map (kbd "C-c C-r") send-to-repl))
 
 (setup-repl emacs-lisp-mode-map
             :run-buffer #'eval-buffer)
-
-
 
 (use-package racket-mode
   :ensure t
@@ -249,18 +220,6 @@
          (setup-repl racket-mode-map
                      :run-buffer #'racket-run
                      :send-to-repl #'racket-send-last-sexp))))
-
-;; ;; Use geiser to make Guile development nicer
-;; (use-package geiser-guile
-;;   :ensure t
-;;   :config
-;;   (add-hook 'geiser-mode-hook
-;;             (lambda ()
-;;               (geiser)
-;;               (setup-repl geiser-mode-map :run-buffer #'geiser-eval-buffer
-;;                                           :send-to-repl #'geiser-eval-last-sexp))))
-
-
 
 (use-package expand-region
   :ensure t)
@@ -277,7 +236,9 @@
 
 
 (use-package magit
-  :ensure t)
+  :ensure t
+  :init
+  (setq magit-save-repository-buffers 'dontask))
 
 ;; ====--------------------------------------------------====
 
@@ -595,15 +556,19 @@
 
 
 
-(defun ncw/project-make ()
+(defun ncw/project-make (&optional cmd)
   "Run `make -k -j' in the project root."
   (declare (interactive-only compile))
   (interactive)
+  (unless cmd (setq b "make -k -j"))
   (let ((default-directory (project-root (project-current t)))
         (compilation-buffer-name-function
          (or project-compilation-buffer-name-function
              compilation-buffer-name-function)))
-    (compile "make -k -j")))
+    (compile cmd)
+    (let ((compile-window (get-buffer-window "*compilation*")))
+      (when compile-window
+        (select-window compile-window)))))
 
 
 ;;; Keybindings
@@ -612,32 +577,34 @@
   :ensure t
   :config
   (general-evil-setup t)
-  (general-auto-unbind-keys))
+  (general-auto-unbind-keys)
+  :init
+  (general-create-definer ncw/leader-def
+    :states '(normal visual motion emacs insert)
+    :keymaps 'override
+    :prefix "\\"
+    :global-prefix "M-\\")
 
+  (ncw/leader-def
+    "g" (lambda () (interactive)
+          (magit-status)
+          (balance-windows))
+    ;; "f" 'eglot-format
+    "f" 'lsp-format-buffer
+    "1" 'dark-theme
+    "2" 'light-theme
+    "b" 'consult-buffer
+    "B" 'switch-to-buffer
+    "q" 'delete-window
+    "\\" 'balance-windows
+    "=" 'balance-windows
+    "c" 'global-display-line-numbers-mode
+    "m" 'ncw/project-make)
 
-(general-create-definer ncw/leader-def
-  :states '(normal visual motion emacs insert)
-  :keymaps 'override
-  :prefix "\\"
-  :global-prefix "M-\\")
-
-(ncw/leader-def
-  "g" 'magit-status
-  ;; "f" 'eglot-format
-  "f" 'lsp-format-buffer
-  "1" 'dark-theme
-  "2" 'light-theme
-  "b" 'consult-buffer
-  "B" 'switch-to-buffer
-  "q" 'delete-window
-  "=" 'balance-windows
-  "c" 'global-display-line-numbers-mode
-  "m" 'ncw/project-make)
-
-(general-def 'motion
-  ";" 'evil-ex
-  ":" 'evil-ex
-  "q" nil)
+  (general-def 'motion
+    ";" 'evil-ex
+    ":" 'evil-ex
+    "q" nil))
 
 
 
@@ -1081,3 +1048,13 @@ You can use \\[keyboard-quit] to hide the doc."
     (insert (format "![ALT](data:image/png;base64, %s)"
                     (shell-command-to-string (format "base64 --wrap=0 %s"
                                                     image-path))))))
+
+
+(defun ncw/build-staged-done (buffer msg)
+  (when (string-match "finished" msg)
+    (magit-stash-pop)))
+
+(defun ncw/build-staged ()
+  (interactive)
+  (magit-stash-push)
+  (ncw/project-make "make -k -j; git stash pop"))
