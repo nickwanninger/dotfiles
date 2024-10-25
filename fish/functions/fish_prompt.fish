@@ -18,8 +18,8 @@ function fish_prompt
     set status_color "blue"
   end
 
-  set_color $status_color
-  echo -n '╭╴'
+  # set_color $status_color
+  # echo -n '╭╴'
 
   if [ ! $last_status -eq "0" ]
     echo -n " $last_status "
@@ -55,10 +55,11 @@ function fish_prompt
 	# echo -n (fish_git_prompt)
 
 
-	echo -en '\\n'
+  # echo -en '\\n'
 
-  set_color $status_color
-  echo -n '╰╼ '
+  set_color yellow
+  echo -n ' # '
+  # echo -n '╰╼ '
 
 	set_color reset
 
