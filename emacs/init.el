@@ -604,7 +604,8 @@
     "\\" 'balance-windows
     "=" 'balance-windows
     "c" 'global-display-line-numbers-mode
-    "m" 'ncw/project-make)
+    "m" 'ncw/project-make
+    "t" 'vterm)
 
   (general-def 'motion
     ";" 'evil-ex
@@ -844,6 +845,23 @@ You can use \\[keyboard-quit] to hide the doc."
    ("<tab>" . copilot-accept-completion)))
 
 
+
+;; Vterm: a decent terminal emulator for emacs
+(use-package vterm
+    :ensure t
+    :hook (vterm-mode-hook . (lambda () (display-line-numbers-mode 0)))
+    :init
+    (unbind-key "M-<up>" vterm-mode-map)
+    (unbind-key "M-<down>" vterm-mode-map)
+    (unbind-key "M-<left>" vterm-mode-map)
+    (unbind-key "M-<right>" vterm-mode-map)
+    (defun evil-collection-vterm-escape-stay ()
+        "Go back to normal state but don't move cursor backwards. Moving cursor
+         backwards is the default vim behavior but it is not appropriate in some
+         cases like terminals."
+        (setq-local evil-move-cursor-back nil))
+
+    (add-hook 'vterm-mode-hook #'evil-collection-vterm-escape-stay))
 
 
 
