@@ -100,7 +100,7 @@
   :straight nil
   :commands (dired dired-jump)
   :bind (("C-x C-j" . dired-jump))
-  :custom ((dired-listing-switches "-lah --group-directories-first"))
+  :custom ((dired-listing-switches "-lah"))
   :config
   (evil-collection-define-key 'normal 'dired-mode-map
     "h" 'dired-up-directory
