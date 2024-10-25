@@ -11,6 +11,8 @@
 
 (add-to-list 'load-path "~/.emacs.d/lisp")
 
+(setq package-user-dir (concat "~/.emacs.d/elpa-" emacs-version))
+
 ;; Setup the package repos
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)

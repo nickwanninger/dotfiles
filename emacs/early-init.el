@@ -1,5 +1,6 @@
 ;; Disable package.el from start-up, because using elpaca
 (setq package-enable-at-startup nil)
+(setq straight-base-dir (concat "~/.emacs.d/straight/" emacs-version))
 
 (defvar bootstrap-version)
 (let ((bootstrap-file
