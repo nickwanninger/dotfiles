@@ -526,9 +526,10 @@
 (defun dark-theme ()
   "Select the dark theme"
   (interactive)
-  ;; (load-theme 'doom-horizon t))
+  (load-theme 'doom-horizon t))
   ;; (load-theme 'doom-ayu-dark t))
-  (load-theme 'doom-molokai t))
+  ;; (load-theme 'doom-molokai t))
+  ;; (load-theme 'doom-tokyo-dark t))
   ;; (load-theme 'modus-vivendi t))
   ;; (load-theme 'vscode-dark-plus t))
 
@@ -536,8 +537,8 @@
 (defun light-theme ()
   "Select the light theme"
   (interactive)
-  (load-theme 'doom-one-light t))
-  ;; (load-theme 'modus-operandi t))
+  ;; (load-theme 'doom-one-light t)
+  (load-theme 'modus-operandi t))
 
 ;; Set the dark theme right away
 (dark-theme)
@@ -558,9 +559,9 @@
 
 (defun ncw/project-make (&optional cmd)
   "Run `make -k -j' in the project root."
-  (declare (interactive-only compile))
+  ; (declare (interactive-only compile))
   (interactive)
-  (unless cmd (setq b "make -k -j"))
+  (unless cmd (setq cmd "make -k -j"))
   (let ((default-directory (project-root (project-current t)))
         (compilation-buffer-name-function
          (or project-compilation-buffer-name-function
