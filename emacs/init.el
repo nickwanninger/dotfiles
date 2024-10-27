@@ -4,6 +4,9 @@
 
 (setq use-package-compute-statistics t)
 
+(setq use-package-always-ensure 't
+   use-package-always-defer 't)
+
 (setq gc-cons-threshold (* 50 1024 1024))
 
 ;; Silence compiler warnings, as they can be pretty disruptive
@@ -31,7 +34,6 @@
 ;; Use no-littering to automatically set common paths to the new user-emacs-directory
 (use-package no-littering
              :ensure t)
-
 
 
 ;; (unless (package-installed-p 'quelpa)
@@ -73,16 +75,43 @@
   (setq split-height-threshold nil)
     ;; Setup the display-buffer-alist
   (setq display-buffer-alist nil)
-  ;; (add-to-list 'display-buffer-alist
-  ;;         `((derived-mode . magit-mode)
-  ;;           (display-buffer-reuse-mode-window
-  ;;            display-buffer-in-direction)
-  ;;           (mode magit-mode)
-  ;;           (window . root)
-  ;;           (window-width . 80)
-  ;;           (direction . right)))
+  ;; Enable line numbers
+  (global-display-line-numbers-mode)
 
-  (global-display-line-numbers-mode))
+  ;; Try to use UTF-8 for everything
+  (set-language-environment "UTF-8")
+  (setq locale-coding-system 'utf-8)
+  (set-default-coding-systems 'utf-8)
+  (set-terminal-coding-system 'utf-8)
+  (set-keyboard-coding-system 'utf-8)
+  (set-selection-coding-system 'utf-8)
+  (prefer-coding-system 'utf-8) ;; Catch-all
+
+  (global-hl-line-mode 1)
+  (setq scroll-conservatively -1)
+
+  (setq enable-local-variables nil)
+  (setq custom-file
+      (expand-file-name "custom.el" user-emacs-directory))
+
+  (setq use-package-always-ensure t)
+  (c-add-style "my-c-style" '((c-tab-always-indent . t)
+                              (c-basic-offset . 4)
+                              (c-offsets-alist (access-label . 1)
+                                               (label . +))))
+  ;; Configure the font to be jetbrains in graphical mode
+  (when (display-graphic-p)
+    (set-frame-font "JetBrains Mono Bold 12" nil t)))
+
+
+
+;; Setting this as the default style:
+(setq c-default-style "my-c-style")
+(setq c-ts-default-style "my-c-style")
+
+;; Make it so underscores and dashes are considered part of a word
+(modify-syntax-entry ?_ "w")
+(modify-syntax-entry ?- "w")
 
 
 
@@ -109,40 +138,8 @@
     "l" 'dired-find-file))
 
 
-;; Try to use UTF-8 for everything
-(set-language-environment "UTF-8")
-(setq locale-coding-system 'utf-8)
-(set-default-coding-systems 'utf-8)
-(set-terminal-coding-system 'utf-8)
-(set-keyboard-coding-system 'utf-8)
-(set-selection-coding-system 'utf-8)
-(prefer-coding-system 'utf-8) ;; Catch-all
-;; (global-hl-line-mode 1)
-(setq scroll-conservatively -1)
-
-(setq enable-local-variables nil)
 
 
-
-(c-add-style "my-c-style" '((c-tab-always-indent . t)
-                            (c-basic-offset . 4)
-                            (c-offsets-alist (access-label . 1)
-                                             (label . +))))
-;; Setting this as the default style:
-(setq c-default-style "my-c-style")
-(setq c-ts-default-style "my-c-style")
-
-;; Make it so underscores and dashes are considered part of a word
-(modify-syntax-entry ?_ "w")
-(modify-syntax-entry ?- "w")
-
-(require 'pl-greek)
-
-
-(setq custom-file
-    (expand-file-name "custom.el" user-emacs-directory))
-
-(setq use-package-always-ensure t)
 
 
 
@@ -155,20 +152,14 @@
   :hook (after-init . global-clipetty-mode))
 
 
+
+
 ;; The most important thing we want here is evil mode, cause I can't use emacs without it :)
-(setq evil-want-keybinding nil)
-
-
-(use-package benchmark-init
-  :ensure t
-  :config
-  ;; To disable collection of benchmark data after init is done.
-  (add-hook 'after-init-hook 'benchmark-init/deactivate))
-
-
-;; Evil Mode
 (use-package evil
   :ensure t
+  :init
+  (setq evil-want-keybinding nil)
+
   :config
   (evil-set-undo-system 'undo-redo)
   (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
@@ -184,25 +175,33 @@
                 (interactive)
                 (evil-execute-macro 1 "viw")))
   (evil-set-leader 'motion (kbd "\\"))
-  :init
-  (evil-mode 1))
+  (setq evil-insert-state-cursor 'bar)
+
+  ;; Alias W to w
+  (evil-ex-define-cmd "W" "w")
+  ;; :init
+  (evil-mode 1)
+  (define-key evil-normal-state-map (kbd "g r") 'lsp-find-references)
+  (define-key evil-normal-state-map (kbd "g d") 'lsp-find-declaration)
+  (define-key evil-normal-state-map (kbd "g d") 'lsp-find-declaration)
+  (define-key evil-normal-state-map (kbd "g D") 'lsp-find-definition)
+
+
+  (define-key evil-normal-state-map (kbd "K")
+      (lambda () (interactive) (lsp-ui-doc-glance))))
 
 (use-package evil-collection
   :init
   (evil-collection-init))
 
 
+
+;; In the terminal, I like to see my mode w/ the cursor shape
 (unless (display-graphic-p)
   (use-package evil-terminal-cursor-changer
     :ensure t
     :init
     (evil-terminal-cursor-changer-activate)))
-
-(setq evil-insert-state-cursor 'bar)
-
-(evil-ex-define-cmd "W" "w")
-
-
 
 
 
@@ -214,16 +213,16 @@
 (setup-repl emacs-lisp-mode-map
             :run-buffer #'eval-buffer)
 
-(use-package racket-mode
-  :ensure t
-  :config
-   (add-hook 'racket-mode-hook
-       (lambda ()
-         (racket-xp-mode)
-         (set-input-method 'pl-greek)
-         (setup-repl racket-mode-map
-                     :run-buffer #'racket-run
-                     :send-to-repl #'racket-send-last-sexp))))
+;; (use-package racket-mode
+;;   :ensure t
+;;   :config
+;;    (add-hook 'racket-mode-hook
+;;        (lambda ()
+;;          (racket-xp-mode)
+;;          (set-input-method 'pl-greek)
+;;          (setup-repl racket-mode-map
+;;                      :run-buffer #'racket-run
+;;                      :send-to-repl #'racket-send-last-sexp))))
 
 (use-package expand-region
   :ensure t)
@@ -239,6 +238,7 @@
   (which-key-mode))
 
 
+;; magit: the best
 (use-package magit
   :ensure t
   :init
@@ -281,17 +281,6 @@
   :ensure t)
 
 
-
-
-
-
-
-(when (display-graphic-p)
-  (set-frame-font "JetBrains Mono Bold 12" nil t))
-
-
-
-
 (defun ncw/setup-lsp-mode ()
   (message "ncw/setup-lsp-mode called")
   (company-mode 1)
@@ -300,6 +289,9 @@
   (lsp-completion-mode 1))
 
 
+
+
+;; Yes, I still use lsp-mode.
 (use-package lsp-mode
   :ensure t
   :commands (lsp lsp-deferred)
@@ -371,130 +363,167 @@
   :hook (lsp-mode . lsp-ui-mode))
 
 
-;; (use-package eglot
-;;   :ensure nil ;; built-in
-;;   :defer t
-;;   :after (eldoc)
-;;   :hook (((c-mode c++-mode c-ts-mode c++-ts-mode rust-mode rust-ts-mode) . eglot-ensure))
-;;   :custom
-;;   ;; When no buffers are connected to an LSP server, shut down the server and
-;;   ;; eglot, to lighten the load on Emacs.
-;;   (eglot-autoshutdown t)
-;;   ;; For performance, set this to a low number. When debugging, comment this out.
-;;   ;; Setting to 0 means no messages/events are logged in the EGLOT events buffer.
-;;   ;; NOTE: In eglot 1.16, this variable was deprecated! If you still want to set
-;;   ;; the events buffer size to 0, you need the following:
-;;   ;; (setf (plist-get eglot-events-buffer-config :size) 0)
-;;   (eglot-events-buffer-size 0)
-;;   ;; For performance, set this to ignore. When debugging, comment this out.
-;;   ;; fset-ing to ignore means no jsonrpc event are logged by Emacs.
-;;   (fset #'jsonrpc--log-event #'ignore)
-;;   ;; XRef look-ups can leave the project Eglot is running a server for
-;;   (eglot-extend-to-xref t)
-;;   ;; Wait some number of seconds before waiting for the connection to the LSP.
-;;   ;; With nil, do not wait to connect at all, just try to connect immediately.
-;;   (eglot-sync-connect nil)
-;;   ;; Reduce the amount of time required for eglot to time-out LSP server
-;;   ;; connection attempts.
-;;   (eglot-connect-timeout 10)
-;;   (eglot-ignored-server-capabilities
-;;    '(;; Disable LSP from providing highlighting, since I use treesitter-based or
-;;      ;; Emacs' built-in regexp-based major modes for font-locking.
-;;      :colorProvider
-;;      :documentHighlightProvider
-;;      :foldingRangeProvider))
-;;   (eglot-stay-out-of '(yasnippet)))
-
-;; (add-hook 'c-ts-mode-hook #'eglot-ensure)
-;; (add-hook 'c++-ts-mode-hook #'eglot-ensure)
-;; (add-hook 'c-mode-hook #'eglot-ensure)
-;; (add-hook 'c++-mode-hook #'eglot-ensure)
-
-
-
 
 (setq treesit-language-source-alist
       '((elisp "https://github.com/Wilfred/tree-sitter-elisp")
         (racket "https://github.com/6cdh/tree-sitter-racket")))
 
 (setq major-mode-remap-alist nil)
-      ;; '((emacs-lisp-mode . emacs-lisp-ts-mode)))
 
 (use-package treesit-auto
   :custom
   (treesit-auto-install 'prompt)
+
+  :init
+
   :config
   (treesit-auto-add-to-auto-mode-alist 'all)
-  (global-treesit-auto-mode))
+  (global-treesit-auto-mode)
+
+  ;; At some point, tree-sitter-cpp broke compat w/ emacs, so I pick a different version
+  (setq ncw/cpp-tsauto-config
+        (make-treesit-auto-recipe
+            :lang 'cpp
+            :ts-mode 'c++-ts-mode
+            :remap 'c++-mode
+            :requires nil
+            :url "https://github.com/tree-sitter/tree-sitter-cpp"
+            :revision "v0.22.0"
+            :source-dir nil
+             :cc nil
+             :c++ nil
+             :ext "\\.cpp\\'"))
+
+  (add-to-list 'treesit-auto-recipe-list ncw/cpp-tsauto-config)
+
+  ;; Add a custom elisp tree-sitter
+  (setq elisp-tsauto-config
+        (make-treesit-auto-recipe
+         :lang 'elisp
+         :ts-mode 'emacs-lisp-ts-mode
+         :remap 'emacs-lisp-mode
+         :url "https://github.com/Wilfred/tree-sitter-elisp"
+         :ext "\\.el\\'"))
+
+  (add-to-list 'treesit-auto-recipe-list elisp-tsauto-config))
 
 
-(setq ncw/cpp-tsauto-config
-      (make-treesit-auto-recipe
-         :lang 'cpp
-         :ts-mode 'c++-ts-mode
-         :remap 'c++-mode
-         :requires nil
-         :url "https://github.com/tree-sitter/tree-sitter-cpp"
-         :revision "v0.22.0"
-         :source-dir nil
-         :cc nil
-         :c++ nil
-         :ext "\\.cpp\\'"))
-
-(add-to-list 'treesit-auto-recipe-list ncw/cpp-tsauto-config)
 
 
 
 
-(setq elisp-tsauto-config
-      (make-treesit-auto-recipe
-       :lang 'elisp
-       :ts-mode 'emacs-lisp-ts-mode
-       :remap 'emacs-lisp-mode
-       :url "https://github.com/Wilfred/tree-sitter-elisp"
-       :ext "\\.el\\'"))
+;; This is a cpp helper function to easily create definition from declaration
+;;   https://gist.github.com/drshapeless/e39ca16d583048e826ec4fa0dfc503b3
+(defun ncw/cpp-definition-in-class ()
+  "Format the current declaration of function into definition and
+put it into kill-ring."
+  (interactive)
+  (kill-new
+   (ncw/generate-cpp-class-function-definition-at-point))
+  (message "definition is put in kill-ring"))
 
-(add-to-list 'treesit-auto-recipe-list elisp-tsauto-config)
+(defun ncw/get-cpp-template-node (class-node)
+  "Return parent template treesit node.
+Return nil if is not in a template."
+  (treesit-parent-until class-node
+                        (lambda (NODE)
+                          (string-equal (treesit-node-type NODE)
+                                        "template_declaration"))))
+
+(defun ncw/get-class-function-node-at-point ()
+  "Return a treesit node of the current class function."
+  (treesit-parent-until (treesit-node-at (point))
+                        (lambda (NODE)
+                          (string-equal (treesit-node-type NODE)
+                                        "field_declaration"))
+                        t))
+
+(defun ncw/get-cpp-class-node-at-point ()
+  "Return the current class treesit node."
+  (treesit-parent-until (treesit-node-at (point))
+                        (lambda (NODE)
+                          (let ((NODE-TYPE (treesit-node-type NODE)))
+                            (or (string-equal NODE-TYPE
+                                              "class_specifier")
+                                (string-equal NODE-TYPE
+                                              "struct_specifier"))))
+                        t))
+
+(defun ncw/generate-cpp-class-function-definition-at-point ()
+  "Return the class function definition at point."
+  (interactive)
+  (string-replace
+   ";"
+   " {\n\n}"
+   (let* ((class-node (ncw/get-cpp-class-node-at-point))
+          (func-node  (ncw/get-class-function-node-at-point))
+          (template-node (ncw/get-cpp-template-node class-node))
+          (class-text (treesit-node-text
+                       (treesit-node-child-by-field-name
+                        class-node
+                        "name")
+                       t))
+          (func-text (treesit-node-text
+                      func-node
+                      t))
+          (first-space-pos (string-match " "
+                                         func-text))
+          (insert-pos (string-match "[a-z]"
+                                    func-text
+                                    first-space-pos)))
+     (if template-node
+         (let* ((template-parameter (treesit-node-text
+                                     (treesit-node-child-by-field-name
+                                      template-node
+                                      "parameters")
+                                     t))
+                (template-head (concat "template "
+                                       template-parameter
+                                       "\n")))
 
 
+           (concat template-head
+                   (substring func-text 0 insert-pos)
+                   class-text
+                   (string-replace "typename " "" template-parameter)
+                   "::"
+                   (substring func-text insert-pos)))
+
+
+       (concat (substring func-text 0 insert-pos)
+               class-text
+               "::"
+               (substring func-text insert-pos))))))
 
 
 
 
 
 (use-package evil-textobj-tree-sitter
-  :ensure t)
+  :ensure t
+  :config
 
-(define-key evil-outer-text-objects-map "f" (evil-textobj-tree-sitter-get-textobj "function.outer"))
-(define-key evil-inner-text-objects-map "f" (evil-textobj-tree-sitter-get-textobj "function.inner"))
-;; You can also bind multiple items and we will match the first one we can find
-(define-key evil-outer-text-objects-map "a" (evil-textobj-tree-sitter-get-textobj ("conditional.outer" "loop.outer")))
+  (define-key evil-outer-text-objects-map "f" (evil-textobj-tree-sitter-get-textobj "function.outer"))
+  (define-key evil-inner-text-objects-map "f" (evil-textobj-tree-sitter-get-textobj "function.inner"))
+  ;; You can also bind multiple items and we will match the first one we can find
+  (define-key evil-outer-text-objects-map "a" (evil-textobj-tree-sitter-get-textobj ("conditional.outer" "loop.outer")))
 
-;; Goto start of next function
-(define-key evil-normal-state-map
-            (kbd "]f")
-            (lambda ()
-              (interactive)
-              (evil-textobj-tree-sitter-goto-textobj "function.outer")))
+  ;; Goto start of next function
+  (define-key evil-normal-state-map
+                (kbd "]f")
+                (lambda ()
+                  (interactive)
+                  (evil-textobj-tree-sitter-goto-textobj "function.outer"))
 
-;; Goto start of previous function
-(define-key evil-normal-state-map
-            (kbd "[f")
-            (lambda ()
-              (interactive)
-              (evil-textobj-tree-sitter-goto-textobj "function.outer" t)))
-
-
-
-(define-key evil-normal-state-map (kbd "g r") 'lsp-find-references)
-(define-key evil-normal-state-map (kbd "g d") 'lsp-find-declaration)
-(define-key evil-normal-state-map (kbd "g d") 'lsp-find-declaration)
-(define-key evil-normal-state-map (kbd "g D") 'lsp-find-definition)
+    ;; Goto start of previous function
+    (define-key evil-normal-state-map
+                (kbd "[f")
+                (lambda ()
+                  (interactive)
+                  (evil-textobj-tree-sitter-goto-textobj "function.outer" t)))))
 
 
-(define-key evil-normal-state-map (kbd "K")
-      (lambda () (interactive) (lsp-ui-doc-glance)))
-;; (lsp-describe-thing-at-point)))
+
 
 
 
@@ -549,15 +578,6 @@
 
 
 
-;; Pulse the current line when performing certain actions in Emacs.
-;; The functions that cause the pulse are in the `pulsar-pulse-functions' list.
-(use-package pulsar
-  :ensure t
-  :config
-  (pulsar-global-mode)
-  :custom
-  (pulsar-face 'pulsar-magenta)
-  (pulsar-delay 0.005))
 
 
 
@@ -605,6 +625,7 @@
     "=" 'balance-windows
     "c" 'global-display-line-numbers-mode
     "m" 'ncw/project-make
+    "I" 'ncw/cpp-definition-in-class
     "t" 'vterm)
 
   (general-def 'motion
@@ -850,7 +871,7 @@ You can use \\[keyboard-quit] to hide the doc."
 (use-package vterm
     :ensure t
     :hook (vterm-mode-hook . (lambda () (display-line-numbers-mode 0)))
-    :init
+    :config ;; config us run *after* the package is loaded
     (unbind-key "M-<up>" vterm-mode-map)
     (unbind-key "M-<down>" vterm-mode-map)
     (unbind-key "M-<left>" vterm-mode-map)
@@ -869,16 +890,12 @@ You can use \\[keyboard-quit] to hide the doc."
 ;; tmux integration
 (use-package tmux-pane
   :ensure t
-  :init
+  :config
   (global-set-key (kbd "M-<up>") #'tmux-pane-omni-window-up)
   (global-set-key (kbd "M-<left>") #'tmux-pane-omni-window-left)
   (global-set-key (kbd "M-<down>") #'tmux-pane-omni-window-down)
-  (global-set-key (kbd "M-<right>") #'tmux-pane-omni-window-right)
+  (global-set-key (kbd "M-<right>") #'tmux-pane-omni-window-right))
 
-  (add-to-list 'pulsar-pulse-functions #'tmux-pane-omni-window-up)
-  (add-to-list 'pulsar-pulse-functions #'tmux-pane-omni-window-left)
-  (add-to-list 'pulsar-pulse-functions #'tmux-pane-omni-window-down)
-  (add-to-list 'pulsar-pulse-functions #'tmux-pane-omni-window-right))
 
 
 ;; (global-set-key (kbd "M-j") #'next-buffer)
@@ -1006,8 +1023,22 @@ You can use \\[keyboard-quit] to hide the doc."
 (global-set-key (kbd "C--") #'split-window-below-and-switch)
 
 
-(add-to-list 'pulsar-pulse-functions #'split-window-right-and-switch)
-(add-to-list 'pulsar-pulse-functions #'split-window-below-and-switch)
+;; Pulse the current line when performing certain actions in Emacs.
+;; The functions that cause the pulse are in the `pulsar-pulse-functions' list.
+(use-package pulsar
+  :ensure t
+  :config
+  (pulsar-global-mode)
+  (add-to-list 'pulsar-pulse-functions #'split-window-right-and-switch)
+  (add-to-list 'pulsar-pulse-functions #'split-window-below-and-switch)
+  (add-to-list 'pulsar-pulse-functions #'tmux-pane-omni-window-up)
+  (add-to-list 'pulsar-pulse-functions #'tmux-pane-omni-window-left)
+  (add-to-list 'pulsar-pulse-functions #'tmux-pane-omni-window-down)
+  (add-to-list 'pulsar-pulse-functions #'tmux-pane-omni-window-right)
+  :custom
+  (pulsar-face 'pulsar-magenta)
+  (pulsar-delay 0.005))
+
 
 ;; Binding to eval buffer
 (global-set-key (kbd "C-c e") 'eval-buffer)
