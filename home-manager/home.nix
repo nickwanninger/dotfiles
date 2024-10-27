@@ -14,6 +14,8 @@
     pkgs.nodejs
     pkgs.git
 
+    pkgs.mosh
+
     pkgs.texliveFull
     # pkgs.racket # The racket language
   ];
