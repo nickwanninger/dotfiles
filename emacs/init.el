@@ -195,7 +195,22 @@
     "l" 'dired-find-file))
 
 
+(global-set-key (kbd "ESC M-[ a") [M-up])
 
+
+;; tmux integration
+(use-package tmux-pane
+  :ensure t
+  :bind
+  (("M-<up>" . tmux-pane-omni-window-up)
+   ("M-<left>" . tmux-pane-omni-window-left)
+   ("M-<down>" . tmux-pane-omni-window-down)
+   ("M-<right>" . tmux-pane-omni-window-right)
+
+   ("ESC M-[ a" . tmux-pane-omni-window-up)
+   ("ESC M-[ d" . tmux-pane-omni-window-left)
+   ("ESC M-[ b" . tmux-pane-omni-window-down)
+   ("ESC M-[ c" . tmux-pane-omni-window-right)))
 
 
 
@@ -922,14 +937,6 @@ You can use \\[keyboard-quit] to hide the doc."
 
 
 
-;; tmux integration
-(use-package tmux-pane
-  :ensure t
-  :bind
-  (("M-<up>" . tmux-pane-omni-window-up)
-   ("M-<left>" . tmux-pane-omni-window-left)
-   ("M-<down>" . tmux-pane-omni-window-down)
-   ("M-<right>" . tmux-pane-omni-window-right)))
 
 
 (use-package project
