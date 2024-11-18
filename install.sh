@@ -48,6 +48,10 @@ pushd ~/dev
   git clone https://github.com/justinbarclay/parinfer-rust-emacs.git
   cd parinfer-rust-emacs
   cargo build --release
+  mkdir -p ~/.cache/emacs/parinfer-rust
+  cp ./target/release/libparinfer_rust* ~/.cache/emacs/parinfer-rust
+
+
   mkdir -p ~/.emacs.d/parinfer-rust/
   cp ./target/release/libparinfer_rust* ~/.emacs.d/parinfer-rust/
 popd

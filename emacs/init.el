@@ -240,6 +240,10 @@
   (define-key evil-visual-state-map (kbd ".") #'er/expand-region)
   (define-key evil-visual-state-map (kbd ",") #'er/contract-region)
 
+  (unless (display-graphic-p)
+    (add-hook 'evil-insert-state-entry-hook (lambda () (send-string-to-terminal "\033[5 q")))
+    (add-hook 'evil-insert-state-exit-hook  (lambda () (send-string-to-terminal "\033[2 q"))))
+
   (define-key evil-normal-state-map (kbd "q") nil)
   (define-key evil-normal-state-map (kbd "C-n") 'neotree)
   (define-key evil-normal-state-map (kbd "SPC")
@@ -673,6 +677,7 @@ Return nil if is not in a template."
           (balance-windows))
     ;; "f" 'eglot-format
     "f" 'lsp-format-buffer
+    "r" 'transpose-frame ;; from transpose-frame below
     "1" 'dark-theme
     "2" 'light-theme
     "b" 'consult-buffer
@@ -898,6 +903,7 @@ You can use \\[keyboard-quit] to hide the doc."
   :hook emacs-lisp-mode racket-mode scheme-mode)
 
 
+(use-package transpose-frame)
 
 (use-package copilot
   :straight (:host github :repo "copilot-emacs/copilot.el" :files ("*.el"))
