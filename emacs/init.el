@@ -169,8 +169,17 @@
   (set-frame-font "JetBrains Mono Bold 12" nil t))
 
 
-
-
+;; Hide the long list of minor modes from the mode-line. The minions
+;; package removes all the additional minor-mode names and their
+;; information from the mode-line. If I have them all showing, the
+;; modeline gets very busy, and very hard to read sometimes. So, I use
+;; this package to remove them, leaving only the current major-mode
+;; and a ;-) for the rest of the minor modes.
+(use-package minions
+  :ensure t
+  :demand t
+  :config
+  (minions-mode 1))
 
 (use-package direnv
   :ensure t
@@ -289,6 +298,8 @@
 (setup-repl emacs-lisp-mode-map
             :run-buffer #'eval-buffer)
 
+
+(use-package haskell-mode)
 ;; (use-package racket-mode
 ;;   :ensure t
 ;;   :config
@@ -631,8 +642,8 @@ Return nil if is not in a template."
 (defun light-theme ()
   "Select the light theme"
   (interactive)
-  ;; (load-theme 'doom-one-light t)
-  (load-theme 'modus-operandi t))
+  (load-theme 'doom-nord-light t))
+  ;; (load-theme 'modus-operandi t))
 
 ;; Set the dark theme right away
 (dark-theme)
