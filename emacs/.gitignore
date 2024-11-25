@@ -3,5 +3,6 @@ elpa/
 eln-cache/
 auto-save-list/
 parinfer-rust/
+elpa*
 
 !straight/versions/default.el
