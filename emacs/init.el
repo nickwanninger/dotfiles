@@ -223,6 +223,14 @@
 
 
 
+(use-package buffer-move
+  :ensure t
+  :bind
+  (("C-c <up>"    . buf-move-up)
+   ("C-c <left>"  . buf-move-left)
+   ("C-c <down>"  . buf-move-down)
+   ("C-c <right>" . buf-move-right)))
+
 
 ;; (electric-indent-mode -1)
 
