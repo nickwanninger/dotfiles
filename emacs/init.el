@@ -104,9 +104,9 @@
 
   :config
 
-  (global-hl-line-mode 1)
+  ;; (global-hl-line-mode 1)
   (show-paren-mode 1)
-;; Enable mouse mode cause I like rats
+  ;; Enable mouse mode cause I like rats
   (xterm-mouse-mode 1)
   (mouse-wheel-mode)
   (menu-bar-mode -1)
@@ -627,6 +627,7 @@ Return nil if is not in a template."
  (mapc #'disable-theme custom-enabled-themes))
 
 
+(use-package ef-themes :ensure t)
 (use-package modus-themes :ensure t)
 
 (use-package doom-themes
@@ -639,19 +640,20 @@ Return nil if is not in a template."
 (defun dark-theme ()
   "Select the dark theme"
   (interactive)
-  (load-theme 'doom-horizon t))
+  ;; (load-theme 'doom-horizon t))
   ;; (load-theme 'doom-ayu-dark t))
   ;; (load-theme 'doom-molokai t))
   ;; (load-theme 'doom-tokyo-dark t))
-  ;; (load-theme 'modus-vivendi t))
+  (load-theme 'modus-vivendi t))
   ;; (load-theme 'vscode-dark-plus t))
 
 
 (defun light-theme ()
   "Select the light theme"
   (interactive)
-  (load-theme 'doom-nord-light t))
+  ;; (load-theme 'doom-nord-light t))
   ;; (load-theme 'modus-operandi t))
+  (load-theme 'modus-operandi-tinted t))
 
 ;; Set the dark theme right away
 (dark-theme)
@@ -924,21 +926,21 @@ You can use \\[keyboard-quit] to hide the doc."
 
 (use-package transpose-frame)
 
-(use-package copilot
-  :straight (:host github :repo "copilot-emacs/copilot.el" :files ("*.el"))
-  :ensure t
+;; (use-package copilot
+;;   :straight (:host github :repo "copilot-emacs/copilot.el" :files ("*.el"))
+;;   :ensure t
 
-  :custom
-  (copilot-idle-delay nil)
+;;   :custom
+;;   (copilot-idle-delay nil)
 
-  :hook
-  ((prog-mode . copilot-mode))
+;;   :hook
+;;   ((prog-mode . copilot-mode))
 
-  :bind
-  (("C-c SPC" . copilot-complete)
-   :map copilot-completion-map
-   ("TAB" . copilot-accept-completion)
-   ("<tab>" . copilot-accept-completion)))
+;;   :bind
+;;   (("C-c SPC" . copilot-complete)
+;;    :map copilot-completion-map
+;;    ("TAB" . copilot-accept-completion)
+;;    ("<tab>" . copilot-accept-completion)))
 
 
 
@@ -1014,10 +1016,7 @@ You can use \\[keyboard-quit] to hide the doc."
 (global-set-key (kbd "C-c e") 'eval-buffer)
 
 ;; Delete the tailing whitespace whenever you save
-(add-hook 'before-save-hook
-          (lambda () (interactive)
-            "Commands to execute before saving any buffer."
-            (delete-trailing-whitespace)))
+;; (add-hook 'before-save-hook #'delete-trailing-whitespace)
 
 
 
