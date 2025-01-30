@@ -142,6 +142,18 @@
 
 
 
+(use-package tramp
+  :ensure nil
+  :config
+  (customize-set-variable
+    'tramp-ssh-controlmaster-options
+     (concat
+       "-o ControlPath=/tmp/ssh-ControlPath-%%r@%%h:%%p "
+          "-o ControlMaster=auto -o ControlPersist=yes"))
+  (setq tramp-default-method "ssh"))
+
+
+
 
 ;; (electric-indent-mode -1)
 
@@ -872,10 +884,10 @@ You can use \\[keyboard-quit] to hide the doc."
     :ensure t
     :hook (vterm-mode-hook . (lambda () (display-line-numbers-mode 0)))
     :config ;; config us run *after* the package is loaded
-    (unbind-key "M-<up>" vterm-mode-map)
-    (unbind-key "M-<down>" vterm-mode-map)
-    (unbind-key "M-<left>" vterm-mode-map)
-    (unbind-key "M-<right>" vterm-mode-map)
+    ;; (unbind-key "M-<up>" vterm-mode-map)
+    ;; (unbind-key "M-<down>" vterm-mode-map)
+    ;; (unbind-key "M-<left>" vterm-mode-map)
+    ;; (unbind-key "M-<right>" vterm-mode-map)
     (defun evil-collection-vterm-escape-stay ()
         "Go back to normal state but don't move cursor backwards. Moving cursor
          backwards is the default vim behavior but it is not appropriate in some
