@@ -5,7 +5,7 @@
 (setq use-package-compute-statistics t)
 
 (setq use-package-always-ensure 't
-   use-package-always-defer 't)
+      use-package-always-defer 't)
 
 (setq gc-cons-threshold (* 50 1024 1024))
 
@@ -26,27 +26,55 @@
 ;; (unless package-archive-contents
 ;;    (package-refresh-contents))
 
+
 ;; Change the user-emacs-directory to keep unwanted things out of ~/.emacs.d
 (setq user-emacs-directory (expand-file-name "~/.cache/emacs/")
       url-history-file (expand-file-name "url/history" user-emacs-directory))
 
 
 ;; Use no-littering to automatically set common paths to the new user-emacs-directory
-(use-package no-littering
-             :ensure t)
+(use-package no-littering :ensure t)
 
 
-;; (unless (package-installed-p 'quelpa)
-;;   (with-temp-buffer
-;;     (url-insert-file-contents "https://raw.githubusercontent.com/quelpa/quelpa/master/quelpa.el")
-;;     (eval-buffer)
-;;     (quelpa-self-upgrade)))
 
-;; (quelpa
-;;  '(quelpa-use-package
-;;    :fetcher git
-;;    :url "https://github.com/quelpa/quelpa-use-package.git"))
-;; (require 'quelpa-use-package)
+
+
+(when (display-graphic-p)
+  (tool-bar-mode -1)
+  (scroll-bar-mode -1))
+
+(setq confirm-kill-emacs #'y-or-n-p)
+(setq echo-keystrokes 0.01)
+
+
+;; Save autosave files to ~/.cache/emacs (this won't work on emacs, but I don't care)
+(setq make-backup-files nil) ; stop creating ~ files
+
+(setq create-lockfiles nil) ; don't be annoying
+
+(let ((my-auto-save-dir (locate-user-emacs-file "auto-save")))
+  (setq auto-save-file-name-transforms
+        `((".*" ,(expand-file-name "\\2" my-auto-save-dir) t)))
+  (unless (file-exists-p my-auto-save-dir)
+    (make-directory my-auto-save-dir)))
+(setq auto-save-default t
+      auto-save-timeout 10
+      auto-save-interval 200)
+
+
+
+(defun split-window-right-and-switch ()
+  "Split a window right, then switch focus to it."
+  (interactive)
+  (select-window (split-window-right))
+  (balance-windows))
+
+
+(defun split-window-below-and-switch ()
+  "Split a window below, then switch focus to it."
+  (interactive)
+  (select-window (split-window-below))
+  (balance-windows))
 
 
 (if (not (fboundp 'x-hide-tip))
@@ -55,10 +83,34 @@
 
 (require 'cl-lib)
 
+
+
+
 (use-package emacs
-  :bind (("RET" . newline-and-indent))
+  :bind (("RET"      . newline-and-indent)
+         ("M-o"      . other-window)
+         ("C-c g d"  . xref-find-definitions)
+         ("C-c e"    . eval-buffer)
+
+         ;; Control pipe to split to the right
+         ("C-\\"     . split-window-right-and-switch)
+
+         ;; Control minus to do a below split
+         ("C--"      . split-window-below-and-switch)
+         ("C-_"      . split-window-below-and-switch)
+
+         ("M-j"      . previous-window-any-frame)
+         ("M-k"      . next-window-any-frame))
 
   :config
+
+  ;; (global-hl-line-mode 1)
+  (show-paren-mode 1)
+  ;; Enable mouse mode cause I like rats
+  (xterm-mouse-mode 1)
+  (mouse-wheel-mode)
+  (menu-bar-mode -1)
+
   (setq resize-mini-windows 'grow-only)
   (setq max-mini-window-height 0.2)
   (setq visible-bell nil)
@@ -71,9 +123,9 @@
   (setq compile-command "make -k -j")
   (setq compilation-scroll-output t)
 
-  (setq split-width-threshold 120)
+  (setq split-width-threshold 160)
   (setq split-height-threshold nil)
-    ;; Setup the display-buffer-alist
+   ;; Setup the display-buffer-alist
   (setq display-buffer-alist nil)
   ;; Enable line numbers
   (global-display-line-numbers-mode)
@@ -87,33 +139,47 @@
   (set-selection-coding-system 'utf-8)
   (prefer-coding-system 'utf-8) ;; Catch-all
 
-  (global-hl-line-mode 1)
+
+  ;; hitting tab does 2 spaces
+  (setq-default indent-tabs-mode nil)
+  (setq-default tab-width 2)
+
+
+
   (setq scroll-conservatively -1)
 
   (setq enable-local-variables nil)
   (setq custom-file
-      (expand-file-name "custom.el" user-emacs-directory))
+    (expand-file-name "custom.el" user-emacs-directory))
 
   (setq use-package-always-ensure t)
   (c-add-style "my-c-style" '((c-tab-always-indent . t)
                               (c-basic-offset . 4)
                               (c-offsets-alist (access-label . 1)
-                                               (label . +))))
+                                              (label . +))))
+  ;; Setting this as the default style:
+  (setq c-default-style "my-c-style")
+  (setq c-ts-default-style "my-c-style")
+  ;; Make it so underscores and dashes are considered part of a word
+  (modify-syntax-entry ?_ "w")
+  (modify-syntax-entry ?- "w")
+
   ;; Configure the font to be jetbrains in graphical mode
-  (when (display-graphic-p)
-    (set-frame-font "JetBrains Mono Bold 12" nil t)))
+  (when (display-graphic-p))
+  (set-frame-font "JetBrains Mono Bold 12" nil t))
 
 
-
-;; Setting this as the default style:
-(setq c-default-style "my-c-style")
-(setq c-ts-default-style "my-c-style")
-
-;; Make it so underscores and dashes are considered part of a word
-(modify-syntax-entry ?_ "w")
-(modify-syntax-entry ?- "w")
-
-
+;; Hide the long list of minor modes from the mode-line. The minions
+;; package removes all the additional minor-mode names and their
+;; information from the mode-line. If I have them all showing, the
+;; modeline gets very busy, and very hard to read sometimes. So, I use
+;; this package to remove them, leaving only the current major-mode
+;; and a ;-) for the rest of the minor modes.
+(use-package minions
+  :ensure t
+  :demand t
+  :config
+  (minions-mode 1))
 
 (use-package direnv
   :ensure t
@@ -138,9 +204,32 @@
     "l" 'dired-find-file))
 
 
+(global-set-key (kbd "ESC M-[ a") [M-up])
+
+
+;; tmux integration
+(use-package tmux-pane
+  :ensure t
+  :bind
+  (("M-<up>" . tmux-pane-omni-window-up)
+   ("M-<left>" . tmux-pane-omni-window-left)
+   ("M-<down>" . tmux-pane-omni-window-down)
+   ("M-<right>" . tmux-pane-omni-window-right)
+
+   ("ESC M-[ a" . tmux-pane-omni-window-up)
+   ("ESC M-[ d" . tmux-pane-omni-window-left)
+   ("ESC M-[ b" . tmux-pane-omni-window-down)
+   ("ESC M-[ c" . tmux-pane-omni-window-right)))
 
 
 
+(use-package buffer-move
+  :ensure t
+  :bind
+  (("C-c <up>"    . buf-move-up)
+   ("C-c <left>"  . buf-move-left)
+   ("C-c <down>"  . buf-move-down)
+   ("C-c <right>" . buf-move-right)))
 
 (use-package tramp
   :ensure nil
@@ -179,6 +268,10 @@
   (define-key evil-normal-state-map (kbd ".") #'er/expand-region)
   (define-key evil-visual-state-map (kbd ".") #'er/expand-region)
   (define-key evil-visual-state-map (kbd ",") #'er/contract-region)
+
+  (unless (display-graphic-p)
+    (add-hook 'evil-insert-state-entry-hook (lambda () (send-string-to-terminal "\033[5 q")))
+    (add-hook 'evil-insert-state-exit-hook  (lambda () (send-string-to-terminal "\033[2 q"))))
 
   (define-key evil-normal-state-map (kbd "q") nil)
   (define-key evil-normal-state-map (kbd "C-n") 'neotree)
@@ -225,6 +318,8 @@
 (setup-repl emacs-lisp-mode-map
             :run-buffer #'eval-buffer)
 
+
+(use-package haskell-mode)
 ;; (use-package racket-mode
 ;;   :ensure t
 ;;   :config
@@ -383,43 +478,41 @@
 (setq major-mode-remap-alist nil)
 
 (use-package treesit-auto
+  :demand t
   :custom
   (treesit-auto-install 'prompt)
 
-  :init
-
   :config
   (treesit-auto-add-to-auto-mode-alist 'all)
-  (global-treesit-auto-mode)
-
-  ;; At some point, tree-sitter-cpp broke compat w/ emacs, so I pick a different version
-  (setq ncw/cpp-tsauto-config
-        (make-treesit-auto-recipe
-            :lang 'cpp
-            :ts-mode 'c++-ts-mode
-            :remap 'c++-mode
-            :requires nil
-            :url "https://github.com/tree-sitter/tree-sitter-cpp"
-            :revision "v0.22.0"
-            :source-dir nil
-             :cc nil
-             :c++ nil
-             :ext "\\.cpp\\'"))
-
-  (add-to-list 'treesit-auto-recipe-list ncw/cpp-tsauto-config)
-
-  ;; Add a custom elisp tree-sitter
-  (setq elisp-tsauto-config
-        (make-treesit-auto-recipe
-         :lang 'elisp
-         :ts-mode 'emacs-lisp-ts-mode
-         :remap 'emacs-lisp-mode
-         :url "https://github.com/Wilfred/tree-sitter-elisp"
-         :ext "\\.el\\'"))
-
-  (add-to-list 'treesit-auto-recipe-list elisp-tsauto-config))
+  (global-treesit-auto-mode))
 
 
+;; At some point, tree-sitter-cpp broke compat w/ emacs, so I pick a different version
+(setq ncw/cpp-tsauto-config
+    (make-treesit-auto-recipe
+        :lang 'cpp
+        :ts-mode 'c++-ts-mode
+        :remap 'c++-mode
+        :requires nil
+        :url "https://github.com/tree-sitter/tree-sitter-cpp"
+        :revision "v0.22.0"
+        :source-dir nil
+            :cc nil
+            :c++ nil
+            :ext "\\.cpp\\'"))
+
+(add-to-list 'treesit-auto-recipe-list ncw/cpp-tsauto-config)
+
+;; Add a custom elisp tree-sitter
+(setq elisp-tsauto-config
+    (make-treesit-auto-recipe
+        :lang 'elisp
+        :ts-mode 'emacs-lisp-ts-mode
+        :remap 'emacs-lisp-mode
+        :url "https://github.com/Wilfred/tree-sitter-elisp"
+        :ext "\\.el\\'"))
+
+(add-to-list 'treesit-auto-recipe-list elisp-tsauto-config)
 
 
 
@@ -539,19 +632,6 @@ Return nil if is not in a template."
 
 
 
-;; (use-package ts-movement
-;;   :load-path "lisp/ts-movement"
-;;   :config
-;;   (define-key ts-movement-map (kbd "C-c .") #'tsm/node-parent)
-;;   (define-key ts-movement-map (kbd "C-c ,") #'tsm/node-children)
-;;   :hook
-;;   (c++-ts-mode . ts-movement-mode)
-;;   (c-ts-mode . ts-movement-mode))
-
-;;; Themes
-
-
-
 
 ;; Advise load-theme, so that it first disables all custom themes before loading (enabling) another one.
 ;; https://emacs.stackexchange.com/a/3114
@@ -559,6 +639,7 @@ Return nil if is not in a template."
  (mapc #'disable-theme custom-enabled-themes))
 
 
+(use-package ef-themes :ensure t)
 (use-package modus-themes :ensure t)
 
 (use-package doom-themes
@@ -571,19 +652,20 @@ Return nil if is not in a template."
 (defun dark-theme ()
   "Select the dark theme"
   (interactive)
-  (load-theme 'doom-horizon t))
+  ;; (load-theme 'doom-horizon t))
   ;; (load-theme 'doom-ayu-dark t))
   ;; (load-theme 'doom-molokai t))
   ;; (load-theme 'doom-tokyo-dark t))
-  ;; (load-theme 'modus-vivendi t))
+  (load-theme 'modus-vivendi t))
   ;; (load-theme 'vscode-dark-plus t))
 
 
 (defun light-theme ()
   "Select the light theme"
   (interactive)
-  ;; (load-theme 'doom-one-light t)
-  (load-theme 'modus-operandi t))
+  ;; (load-theme 'doom-nord-light t))
+  ;; (load-theme 'modus-operandi t))
+  (load-theme 'modus-operandi-tinted t))
 
 ;; Set the dark theme right away
 (dark-theme)
@@ -628,6 +710,7 @@ Return nil if is not in a template."
           (balance-windows))
     ;; "f" 'eglot-format
     "f" 'lsp-format-buffer
+    "r" 'transpose-frame ;; from transpose-frame below
     "1" 'dark-theme
     "2" 'light-theme
     "b" 'consult-buffer
@@ -768,13 +851,6 @@ You can use \\[keyboard-quit] to hide the doc."
 
 
 
-;; (use-package ace-window
-;;   :ensure t
-;;   :init
-;;   (global-set-key (kbd "M-o") 'ace-window))
-
-(global-set-key (kbd "M-o") 'other-window)
-
 (use-package company
   :ensure t
   :hook (prog-mode . company-mode)
@@ -860,22 +936,23 @@ You can use \\[keyboard-quit] to hide the doc."
   :hook emacs-lisp-mode racket-mode scheme-mode)
 
 
+(use-package transpose-frame)
 
-(use-package copilot
-  :straight (:host github :repo "copilot-emacs/copilot.el" :files ("*.el"))
-  :ensure t
+;; (use-package copilot
+;;   :straight (:host github :repo "copilot-emacs/copilot.el" :files ("*.el"))
+;;   :ensure t
 
-  :custom
-  (copilot-idle-delay nil)
+;;   :custom
+;;   (copilot-idle-delay nil)
 
-  :hook
-  ((prog-mode . copilot-mode))
+;;   :hook
+;;   ((prog-mode . copilot-mode))
 
-  :bind
-  (("C-c SPC" . copilot-complete)
-   :map copilot-completion-map
-   ("TAB" . copilot-accept-completion)
-   ("<tab>" . copilot-accept-completion)))
+;;   :bind
+;;   (("C-c SPC" . copilot-complete)
+;;    :map copilot-completion-map
+;;    ("TAB" . copilot-accept-completion)
+;;    ("<tab>" . copilot-accept-completion)))
 
 
 
@@ -899,25 +976,11 @@ You can use \\[keyboard-quit] to hide the doc."
 
 
 
-;; tmux integration
-(use-package tmux-pane
-  :ensure t
-  :config
-  (global-set-key (kbd "M-<up>") #'tmux-pane-omni-window-up)
-  (global-set-key (kbd "M-<left>") #'tmux-pane-omni-window-left)
-  (global-set-key (kbd "M-<down>") #'tmux-pane-omni-window-down)
-  (global-set-key (kbd "M-<right>") #'tmux-pane-omni-window-right))
-
-
-
-;; (global-set-key (kbd "M-j") #'next-buffer)
-;; (global-set-key (kbd "M-k") #'previous-buffer)
 
 
 (use-package project
   :config
   (setq project-vc-merge-submodules nil))
-(global-set-key (kbd "C-p")  #'project-find-file)
 
 
 (setq-default mode-line-buffer-identification
@@ -925,30 +988,6 @@ You can use \\[keyboard-quit] to hide the doc."
                      'face (if (mode-line-window-selected-p)
                              'bold
                             'italic))))
-
-
-
-;; (add-to-list 'display-buffer-alist
-;;              '((lambda (buffer _) (with-current-buffer buffer
-;;                                     (seq-some (lambda (mode)
-;;                                                 (derived-mode-p mode))
-;;                                               '(help-mode))))
-;;                (display-buffer-reuse-window display-buffer-below-selected)
-;;                (reusable-frames . visible)
-;;                (window-height . 0.25)))
-
-
-
-
-;; (use-package spaceline :ensure t
-;;   :config
-;;   (setq-default mode-line-format '("%e" (:eval (spaceline-ml-main)))))
-
-;; (use-package spaceline-config :ensure spaceline
-;;   :config
-;;   (spaceline-helm-mode 1)
-;;   (spaceline-spacemacs-theme))
-
 
 (defun edit-init ()
   "Edit the init.el file in the current buffer"
@@ -965,74 +1004,7 @@ You can use \\[keyboard-quit] to hide the doc."
 
 
 
-;; ====-----------------------------------------------====
 
-
-
-;; ====-----------------------------------------------====
-
-
-(show-paren-mode 1)
-
-;; hitting tab does 2 spaces
-(setq-default indent-tabs-mode nil)
-(setq-default tab-width 2)
-
-
-;; Enable mouse mode cause I like rats
-(xterm-mouse-mode 1)
-(mouse-wheel-mode)
-(menu-bar-mode -1)
-
-(when (display-graphic-p)
-  (tool-bar-mode -1)
-  (scroll-bar-mode -1))
-
-(setq confirm-kill-emacs #'y-or-n-p)
-(setq echo-keystrokes 0.01)
-
-
-;; Save autosave files to ~/.cache/emacs (this won't work on emacs, but I don't care)
-(setq make-backup-files nil) ; stop creating ~ files
-
-(setq create-lockfiles nil) ; don't be annoying
-
-(let ((my-auto-save-dir (locate-user-emacs-file "auto-save")))
-  (setq auto-save-file-name-transforms
-        `((".*" ,(expand-file-name "\\2" my-auto-save-dir) t)))
-  (unless (file-exists-p my-auto-save-dir)
-    (make-directory my-auto-save-dir)))
-(setq auto-save-default t
-      auto-save-timeout 10
-      auto-save-interval 200)
-
-
-
-
-(global-set-key (kbd "C-c <left>")  'windmove-left)
-(global-set-key (kbd "C-c <right>") 'windmove-right)
-(global-set-key (kbd "C-c <up>")    'windmove-up)
-(global-set-key (kbd "C-c <down>")  'windmove-down)
-
-(global-set-key (kbd "C-c g d") 'xref-find-definitions)
-
-(defun split-window-right-and-switch ()
-  "Split a window right, then switch focus to it."
-  (interactive)
-  (select-window (split-window-right))
-  (balance-windows))
-
-
-(defun split-window-below-and-switch ()
-  "Split a window below, then switch focus to it."
-  (interactive)
-  (select-window (split-window-below))
-  (balance-windows))
-
-(global-unset-key (kbd "C-_"))
-(global-set-key (kbd "C-\\") #'split-window-right-and-switch)
-(global-set-key (kbd "C-_") #'split-window-below-and-switch)
-(global-set-key (kbd "C--") #'split-window-below-and-switch)
 
 
 ;; Pulse the current line when performing certain actions in Emacs.
@@ -1056,10 +1028,7 @@ You can use \\[keyboard-quit] to hide the doc."
 (global-set-key (kbd "C-c e") 'eval-buffer)
 
 ;; Delete the tailing whitespace whenever you save
-(add-hook 'before-save-hook
-          (lambda () (interactive)
-            "Commands to execute before saving any buffer."
-            (delete-trailing-whitespace)))
+;; (add-hook 'before-save-hook #'delete-trailing-whitespace)
 
 
 
