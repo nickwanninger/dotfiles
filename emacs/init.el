@@ -2,7 +2,7 @@
 ;; Make sure we load this file, instead of the precompiled file, if it is newer
 (setq load-prefer-newer t)
 
-(setq use-package-compute-statistics t)
+; (setq use-package-compute-statistics t)
 
 (setq use-package-always-ensure 't
       use-package-always-defer 't)
@@ -351,6 +351,12 @@
   :init
   (setq magit-save-repository-buffers 'dontask))
 
+
+(use-package git-gutter
+  :ensure t
+  :init
+  (global-git-gutter-mode +1))
+
 ;; ====--------------------------------------------------====
 
 ;; I'm told that these few packages make the minibuffer much nicer to use.
@@ -405,6 +411,7 @@
   :hook ((c-ts-mode . lsp)
          (c-mode . lsp)
          (c++-ts-mode . lsp)
+         (python-ts-mode . lsp)
          ;; (c++-mode . lsp)
          (lsp-mode . ncw/setup-lsp-mode))
   :init

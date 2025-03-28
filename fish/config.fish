@@ -25,6 +25,7 @@ export COLORTERM="truecolor"
 
 export PATH="$GOPATH/bin:$PATH"
 export PATH="/opt/cuda/bin:$PATH"
+export PATH="/tank/nick/local/bin:$PATH"
 
 
 
