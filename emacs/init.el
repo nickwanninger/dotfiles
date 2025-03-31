@@ -945,21 +945,24 @@ You can use \\[keyboard-quit] to hide the doc."
 
 (use-package transpose-frame)
 
-;; (use-package copilot
-;;   :straight (:host github :repo "copilot-emacs/copilot.el" :files ("*.el"))
-;;   :ensure t
+(use-package copilot
+  :straight (:host github :repo "copilot-emacs/copilot.el" :files ("*.el"))
+  :ensure t
 
-;;   :custom
-;;   (copilot-idle-delay nil)
+  ;; :custom
+  ;; (copilot-idle-delay nil)
 
-;;   :hook
-;;   ((prog-mode . copilot-mode))
+  :hook
+  ((prog-mode . copilot-mode))
 
-;;   :bind
-;;   (("C-c SPC" . copilot-complete)
-;;    :map copilot-completion-map
-;;    ("TAB" . copilot-accept-completion)
-;;    ("<tab>" . copilot-accept-completion)))
+  :bind
+  (("C-c SPC" . copilot-complete)
+   :map copilot-completion-map
+   ("TAB" . copilot-accept-completion)
+   ("<tab>" . copilot-accept-completion)))
+
+;; Bind tab so that if there is a company suggestion, suggest that. otherwise do copilot-complete
+ 
 
 
 

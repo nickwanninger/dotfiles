@@ -1,11 +1,11 @@
 function fish_prompt
+  set last_status $status
 
   if [ "$TERM" = "dumb" ]
     printf "> "
     return
   end
 
-  set last_status $status
 	
 	# set_color green
 	# printf '┌ '
@@ -14,53 +14,54 @@ function fish_prompt
 
   set status_color "red"
 
+
+
   if [ $last_status -eq "0" ]
-    set status_color "blue"
+    set status_color "brgreen"
   end
 
-  # set_color $status_color
-  # echo -n '╭╴'
 
-  if [ ! $last_status -eq "0" ]
-    echo -n " $last_status "
-  end
-
-  set_color reset
-  set_color -i
+  set_color brblack
   echo -n (hostname)
   echo -n ' '
   set_color reset
 
-	set_color blue
 
+	set_color $status_color
 	echo -n (prompt_pwd)
 
-  if test -n "$NIX_STORE"
-    set_color green
-    echo -n ' (nix'
+  set_color reset
+  echo -n ' '
 
-    if test -n "$NDEV_DIR"
-	    set_color brblack
-      echo -n " in (basename $NDEV_DIR)"
-      set_color green
+end
+
+function fish_right_prompt -d "Write out the right prompt"
+  set_color brblack
+
+  set -l duration (math -s0 "$CMD_DURATION / 1000")
+
+  if test "$duration" -gt 2
+    if test "$duration" -ge 3600
+      printf "%dh %dm %ds" (math -s0 "$duration / 3600") (math -s0 "($duration % 3600) / 60") (math -s0 "$duration % 60")
+    else if test "$duration" -ge 60
+      printf "%dm %ds" (math -s0 "$duration / 60") (math -s0 "$duration % 60")
+    else
+      printf "%ds" $duration
     end
-
-
-    echo -n ')'
-    # false
   end
+  set_color reset
 
 
-	# set_color brblack
-	# echo -n (fish_git_prompt)
+  if test -n "$NIX_STORE"
+    set_color -i brblack
 
-
-  # echo -en '\\n'
-
-  set_color yellow
-  echo -n ' # '
-  # echo -n '╰╼ '
-
-	set_color reset
+    if test -n "$DIRENV_FILE"
+      echo -n 'nix::'
+      echo -n (basename (dirname $DIRENV_FILE))
+    else
+      echo -n 'nix'
+    end
+	  set_color reset
+  end
 
 end
