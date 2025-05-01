@@ -636,7 +636,13 @@ Return nil if is not in a template."
 
 
 
+;; TODO:
+;; DONT
 
+(use-package hl-todo :ensure t
+  :config
+  ;; (setq hl-todo-color-background t)
+  (global-hl-todo-mode))
 
 
 
@@ -646,6 +652,7 @@ Return nil if is not in a template."
  (mapc #'disable-theme custom-enabled-themes))
 
 
+(use-package monokai-pro-theme :ensure t)
 (use-package ef-themes :ensure t)
 (use-package modus-themes :ensure t)
 
@@ -659,11 +666,13 @@ Return nil if is not in a template."
 (defun dark-theme ()
   "Select the dark theme"
   (interactive)
+  ;; (load-theme 'doom-monokai-spectrum t))
+  (load-theme 'monokai-pro-spectrum t))
   ;; (load-theme 'doom-horizon t))
   ;; (load-theme 'doom-ayu-dark t))
   ;; (load-theme 'doom-molokai t))
   ;; (load-theme 'doom-tokyo-dark t))
-  (load-theme 'modus-vivendi t))
+  ;; (load-theme 'modus-vivendi t))
   ;; (load-theme 'vscode-dark-plus t))
 
 
