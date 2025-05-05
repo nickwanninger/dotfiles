@@ -636,9 +636,6 @@ Return nil if is not in a template."
 
 
 
-;; TODO:
-;; DONT
-
 (use-package hl-todo :ensure t
   :config
   ;; (setq hl-todo-color-background t)
