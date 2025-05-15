@@ -40,6 +40,7 @@
 
 
 (when (display-graphic-p)
+  (pixel-scroll-precision-mode 1)
   (tool-bar-mode -1)
   (scroll-bar-mode -1))
 
@@ -166,7 +167,8 @@
 
   ;; Configure the font to be jetbrains in graphical mode
   (when (display-graphic-p))
-  (set-frame-font "JetBrains Mono Bold 12" nil t))
+  ;; (set-frame-font "JetBrains Mono Bold 12" nil t))
+  (set-frame-font "Aporetic Sans Mono Bold 14" nil t))
 
 
 ;; Hide the long list of minor modes from the mode-line. The minions
@@ -478,6 +480,47 @@
 
 
 
+
+
+
+
+
+
+
+(use-package elfeed
+  :ensure t
+  ;; :bind (("C-c " . #'elfeed))
+  :custom
+  ;; List of all feeds that I should fetch and care about
+  ;; The cdr (tail of list) will be symbols attached to anything coming from that
+  ;; particular feed.
+  (elfeed-feeds '(("https://karl.hallsby.com/feed.xml")
+                  ("https://fasterthanli.me/index.xml")
+                  ("https://karthinks.com/index.xml")
+                  ("https://wingolog.com/feed/atom")
+                  ("https://xkcd.com/atom.xml")))
+
+  ;; NOTE: Make elfeed use Emacs' built-in url-retrieve function rather than cURL.
+  ;; This is significantly faster, but only works on Emacsen running on Linux
+  ;; and Emacsen that are compiled with GNUTLS support
+  ;; (see system-configuration-features).
+  (elfeed-use-curl 'nil))
+
+;; Prettify the elfeed buffer, making some things easier to read
+(use-package elfeed-goodies
+  :ensure t
+  :after (elfeed)
+  :config
+  (elfeed-goodies/setup))
+
+
+
+
+
+
+
+
+
 (setq treesit-language-source-alist
       '((elisp "https://github.com/Wilfred/tree-sitter-elisp")
         (racket "https://github.com/6cdh/tree-sitter-racket")))
@@ -642,6 +685,51 @@ Return nil if is not in a template."
   (global-hl-todo-mode))
 
 
+;;; RefTeX
+(use-package reftex
+  :ensure nil ;; built-in
+  :defer t
+  :after (tex-mode)
+  ;; Make sure that reftex gets loaded when AucTeX gets loaded, i.e. when LaTeX file is opened
+  :hook ((LaTeX-mode . turn-on-reftex)
+         (latex-mode . turn-on-reftex))
+  :bind (:map latex-mode-map
+              ;; Scan the whole document for new labels/citations
+              ("C-c r" . reftex-parse-all))
+  :custom
+  ;; Make RefTeX play nice with AucTeX
+  (reftex-plug-into-AUCTeX t)
+  ;; When parsing very large documents, we might not want to reparse every file
+  (reftex-enable-partial-scans t)
+  ;; Set default citation style for RefTeX to use
+  (reftex-cite-format 'biblatex)
+  ;; Set a default style to present possible citation matches
+  (reftex-sort-bibtex-matches 'author))
+
+
+
+(use-package auctex
+  :ensure t
+  :defer t
+  :init
+  ;; Force auctex (the strictly superior (La)TeX major-mode) to be used by setting
+  ;; both the auto-mode-alist and remapping the built-in latex-mode and tex-mode
+  ;; major modes to the auctex versions.
+  (add-to-list 'auto-mode-alist '("\\.tex\\'" . LaTeX-mode))
+  (add-to-list 'major-mode-remap-alist '(latex-mode . LaTeX-mode))
+  (add-to-list 'major-mode-remap-alist '(tex-mode . TeX-mode))
+  :custom
+  (TeX-parse-self t) ;; Parse multifile documents automagically
+  (TeX-auto-save t) ;; Enables parsing upon saving the document
+  (TeX-show-compilation t) ;; Always show compilation output
+  (TeX-global-PDF-mode t) ;; Make the default TeX mode PDF mode
+  (TeX-command-default "pdflatex") ;; Default compile to PDF
+  (LaTeX-biblatex-use-Biber t) ;; Make biblatex use Biber automatically
+  (TeX-electric-sub-and-superscript t) ;; Inserts {} automaticly on _ and ^
+  (TeX-source-correlate-mode t) ;; Correlate output to input so we can easily navigate
+  (TeX-source-correlate-method 'synctex)
+  (TeX-source-correlate-start-server t))
+
 
 ;; Advise load-theme, so that it first disables all custom themes before loading (enabling) another one.
 ;; https://emacs.stackexchange.com/a/3114
@@ -677,8 +765,8 @@ Return nil if is not in a template."
   "Select the light theme"
   (interactive)
   ;; (load-theme 'doom-nord-light t))
-  ;; (load-theme 'modus-operandi t))
-  (load-theme 'modus-operandi-tinted t))
+  (load-theme 'modus-operandi t))
+  ;; (load-theme 'modus-operandi-tinted t))
 
 ;; Set the dark theme right away
 (dark-theme)
@@ -722,6 +810,7 @@ Return nil if is not in a template."
           (magit-status)
           (balance-windows))
     ;; "f" 'eglot-format
+    "e" 'elfeed
     "f" 'lsp-format-buffer
     "r" 'transpose-frame ;; from transpose-frame below
     "1" 'dark-theme
