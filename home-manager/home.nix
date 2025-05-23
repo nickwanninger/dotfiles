@@ -6,10 +6,14 @@
   home.stateVersion = config.stateVersion;
 
   home.packages = [
+
     pkgs.neovim
     pkgs.direnv
     pkgs.emacs-nox
     pkgs.guile
+    pkgs.meson
+    pkgs.gmime3
+    pkgs.gmime
 
     pkgs.nodejs
     pkgs.git
@@ -17,6 +21,14 @@
     pkgs.mosh
 
     pkgs.texliveFull
+
+    # email stuff for mu4e
+    pkgs.isync
+    pkgs.mu
+    pkgs.mu.mu4e
+    pkgs.msmtp
+
+
     # pkgs.racket # The racket language
   ];
 

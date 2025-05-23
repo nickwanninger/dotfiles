@@ -2,6 +2,9 @@
 ;; Make sure we load this file, instead of the precompiled file, if it is newer
 (setq load-prefer-newer t)
 
+(straight-use-package 'org)
+
+
 ; (setq use-package-compute-statistics t)
 
 (setq use-package-always-ensure 't
@@ -482,11 +485,6 @@
 
 
 
-
-
-
-
-
 (use-package elfeed
   :ensure t
   ;; :bind (("C-c " . #'elfeed))
@@ -497,21 +495,20 @@
   (elfeed-feeds '(("https://karl.hallsby.com/feed.xml")
                   ("https://fasterthanli.me/index.xml")
                   ("https://karthinks.com/index.xml")
-                  ("https://wingolog.com/feed/atom")
-                  ("https://xkcd.com/atom.xml")))
+                  ("https://wingolog.org/feed/atom")
+                  ("https://xkcd.com/atom.xml")
+                  ("https://buttondown.email/jaffray/rss")
+                  ("https://christine.website/blog.rss")
+                  ("https://computer.rip/rss.xml")))
 
-  ;; NOTE: Make elfeed use Emacs' built-in url-retrieve function rather than cURL.
-  ;; This is significantly faster, but only works on Emacsen running on Linux
-  ;; and Emacsen that are compiled with GNUTLS support
-  ;; (see system-configuration-features).
-  (elfeed-use-curl 'nil))
+  (elfeed-use-curl t))
 
 ;; Prettify the elfeed buffer, making some things easier to read
-(use-package elfeed-goodies
-  :ensure t
-  :after (elfeed)
-  :config
-  (elfeed-goodies/setup))
+;; (use-package elfeed-goodies
+;;   :ensure t
+;;   :after (elfeed)
+;;   :config
+;;   (elfeed-goodies/setup))
 
 
 

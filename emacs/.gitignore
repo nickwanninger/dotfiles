@@ -5,4 +5,6 @@ auto-save-list/
 parinfer-rust/
 elpa*
 
+
+url/
 !straight/versions/default.el
