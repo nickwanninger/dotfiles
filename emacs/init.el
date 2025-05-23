@@ -245,6 +245,11 @@
 
 
 
+;; A visual undo tree
+(use-package vundo :ensure t)
+
+
+
 
 ;; (electric-indent-mode -1)
 
