@@ -824,6 +824,7 @@ Return nil if is not in a template."
     "\\" 'balance-windows
     "=" 'balance-windows
     "c" 'global-display-line-numbers-mode
+    "z" 'vundo ;; open visual undo mode
     "m" 'ncw/project-make
     "I" 'ncw/cpp-definition-in-class
     "t" 'vterm)
