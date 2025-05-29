@@ -504,7 +504,8 @@
                   ("https://xkcd.com/atom.xml")
                   ("https://buttondown.email/jaffray/rss")
                   ("https://christine.website/blog.rss")
-                  ("https://computer.rip/rss.xml")))
+                  ("https://computer.rip/rss.xml")
+                  ("https://nickw.io/api/rss.xml")))
 
   (elfeed-use-curl t))
 
@@ -1005,8 +1006,8 @@ You can use \\[keyboard-quit] to hide the doc."
   (org-indent-mode)
   ;; (variable-pitch-mode)
   (auto-fill-mode 0)
-  ;; (visual-line-mode 1)
-  (set-input-method 'pl-greek)
+  (visual-line-mode 1)
+  ;; (set-input-method 'pl-greek)
   (setq evil-auto-indent nil)
   (define-key org-mode-map (kbd "M-<up>") nil)
   (define-key org-mode-map (kbd "M-<left>") nil)
