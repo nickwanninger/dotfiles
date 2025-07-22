@@ -328,6 +328,8 @@
 (setup-repl emacs-lisp-mode-map
             :run-buffer #'eval-buffer)
 
+(use-package wren-mode :ensure t)
+;; (use-package glsl-mode :ensure t)
 
 (use-package haskell-mode)
 ;; (use-package racket-mode
