@@ -18,6 +18,9 @@
     pkgs.nodejs
     pkgs.git
 
+    # The uv python package manager
+    pkgs.uv
+
     pkgs.mosh
 
     pkgs.texliveFull

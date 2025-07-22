@@ -60,7 +60,7 @@
   (setq auto-save-file-name-transforms
         `((".*" ,(expand-file-name "\\2" my-auto-save-dir) t)))
   (unless (file-exists-p my-auto-save-dir)
-    (make-directory my-auto-save-dir)))
+    (make-directory my-auto-save-dir-save-dir)))
 (setq auto-save-default t
       auto-save-timeout 10
       auto-save-interval 200)
@@ -754,8 +754,9 @@ Return nil if is not in a template."
 (defun dark-theme ()
   "Select the dark theme"
   (interactive)
+  (load-theme 'doom-molokai t))
   ;; (load-theme 'doom-monokai-spectrum t))
-  (load-theme 'monokai-pro-spectrum t))
+  ;; (load-theme 'monokai-pro-spectrum t))
   ;; (load-theme 'doom-horizon t))
   ;; (load-theme 'doom-ayu-dark t))
   ;; (load-theme 'doom-molokai t))
