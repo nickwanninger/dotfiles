@@ -756,14 +756,14 @@ Return nil if is not in a template."
 (defun dark-theme ()
   "Select the dark theme"
   (interactive)
-  (load-theme 'doom-molokai t))
+  ;; (load-theme 'doom-molokai t))
   ;; (load-theme 'doom-monokai-spectrum t))
   ;; (load-theme 'monokai-pro-spectrum t))
   ;; (load-theme 'doom-horizon t))
   ;; (load-theme 'doom-ayu-dark t))
   ;; (load-theme 'doom-molokai t))
   ;; (load-theme 'doom-tokyo-dark t))
-  ;; (load-theme 'modus-vivendi t))
+  (load-theme 'modus-vivendi t))
   ;; (load-theme 'vscode-dark-plus t))
 
 
@@ -824,6 +824,7 @@ Return nil if is not in a template."
     "b" 'consult-buffer
     "B" 'switch-to-buffer
     "q" 'delete-window
+    "p" 'project-find-file
     "\\" 'balance-windows
     "=" 'balance-windows
     "c" 'global-display-line-numbers-mode
