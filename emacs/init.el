@@ -757,13 +757,13 @@ Return nil if is not in a template."
   "Select the dark theme"
   (interactive)
   ;; (load-theme 'doom-molokai t))
-  ;; (load-theme 'doom-monokai-spectrum t))
+  (load-theme 'doom-monokai-spectrum t))
   ;; (load-theme 'monokai-pro-spectrum t))
   ;; (load-theme 'doom-horizon t))
   ;; (load-theme 'doom-ayu-dark t))
   ;; (load-theme 'doom-molokai t))
   ;; (load-theme 'doom-tokyo-dark t))
-  (load-theme 'modus-vivendi t))
+  ;; (load-theme 'modus-vivendi t))
   ;; (load-theme 'vscode-dark-plus t))
 
 
