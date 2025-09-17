@@ -70,15 +70,15 @@
 (defun split-window-right-and-switch ()
   "Split a window right, then switch focus to it."
   (interactive)
-  (select-window (split-window-right))
-  (balance-windows))
+  (select-window (split-window-right)))
+  ;; (balance-windows))
 
 
 (defun split-window-below-and-switch ()
   "Split a window below, then switch focus to it."
   (interactive)
-  (select-window (split-window-below))
-  (balance-windows))
+  (select-window (split-window-below)))
+  ;; (balance-windows))
 
 
 (if (not (fboundp 'x-hide-tip))
@@ -688,6 +688,9 @@ Return nil if is not in a template."
   :config
   ;; (setq hl-todo-color-background t)
   (global-hl-todo-mode))
+
+
+(setq ispell-program-name "/opt/homebrew/bin/aspell")
 
 
 ;;; RefTeX
