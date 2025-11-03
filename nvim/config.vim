@@ -28,7 +28,7 @@ set ttyfast  " we have a fast terminal
 set backspace=indent,eol,start
 set clipboard=unnamedplus
 set mouse=a
-set pastetoggle=<F2>
+" set pastetoggle=<F2>
 set sidescroll=10
 set matchpairs+=<:>
 set incsearch
