@@ -5,6 +5,9 @@
   home.homeDirectory = config.home;
   home.stateVersion = config.stateVersion;
 
+  # NOT sure about this!
+  # home.enableNixpkgsReleaseCheck = false;
+
   home.packages = [
 
     pkgs.neovim
@@ -31,6 +34,10 @@
     pkgs.mu.mu4e
     pkgs.msmtp
 
+
+    # AI tools to steal my job.
+    pkgs.claude-code
+    pkgs.codex
 
     # pkgs.racket # The racket language
   ];

@@ -5,14 +5,14 @@
     # Specify the source of Home Manager and Nixpkgs.
     nixpkgs.url = "github:nixos/nixpkgs/25.05";
     home-manager = {
-      url = "github:nix-community/home-manager";
+      url = "github:nix-community/home-manager/release-25.05";  # match Home Manager release to nixpkgs
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
+    claude-code.url = "github:sadjow/claude-code-nix";
   };
 
 
-  outputs = { nixpkgs, home-manager, ... }:
+  outputs = { nixpkgs, home-manager, claude-code, ... }:
     let
       machines = {
         # Dev machine at work
@@ -50,7 +50,13 @@
 
       homeManagerConfiguration = config:
       let
-        pkgs = import nixpkgs { system = config.system; };
+        pkgs = import nixpkgs {
+          system = config.system;
+          overlays = [ claude-code.overlays.default ];
+          config = {
+            allowUnfree = true;
+          };
+        };
       in home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
 

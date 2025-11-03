@@ -25,6 +25,7 @@
 (add-to-list 'package-archives '("elpa" . "https://elpa.gnu.org/packages/") t)
 (add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/") t)
 
+
 (package-initialize)
 ;; (unless package-archive-contents
 ;;    (package-refresh-contents))
@@ -169,9 +170,10 @@
   (modify-syntax-entry ?- "w")
 
   ;; Configure the font to be jetbrains in graphical mode
-  (when (display-graphic-p))
+  (when (display-graphic-p)
   ;; (set-frame-font "JetBrains Mono Bold 12" nil t))
-  (set-frame-font "Aporetic Sans Mono Bold 14" nil t))
+  ;; (set-frame-font "Aporetic Sans Mono Bold 14" nil t))
+    (set-frame-font "Maple Mono NF Bold 12" nil t)))
 
 
 ;; Hide the long list of minor modes from the mode-line. The minions
@@ -759,15 +761,14 @@ Return nil if is not in a template."
 (defun dark-theme ()
   "Select the dark theme"
   (interactive)
-  (load-theme 'doom-molokai t))
-  ;; (load-theme 'doom-monokai-spectrum t))
+  ;; (load-theme 'doom-molokai t))
+  (load-theme 'doom-monokai-spectrum t))
   ;; (load-theme 'monokai-pro-spectrum t))
   ;; (load-theme 'doom-horizon t))
   ;; (load-theme 'doom-ayu-dark t))
   ;; (load-theme 'doom-molokai t))
-  ;; (load-theme 'doom-tokyo-dark t))
-  ;; (load-theme 'modus-vivendi t))
-  ;; (load-theme 'vscode-dark-plus t))
+  ;; (load-theme 'modus-vivendi t)
+  ;; (load-theme 'doom-dark+ t))
 
 
 (defun light-theme ()
@@ -998,6 +999,9 @@ You can use \\[keyboard-quit] to hide the doc."
 
 
 
+(use-package lua-mode
+  :ensure t
+  :defer t)
 
 
 
@@ -1051,6 +1055,32 @@ You can use \\[keyboard-quit] to hide the doc."
 
 (use-package transpose-frame)
 
+
+
+
+
+
+;; Vterm: a decent terminal emulator for emacs
+(use-package vterm
+    :ensure t
+    :hook (vterm-mode-hook . (lambda () (display-line-numbers-mode -1)))
+    :config ;; config us run *after* the package is loaded
+    ;; (unbind-key "M-<up>" vterm-mode-map)
+    ;; (unbind-key "M-<down>" vterm-mode-map)
+    ;; (unbind-key "M-<left>" vterm-mode-map)
+    ;; (unbind-key "M-<right>" vterm-mode-map)
+    (defun evil-collection-vterm-escape-stay ()
+        "Go back to normal state but don't move cursor backwards. Moving cursor
+         backwards is the default vim behavior but it is not appropriate in some
+         cases like terminals."
+        (setq-local evil-move-cursor-back nil))
+
+    (add-hook 'vterm-mode-hook #'evil-collection-vterm-escape-stay))
+
+
+
+
+
 (use-package copilot
   :straight (:host github :repo "copilot-emacs/copilot.el" :files ("*.el"))
   :ensure t
@@ -1068,26 +1098,32 @@ You can use \\[keyboard-quit] to hide the doc."
    ("<tab>" . copilot-accept-completion)))
 
 ;; Bind tab so that if there is a company suggestion, suggest that. otherwise do copilot-complete
+
+(use-package monet
+  :straight (:type git :host github :repo "stevemolitor/monet"))
+
+;; Claude-code
+(use-package claude-code
+  :straight (:type git :host github :repo "stevemolitor/claude-code.el" :branch "main" :depth 1
+                   :files ("*.el" (:exclude "images/*")))
+  :bind-keymap
+  ("C-c c" . claude-code-command-map) ;; or your preferred key
+  ;; Optionally define a repeat map so that "M" will cycle thru Claude auto-accept/plan/confirm modes after invoking claude-code-cycle-mode / C-c M.
+  :bind
+  (:repeat-map my-claude-code-map ("M" . claude-code-cycle-mode))
+  :config
+  (setq claude-code-terminal-backend 'vterm)
+  ;; optional IDE integration with Monet
+  (add-hook 'claude-code-process-environment-functions #'monet-start-server-function)
+  (monet-mode 1)
+
+
+
+  (claude-code-mode))
+
+;; ---------------
  
 
-
-
-;; Vterm: a decent terminal emulator for emacs
-(use-package vterm
-    :ensure t
-    :hook (vterm-mode-hook . (lambda () (display-line-numbers-mode 0)))
-    :config ;; config us run *after* the package is loaded
-    ;; (unbind-key "M-<up>" vterm-mode-map)
-    ;; (unbind-key "M-<down>" vterm-mode-map)
-    ;; (unbind-key "M-<left>" vterm-mode-map)
-    ;; (unbind-key "M-<right>" vterm-mode-map)
-    (defun evil-collection-vterm-escape-stay ()
-        "Go back to normal state but don't move cursor backwards. Moving cursor
-         backwards is the default vim behavior but it is not appropriate in some
-         cases like terminals."
-        (setq-local evil-move-cursor-back nil))
-
-    (add-hook 'vterm-mode-hook #'evil-collection-vterm-escape-stay))
 
 
 
@@ -1204,6 +1240,26 @@ You can use \\[keyboard-quit] to hide the doc."
 (defun ncw/build-staged-done (buffer msg)
   (when (string-match "finished" msg)
     (magit-stash-pop)))
+
+;; Requires vterm.el
+(defun ncw/vterm-codex-left ()
+  "Open a vterm on the far-left side and run `codex`, with line numbers disabled."
+  (interactive)
+  (require 'vterm)
+  (let* ((buf-name "*vterm-codex*")
+         (buf (or (get-buffer buf-name)
+                  (with-current-buffer (generate-new-buffer buf-name)
+                    (current-buffer))))
+         (win (display-buffer-in-side-window
+               buf '((side . left) (slot . 0) (window-width . 80)))))
+    (select-window win)
+    ;; Ensure it's a vterm buffer
+    (unless (derived-mode-p 'vterm-mode)
+      (vterm-mode))
+    ;; Run `codex`
+    (goto-char (point-max))
+    (vterm-send-string "npx codex")
+    (vterm-send-return)))
 
 (defun ncw/build-staged ()
   (interactive)
