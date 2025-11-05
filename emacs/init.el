@@ -116,6 +116,11 @@
   (mouse-wheel-mode)
   (menu-bar-mode -1)
 
+  ;; Make Emacs treat manual and programmatic buffer switches the same. This
+  ;; works by making `switch-to-buffer' actually use `pop-to-buffer-same-window'
+  ;; which respects `display-buffer-alist'.
+  (setq switch-to-buffer-obey-display-actions t)
+
   (setq resize-mini-windows 'grow-only)
   (setq max-mini-window-height 0.2)
   (setq visible-bell nil)
@@ -206,9 +211,12 @@
                                        "-lah"
                                        "-lah --group-directories-first")))
   :config
+  (setq dired-kill-when-opening-new-dired-buffer t)
   (evil-collection-define-key 'normal 'dired-mode-map
     "h" 'dired-up-directory
-    "l" 'dired-find-file))
+    "l" 'dired-find-file
+    "N" 'dired-create-directory
+    "n" 'dired-create-empty-file))
 
 
 (global-set-key (kbd "ESC M-[ a") [M-up])
@@ -255,17 +263,6 @@
 
 
 
-(use-package treemacs :ensure t)
-(use-package treemacs-evil :ensure t)
-(use-package treemacs-projectile :ensure t)
-(use-package treemacs-magit :ensure t)
-(use-package treemacs-nerd-icons :ensure t
-  :config
-  (treemacs-nerd-icons-config))
-
-
-;; (electric-indent-mode -1)
-
 
 ;; clipetty: copy to native clipboard using OSC 52
 (use-package clipetty
@@ -294,7 +291,6 @@
     (add-hook 'evil-insert-state-exit-hook  (lambda () (send-string-to-terminal "\033[2 q"))))
 
   (define-key evil-normal-state-map (kbd "q") nil)
-  (define-key evil-normal-state-map (kbd "C-n") 'treemacs)
   (define-key evil-normal-state-map (kbd "SPC")
               (lambda ()
                 (interactive)
@@ -830,11 +826,14 @@ Return nil if is not in a template."
     "r" 'transpose-frame ;; from transpose-frame below
     "1" 'dark-theme
     "2" 'light-theme
+    ;; Buffer switching
     "b" 'consult-buffer
-    "B" 'switch-to-buffer
-    "q" 'delete-window
+    "B" 'ibuffer
+    "Q" 'delete-window
     "p" 'project-find-file
     "\\" 'balance-windows
+    "d" 'dired-jump-other-window
+    "D" 'dired-other-window
     "=" 'balance-windows
     "c" 'global-display-line-numbers-mode
     "z" 'vundo ;; open visual undo mode
@@ -1100,7 +1099,9 @@ You can use \\[keyboard-quit] to hide the doc."
   (("C-c SPC" . copilot-complete)
    :map copilot-completion-map
    ("TAB" . copilot-accept-completion)
-   ("<tab>" . copilot-accept-completion)))
+   ("<tab>" . copilot-accept-completion))
+  :config
+  (add-to-list 'warning-suppress-types '(copilot)))
 
 ;; Bind tab so that if there is a company suggestion, suggest that. otherwise do copilot-complete
 
