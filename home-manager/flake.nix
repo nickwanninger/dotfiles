@@ -22,7 +22,6 @@
           home = "/home/nick";
           graphical = false;
           local = false;
-          stateVersion = "23.05";
         };
 
 
@@ -33,7 +32,6 @@
           home = "/Users/nick";
           graphical = true;
           local = true;
-          stateVersion = "23.05";
         };
 
         # The Linux VM on my Macbook
@@ -43,7 +41,6 @@
           home = "/home/nick";
           graphical = false;
           local = true;
-          stateVersion = "23.05";
         };
       };
 

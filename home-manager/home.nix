@@ -3,7 +3,7 @@
 {
   home.username = config.username;
   home.homeDirectory = config.home;
-  home.stateVersion = config.stateVersion;
+  home.stateVersion = "25.05";
 
   # NOT sure about this!
   # home.enableNixpkgsReleaseCheck = false;
@@ -39,8 +39,15 @@
     pkgs.claude-code
     pkgs.codex
 
+    pkgs.zig
+
     # pkgs.racket # The racket language
-  ];
+  ] ++ (if config.system != "aarch64-darwin" then
+  [
+    # Linux specific packages
+    pkgs.poop # :)
+
+  ] else []);
 
   home.file = {};
 
