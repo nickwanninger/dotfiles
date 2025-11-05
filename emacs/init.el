@@ -61,7 +61,7 @@
   (setq auto-save-file-name-transforms
         `((".*" ,(expand-file-name "\\2" my-auto-save-dir) t)))
   (unless (file-exists-p my-auto-save-dir)
-    (make-directory my-auto-save-dir-save-dir)))
+    (make-directory my-auto-save-dir)))
 (setq auto-save-default t
       auto-save-timeout 10
       auto-save-interval 200)
@@ -92,7 +92,7 @@
 
 
 (use-package emacs
-  :bind (("RET"      . newline-and-indent)
+  :bind (;; ("RET"      . newline-and-indent)
          ("M-o"      . other-window)
          ("C-c g d"  . xref-find-definitions)
          ("C-c e"    . eval-buffer)
@@ -255,6 +255,14 @@
 
 
 
+(use-package treemacs :ensure t)
+(use-package treemacs-evil :ensure t)
+(use-package treemacs-projectile :ensure t)
+(use-package treemacs-magit :ensure t)
+(use-package treemacs-nerd-icons :ensure t
+  :config
+  (treemacs-nerd-icons-config))
+
 
 ;; (electric-indent-mode -1)
 
@@ -286,7 +294,7 @@
     (add-hook 'evil-insert-state-exit-hook  (lambda () (send-string-to-terminal "\033[2 q"))))
 
   (define-key evil-normal-state-map (kbd "q") nil)
-  (define-key evil-normal-state-map (kbd "C-n") 'neotree)
+  (define-key evil-normal-state-map (kbd "C-n") 'treemacs)
   (define-key evil-normal-state-map (kbd "SPC")
               (lambda ()
                 (interactive)
@@ -403,9 +411,6 @@
   :hook
   (embark-collect-mode . consult-preview-at-point-mode))
 
-
-(use-package neotree
-  :ensure t)
 
 
 (defun ncw/setup-lsp-mode ()
@@ -1049,8 +1054,8 @@ You can use \\[keyboard-quit] to hide the doc."
   :hook ((prog-mode . rainbow-delimiters-mode)))
 
 
-(use-package parinfer-rust-mode
-  :hook emacs-lisp-mode racket-mode scheme-mode)
+;; (use-package parinfer-rust-mode
+;;   :hook emacs-lisp-mode racket-mode scheme-mode)
 
 
 (use-package transpose-frame)
