@@ -14,15 +14,17 @@
 
   outputs = { nixpkgs, home-manager, claude-code, ... }:
     let
+      cheeseMachine = {
+        system = "x86_64-linux";
+        username = "nick";
+        home = "/home/nick";
+        graphical = false;
+        local = false;
+      };
       machines = {
         # Dev machine at work
-        "nick@roquefort" = {
-          system = "x86_64-linux";
-          username = "nick";
-          home = "/home/nick";
-          graphical = false;
-          local = false;
-        };
+        "nick@roquefort" = cheeseMachine;
+        "nick@dubliner" = cheeseMachine;
 
 
         # My Macbook Pro
