@@ -22,7 +22,7 @@
         local = false;
       };
       machines = {
-        # Dev machine at work
+        # Dev machines at work
         "nick@roquefort" = cheeseMachine;
         "nick@dubliner" = cheeseMachine;
 

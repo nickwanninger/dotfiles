@@ -37,7 +37,6 @@
 
     # AI tools to steal my job.
     pkgs.claude-code
-    pkgs.codex
 
     pkgs.zig
 
