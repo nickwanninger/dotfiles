@@ -758,11 +758,12 @@ Return nil if is not in a template."
   (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
         doom-themes-enable-italic t))
 
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
+
 
 (defun dark-theme ()
   "Select the dark theme"
   (interactive)
-  (load-theme 'doom-xcode t))
   ;; (load-theme 'doom-molokai t))
   ;; (load-theme 'doom-monokai-spectrum t))
   ;; (load-theme 'monokai-pro-spectrum t))
@@ -770,6 +771,7 @@ Return nil if is not in a template."
   ;; (load-theme 'doom-ayu-dark t))
   ;; (load-theme 'doom-molokai t))
   ;; (load-theme 'modus-vivendi t))
+  (load-theme 'anysphere t))
   ;; (load-theme 'doom-dark+ t))
 
 
