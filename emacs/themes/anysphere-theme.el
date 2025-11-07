@@ -88,8 +88,8 @@ Can be an integer to determine the exact padding."
    (vc-deleted     red)
 
    ;; custom categories
-   (modeline-bg     `(,(doom-darken (car bg-alt) 0.3) ,@(cdr base3)))
-   (modeline-bg-alt `(,(car bg) ,@(cdr base1)))
+   (modeline-bg     `(,(doom-darken (car bg) 0.15) ,@(cdr base3)))
+   (modeline-bg-alt `(,(doom-darken (car bg) 0.1) ,@(cdr base1)))
    (modeline-fg     base8)
    (modeline-fg-alt comments)
    (-modeline-pad
@@ -101,7 +101,7 @@ Can be an integer to determine the exact padding."
   ;; --- faces ------------------------------
   (((font-lock-keyword-face &override) :weight 'bold)
    ((line-number &override) :foreground base4)
-   ((line-number-current-line &override) :foreground orange :weight 'bold)
+   ((line-number-current-line &override) :foreground base8 :weight 'bold)
    (mode-line
     :background modeline-bg :foreground modeline-fg
     :box (if -modeline-pad `(:line-width ,-modeline-pad :color ,modeline-bg)))
