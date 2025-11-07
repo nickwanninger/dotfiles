@@ -762,13 +762,14 @@ Return nil if is not in a template."
 (defun dark-theme ()
   "Select the dark theme"
   (interactive)
+  (load-theme 'doom-xcode t))
   ;; (load-theme 'doom-molokai t))
   ;; (load-theme 'doom-monokai-spectrum t))
   ;; (load-theme 'monokai-pro-spectrum t))
   ;; (load-theme 'doom-horizon t))
   ;; (load-theme 'doom-ayu-dark t))
   ;; (load-theme 'doom-molokai t))
-  (load-theme 'modus-vivendi t))
+  ;; (load-theme 'modus-vivendi t))
   ;; (load-theme 'doom-dark+ t))
 
 
