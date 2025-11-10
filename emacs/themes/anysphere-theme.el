@@ -24,6 +24,7 @@ Can be an integer to determine the exact padding."
   :type '(choice integer boolean))
 
 
+
 ;;
 ;;; Theme definition
 
@@ -31,7 +32,7 @@ Can be an integer to determine the exact padding."
   "A theme based off of the Anysphere VSCode theme"
 
   ;; name        gui       256       16
-  ((bg         '("#1a1a1a" nil       nil))
+  ((bg         '("#010101" nil       nil))
    (bg-alt     '("#141414" nil       nil))
    (base0      '("#0d0d0d" "black"   "black"))
    (base1      '("#141414" "#141414"))

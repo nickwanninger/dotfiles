@@ -92,7 +92,7 @@
 
 
 (use-package emacs
-  :bind (;; ("RET"      . newline-and-indent)
+  :bind (("RET"      . newline-and-indent)
          ("M-o"      . other-window)
          ("C-c g d"  . xref-find-definitions)
          ("C-c e"    . eval-buffer)
