@@ -67,7 +67,7 @@ Can be an integer to determine the exact padding."
    ;; face categories - mapped to Anysphere semantic tokens
    (highlight      teal)
    (vertical-bar   `("#141414" ,@base0))
-   (selection      `(,(car (doom-lighten bg 0.1)) ,@(cdr base4)))
+   (selection      `(,(car (doom-lighten bg 0.25)) ,@(cdr base4)))
    (builtin        teal)
    (comments       grey)
    (doc-comments   (doom-lighten grey 0.14))
@@ -89,8 +89,8 @@ Can be an integer to determine the exact padding."
    (vc-deleted     red)
 
    ;; custom categories
-   (modeline-bg     `(,(doom-darken (car bg) 0.15) ,@(cdr base3)))
-   (modeline-bg-alt `(,(doom-darken (car bg) 0.1) ,@(cdr base1)))
+   (modeline-bg     `(,(doom-lighten (car bg) 0.10) ,@(cdr base3)))
+   (modeline-bg-alt `(,(doom-lighten (car bg) 0.05) ,@(cdr base1)))
    (modeline-fg     base8)
    (modeline-fg-alt comments)
    (-modeline-pad

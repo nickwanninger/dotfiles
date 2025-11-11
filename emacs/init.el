@@ -109,7 +109,7 @@
 
   :config
 
-  ;; (global-hl-line-mode 1)
+  (global-hl-line-mode 1)
   (show-paren-mode 1)
   ;; Enable mouse mode cause I like rats
   (xterm-mouse-mode 1)
