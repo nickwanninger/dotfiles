@@ -33,7 +33,7 @@ Can be an integer to determine the exact padding."
 
   ;; name        gui       256       16
   ((bg         '("#010101" nil       nil))
-   (bg-alt     '("#141414" nil       nil))
+   (bg-alt     '("#040404" nil       nil))
    (base0      '("#0d0d0d" "black"   "black"))
    (base1      '("#141414" "#141414"))
    (base2      '("#1a1a1a" "#1a1a1a"))
