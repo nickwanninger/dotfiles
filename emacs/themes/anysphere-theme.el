@@ -125,7 +125,11 @@ Can be an integer to determine the exact padding."
    (rainbow-delimiters-depth-4-face :foreground green)
    (rainbow-delimiters-depth-5-face :foreground magenta)
    (rainbow-delimiters-depth-6-face :foreground violet)
-   (rainbow-delimiters-depth-7-face :foreground teal)))
+   (rainbow-delimiters-depth-7-face :foreground teal)
+
+   ;;;; flymake
+   (flymake-error :background red :foreground base0)
+   (flymake-warning :background yellow :foreground base0)))
 
   ;; --- variables --------------------------
   ;; ()
