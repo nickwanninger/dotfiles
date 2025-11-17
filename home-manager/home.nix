@@ -34,6 +34,9 @@
     pkgs.mu.mu4e
     pkgs.msmtp
 
+    # Github CLI tool
+    pkgs.gh
+
 
     # AI tools to steal my job.
     pkgs.claude-code

@@ -43,7 +43,7 @@ Can be an integer to determine the exact padding."
    (base6      '("#636262" "#636262" "brightblack"))
    (base7      '("#CCCCCC" "#CCCCCC" "brightblack"))
    (base8      '("#FFFFFF" "#FFFFFF" "white"))
-   (fg         '("#D8DEE9" "#D8DEE9" "white"))
+   (fg         '("#FFFFFF" "#FFFFFF" "white"))
    (fg-alt     '("#CCCCCC99" "#CCCCCC99"))
 
    ;; Anysphere primary colors
