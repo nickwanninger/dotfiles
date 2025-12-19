@@ -1,0 +1,84 @@
+window-padding-x = 8
+window-padding-y = 4
+window-padding-balance = true
+
+# theme = Cursor Dark
+
+palette = 0=#000000
+palette = 1=#ec675e
+palette = 2=#89f498
+palette = 3=#f4f9a8
+palette = 4=#76c5fa
+palette = 5=#ed73be
+palette = 6=#adebfc
+palette = 7=#fffffe
+palette = 8=#686868
+palette = 9=#ec675e
+palette = 10=#89f498
+palette = 11=#f4f9a8
+palette = 12=#76c5fa
+palette = 13=#ed73be
+palette = 14=#adebfc
+palette = 15=#ffffff
+# background = #000000
+# foreground = #fefffb
+# cursor-color = #eaeaea
+# selection-background = #4b7739
+# selection-foreground = #75fb4c
+
+# palette = 0=#2A2A2A
+# palette = 1=#BF616A
+# palette = 2=#A3BE8C
+# palette = 3=#EBCB8B
+# palette = 4=#81A1C1
+# palette = 5=#B48EAD
+# palette = 6=#88C0D0
+# palette = 7=#FFFFFF
+# palette = 8=#505050
+# palette = 9=#BF616A
+# palette = 10=#A3BE8C
+# palette = 11=#EBCB8B
+# palette = 12=#81A1C1
+# palette = 13=#B48EAD
+# palette = 14=#88C0D0
+# palette = 15=#FFFFFF
+
+# foreground = #D8DEE9
+foreground = #FFFFFF
+# background = #1a1a1a
+background = #010101
+cursor-color = #FFFFFF
+cursor-text = #1a1a1a
+
+selection-background = #404040
+selection-foreground = #FFFFFF
+
+cursor-style = block
+
+# font-family = Maple Mono NF SemiBold
+font-size = 11
+font-thicken = true
+
+macos-option-as-alt = left
+keybind = alt+left=unbind
+keybind = alt+right=unbind
+
+
+keybind = global:cmd+backquote=toggle_quick_terminal
+
+background-opacity = 1.0
+background-blur = false
+
+# make it so the cursor doesn't switch to a bar at the shell prompt
+#    (this unifies the behavior in and out of tmux)
+shell-integration-features = no-cursor,no-ssh-env,no-ssh-terminfo
+
+
+# Make the cursor a block by default
+cursor-style = block
+# make the cursor bar twice as thick
+adjust-cursor-thickness = 200%
+
+
+clipboard-write = allow
+clipboard-read = allow

@@ -337,6 +337,16 @@
 (use-package wren-mode :ensure t)
 ;; (use-package glsl-mode :ensure t)
 
+(use-package slang-mode
+  :straight (:host github :repo "k1ngst0m/slang-mode")
+  :mode (("\\.slang\\'" . slang-mode)
+         ("\\.sl\\'" . slang-mode)
+         ("\\.slangh\\'" . slang-mode))
+  :config
+  ;; Optional: Enable LSP support
+  (require 'slang-lsp)
+  (slang-lsp-initialize))
+
 (use-package haskell-mode)
 ;; (use-package racket-mode
 ;;   :ensure t
@@ -805,6 +815,8 @@ Return nil if is not in a template."
         (select-window compile-window)))))
 
 
+(use-package evil-multiedit :ensure t)
+
 ;;; Keybindings
 
 (use-package general
@@ -834,6 +846,7 @@ Return nil if is not in a template."
     "B" 'ibuffer
     "Q" 'delete-window
     "p" 'project-find-file
+    "s" 'evil-multiedit-match-and-next
     "\\" 'balance-windows
     "d" 'dired-jump-other-window
     "D" 'dired-other-window
