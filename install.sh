@@ -10,34 +10,71 @@ mkdir -p ~/.local/{bin,local,lib}
 # ln -sF ${DOTFILES}/fish/ ~/.config
 
 
-function link_dotconfig() {
-  name=$1
-  echo "Installing ${name} to ~/.config/${name}"
-  rm -rf ~/.config/${name}
-  ln -sF ${DOTFILES}/${name} ~/.config/${name}
+link_dotconfig() {
+  local source_name=$1
+  local target_path=${2:-"$HOME/.config/$source_name"}
+  local source_path="${DOTFILES}/${source_name}"
+
+  # Check if source exists in dotfiles
+  if [[ ! -e "$source_path" ]]; then
+    echo "Error: Source does not exist: $source_path"
+    return 1
+  fi
+
+  # If target already exists
+  if [[ -e "$target_path" ]]; then
+    # If it's a symlink, check if it points to our dotfiles
+    if [[ -L "$target_path" ]]; then
+      local current_link=$(readlink "$target_path")
+      if [[ "$current_link" == "$source_path" ]]; then
+        echo "✓ ${source_name} Already linked correctly"
+        return 0
+      else
+        echo "! ${source_name} Symlink points to different location: $current_link"
+      fi
+    else
+      # It's a real directory/file, ask user
+      echo "! Target for ${source_name} already exists (not a symlink): $target_path"
+      read -p "  Replace it? (y/n) " -n 1 -r
+      echo
+      if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+        echo "  Skipping ${source_name}"
+        return 0
+      fi
+    fi
+
+    # Remove the old target
+    rm -rf "$target_path"
+  fi
+
+  # Create the symlink
+  ln -sF "$source_path" "$target_path"
+  echo "  ✓ Linked"
 }
 
 
 
 link_dotconfig "fish"
-link_dotconfig "nix"
 link_dotconfig "ghostty"
-link_dotconfig "home-manager"
 link_dotconfig "nvim"
+link_dotconfig "emacs" "$HOME/.emacs.d"
+
+# TMUX is special - link the config file directly
+link_dotconfig "tmux/tmux.conf" "$HOME/.tmux.conf"
 
 
-# Setup emacs
-rm -rf ~/.emacs.d
-ln -sF ${DOTFILES}/emacs ~/.emacs.d
 
-# TMUX is special
-ln -sf ${DOTFILES}/tmux/tmux.conf ~/.tmux.conf
+link_dotconfig "nix"
+link_dotconfig "home-manager"
 
-echo "Configuring NeoVIM and installing bundles..."
+if command -v nix >/dev/null 2>&1; then
+  echo "Updating home manager"
+  make -C ${DOTFILES}/home-manager
+fi
 
-echo "installing terminfos"
-tic -x misc/xterm-256color-italic.terminfo
-tic -x misc/tmux-256color.terminfo
+
+tic -x "${DOTFILES}/misc/xterm-256color-italic.terminfo"
+tic -x "${DOTFILES}/misc/tmux-256color.terminfo"
 
 echo "Setup Complete!"
 
