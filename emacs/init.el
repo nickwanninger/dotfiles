@@ -347,6 +347,9 @@
   (require 'slang-lsp)
   (slang-lsp-initialize))
 
+
+(use-package janet-mode
+             :ensure t)
 (use-package haskell-mode)
 ;; (use-package racket-mode
 ;;   :ensure t

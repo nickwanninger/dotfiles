@@ -1,0 +1,8 @@
+- When writing git commits, keep them brief with a title and a sentence or two description. Do not sign off as claude
+- When writing commits, do a line wrap to make them not a single big long line. It is sometimes hard to read.
+- As we are working through things, I prefer to have a working markdown document that acts as a form of "journal" of the work we are doing. Usually I prefer to have some kind of `PLAN.md` document which gets updated as the tasks are completed. Whenever we start new work, if I haven't mentioned a working document, ask for one (or choose a new one if you think it would help).
+- I prefer C-with-classes, using things like smart poiners (or even better, unique pointers), and I would like to reach for concepts instead of inheretence if it makes sense.
+- I don't like deeply nested class heirarchies if I can avoid it.
+- Use the 'never nesting' concept for control flow - that is, instead of putting a whole function in an if statement, early return if the condition is false if it makes sense.
+- If code is clear and self documenting, it does not need a comment describing it. Overly commented code is prone to semantic satiation, and comments becoming out of date.
+- When we are making progress on a feature, recommend I make atomic git commits, as I often forget.

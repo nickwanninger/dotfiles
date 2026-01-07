@@ -76,6 +76,10 @@ fi
 tic -x "${DOTFILES}/misc/xterm-256color-italic.terminfo"
 tic -x "${DOTFILES}/misc/tmux-256color.terminfo"
 
+
+link_dotconfig ai/claude/skills ~/.claude/skills
+link_dotconfig ai/claude/CLAUDE.md ~/.claude/CLAUDE.md
+
 echo "Setup Complete!"
 
 
