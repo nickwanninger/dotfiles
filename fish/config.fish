@@ -120,3 +120,9 @@ end
 if type -q direnv
   direnv hook fish | source
 end
+
+# Amp CLI
+export PATH="/Users/nick/.amp/bin:$PATH"
+
+# opencode
+fish_add_path /Users/nick/.opencode/bin
