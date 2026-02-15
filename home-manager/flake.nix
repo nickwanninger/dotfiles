@@ -8,11 +8,10 @@
       url = "github:nix-community/home-manager/release-25.05";  # match Home Manager release to nixpkgs
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    claude-code.url = "github:sadjow/claude-code-nix";
   };
 
 
-  outputs = { nixpkgs, home-manager, claude-code, ... }:
+  outputs = { nixpkgs, home-manager, ... }:
     let
       cheeseMachine = {
         system = "x86_64-linux";
@@ -51,7 +50,7 @@
       let
         pkgs = import nixpkgs {
           system = config.system;
-          overlays = [ claude-code.overlays.default ];
+          overlays = [ ];
           config = {
             allowUnfree = true;
           };

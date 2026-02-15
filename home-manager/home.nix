@@ -38,9 +38,6 @@
     pkgs.gh
 
 
-    # AI tools to steal my job.
-    pkgs.claude-code
-
     pkgs.zig
 
     # pkgs.racket # The racket language
