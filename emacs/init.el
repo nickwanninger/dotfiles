@@ -162,6 +162,16 @@
     (set-frame-font "Maple Mono NF Bold 12" nil t)))
 
 
+(use-package doom-modeline
+  :ensure t
+  :init (doom-modeline-mode 1)
+  :custom
+  (doom-modeline-height 25)
+  (doom-modeline-bar-width 3)
+  (doom-modeline-icon t)
+  (doom-modeline-minor-modes t)
+  (doom-modeline-buffer-file-name-style 'truncate-upto-project))
+
 ;; Hide the long list of minor modes from the mode-line. The minions
 ;; package removes all the additional minor-mode names and their
 ;; information from the mode-line. If I have them all showing, the
@@ -1015,11 +1025,6 @@ Return nil if is not in a template."
   (setq project-vc-merge-submodules nil))
 
 
-(setq-default mode-line-buffer-identification
-            '(:eval (propertize "%12b"
-                     'face (if (mode-line-window-selected-p)
-                             'bold
-                            'italic))))
 
 (defun edit-init ()
   "Edit the init.el file in the current buffer"
