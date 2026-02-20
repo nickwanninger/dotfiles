@@ -7,8 +7,7 @@
 
 ; (setq use-package-compute-statistics t)
 
-(setq use-package-always-ensure 't
-      use-package-always-defer 't)
+(setq use-package-always-defer 't)
 
 (setq gc-cons-threshold (* 50 1024 1024))
 
@@ -16,20 +15,6 @@
 (setq native-comp-async-report-warnings-errors nil)
 
 (add-to-list 'load-path "~/.emacs.d/lisp")
-
-(setq package-user-dir (concat "~/.emacs.d/elpa-" emacs-version))
-
-;; Setup the package repos
-(require 'package)
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-(add-to-list 'package-archives '("elpa" . "https://elpa.gnu.org/packages/") t)
-(add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/") t)
-
-
-(package-initialize)
-;; (unless package-archive-contents
-;;    (package-refresh-contents))
-
 
 ;; Change the user-emacs-directory to keep unwanted things out of ~/.emacs.d
 (setq user-emacs-directory (expand-file-name "~/.cache/emacs/")
@@ -125,18 +110,14 @@
   (setq max-mini-window-height 0.2)
   (setq visible-bell nil)
   (setq ring-bell-function #'ignore)
-  ;; Setup the display-buffer-alist
   (setq display-buffer-alist nil)
   ;; don't show ANSI escape sequences in compile buffer
   (add-hook 'compilation-filter-hook 'ansi-color-compilation-filter)
-  ;; (add-to-list 'display-buffer-alist
   (setq compile-command "make -k -j")
   (setq compilation-scroll-output t)
 
   (setq split-width-threshold 160)
   (setq split-height-threshold nil)
-   ;; Setup the display-buffer-alist
-  (setq display-buffer-alist nil)
   ;; Enable line numbers
   (global-display-line-numbers-mode)
 
@@ -217,9 +198,6 @@
     "l" 'dired-find-file
     "N" 'dired-create-directory
     "n" 'dired-create-empty-file))
-
-
-(global-set-key (kbd "ESC M-[ a") [M-up])
 
 
 ;; tmux integration
@@ -303,7 +281,6 @@
   ;; :init
   (evil-mode 1)
   (define-key evil-normal-state-map (kbd "g r") 'lsp-find-references)
-  (define-key evil-normal-state-map (kbd "g d") 'lsp-find-declaration)
   (define-key evil-normal-state-map (kbd "g d") 'lsp-find-declaration)
   (define-key evil-normal-state-map (kbd "g D") 'lsp-find-definition)
 
@@ -444,8 +421,6 @@
          (lsp-mode . ncw/setup-lsp-mode))
   :init
   (setq lsp-keymap-prefix "C-c l")
-  (setq lsp-ui-doc-show-with-mouse nil)
-  (setq lsp-ui-doc-position 'at-point)
   (setq lsp-headerline-breadcrumb-enable nil)
   :config
   (lsp-enable-which-key-integration t)
@@ -551,7 +526,7 @@
 (use-package treesit-auto
   :demand t
   :custom
-  (treesit-auto-install 'prompt)
+  (treesit-auto-install t)
 
   :config
   (treesit-auto-add-to-auto-mode-alist 'all)
@@ -757,8 +732,8 @@ Return nil if is not in a template."
 
 ;; Advise load-theme, so that it first disables all custom themes before loading (enabling) another one.
 ;; https://emacs.stackexchange.com/a/3114
-(defadvice load-theme (before theme-dont-propagate activate)
- (mapc #'disable-theme custom-enabled-themes))
+(advice-add 'load-theme :before
+  (lambda (&rest _) (mapc #'disable-theme custom-enabled-themes)))
 
 
 (use-package monokai-pro-theme :ensure t)
@@ -865,126 +840,6 @@ Return nil if is not in a template."
     ":" 'evil-ex
     "q" nil))
 
-
-
-
-(use-package popup
-  :ensure t)
-
-(use-package eldoc
-  :ensure t)
-
-(defvar-local eldoc-tip--old-eldoc-functions nil
-  "The original value of ‘eldoc-display-functions’. The original value before enabling eldoc-box.")
-
-(defface eldoc-tip-tooltip
-  '((((class color) (min-colors 88) (background light))
-     (:foreground "black" :background "cornsilk"))
-    (((class color) (min-colors 88) (background dark))
-     (:background "gray26" :foreground "white"))
-    (t (:foreground "black" :background "yellow")))
-
-  "Face used for the tooltip.")
-(defun eldoc-tip--compose-doc (doc)
-  "Compose a doc passed from eldoc.
-
-DOC has the form of (TEXT :KEY VAL...), and KEY can be ‘:thing’
-and ‘:face’, among other things. If ‘:thing’ exists, it is put at
-the start of the doc followed by a colon. If ‘:face’ exists, it
-is applied to the thing.
-
-Return the composed string."
-  (let ((thing (plist-get (cdr doc) :thing))
-        (face (plist-get (cdr doc) :face)))
-    (concat (if thing
-                (concat (propertize (format "%s" thing) 'face face) ": ")
-              "")
-            (car doc))))
-
-;; (defface eldoc-tip-body '((t . nil)))
-
-
-(defun eldoc-tip--eldoc-message-function (str &rest args)
-  "Front-end for eldoc."
-  (when (stringp str)
-    (let* ((doc (string-trim-right (apply #'format str args))))
-       (popup-tip doc
-                  :point (point)
-                  ;; :min-height 10
-                  :max-width 80
-                  :truncate nil
-                  :margin 2
-                  :face 'eldoc-tip-tooltip))))
-             ;; :face 'eldoc-tip-body))
-
-(defcustom eldoc-tip-doc-separator "\n----\n"
-  "The separator between documentation from different sources.
-
-Since Emacs 28, Eldoc can combine documentation from different
-sources, this separator is used to separate documentation from
-different sources.
-
-This separator is used for the documentation shown in
-‘eldoc-tip-bover-mode’ but not ‘eldoc-box-help-at-point’."
-  :type 'string)
-
-(defun eldoc-tip--eldoc-display-function (docs interactive)
-  "Display DOCS in childframe.
-For DOCS and INTERACTIVE see ‘eldoc-display-functions’. Maybe
-display the docs in echo area depending on
-‘eldoc-box-only-multi-line’."
-  (let ((doc (string-trim (string-join
-                              (mapcar #'eldoc-tip--compose-doc docs)
-                              eldoc-tip-doc-separator))))
-    (when (eldoc-tip--eldoc-message-function "%s" doc)
-      (eldoc-display-in-echo-area docs interactive))))
-
-
-(defun eldoc-tip--enable ()
-  "Enable eldoc-tip hover. Intended for internal use."
-  (message "eldoc-tip-enable")
-  (if (not (boundp 'eldoc-display-functions))
-      (add-function :before-while (local 'eldoc-message-function)
-                    #'eldoc-tip--eldoc-message-function)
-
-    (setq-local eldoc-tip--old-eldoc-functions eldoc-display-functions)
-    (setq-local eldoc-display-functions (list 'eldoc-tip--eldoc-display-function))))
-                ;; (cons 'eldoc-tip--eldoc-display-function
-                ;;       (remq 'eldoc-display-in-echo-area eldoc-display-functions)))))
-
-
-(defun eldoc-display-functionsoc-tip--disable ()
-  "Disable eldoc-box hover. Intended for internal use."
-  (if (not (boundp 'eldoc-display-functions))
-      (remove-function (local 'eldoc-message-function) #'eldoc-tip--eldoc-message-function)
-
-    (setq-local eldoc-display-functions
-                (remq 'eldoc-tip--eldoc-display-function
-                      eldoc-display-functions))
-    ;; If we removed eldoc-display-in-echo-area when enabling
-    ;; eldoc-box, add it back.
-    (when (memq 'eldoc-display-in-echo-area
-                eldoc-tip--old-eldoc-functions)
-      (setq-local eldoc-display-functions
-                  (cons 'eldoc-display-in-echo-area
-                        eldoc-display-functions)))))
-  ;; (advice-remove #'keyboard-quit #'eldoc-box-quit-frame))
-
-(define-minor-mode eldoc-tip-hover-at-point-mode
-  "A convenient minor mode to display doc at point.
-You can use \\[keyboard-quit] to hide the doc."
-  :lighter " TIP"
-  :global t
-  (if eldoc-tip-hover-at-point-mode
-      (progn (remove-hook 'pre-command-hook #'eldoc-pre-command-refresh-echo-area t)
-             (eldoc-tip--enable))
-    (eldoc-tip--disable)))
-(require 'eldoc)
-
-;; (eldoc-tip-hover-at-point-mode 1)
-
-;; (general-def 'motion
-;;   "K" 'tooltip-eldoc)
 
 
 
@@ -1200,9 +1055,6 @@ You can use \\[keyboard-quit] to hide the doc."
   (pulsar-face 'pulsar-magenta)
   (pulsar-delay 0.005))
 
-
-;; Binding to eval buffer
-(global-set-key (kbd "C-c e") 'eval-buffer)
 
 ;; Delete the tailing whitespace whenever you save
 ;; (add-hook 'before-save-hook #'delete-trailing-whitespace)
