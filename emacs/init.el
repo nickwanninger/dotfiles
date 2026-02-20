@@ -170,7 +170,18 @@
   (doom-modeline-bar-width 3)
   (doom-modeline-icon t)
   (doom-modeline-minor-modes t)
-  (doom-modeline-buffer-file-name-style 'truncate-upto-project))
+  (doom-modeline-buffer-file-name-style 'truncate-upto-project)
+  (doom-modeline-buffer-encoding nil)
+  (doom-modeline-modal-icon nil)
+  :config
+  ;; Single-letter evil state tags with background colors
+  (setq evil-normal-state-tag   (propertize "N" 'face '(:background "#98be65" :foreground "#1c1f24" :weight bold))
+        evil-insert-state-tag   (propertize "I" 'face '(:background "#51afef" :foreground "#1c1f24" :weight bold))
+        evil-visual-state-tag   (propertize "V" 'face '(:background "#c678dd" :foreground "#1c1f24" :weight bold))
+        evil-replace-state-tag  (propertize "R" 'face '(:background "#ff6c6b" :foreground "#1c1f24" :weight bold))
+        evil-operator-state-tag (propertize "O" 'face '(:background "#ecbe7b" :foreground "#1c1f24" :weight bold))
+        evil-motion-state-tag   (propertize "M" 'face '(:background "#a9a1e1" :foreground "#1c1f24" :weight bold))
+        evil-emacs-state-tag    (propertize "E" 'face '(:background "#ff6c6b" :foreground "#1c1f24" :weight bold))))
 
 ;; Hide the long list of minor modes from the mode-line. The minions
 ;; package removes all the additional minor-mode names and their
