@@ -82,8 +82,8 @@ cursor-style = block
 adjust-cursor-thickness = 200%
 
 
-#macos-icon = paper
-#macos-icon-frame = beige
+macos-icon = official
+# macos-icon-frame = beige
 
 
 
