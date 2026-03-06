@@ -270,6 +270,8 @@
 
 
 
+(use-package expreg :ensure t)
+
 
 ;; The most important thing we want here is evil mode, cause I can't use emacs without it :)
 (use-package evil
@@ -281,9 +283,9 @@
   (evil-set-undo-system 'undo-redo)
   (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
 
-  (define-key evil-normal-state-map (kbd ".") #'er/expand-region)
-  (define-key evil-visual-state-map (kbd ".") #'er/expand-region)
-  (define-key evil-visual-state-map (kbd ",") #'er/contract-region)
+  (define-key evil-normal-state-map (kbd ".") #'expreg-expand)
+  (define-key evil-visual-state-map (kbd ".") #'expreg-expand)
+  (define-key evil-visual-state-map (kbd ",") #'expreg-contract)
 
   (unless (display-graphic-p)
     (add-hook 'evil-insert-state-entry-hook (lambda () (send-string-to-terminal "\033[5 q")))
@@ -359,9 +361,6 @@
 ;;          (setup-repl racket-mode-map
 ;;                      :run-buffer #'racket-run
 ;;                      :send-to-repl #'racket-send-last-sexp))))
-
-(use-package expand-region
-  :ensure t)
 
 
 (use-package which-key
@@ -997,33 +996,6 @@ Return nil if is not in a template."
    ("<tab>" . copilot-accept-completion))
   :config
   (add-to-list 'warning-suppress-types '(copilot)))
-
-;; Bind tab so that if there is a company suggestion, suggest that. otherwise do copilot-complete
-
-(use-package monet
-  :straight (:type git :host github :repo "stevemolitor/monet"))
-
-;; Claude-code
-(use-package claude-code
-  :straight (:type git :host github :repo "stevemolitor/claude-code.el" :branch "main" :depth 1
-                   :files ("*.el" (:exclude "images/*")))
-  :bind-keymap
-  ("C-c c" . claude-code-command-map) ;; or your preferred key
-  ;; Optionally define a repeat map so that "M" will cycle thru Claude auto-accept/plan/confirm modes after invoking claude-code-cycle-mode / C-c M.
-  :bind
-  (:repeat-map my-claude-code-map ("M" . claude-code-cycle-mode))
-  :config
-  (setq claude-code-terminal-backend 'vterm)
-  ;; optional IDE integration with Monet
-  (add-hook 'claude-code-process-environment-functions #'monet-start-server-function)
-  (monet-mode 1)
-
-
-
-  (claude-code-mode))
-
-;; ---------------
- 
 
 
 
