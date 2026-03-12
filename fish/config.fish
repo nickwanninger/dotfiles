@@ -126,3 +126,8 @@ export PATH="/Users/nick/.amp/bin:$PATH"
 
 # opencode
 fish_add_path /Users/nick/.opencode/bin
+
+# Added by LM Studio CLI (lms)
+set -gx PATH $PATH /Users/nick/.lmstudio/bin
+# End of LM Studio CLI section
+
