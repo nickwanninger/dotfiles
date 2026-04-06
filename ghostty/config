@@ -51,6 +51,7 @@ foreground = #FFFFFF
 background = #010101
 cursor-color = #FFFFFF
 cursor-text = #1a1a1a
+cursor-invert-fg-bg = true
 
 selection-background = #404040
 selection-foreground = #FFFFFF
