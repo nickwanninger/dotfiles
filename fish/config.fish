@@ -132,5 +132,8 @@ set -gx PATH $PATH /Users/nick/.lmstudio/bin
 # End of LM Studio CLI section
 
 
+# Added by LM Studio CLI tool (lms)
+set -gx PATH $PATH /home/nick/.lmstudio/bin
+
 # opencode
 fish_add_path /home/nick/.opencode/bin
