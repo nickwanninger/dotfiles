@@ -80,6 +80,8 @@ tic -x "${DOTFILES}/misc/tmux-256color.terminfo"
 link_dotconfig ai/claude/skills ~/.claude/skills
 link_dotconfig ai/claude/CLAUDE.md ~/.claude/CLAUDE.md
 
+npm config set prefix ~/.npm-global
+
 echo "Setup Complete!"
 
 

@@ -89,6 +89,7 @@ set -g fish_color_cancel -r
 
 set -gx PNPM_HOME "/Users/nick/Library/pnpm"
 set -gx PATH "$PNPM_HOME" $PATH
+set -gx PATH "$HOME/.npm-global/bin" $PATH
 
 source /Users/nick/.opam/opam-init/init.fish > /dev/null 2> /dev/null; or true
 
