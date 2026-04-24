@@ -12,21 +12,20 @@ function fish_prompt
 
 	set -g __fish_git_prompt_show_informative_status 1
 
-  set hostname_color "brblack"
-  set status_color "brgreen"
+
+  set main_color "brgreen"
+
   if [ $last_status -ne "0" ]
-    set hostname_color yellow
-    set status_color red
+    set main_color red
   end
+  set_color $main_color
+  echo -n '■ '
 
-
-  set_color $hostname_color
+  set_color brblack
   echo -n (hostname)
   echo -n ' '
-  set_color reset
 
-
-	set_color $status_color
+	set_color $main_color
 	echo -n (prompt_pwd)
 
   set_color reset

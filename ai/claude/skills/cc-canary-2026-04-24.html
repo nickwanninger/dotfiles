@@ -1,0 +1,636 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>cc-canary · 2026-02-23 → 2026-04-24</title>
+<style>
+:root {
+  --bg: #0d1117; --card: #161b22; --border: #30363d; --border-soft: #21262d;
+  --fg: #e6edf3; --fg-muted: #8b949e; --fg-dim: #6e7681;
+  --good: #3fb950; --warn: #d29922; --bad: #f85149; --accent: #58a6ff;
+  --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  --sans: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: var(--bg); color: var(--fg); }
+body { font-family: var(--sans); font-size: 14px; line-height: 1.6; padding: 2rem 1rem; -webkit-font-smoothing: antialiased; }
+main { max-width: 960px; margin: 0 auto; }
+h1, h2, h3 { font-weight: 600; letter-spacing: -.01em; margin: 2rem 0 .75rem; }
+h1 { font-size: 1.75rem; padding-bottom: .5rem; border-bottom: 1px solid var(--border-soft); }
+h2 { font-size: 1.25rem; padding-top: .5rem; border-top: 1px solid var(--border-soft); }
+h3 { font-size: 1rem; }
+h3:first-child { margin-top: 0; }
+p { margin: .75rem 0; }
+strong { color: #fff; font-weight: 600; }
+code { background: rgba(110, 118, 129, 0.2); padding: .1em .4em; border-radius: 4px; font-family: var(--mono); font-size: .875em; color: var(--accent); }
+pre { background: var(--card); border: 1px solid var(--border-soft); border-radius: 8px; padding: 1rem; overflow-x: auto; font-family: var(--mono); font-size: .8125rem; line-height: 1.45; color: var(--fg); }
+pre code { background: none; padding: 0; color: inherit; font-size: inherit; }
+table { width: 100%; border-collapse: separate; border-spacing: 0; margin: 1rem 0; font-family: var(--mono); font-size: .8125rem; }
+th, td { padding: .5rem .75rem; text-align: right; border-bottom: 1px solid var(--border-soft); }
+th:first-child, td:first-child { text-align: left; }
+th { color: var(--fg-muted); font-size: .6875rem; text-transform: uppercase; letter-spacing: .04em; font-weight: 500; background: var(--card); }
+tbody tr:last-child td { border-bottom: none; }
+tbody tr:hover { background: rgba(88, 166, 255, .04); }
+ul, ol { margin: .75rem 0; padding-left: 1.5rem; }
+li { margin: .25rem 0; }
+hr { border: none; border-top: 1px solid var(--border-soft); margin: 2rem 0; }
+blockquote { margin: 1rem 0; padding: .5rem 1rem; border-left: 3px solid var(--accent); background: var(--card); color: var(--fg-muted); border-radius: 0 4px 4px 0; }
+/* Highlight the metadata block at the top */
+main > p:first-of-type { background: var(--card); border: 1px solid var(--border-soft); border-radius: 8px; padding: 1rem 1.25rem; font-family: var(--mono); font-size: .8125rem; margin-bottom: 1.5rem; }
+/* Verdict colors based on common words */
+code:contains("HOLDING") { color: var(--good); }
+@media print { :root { --bg: #fff; --card: #fff; --fg: #000; --fg-muted: #555; --fg-dim: #888; --border: #ccc; --border-soft: #eee; --accent: #0066cc; } body { padding: 1rem; } }
+</style>
+</head>
+<body>
+<main>
+<p><strong>Window</strong> 2026-02-23 → 2026-04-24 · <strong>34 sessions</strong> · <strong>~$22 spent</strong> · 3 projects · Models: <code>claude-sonnet-4-6</code>: 21, <code>claude-opus-4-6</code>: 1, <code>claude-haiku-4-5-20251001</code>: 2</p>
+<p><strong>Inflection</strong> — (none clear) · 0.0σ · <code>fallback_split_half</code></p>
+<p><strong>Verdict</strong> INCONCLUSIVE — Read:Edit ratio up 52% and tokens per user turn up 2.2×; fallback split and cross-version are confounded by unknown-model sessions.</p>
+<h2>Headline metrics — pre vs post</h2>
+<table><thead><tr>
+<th>Metric</th>
+<th>Pre</th>
+<th>Post</th>
+<th>Δ</th>
+<th>Band (post)</th>
+</tr></thead><tbody>
+<tr>
+<td>Read:Edit ratio</td>
+<td>0.56</td>
+<td>0.85</td>
+<td>+52%</td>
+<td>concerning</td>
+</tr>
+<tr>
+<td>Write share of mutations</td>
+<td>0.0%</td>
+<td>0.0%</td>
+<td>0%</td>
+<td>healthy</td>
+</tr>
+<tr>
+<td>Reasoning loops / 1K tool calls</td>
+<td>0.00</td>
+<td>0.00</td>
+<td>0%</td>
+<td>healthy</td>
+</tr>
+<tr>
+<td>Frustration rate (user prompts)</td>
+<td>0.2%</td>
+<td>0.0%</td>
+<td>-84%</td>
+<td>healthy</td>
+</tr>
+<tr>
+<td>Thinking redaction rate</td>
+<td>0.0%</td>
+<td>47.6%</td>
+<td>new</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Mean thinking length (chars)</td>
+<td>0</td>
+<td>0</td>
+<td>0%</td>
+<td>—</td>
+</tr>
+<tr>
+<td>API turns per user turn</td>
+<td>1.11</td>
+<td>1.49</td>
+<td>+34%</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Tokens per user turn</td>
+<td>23,673</td>
+<td>51,034</td>
+<td>2.2×</td>
+<td>—</td>
+</tr>
+</tbody></table>
+<h2>Weekly trend bars</h2>
+<p><strong>Weekly cost ($USD, est.)</strong> — total: <strong>$22</strong></p>
+<pre><code>  2026-03-23  ███████░░░░░░░░░░░░░░░░░░░░░░░  $2.87
+  2026-03-30  ████████░░░░░░░░░░░░░░░░░░░░░░  $3.10
+  2026-04-06  ██████████████████████████████  $11.74
+  2026-04-13  ██████████░░░░░░░░░░░░░░░░░░░░  $3.88
+  2026-04-20  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  $0.00</code></pre>
+<table><thead><tr>
+<th>Model</th>
+<th>Cost</th>
+<th>Share</th>
+</tr></thead><tbody>
+<tr>
+<td><code>claude-sonnet-4-6</code></td>
+<td>$21.06</td>
+<td>97%</td>
+</tr>
+<tr>
+<td><code>claude-opus-4-6</code></td>
+<td>$0.46</td>
+<td>2%</td>
+</tr>
+<tr>
+<td><code>claude-haiku-4-5-20251001</code></td>
+<td>$0.08</td>
+<td>0%</td>
+</tr>
+<tr>
+<td><code>unknown</code></td>
+<td>$0.00</td>
+<td>0%</td>
+</tr>
+<tr>
+<td><code>&lt;synthetic&gt;</code></td>
+<td>$0.00</td>
+<td>0%</td>
+</tr>
+</tbody></table>
+<p><strong>Read:Edit ratio (weekly median)</strong></p>
+<pre><code>  2026-03-23  ██████████████████████████████  1.79
+  2026-03-30  ███████████████████████░░░░░░░  1.40
+  2026-04-06  █████████████████████░░░░░░░░░  1.26
+  2026-04-13  ███████████░░░░░░░░░░░░░░░░░░░  0.647</code></pre>
+<p><strong>Tokens per user turn (weekly median)</strong></p>
+<pre><code>  2026-03-23  ████████░░░░░░░░░░░░░░░░░░░░░░  24,021
+  2026-03-30  ████████████████░░░░░░░░░░░░░░  50,267
+  2026-04-06  ███████████████████░░░░░░░░░░░  58,464
+  2026-04-13  ██████████████████████████████  91,800
+  2026-04-20  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  0.0000</code></pre>
+<p>Read:Edit ratio rose 0.56 → 0.85 (+52%), tokens per user turn rose 23,673 → 51,034 (2.2×), and API turns per user turn rose 1.11 → 1.49 (+34%).</p>
+<hr>
+<h2>1. Timeline</h2>
+<p>The rendered split is 2026-03-24 → 2026-04-06 versus 2026-04-07 → 2026-04-21, but the report itself marks the inflection as “none clear” and falls back to a half-window split at 0.0σ. The weekly series does not show a collapse so much as a step-up in volume around the week of 2026-04-06: estimated cost peaks at $11.74, tokens per user turn climb from roughly 24k in late March to 58k and then 91.8k in mid-April, while weekly median Read:Edit ratio actually trends down from 1.79 to 0.647 by the last active week.</p>
+<p>The dominant model is still <code>claude-sonnet-4-6</code> on both sides of the split, so there is no clean model handoff overlapping the date boundary. The cross-version section is instead confounded by eight <code>unknown</code>-model sessions, and this rendered HTML does not expose session IDs, so the safest timeline read is “heavier, more expensive sessions in early-to-mid April” rather than a sharp behavioral break on a single day.</p>
+<table><thead><tr>
+<th>Period</th>
+<th>Dates</th>
+<th>Sessions</th>
+<th>Dominant model</th>
+</tr></thead><tbody>
+<tr>
+<td>Pre-inflection</td>
+<td>2026-03-24 → 2026-04-06</td>
+<td>17</td>
+<td><code>claude-sonnet-4-6</code></td>
+</tr>
+<tr>
+<td>Post-inflection</td>
+<td>2026-04-07 → 2026-04-21</td>
+<td>17</td>
+<td><code>claude-sonnet-4-6</code></td>
+</tr>
+</tbody></table>
+<h2>2. Cross-version comparison</h2>
+<table><thead><tr>
+<th>Metric</th>
+<th><code>claude-sonnet-4-6</code> (n=21)</th>
+<th><code>unknown</code> (n=8)</th>
+<th>Δ</th>
+</tr></thead><tbody>
+<tr>
+<td>Read:Edit ratio</td>
+<td>1.50</td>
+<td>0.00</td>
+<td>-100.0%</td>
+</tr>
+<tr>
+<td>Write share of mutations</td>
+<td>5.6%</td>
+<td>0.0%</td>
+<td>-100.0%</td>
+</tr>
+<tr>
+<td>Frustration rate (user prompts)</td>
+<td>0.0%</td>
+<td>0.2%</td>
+<td>566.7%</td>
+</tr>
+<tr>
+<td>Thinking redaction rate</td>
+<td>100.0%</td>
+<td>0.0%</td>
+<td>-100.0%</td>
+</tr>
+<tr>
+<td>API turns per user turn</td>
+<td>1.49</td>
+<td>0.00</td>
+<td>-100.0%</td>
+</tr>
+<tr>
+<td>Tokens per user turn</td>
+<td>61,292</td>
+<td>0</td>
+<td>-100.0%</td>
+</tr>
+<tr>
+<td>Interrupts / 1K tool calls</td>
+<td>22.42</td>
+<td>2000.00</td>
+<td>8820.0%</td>
+</tr>
+</tbody></table>
+<p>This is not a clean newer-versus-older model comparison. The only populated comparison row is <code>claude-sonnet-4-6</code> versus <code>unknown</code>, and the <code>unknown</code> bucket shows zeros for several tool-derived rates, which makes the -100% deltas mostly a metadata-attribution problem rather than evidence of worse model behavior. With only one counted <code>claude-opus-4-6</code> session and two <code>claude-haiku-4-5-20251001</code> sessions in the window, task mix and missing model labels dominate this section.</p>
+<h2>3. Findings</h2>
+<h3>Finding 1 — Read:Edit ratio</h3>
+<p><strong>Classification</strong>: ambiguous <strong>Signal</strong>: Read:Edit ratio went up from 0.56 to 0.85 (+52%) · band <code>concerning</code> · severity <code>high</code></p>
+<p>The headline move is +52%, but the weekly median ends at 0.647 after starting at 1.79, so the period aggregate is being pulled by heavier mid-window sessions rather than a monotonic deterioration. The cross-version table does not rescue this signal because its comparator is the <code>unknown</code> bucket, not a clean second model.</p>
+<h3>Finding 2 — Tokens per user turn</h3>
+<p><strong>Classification</strong>: ambiguous <strong>Signal</strong>: Tokens per user turn went up from 23,673 to 51,034 (2.2×) · band <code>unbanded</code> · severity <code>medium</code></p>
+<p>Tokens per user turn more than doubled, and Appendix H shows output tokens per user prompt also rose 2.7× while cache-read tokens per API request rose 1.66×. That points to larger responses and fatter context windows, but not clearly to thrash because output per request increased more than request count did.</p>
+<h3>Finding 3 — Frustration rate (user prompts)</h3>
+<p><strong>Classification</strong>: user-side <strong>Signal</strong>: Frustration rate (user prompts) went down from 0.2% to 0.0% (-84%) · band <code>healthy</code> · severity <code>medium</code></p>
+<p>The strongest number here is simply 0.2% → 0.0%, and the word-shift table agrees: <code>wrong</code>, <code>bad</code>, and <code>stop</code> all fall sharply or disappear after the split. That is a direct counter-signal against a clean quality regression.</p>
+<h3>Finding 4 — Interrupts / 1K tool calls</h3>
+<p><strong>Classification</strong>: user-side <strong>Signal</strong>: Interrupts / 1K tool calls went down from 37.04 to 16.63 (-55%) · band <code>unbanded</code> · severity <code>medium</code></p>
+<p>Interrupts are cut nearly in half, from 37.04 to 16.63 per 1K tool calls. If the model were obviously going off the rails more often, this rate would normally rise, not fall.</p>
+<h3>Finding 5 — API turns per user turn</h3>
+<p><strong>Classification</strong>: ambiguous <strong>Signal</strong>: API turns per user turn went up from 1.11 to 1.49 (+34%) · band <code>unbanded</code> · severity <code>medium</code></p>
+<p>Requests per user prompt rose 34%, but Appendix H shows output tokens per API request rose 2.5× at the same time. That looks more like bigger multi-turn work packets than empty retry loops.</p>
+<h2>4. Root-cause narrative</h2>
+<p>The biggest visible shift is not a clear quality break. It is a workload-and-output shift: tokens per user turn rise from 23,673 to 51,034, output tokens per API request rise from 255 to 643, and cache-read tokens per API request rise from 40,157 to 66,508. That combination says the post-split sessions are carrying more context and producing more text.</p>
+<p>Read:Edit ratio does worsen in the headline table, and that is the strongest caution flag in the report. But it does not line up with the other “something is broken” indicators: interrupts fall 55%, explicit frustration falls to zero, and there are no reasoning-loop or self-admitted-error spikes. If there is a regression here, it is subtle enough that user correction behavior is not amplifying with it.</p>
+<p>The thinking metrics point to instrumentation change more than capability collapse. The report marks the inflection as <code>fallback_split_half</code> at 0.0σ, there is no true pre-transition thinking baseline before 2026-03-25, and thinking visibility flips from absent to mostly visible to mostly redacted in a clean step-like pattern. That is consistent with a rollout or logging-policy change layered on top of normal task variation.</p>
+<p>The cross-version section also cannot carry a regression claim. The apparent deltas are mostly <code>claude-sonnet-4-6</code> versus <code>unknown</code>, not a stable old-versus-new comparison on the same task family. The most defensible root-cause read is therefore: heavier sessions and noisier attribution changed the aggregate metrics, while the user-facing correction signals stayed flat or improved.</p>
+<h2>5. What would help</h2>
+<ul>
+<li>Run the same report again after another 15–20 explicitly attributed sessions; the biggest current confound is the <code>unknown</code>-model bucket in cross-version comparisons.</li>
+<li>Spot-check the high-volume week of 2026-04-06, because that is where cost and token inflation spike hardest and likely explains most of the aggregate movement.</li>
+<li>If you want a cleaner bakeoff, keep one model fixed for a short stretch; the current window has too little non-sonnet volume to support strong cross-version claims.</li>
+<li>Watch <code>output tokens per API request</code> and <code>cache-read tokens per API request</code> together; those moved more than frustration or interrupts and are the best early warning for wasteful session growth.</li>
+</ul>
+<hr>
+<h2>Methodology</h2>
+<ul>
+<li><strong>Data source</strong>: 34 JSONL files from <code>~/.claude/projects/</code> spanning 2026-02-23 → 2026-04-24</li>
+<li><strong>Tool calls analysed</strong>: 751</li>
+<li><strong>Thinking blocks analysed</strong>: 300 (58% redacted)</li>
+<li><strong>User prompts analysed</strong>: 977</li>
+<li><strong>Sessions read by Claude</strong>: 0 (tables pre-rendered by the script; no JSONL re-read)</li>
+<li><strong>Pre-compute</strong>: <code>scripts/compute_stats.py</code> (stdlib Python, ~2s runtime)</li>
+<li><strong>Inflection detection</strong>: composite health score per day; argmax of |before − after| over candidate dates; 0.75σ floor; fallback to median timestamp split if no break clears</li>
+<li><strong>Classification</strong>: every finding labelled model-side / user-side / ambiguous per the three-bucket framing</li>
+<li><strong>Redaction</strong>: user-prompt content redacted for <code>/Users/</code>, emails, tokens, long hex; truncated to ≤180 chars</li>
+<li><strong>Excluded by default</strong>: subagent sessions (<code>agent-*.jsonl</code>, project slug <code>subagents</code>); sessions with &lt;10 user-prompt words</li>
+</ul>
+<hr>
+<h2>Appendix A — Behavioral catalog</h2>
+<h3>A.1 Reasoning reversals / 1K tool calls</h3>
+<table><thead><tr>
+<th>Period</th>
+<th>Rate</th>
+</tr></thead><tbody>
+<tr>
+<td>Pre</td>
+<td>0.00</td>
+</tr>
+<tr>
+<td>Post</td>
+<td>0.00</td>
+</tr>
+</tbody></table>
+<p>No reasoning reversals were detected in either period: 0.00 per 1K tool calls before and after. There are no representative loop snippets in this rendered report because the underlying detector found none worth surfacing.</p>
+<h3>A.2 Premature stopping / permission-seeking</h3>
+<table><thead><tr>
+<th>Period</th>
+<th>Occurrences / 1K tool calls</th>
+</tr></thead><tbody>
+<tr>
+<td>Pre</td>
+<td>3.70</td>
+</tr>
+<tr>
+<td>Post</td>
+<td>2.08</td>
+</tr>
+</tbody></table>
+<p>No. Premature stopping or permission-seeking declines from 3.70 to 2.08 occurrences per 1K tool calls, which puts this pattern in the “not getting worse” bucket rather than the “more hesitant” bucket.</p>
+<h3>A.3 Self-admitted error phrases / 1K tool calls</h3>
+<table><thead><tr>
+<th>Period</th>
+<th>Rate</th>
+</tr></thead><tbody>
+<tr>
+<td>Pre</td>
+<td>0.00</td>
+</tr>
+<tr>
+<td>Post</td>
+<td>0.00</td>
+</tr>
+</tbody></table>
+<p>No self-admitted error phrases were detected in either period, so there is no post-split increase in explicit mistake acknowledgements. This appendix is neutral rather than supportive of either a regression or an improvement claim.</p>
+<h3>A.4 Shortcut vocabulary in user prompts</h3>
+<table><thead><tr>
+<th>Period</th>
+<th>'shortcut' words / 1K user words</th>
+</tr></thead><tbody>
+<tr>
+<td>Pre</td>
+<td>0.81</td>
+</tr>
+<tr>
+<td>Post</td>
+<td>1.57</td>
+</tr>
+</tbody></table>
+<p>The shortcut-word rate rises from 0.81 to 1.57 per 1K user words, driven mostly by <code>easier</code>, not by harsher corrective language. Because <code>wrong</code>, <code>bad</code>, <code>quick</code>, and especially <code>stop</code> all fall at the same time, this reads more like softer user framing around convenience than firefighting under model failure.</p>
+<h2>Appendix B — User interrupt patterns</h2>
+<table><thead><tr>
+<th>Period</th>
+<th>Interrupts / 1K tool calls</th>
+</tr></thead><tbody>
+<tr>
+<td>Pre</td>
+<td>37.04</td>
+</tr>
+<tr>
+<td>Post</td>
+<td>16.63</td>
+</tr>
+</tbody></table>
+<p>The rendered HTML does not include a per-project interrupt breakout, so clustering cannot be verified directly here. What is visible is the aggregate rate drop from 37.04 to 16.63 per 1K tool calls, which argues against interrupts becoming concentrated enough to define the post-split period.</p>
+<h2>Appendix C — Median thinking signature by hour of day (local TZ)</h2>
+<p>Post-period window: 2026-04-07 → 2026-04-21. Signature length is the cryptographic signature attached to each thinking block — it tracks reasoning depth even when the thinking content itself is redacted (r=0.97 correlation with visible content length).</p>
+<table><thead><tr>
+<th>Hour (local)</th>
+<th>N blocks</th>
+<th>Median sig</th>
+<th>Notes</th>
+</tr></thead><tbody>
+<tr>
+<td>12am</td>
+<td>16</td>
+<td>1,384</td>
+<td></td>
+</tr>
+<tr>
+<td>1am</td>
+<td>3</td>
+<td>496</td>
+<td></td>
+</tr>
+<tr>
+<td>10am</td>
+<td>47</td>
+<td>2,636</td>
+<td></td>
+</tr>
+<tr>
+<td>11am</td>
+<td>17</td>
+<td>516</td>
+<td>lowest morning · dip</td>
+</tr>
+<tr>
+<td>12pm</td>
+<td>11</td>
+<td>1,936</td>
+<td></td>
+</tr>
+<tr>
+<td>2pm</td>
+<td>20</td>
+<td>2,904</td>
+<td>strongest afternoon hour</td>
+</tr>
+<tr>
+<td>3pm</td>
+<td>13</td>
+<td>1,980</td>
+<td></td>
+</tr>
+<tr>
+<td>5pm</td>
+<td>14</td>
+<td>836</td>
+<td></td>
+</tr>
+<tr>
+<td>6pm</td>
+<td>3</td>
+<td>3,472</td>
+<td></td>
+</tr>
+<tr>
+<td>7pm</td>
+<td>3</td>
+<td>652</td>
+<td></td>
+</tr>
+<tr>
+<td>8pm</td>
+<td>9</td>
+<td>9,440</td>
+<td>best regular hour — 4.9× median</td>
+</tr>
+<tr>
+<td>9pm</td>
+<td>4</td>
+<td>1,206</td>
+<td></td>
+</tr>
+<tr>
+<td>10pm</td>
+<td>6</td>
+<td>2,924</td>
+<td></td>
+</tr>
+<tr>
+<td>11pm</td>
+<td>11</td>
+<td>864</td>
+<td></td>
+</tr>
+</tbody></table>
+<p>The post-period hour curve has a morning ramp into 10am (median signature 2,636), a sharp dip at 11am (516), a solid afternoon peak at 2pm (2,904), and then a pronounced evening anomaly at 8pm where the median signature jumps to 9,440. That 8pm value is 4.9× the overall median, so the shape matches normal daytime work plus one standout deep-work hour that dominates the reasoning-depth profile.</p>
+<h2>Appendix D — Token-volume cost proxy</h2>
+<table><thead><tr>
+<th>Period</th>
+<th>Tokens per user turn</th>
+</tr></thead><tbody>
+<tr>
+<td>Pre</td>
+<td>23,673</td>
+</tr>
+<tr>
+<td>Post</td>
+<td>51,034</td>
+</tr>
+</tbody></table>
+<p>Token consumption per user turn rises from 23,673 to 51,034, but the companion rate moves matter: output tokens per user prompt rise 2.7× and cache-read tokens per API request rise 1.66×. That is explainable by harder or more context-heavy tasks, and this appendix does not show the flat-output/high-retry pattern that would make inefficiency the default explanation.</p>
+<h2>Appendix E — Word-frequency shift (per 1K user words)</h2>
+<p>Only the interesting moves:</p>
+<table><thead><tr>
+<th>Word</th>
+<th>Before</th>
+<th>After</th>
+<th>Change</th>
+<th>Interpretation</th>
+</tr></thead><tbody>
+<tr>
+<td><code>easier</code></td>
+<td>0.087</td>
+<td>1.289</td>
+<td>+1382%</td>
+<td>more 'make it easier' framing</td>
+</tr>
+<tr>
+<td><code>wrong</code></td>
+<td>0.203</td>
+<td>0.0</td>
+<td>-100%</td>
+<td>gone — never after transition</td>
+</tr>
+<tr>
+<td><code>bad</code></td>
+<td>0.145</td>
+<td>0.0</td>
+<td>-100%</td>
+<td>gone — never after transition</td>
+</tr>
+<tr>
+<td><code>quick</code></td>
+<td>0.203</td>
+<td>0.0</td>
+<td>-100%</td>
+<td>gone — never after transition</td>
+</tr>
+<tr>
+<td><code>stop</code></td>
+<td>1.477</td>
+<td>0.286</td>
+<td>-81%</td>
+<td>fewer 'stop doing that' corrections (collapsed)</td>
+</tr>
+<tr>
+<td><code>please</code></td>
+<td>0.29</td>
+<td>0.43</td>
+<td>+48%</td>
+<td>more polite framing</td>
+</tr>
+<tr>
+<td><code>just</code></td>
+<td>0.348</td>
+<td>0.215</td>
+<td>-38%</td>
+<td>less 'just do it' framing</td>
+</tr>
+</tbody></table>
+<p>User language shifts toward softer framing, not toward firefighting. <code>easier</code> jumps +1382% and <code>please</code> rises 48%, while <code>wrong</code>, <code>bad</code>, and <code>quick</code> disappear and <code>stop</code> drops 81%; taken together, that looks more like less corrective steering than mounting frustration.</p>
+<h2>Appendix F — Thinking depth (three-period split)</h2>
+<p>Split by detected transition day (2026-03-25). Signature length is the reasoning-depth proxy that works for both visible and redacted thinking blocks.</p>
+<table><thead><tr>
+<th>Period</th>
+<th>N</th>
+<th>Median signature</th>
+<th>p25</th>
+<th>p75</th>
+</tr></thead><tbody>
+<tr>
+<td>Before (through 2026-03-24)</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Transition (2026-03-25)</td>
+<td>52</td>
+<td>1,270</td>
+<td>380</td>
+<td>5,772</td>
+</tr>
+<tr>
+<td>After (2026-03-25+)</td>
+<td>248</td>
+<td>1,096</td>
+<td>496</td>
+<td>5,184</td>
+</tr>
+</tbody></table>
+<p>There is no usable before-transition thinking baseline here because the “before” row has N=0. Within the thinking-enabled period, the median signature slips from 1,270 on the transition day to 1,096 after it, a drop of about 14%, which is far smaller than the reference 2,200 → 600 (-73%) collapse.</p>
+<h2>Appendix G — Thinking visibility transition</h2>
+<table><thead><tr>
+<th>Period</th>
+<th>Thinking visible</th>
+<th>Thinking redacted</th>
+</tr></thead><tbody>
+<tr>
+<td>2026-03-24 → 2026-03-24</td>
+<td>0.0%</td>
+<td>0.0%</td>
+</tr>
+<tr>
+<td>2026-03-25</td>
+<td>94.2%</td>
+<td>5.8%</td>
+</tr>
+<tr>
+<td>2026-03-25+</td>
+<td>31.0%</td>
+<td>69.0%</td>
+</tr>
+</tbody></table>
+<p>The visibility change is step-like, not gradual. Thinking is absent through 2026-03-24, mostly visible on 2026-03-25, and then mostly redacted afterward, which is much more consistent with a policy or instrumentation rollout than with anything the user changed in the workflow.</p>
+<h2>Appendix H — Per-turn behavior pre vs post</h2>
+<p>Rates only, so volume is controlled for.</p>
+<table><thead><tr>
+<th>Metric</th>
+<th>2026-03-24 → 2026-04-06</th>
+<th>2026-04-07 → 2026-04-21</th>
+<th>Before→After</th>
+</tr></thead><tbody>
+<tr>
+<td>Output tokens per API request</td>
+<td>255</td>
+<td>643</td>
+<td>2.5×</td>
+</tr>
+<tr>
+<td>Output tokens per user prompt</td>
+<td>342</td>
+<td>938</td>
+<td>2.7×</td>
+</tr>
+<tr>
+<td>Cache-read tokens per API request</td>
+<td>40,157</td>
+<td>66,508</td>
+<td>1.66×</td>
+</tr>
+<tr>
+<td>Thinking blocks per API request</td>
+<td>0.244</td>
+<td>0.202</td>
+<td>0.83×</td>
+</tr>
+<tr>
+<td>API requests per user prompt</td>
+<td>1.3</td>
+<td>1.5</td>
+<td>1.09×</td>
+</tr>
+<tr>
+<td>Thinking redaction rate</td>
+<td>42.1%</td>
+<td>68.7%</td>
+<td>1.63×</td>
+</tr>
+</tbody></table>
+<p>The biggest per-turn move is output volume: output tokens per API request rise 2.5× and output tokens per user prompt rise 2.7×. API requests per user prompt rise only 1.09× while thinking blocks per request actually fall to 0.83×, so this looks more like bigger answers per turn than request-level thrashing.</p>
+<hr>
+<h2>A note from Claude</h2>
+<p>I can summarize the aggregate pattern here, but I should be explicit about the biggest limit: the model helping write this report is in the same family as the system being described. The safer parts of this report are the raw deltas and the places where multiple tables agree. The least safe parts are strong causal claims, especially when the split is <code>fallback_split_half</code> and the cross-version comparator is <code>unknown</code>.</p>
+<hr>
+<p><em>Generated by <code>/cc-canary-forensic</code> on 2026-04-24 19:41 UTC. Stats + markdown pre-rendered by <code>scripts/compute_stats.py</code> (pure stdlib Python, ~2s). Reads <code>~/.claude/projects/</code> only — no network, no external data.</em></p>
+</main>
+</body>
+</html>
