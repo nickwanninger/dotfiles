@@ -79,6 +79,7 @@ tic -x "${DOTFILES}/misc/tmux-256color.terminfo"
 
 link_dotconfig ai/claude/skills ~/.claude/skills
 link_dotconfig ai/claude/CLAUDE.md ~/.claude/CLAUDE.md
+link_dotconfig ai/claude/CLAUDE.md ~/.pi/agent/AGENTS.md
 
 npm config set prefix ~/.npm-global
 
