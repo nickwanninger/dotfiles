@@ -69,7 +69,8 @@ keybind = alt+right=unbind
 
 keybind = global:cmd+backquote=toggle_quick_terminal
 
-background-opacity = 1.0
+background-opacity = 1
+# background-blur = macos-glass-regular
 background-blur = false
 
 # make it so the cursor doesn't switch to a bar at the shell prompt
