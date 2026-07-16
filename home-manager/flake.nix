@@ -3,9 +3,9 @@
 
   inputs = {
     # Specify the source of Home Manager and Nixpkgs.
-    nixpkgs.url = "github:nixos/nixpkgs/25.05";
+    nixpkgs.url = "github:nixos/nixpkgs/26.05";
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.05";  # match Home Manager release to nixpkgs
+      url = "github:nix-community/home-manager/release-26.05";  # match Home Manager release to nixpkgs
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };

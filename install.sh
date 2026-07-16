@@ -10,9 +10,9 @@ mkdir -p ~/.local/{bin,local,lib}
 # ln -sF ${DOTFILES}/fish/ ~/.config
 
 
-link_dotconfig() {
+link_path() {
   local source_name=$1
-  local target_path=${2:-"$HOME/.config/$source_name"}
+  local target_path=$2
   local source_path="${DOTFILES}/${source_name}"
 
   # Check if source exists in dotfiles
@@ -22,7 +22,7 @@ link_dotconfig() {
   fi
 
   # If target already exists
-  if [[ -e "$target_path" ]]; then
+  if [[ -e "$target_path" || -L "$target_path" ]]; then
     # If it's a symlink, check if it points to our dotfiles
     if [[ -L "$target_path" ]]; then
       local current_link=$(readlink "$target_path")
@@ -48,24 +48,25 @@ link_dotconfig() {
   fi
 
   # Create the symlink
-  ln -sF "$source_path" "$target_path"
+  mkdir -p "$(dirname "$target_path")"
+  ln -s "$source_path" "$target_path"
   echo "  ✓ Linked"
 }
 
 
 
-link_dotconfig "fish"
-link_dotconfig "ghostty"
-link_dotconfig "nvim"
-link_dotconfig "emacs" "$HOME/.emacs.d"
+link_path "fish" "$HOME/.config/fish"
+link_path "ghostty" "$HOME/.config/ghostty"
+link_path "nvim" "$HOME/.config/nvim"
+link_path "emacs" "$HOME/.emacs.d"
 
 # TMUX is special - link the config file directly
-link_dotconfig "tmux/tmux.conf" "$HOME/.tmux.conf"
+link_path "tmux/tmux.conf" "$HOME/.tmux.conf"
 
 
 
-link_dotconfig "nix"
-link_dotconfig "home-manager"
+link_path "nix" "$HOME/.config/nix"
+link_path "home-manager" "$HOME/.config/home-manager"
 
 if command -v nix >/dev/null 2>&1; then
   echo "Updating home manager"
@@ -77,9 +78,15 @@ tic -x "${DOTFILES}/misc/xterm-256color-italic.terminfo"
 tic -x "${DOTFILES}/misc/tmux-256color.terminfo"
 
 
-link_dotconfig ai/claude/skills ~/.claude/skills
-link_dotconfig ai/claude/CLAUDE.md ~/.claude/CLAUDE.md
-link_dotconfig ai/claude/CLAUDE.md ~/.pi/agent/AGENTS.md
+link_path "ai/AGENTS.md" "$HOME/.codex/AGENTS.md"
+link_path "ai/AGENTS.md" "$HOME/.claude/CLAUDE.md"
+link_path "ai/AGENTS.md" "$HOME/.config/opencode/AGENTS.md"
+link_path "ai/AGENTS.md" "$HOME/.pi/agent/AGENTS.md"
+
+link_path "ai/skills" "$HOME/.agents/skills"
+link_path "ai/skills" "$HOME/.codex/skills"
+link_path "ai/skills" "$HOME/.claude/skills"
+
 
 npm config set prefix ~/.npm-global
 

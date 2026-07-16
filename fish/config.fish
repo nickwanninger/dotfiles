@@ -138,3 +138,6 @@ set -gx PATH $PATH /home/nick/.lmstudio/bin
 
 # opencode
 fish_add_path /home/nick/.opencode/bin
+
+# Hermes Agent — ensure ~/.local/bin is on PATH
+fish_add_path "$HOME/.local/bin"

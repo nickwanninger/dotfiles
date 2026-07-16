@@ -3,7 +3,7 @@
 {
   home.username = config.username;
   home.homeDirectory = config.home;
-  home.stateVersion = "25.05";
+  home.stateVersion = "26.05";
 
   # NOT sure about this!
   # home.enableNixpkgsReleaseCheck = false;
@@ -18,7 +18,7 @@
     pkgs.gmime3
     pkgs.gmime
 
-    pkgs.nodejs
+    pkgs.nodejs_26
     pkgs.git
 
     # The uv python package manager
