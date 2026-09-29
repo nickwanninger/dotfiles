@@ -1130,3 +1130,59 @@ Return nil if is not in a template."
   (interactive)
   (magit-stash-push)
   (ncw/project-make "make -k -j; git stash pop"))
+
+
+
+;; Some example commands the menu will invoke
+(defun my-project-build (&optional args)
+  (interactive)
+  (message "Building project..."))
+
+(defun my-project-test ()
+  (interactive)
+  (message "Running tests..."))
+
+(defun my-project-clean ()
+  (interactive)
+  (message "Cleaning build artifacts..."))
+
+
+(require 'transient)
+
+;; Infix argument: lets the user toggle a switch or set a value
+;; that gets passed to the suffix commands via (transient-args transient-current-command)
+(transient-define-infix my-project--verbose-switch ()
+  :description "Verbose output"
+  :class 'transient-switch
+  :key "-v"
+  :argument "--verbose")
+
+(transient-define-infix my-project--jobs-arg ()
+  :description "Parallel jobs"
+  :class 'transient-option
+  :key "-j"
+  :argument "--jobs="
+  :reader #'transient-read-number-N+)
+
+;; A suffix command that reads the current transient arguments
+(transient-define-suffix my-project--build-suffix (args)
+  :description "Build"
+  :key "b"
+  (interactive (list (transient-args transient-current-command)))
+  (message "Building with args: %S" args)
+  (my-project-build))
+
+;; The main menu (prefix command)
+(transient-define-prefix my-project-menu ()
+  "Project management menu."
+  ["Arguments"
+   (my-project--verbose-switch)
+   (my-project--jobs-arg)]
+  ["Actions"
+   [("b" "Build" my-project--build-suffix)
+    ("t" "Test" my-project-test)]
+   [("c" "Clean" my-project-clean)
+    ("q" "Quit" transient-quit-one)]])
+
+;; Bind it to a key
+(global-set-key (kbd "C-c m") #'my-project-menu)
