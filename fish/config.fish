@@ -145,3 +145,7 @@ fish_add_path "$HOME/.local/bin"
 # bun
 set --export BUN_INSTALL "$HOME/.bun"
 set --export PATH $BUN_INSTALL/bin $PATH
+
+
+# Added by Antigravity CLI installer
+set -gx PATH "/home/nick/.local/bin" $PATH

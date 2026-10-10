@@ -14,19 +14,17 @@ function fish_prompt
 
 
   set main_color "brblack"
-  set dot '●'
 
   if [ $last_status -ne "0" ]
-    set main_color red
-    set dot '■'
+    set_color red
+    echo -n '■ '
   end
   set_color $main_color
 
-  echo -n "$dot "
-
+  set_color 14ff6e
+  echo -n (hostname)
+  echo -n ' '
   set_color brblack
-  # echo -n (hostname)
-  # echo -n ' '
 
   # set_color $main_color
   echo -n (prompt_pwd)
