@@ -19,3 +19,8 @@
   (load bootstrap-file nil 'nomessage))
 
 (setq straight-use-package-by-default t)
+
+
+(when (eq system-type 'darwin)
+  (setenv "MACOSX_DEPLOYMENT_TARGET"
+          (car (process-lines "/usr/bin/sw_vers" "-productVersion"))))

@@ -58,8 +58,8 @@ selection-foreground = #FFFFFF
 
 cursor-style = block
 
-# font-family = Maple Mono NF SemiBold
-font-family = Ioskeley Mono Nerd Font
+font-family = Maple Mono NF Bold
+#font-family = Ioskeley Mono Nerd Font
 font-size = 10
 font-thicken = true
 

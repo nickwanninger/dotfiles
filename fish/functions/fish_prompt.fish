@@ -13,20 +13,16 @@ function fish_prompt
 	set -g __fish_git_prompt_show_informative_status 1
 
 
-  set main_color "brblack"
-
   if [ $last_status -ne "0" ]
     set_color red
     echo -n '■ '
   end
-  set_color $main_color
 
-  set_color 14ff6e
+  set_color -f 14ff6e
   echo -n (hostname)
   echo -n ' '
   set_color brblack
 
-  # set_color $main_color
   echo -n (prompt_pwd)
   # echo -n (path basename $PWD)
 
