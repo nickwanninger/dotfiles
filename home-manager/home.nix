@@ -18,7 +18,7 @@
     pkgs.gmime3
     pkgs.gmime
 
-    pkgs.nodejs_26
+    pkgs.nodejs_latest
     pkgs.git
 
     # The uv python package manager
