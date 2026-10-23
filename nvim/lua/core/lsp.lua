@@ -1,12 +1,11 @@
 local keys = require('core.keymap')
-local lsp = require('lspconfig')
 local cmp_nvim_lsp = require('cmp_nvim_lsp')
-M = {}
+local M = {}
 
 
-M.setup_server = function(server_name)
+M.setup = function()
   local capabilities = cmp_nvim_lsp.default_capabilities()
-  lsp[server_name].setup {
+  vim.lsp.config('*', {
     capabilities = capabilities,
     keymap = {
       recommended = true,
@@ -15,7 +14,13 @@ M.setup_server = function(server_name)
     flags = {
       debounce_text_changed = 150,
     },
-    on_attach = function(_, bufnr)
+  })
+
+  vim.api.nvim_create_autocmd('LspAttach', {
+    group = vim.api.nvim_create_augroup('CoreLsp', { clear = true }),
+    callback = function(event)
+      local client = vim.lsp.get_client_by_id(event.data.client_id)
+      local bufnr = event.buf
       local opts = { noremap = true, silent = true, buffer = bufnr }
 
       keys.map("gR", "Show LSP References", ":Telescope lsp_references<CR>", opts)
@@ -31,13 +36,13 @@ M.setup_server = function(server_name)
       keys.map("<c-k>", "Show Signature Help", vim.lsp.buf.signature_help, opts)
       keys.map("<leader>rs", "Restart LSP", ":LspRestart<CR>", opts)
 
-      if server_name == "clangd" then
+      if client.name == "clangd" then
         keys.map("<leader>f", "Clang Format", ":ClangFormat<cr>", opts)
       else
         keys.map("<leader>f", "Format", vim.lsp.buf.format, opts)
       end
     end
-  }
+  })
 end
 
 return M

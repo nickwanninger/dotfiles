@@ -9,22 +9,15 @@ return {
     local mason_lspconfig = require('mason-lspconfig')
 
     mason.setup {}
+    require('core.lsp').setup()
     mason_lspconfig.setup {
       ensure_installed = {
         'rust_analyzer',
         'pyright',
       },
-      automatic_installation = { exclude = { "clangd" } }
+      automatic_enable = { exclude = { "clangd" } }
     }
 
-    -- Next, hook up mason so that when a language server
-    -- becomes available, it starts the server w/ lspconfig
-    mason_lspconfig.setup_handlers {
-      require'core.lsp'.setup_server
-    }
-
-    require('core.lsp').setup_server('clangd')
-
-
+    vim.lsp.enable('clangd')
   end
 }

@@ -1,17 +1,17 @@
 local wk = require('which-key')
 
-wk.register {
-  [';'] = {':', "vim-ex"}
+wk.add {
+  { ';', ':', desc = "vim-ex" }
 }
 
-M = {}
+local M = {}
 
 
 M.map = function(binding, name, func, opt)
   opt = opt or {}
-  wk.register({
-    [binding] = {func, name}
-  }, opt)
+  wk.add {
+    vim.tbl_extend('force', opt, { binding, func, desc = name })
+  }
 end
 
 

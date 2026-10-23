@@ -113,18 +113,18 @@ M.setup = function(opts)
   -- local theme_name = 'modus_operandi'
   vim.cmd('colorscheme ' .. theme_name)
 
-  wk.register {
-    ['<leader>1'] = {
+  wk.add {
+    { '<leader>1',
       function()
         vim.cmd('colorscheme ' .. theme_name)
       end,
-      "Dark Theme"
+      desc = "Dark Theme"
     },
-    ['<leader>2'] = {
+    { '<leader>2',
       function()
         vim.cmd('colorscheme modus_operandi')
       end,
-      "Light Theme"
+      desc = "Light Theme"
     }
   }
 end

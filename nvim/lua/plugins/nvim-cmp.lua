@@ -16,8 +16,8 @@ return {
     local luasnip = require('luasnip')
     local luasnip_from_vscode = require('luasnip.loaders.from_vscode')
 
-    wk.register({
-      ['<C-m>'] = { function() luasnip.jump(1) end, "Next mark" },
+    wk.add({
+      { '<C-m>', function() luasnip.jump(1) end, desc = "Next mark" },
     })
 
     -- local keymap = vim.api.nvim_set_keymap
