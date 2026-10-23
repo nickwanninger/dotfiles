@@ -1,4 +1,11 @@
-;; Disable package.el from start-up, because using elpaca
+;;; early-init.el --- Early settings -*- lexical-binding: t; -*-
+
+;; Compile Lisp in the background with one worker.
+(setq native-comp-speed 2
+      native-comp-jit-compilation t
+      native-comp-async-jobs-number 1)
+
+;; Disable package.el because Straight manages packages.
 (setq package-enable-at-startup nil)
 (setq straight-base-dir (concat "~/.emacs.d/straight/" emacs-version))
 

@@ -1,3 +1,5 @@
+;;; init.el --- Emacs settings -*- lexical-binding: t; -*-
+
 (provide 'init)
 ;; Make sure we load this file, instead of the precompiled file, if it is newer
 (setq load-prefer-newer t)
@@ -23,7 +25,6 @@
 
 ;; Use no-littering to automatically set common paths to the new user-emacs-directory
 (use-package no-littering :ensure t)
-(setq native-comp-speed -1)
 
 
 
@@ -434,10 +435,10 @@
 (use-package lsp-mode
   :ensure t
   :commands (lsp lsp-deferred)
-  :hook ((c-ts-mode . lsp)
-         (c-mode . lsp)
-         (c++-ts-mode . lsp)
-         (python-ts-mode . lsp)
+  :hook ((c-ts-mode . lsp-deferred)
+         (c-mode . lsp-deferred)
+         (c++-ts-mode . lsp-deferred)
+         (python-ts-mode . lsp-deferred)
          ;; (c++-mode . lsp)
          (lsp-mode . ncw/setup-lsp-mode))
   :init
@@ -538,48 +539,15 @@
 
 
 
-(setq treesit-language-source-alist
-      '((elisp "https://github.com/Wilfred/tree-sitter-elisp")
-        (racket "https://github.com/6cdh/tree-sitter-racket")))
+;; Emacs 31 manages mode mappings and grammar installation.
+(require 'treesit)
+(setopt treesit-enabled-modes t
+        treesit-auto-install-grammar 'ask)
 
-(setq major-mode-remap-alist nil)
-
-(use-package treesit-auto
-  :demand t
-  :custom
-  (treesit-auto-install t)
-
-  :config
-  (treesit-auto-add-to-auto-mode-alist 'all)
-  (global-treesit-auto-mode))
-
-
-;; At some point, tree-sitter-cpp broke compat w/ emacs, so I pick a different version
-(setq ncw/cpp-tsauto-config
-    (make-treesit-auto-recipe
-        :lang 'cpp
-        :ts-mode 'c++-ts-mode
-        :remap 'c++-mode
-        :requires nil
-        :url "https://github.com/tree-sitter/tree-sitter-cpp"
-        :revision "v0.22.0"
-        :source-dir nil
-            :cc nil
-            :c++ nil
-            :ext "\\.cpp\\'"))
-
-(add-to-list 'treesit-auto-recipe-list ncw/cpp-tsauto-config)
-
-;; Add a custom elisp tree-sitter
-(setq elisp-tsauto-config
-    (make-treesit-auto-recipe
-        :lang 'elisp
-        :ts-mode 'emacs-lisp-ts-mode
-        :remap 'emacs-lisp-mode
-        :url "https://github.com/Wilfred/tree-sitter-elisp"
-        :ext "\\.el\\'"))
-
-(add-to-list 'treesit-auto-recipe-list elisp-tsauto-config)
+;; Keep extra grammar sources for manual installation.
+(dolist (source '((elisp "https://github.com/Wilfred/tree-sitter-elisp")
+                  (racket "https://github.com/6cdh/tree-sitter-racket")))
+  (add-to-list 'treesit-language-source-alist source))
 
 
 

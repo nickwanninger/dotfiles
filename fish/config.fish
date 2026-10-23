@@ -5,37 +5,54 @@ export TERM="xterm-256color"
 set -e LD_LIBRARY_PATH
 set -e LD_INCLUDE_PATH
 
-# export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/lib"
-
-
+# Keep platform paths separate from user tools.
+set -l platform_paths
 switch (uname)
-# Specific things to my mac
-	case Darwin
-		export C_INCLUDE_PATH="/opt/homebrew/include:$C_INCLUDE_PATH"
-		export CFLAGS="-I/opt/homebrew/include"
-		export LDFLAGS="-L/opt/homebrew/lib"
-		export PATH="/opt/homebrew/bin:$PATH"
-		export PATH="/Applications/Racket v8.9/bin:$PATH"
+    case Darwin
+        # Remove Linux paths inherited from an older shell.
+        set -l linux_paths '^(/home/|/tank/|/opt/cuda/|/usr/local/cuda/)'
+        if set -q fish_user_paths
+            set -g fish_user_paths (string match -rv $linux_paths -- $fish_user_paths)
+        end
+        set -gx PATH (string match -rv $linux_paths -- $PATH)
+
+        if not contains -- /opt/homebrew/include $C_INCLUDE_PATH
+            set -gx C_INCLUDE_PATH /opt/homebrew/include $C_INCLUDE_PATH
+        end
+        set -gx CFLAGS -I/opt/homebrew/include
+        set -gx LDFLAGS -L/opt/homebrew/lib
+        set -gx HOMEBREW_NO_AUTO_UPDATE 1
+        set -gx PNPM_HOME "$HOME/Library/pnpm"
+        set platform_paths "/Applications/Racket v8.9/bin" /opt/homebrew/bin
+    case Linux
+        set -gx PNPM_HOME "$HOME/.local/share/pnpm"
+        set platform_paths /usr/local/cuda/bin /tank/nick/local/bin /opt/cuda/bin
 end
 
+set -gx GOPATH "$HOME/dev/go"
+set -gx BUN_INSTALL "$HOME/.bun"
+set -gx COLORTERM truecolor
 
-set -x GOPATH $HOME/dev/go
+# Add existing directories without writing universal variables.
+fish_add_path --path --move \
+    "$BUN_INSTALL/bin" \
+    "$HOME/.opencode/bin" \
+    "$HOME/.bin" \
+    "$HOME/.local/bin" \
+    "$HOME/.cargo/bin" \
+    "$HOME/.nix-profile/bin" \
+    /nix/var/nix/profiles/default/bin \
+    "$HOME/.amp/bin" \
+    "$HOME/.cabal/bin" \
+    "$HOME/.ghcup/bin" \
+    "$HOME/.npm-global/bin" \
+    "$PNPM_HOME" \
+    "$GOPATH/bin" \
+    $platform_paths
+fish_add_path --path --append "$HOME/.lmstudio/bin"
 
-export COLORTERM="truecolor"
-
-export PATH="$GOPATH/bin:$PATH"
-export PATH="/opt/cuda/bin:$PATH"
-export PATH="/tank/nick/local/bin:$PATH"
-
-
-
-export PATH="/usr/local/cuda/bin:$PATH"
-# export LD_LIBRARY_PATH="/usr/local/cuda/lib:$LD_LIBRARY_PATH"
-
-set -g fish_user_paths $HOME/.bin $HOME/.local/bin $HOME/.cargo/bin $fish_user_paths
-
-export EDITOR=(which nvim)
-export RVTC="~/chariot/toolchain/local/bin/riscv64-elf-"
+set -gx EDITOR nvim
+set -gx RVTC "$HOME/chariot/toolchain/local/bin/riscv64-elf-"
 
 alias cft "vim ~/dotfiles/tmux/tmux.conf"
 alias cff "vim ~/dotfiles/fish/config.fish"
@@ -62,10 +79,9 @@ alias magit "nvim -c :Neogit"
 # Run emacs in a client
 alias em "emacsclient --create-frame --alternate-editor=''"
 
-# disable homebrew auto update. Not sure if this works
-set -x HOMEBREW_NO_AUTO_UPDATE 1
-set HOMEBREW_NO_AUTO_UPDATE 1
-test -e {$HOME}/.iterm2_shell_integration.fish ; and source {$HOME}/.iterm2_shell_integration.fish
+if status is-interactive; and test -r "$HOME/.iterm2_shell_integration.fish"
+    source "$HOME/.iterm2_shell_integration.fish"
+end
 
 
 
@@ -87,65 +103,26 @@ set -g fish_color_valid_path --bold --underline brblue
 set -g fish_color_autosuggestion brblack
 set -g fish_color_cancel -r
 
-set -gx PNPM_HOME "/Users/nick/Library/pnpm"
-set -gx PATH "$PNPM_HOME" $PATH
-set -gx PATH "$HOME/.npm-global/bin" $PATH
-
-source /Users/nick/.opam/opam-init/init.fish > /dev/null 2> /dev/null; or true
-
-
-
-set -gx PATH "$HOME/.nix-profile/bin" $PATH
+if test -r "$HOME/.opam/opam-init/init.fish"
+    source "$HOME/.opam/opam-init/init.fish" >/dev/null 2>&1
+end
 
 alias enable_conda 'eval $HOME/anaconda3/bin/conda "shell.fish" "hook" $argv | source'
-#>>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-if [ -d $HOME/anaconda3 ]
-	# eval $HOME/anaconda3/bin/conda "shell.fish" "hook" $argv | source
-end
-# <<< conda initialize <<<
-
-# set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME ;
-set -gx PATH "$HOME/.cabal/bin" "$HOME/.ghcup/bin" $PATH # ghcup-env
-set -gx PATH "/nix/var/nix/profiles/default/bin" $PATH # ghcup-env
-
-if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.fish' ]
-  . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.fish'
+# conf.d/nix-env.fish initializes Nix before this file.
+if not set -q __HM_SESS_VARS_SOURCED; and test -r "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
+    bass source "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
 end
 
-
-if test -e ~/.nix-profile/etc/profile.d/hm-session-vars.sh
-  bass source ~/.nix-profile/etc/profile.d/hm-session-vars.sh
+# Nix can already install the direnv hook through vendor_conf.d.
+if status is-interactive; and not functions -q __direnv_export_eval; and command -q direnv
+    direnv hook fish | source
 end
 
-if type -q direnv
-  direnv hook fish | source
+# Keep the first occurrence so nested shells do not grow PATH.
+set -l unique_paths
+for path_entry in $PATH
+    if not contains -- $path_entry $unique_paths
+        set -a unique_paths $path_entry
+    end
 end
-
-# Amp CLI
-export PATH="/Users/nick/.amp/bin:$PATH"
-
-# opencode
-fish_add_path /Users/nick/.opencode/bin
-
-# Added by LM Studio CLI (lms)
-set -gx PATH $PATH /Users/nick/.lmstudio/bin
-# End of LM Studio CLI section
-
-
-# Added by LM Studio CLI tool (lms)
-set -gx PATH $PATH /home/nick/.lmstudio/bin
-
-# opencode
-fish_add_path /home/nick/.opencode/bin
-
-# Hermes Agent — ensure ~/.local/bin is on PATH
-fish_add_path "$HOME/.local/bin"
-
-# bun
-set --export BUN_INSTALL "$HOME/.bun"
-set --export PATH $BUN_INSTALL/bin $PATH
-
-
-# Added by Antigravity CLI installer
-set -gx PATH "/home/nick/.local/bin" $PATH
+set -gx PATH $unique_paths
