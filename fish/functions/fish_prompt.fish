@@ -18,7 +18,7 @@ function fish_prompt
     echo -n '■ '
   end
 
-  set_color -f 14ff6e
+  set_color 14ff6e
   echo -n (hostname)
   echo -n ' '
   set_color brblack
